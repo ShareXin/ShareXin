@@ -25,8 +25,4 @@
 - First commit
 
 ### Todo
-- Pause the screen during an "area" screenshot.
-- Properly save file without need of console output
-- Button should say Toot for Mastodon and Tweet for Twitter
-- Tweeting or Tooting should also save the file
 - t doesn't work properly in i3
