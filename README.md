@@ -15,7 +15,7 @@
 
 #### Installation
 1. `git clone https://github.com/ShareXin/`
-2. `cargo install sharexin`
+2. `cargo install`
 3. Login to Twitter and/or Mastodon using t and/or toot
 4. Explore `--help`
 
