@@ -23,6 +23,3 @@
 #### [0.0.0] - 2017-07-19
 #### Added
 - First commit
-
-### Todo
-- t doesn't work properly in i3
