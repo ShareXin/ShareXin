@@ -1,0 +1,12 @@
+[package]
+name = "sharexin"
+version = "0.1.0"
+authors = ["TheBitStick <thebitstick@tfwno.gf>"]
+
+[dependencies]
+gtk = "*"
+notify-rust = "*"
+glib = "*"
+gdk = "*"
+time = "*"
+users = "*"
