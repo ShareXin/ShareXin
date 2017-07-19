@@ -26,3 +26,5 @@
 
 ### Todo
 - Pause the screen during an "area" screenshot.
+- Properly save file without need of console output
+- Button should say Toot for Mastodon and Tweet for Twitter
