@@ -1,12 +1,12 @@
 # ShareXin  
 
-![ShareXin]()
+![](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
 
 #### Requirements
-gnome-screenshot  
-gtk3  
-[t](https://github.com/sferik/t)  
-[toot](https://github.com/ihabunek/toot)  
+* gnome-screenshot  
+* gtk3  
+* [t](https://github.com/sferik/t)  
+* [toot](https://github.com/ihabunek/toot)  
 
 #### Features
 * Uploads to Twitter and Mastodon
