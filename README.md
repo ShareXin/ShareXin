@@ -4,7 +4,7 @@
 
 #### Requirements
 gnome-screenshot  
-gtk3
+gtk3  
 [t](https://github.com/sferik/t)  
 [toot](https://github.com/ihabunek/toot)  
 
