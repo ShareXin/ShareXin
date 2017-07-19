@@ -69,6 +69,8 @@ fn save()
     new_file.push_str(".png");
     #[allow(unused_must_use)]
     let _ = std::fs::copy("/tmp/sharexin_img.png", new_file);
+    Notification::new().summary("File saved")
+    .icon("file:///tmp/sharexin_img.png").show().unwrap();
 }
 
 fn gui(mort: bool)
@@ -109,8 +111,6 @@ fn gui(mort: bool)
     });
 
     cancel.connect_clicked(|_| {
-        Notification::new().summary("File saved")
-            .icon("file:///tmp/sharexin_img.png").show().unwrap();
         gtk::main_quit();
     });
 
