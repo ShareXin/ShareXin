@@ -15,10 +15,10 @@ use notify_rust::Notification;
 fn toot(txt: String)
 {
     println!("Text: {}", txt);
-    let mastodon = Command::new("toot")
+    let _mastodon = Command::new("toot")
     .arg("post").arg("-m").arg("/tmp/sharexin_img.png").arg(&txt)
     .output().expect("Nope");
-    println!("{}", String::from_utf8_lossy(&mastodon.stdout));
+    println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
     Notification::new().summary("Sent to Mastodon")
         .body(&txt).icon("file:///tmp/sharexin_img.png").show().unwrap();
 }
@@ -26,10 +26,16 @@ fn toot(txt: String)
 fn twitter(txt: String)
 {
     println!("Text: {}", txt);
-    let t = Command::new("t")
+    let usre = get_user_by_uid(get_current_uid()).unwrap();
+    let usr = usre.name();
+    let mut trc = String::from("/home/");
+    trc.push_str(&usr);
+    trc.push_str("/.trc");
+    let _t = Command::new("t")
     .arg("update").arg("-f").arg("/tmp/sharexin_img.png").arg(&txt)
+    .arg("-P").arg(&trc)
     .output().expect("Nope");
-    println!("{}", String::from_utf8_lossy(&t.stdout));
+    println!("{}", String::from_utf8_lossy(&_t.stdout));
     Notification::new().summary("Sent to Twitter")
         .body(&txt).icon("file:///tmp/sharexin_img.png").show().unwrap();
 }
@@ -143,7 +149,7 @@ fn gui(mort: bool)
 
 fn main()
 {
-    let help = "
+    let help = String::from("
 Usage: sharerust [OPTION (Image,Social)]
 Examples: 
 sharerust -at
@@ -157,53 +163,49 @@ Image Options:
 
 Social Options:
 \t-m\t\tUpload to Mastodon (uses \"toot\")
-\t-t\t\tUpload to Twitter (uses \"t\")";
-    let args: Vec<_> = env::args().collect();
+\t-t\t\tUpload to Twitter (uses \"t\")
+\t-f\t\tOnly save file");
+        let args: Vec<_> = env::args().collect();
     if args.len() > 1 {
-        if args[1] == "-h" || args[1] == "--help" {
-            println!("{}", help);
+        match args[1].as_ref() {
+            "-h" | "--help" | "-a" | "-w" => println!("{}", help),
+            "-am" => {
+                image(String::from("-a"));
+                gui(true);
+            },
+            "-at" => {
+                image(String::from("-a"));
+                gui(true);
+            },
+            "-wm" => {
+                image(String::from("-w"));
+                gui(true);
+            },
+            "-wt" => {
+                image(String::from("-w"));
+                gui(true);
+            },
+            "-m" => {
+                image(String::new());
+                gui(true);
+            },
+            "-t" => {
+                image(String::new());
+                gui(true);
+            },
+            "-af" => {
+                image(String::from("-a"));
+                save();
+            },
+            "-wf" => {
+                image(String::from("-w"));
+                save();
+            },
+            "-f" => {
+                image(String::new());
+                save();
+            },
+            _ => println!("Unknown option. Use the --help flag for Help.")
         }
-        else if args[1] == "-a" || args[1] == "--area" {
-            println!("{}", help);
-        }
-        else if args[1] == "-am" {
-            image(String::from("-a"));
-            gui(true);
-        }
-        else if args[1] == "-at" {
-            image(String::from("-a"));
-            gui(false);
-        }
-        else if args[1] == "-wm" {
-            image(String::from("-w"));
-            gui(true);
-        }
-        else if args[1] == "-wt" {
-            image(String::from("-w"));
-            gui(false);
-        }
-        else if args[1] == "-m" {
-            image(String::from(""));
-            gui(true);
-        }
-        else if args[1] == "-t" {
-            image(String::from(""));
-            gui(false);
-        }
-        else if args[1] == "-af" {
-            image(String::from("-a"));
-        }
-        else if args[1] == "-wf" {
-            image(String::from("-w"));
-        }
-        else if args[1] == "-f" {
-            image(String::from(""));
-        }
-        else {
-            println!("Unknown option. Use the --help flag for Help.");
-        }
-    }
-    if args.len() == 1 {
-        println!("No option specified. Use the --help flag for Help.");
     }
 }
