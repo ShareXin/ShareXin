@@ -5,7 +5,7 @@ extern crate time;
 extern crate users;
 use users::{get_user_by_uid, get_current_uid};
 use gtk::*;
-#[warn(unused_imports)]
+#[allow(unused_imports)]
 use std::fs;
 use std::env;
 use std::thread;
@@ -36,25 +36,39 @@ fn twitter(txt: String)
 
 fn image(cmd: String)
 {
-    let image = Command::new("gnome-screenshot").arg(&cmd)
+    if cmd == "-a" { 
+        let _before_image = Command::new("gnome-screenshot")
         .arg("--file=/tmp/sharexin_img.png").output().expect("Nope");
-    println!("{}", String::from_utf8_lossy(&image.stdout));
+        let _feh = Command::new("feh").arg("/tmp/sharexin_img.png").arg("-F")
+        .spawn().expect("Nope");
+        let _image = Command::new("gnome-screenshot").arg(&cmd)
+        .arg("--file=/tmp/sharexin_img.png").output().expect("Nope");
+        println!("{}", String::from_utf8_lossy(&_image.stdout));
+        let _kill = Command::new("killall").arg("feh").output().expect("Nope");
+    }
+    else {
+        let _image = Command::new("gnome-screenshot").arg(&cmd)
+        .arg("--file=/tmp/sharexin_img.png").output().expect("Nope");
+        println!("{}", String::from_utf8_lossy(&_image.stdout));
+    }
+    save();
 }
 
 fn save()
 {
-    #[warn(unused_must_use)]
     let user = get_user_by_uid(get_current_uid()).unwrap();
     let username = String::from(user.name());
     let mut pictures = String::from("/home/");
     pictures.push_str(&username);
     pictures.push_str("/Pictures/ShareXin");
-    std::fs::create_dir(pictures);
+    #[allow(unused_must_use)]
+    let _ = std::fs::create_dir(pictures);
     let mut new_file = String::from("/home/jorge/Pictures/ShareXin/sharexin-");
     let time = String::from(time::strftime("%Y-%m-%d-%T", &time::now()).unwrap());
     new_file.push_str(&time);
     new_file.push_str(".png");
-    std::fs::copy("/tmp/sharexin_img.png", new_file);
+    #[allow(unused_must_use)]
+    let _ = std::fs::copy("/tmp/sharexin_img.png", new_file);
 }
 
 fn gui(mort: bool)
@@ -65,7 +79,12 @@ fn gui(mort: bool)
     }
 
     let window = Window::new(WindowType::Toplevel);
-    window.set_title("ShareXin");
+    if mort {
+        window.set_title("ShareXin - Mastodon");
+    }
+    else {
+        window.set_title("ShareXin - Twitter");
+    }
     window.set_default_size(350, 250);
     window.set_border_width(10);
     let grid = gtk::Grid::new();
@@ -173,15 +192,12 @@ Social Options:
         }
         else if args[1] == "-af" {
             image(String::from("-a"));
-            save();
         }
         else if args[1] == "-wf" {
             image(String::from("-w"));
-            save();
         }
         else if args[1] == "-f" {
             image(String::from(""));
-            save();
         }
         else {
             println!("Unknown option. Use the --help flag for Help.");
