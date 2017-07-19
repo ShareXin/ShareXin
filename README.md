@@ -20,6 +20,9 @@
 4. Explore `--help`
 
 ### Changelog
+#### [0.1.0] - 2017-07-19
+- Bug fixes and improvements
+
 #### [0.0.0] - 2017-07-19
 #### Added
 - First commit
