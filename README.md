@@ -23,6 +23,9 @@
 - If 't' won't send your tweet, check your $PATH. Your terminal may be able to launch it, but your WM/DE may not.
 
 ### Changelog
+#### [0.2.1] - 2017-07-20
+- Centered window (why isn't .set_position() IN THE DOCS)
+
 #### [0.2.0] - 2017-07-20
 - Uh, if you're haven problems with t not loadin', check your $PATH
 

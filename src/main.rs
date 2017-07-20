@@ -89,6 +89,7 @@ fn gui(mort: bool)
     }
     window.set_default_size(350, 250);
     window.set_border_width(10);
+    window.set_position(gtk::WindowPosition::Center);
     let grid = gtk::Grid::new();
     grid.set_column_spacing(5);
     grid.set_row_spacing(5);
