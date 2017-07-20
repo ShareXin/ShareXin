@@ -175,7 +175,7 @@ Social Options:
             },
             "-at" => {
                 image(String::from("-a"));
-                gui(true);
+                gui(false);
             },
             "-wm" => {
                 image(String::from("-w"));
@@ -183,7 +183,7 @@ Social Options:
             },
             "-wt" => {
                 image(String::from("-w"));
-                gui(true);
+                gui(false);
             },
             "-m" => {
                 image(String::new());
@@ -191,7 +191,7 @@ Social Options:
             },
             "-t" => {
                 image(String::new());
-                gui(true);
+                gui(false);
             },
             "-af" => {
                 image(String::from("-a"));
