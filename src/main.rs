@@ -26,14 +26,8 @@ fn toot(txt: String)
 fn twitter(txt: String)
 {
     println!("Text: {}", txt);
-    let usre = get_user_by_uid(get_current_uid()).unwrap();
-    let usr = usre.name();
-    let mut trc = String::from("/home/");
-    trc.push_str(&usr);
-    trc.push_str("/.trc");
     let _t = Command::new("t")
-    .arg("update").arg("-f").arg("/tmp/sharexin_img.png").arg(&txt)
-    .arg("-P").arg(&trc)
+    .args(&["update", &txt, "-f", "/tmp/sharexin_img.png"])
     .output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_t.stdout));
     Notification::new().summary("Sent to Twitter")
