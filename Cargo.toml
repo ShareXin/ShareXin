@@ -1,12 +1,16 @@
 [package]
 name = "sharexin"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
+description = "ShareX for Linux"
+homepage = "https://github.com/thebitstick/ShareXin"
+repository = "https://github.com/thebitstick/ShareXin"
+license = "MIT"
 
 [dependencies]
-gtk = "*"
-notify-rust = "*"
-glib = "*"
-gdk = "*"
-time = "*"
-users = "*"
+gtk = "^0.1.3"
+notify-rust = "^3.4.1"
+glib = "^0.1.3"
+gdk = "^0.5.3"
+time = "^0.1.38"
+users = "^0.5.2"

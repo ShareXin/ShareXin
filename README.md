@@ -19,7 +19,13 @@
 3. Login to Twitter and/or Mastodon using t and/or toot
 4. Explore `--help`
 
+#### Troubleshooting
+- If 't' won't send your tweet, check your $PATH. Your terminal may be able to launch it, but your WM/DE may not.
+
 ### Changelog
+#### [0.2.0] - 2017-07-20
+- Uh, if you're haven problems with t not loadin', check your $PATH
+
 #### [0.1.0] - 2017-07-19
 - Bug fixes and improvements
 
