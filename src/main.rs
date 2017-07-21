@@ -12,7 +12,7 @@ use std::thread;
 use std::process::Command;
 use notify_rust::Notification;
 
-fn toot(txt: String)
+fn toot_img(txt: String)
 {
     println!("Text: {}", txt);
     let _mastodon = Command::new("toot")
@@ -23,7 +23,7 @@ fn toot(txt: String)
         .body(&txt).icon("file:///tmp/sharexin_img.png").show().unwrap();
 }
 
-fn twitter(txt: String)
+fn twitter_img(txt: String)
 {
     println!("Text: {}", txt);
     let _t = Command::new("t")
@@ -32,6 +32,26 @@ fn twitter(txt: String)
     println!("{}", String::from_utf8_lossy(&_t.stdout));
     Notification::new().summary("Sent to Twitter")
         .body(&txt).icon("file:///tmp/sharexin_img.png").show().unwrap();
+}
+
+fn toot(txt: String)
+{
+    println!("Text: {}", txt);
+    let _mastodon = Command::new("toot")
+    .arg("post").arg(&txt).output().expect("Nope");
+    println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
+    Notification::new().summary("Sent to Mastodon")
+        .body(&txt).show().unwrap();
+}
+
+fn twitter(txt: String)
+{
+    println!("Text: {}", txt);
+    let _t = Command::new("t")
+    .args(&["update", &txt]).output().expect("Nope");
+    println!("{}", String::from_utf8_lossy(&_t.stdout));
+    Notification::new().summary("Sent to Twitter")
+        .body(&txt).show().unwrap();
 }
 
 fn image(cmd: String)
@@ -73,7 +93,7 @@ fn save()
     .icon("file:///tmp/sharexin_img.png").show().unwrap();
 }
 
-fn gui(mort: bool)
+fn gui(mort: bool, morti: bool)
 {
     if gtk::init().is_err() {
         println!("Failed to initialize GTK.");
@@ -96,6 +116,7 @@ fn gui(mort: bool)
     let text = gtk::TextView::new();
     text.set_hexpand(true);
     text.set_vexpand(true);
+    text.set_wrap_mode(gtk::WrapMode::Char);
     grid.attach(&text, 0, 0, 3, 3);
     let cancel = Button::new_with_label("Cancel");
     cancel.set_size_request(40, 30);
@@ -121,21 +142,51 @@ fn gui(mort: bool)
         &TextBuffer::get_end_iter(&TextView::get_buffer(&text).unwrap()), false);
         let tweet: String = sent.unwrap();
         if mort {
-        thread::spawn(move || {
-            glib::idle_add(move || {
-                toot(tweet.clone());
-                gtk::main_quit();
-                Continue(false)
-            });
-        });}
+            if morti {
+                thread::spawn(move || {
+                    glib::idle_add(move || {
+                        toot_img(tweet.clone());
+                        gtk::main_quit();
+                        Continue(false)
+                    });
+                 });
+            }
+            else if !tweet.is_empty() {
+                thread::spawn(move || {
+                    glib::idle_add(move || {
+                        toot(tweet.clone());
+                        gtk::main_quit();
+                        Continue(false)
+                    });
+                 });
+            }
+            else {
+                Notification::new().summary("Tweet empty | Not Sent").show().unwrap();
+            }
+        }
         else {
-        thread::spawn(move || {
-            glib::idle_add(move || {
-                twitter(tweet.clone());
-                gtk::main_quit();
-                Continue(false)
-            });
-        });}
+            if morti {
+                thread::spawn(move || {
+                    glib::idle_add(move || {
+                        twitter_img(tweet.clone());
+                        gtk::main_quit();
+                        Continue(false)
+                    });
+                 });
+            }
+            else if !tweet.is_empty() {
+                thread::spawn(move || {
+                    glib::idle_add(move || {
+                        twitter(tweet.clone());
+                        gtk::main_quit();
+                        Continue(false)
+                    });
+                 });
+            }
+            else {
+                Notification::new().summary("Toot empty | Not Sent").show().unwrap();
+            }
+        }
        window.hide();
     });
 
@@ -144,17 +195,19 @@ fn gui(mort: bool)
 
 fn main()
 {
-    let help = String::from("
-Usage: sharerust [OPTION (Image,Social)]
+    let help = String::from(
+"Usage: sharerust [OPTION (Image,Social)]
 Examples: 
 sharerust -at
 sharerust --help
 sharerust -wm
+sharerust -m
 
 Image Options:
 \t-h --help\tDisplay this message
 \t-a\t\tCapture an area (default is Fullscreen)
 \t-w\t\tCapture the current window (default is Fullscreen)
+\t-n\t\tNo Image will be taken, will tweet without an image
 
 Social Options:
 \t-m\t\tUpload to Mastodon (uses \"toot\")
@@ -163,30 +216,36 @@ Social Options:
         let args: Vec<_> = env::args().collect();
     if args.len() > 1 {
         match args[1].as_ref() {
-            "-h" | "--help" | "-a" | "-w" => println!("{}", help),
+            "-h" | "--help" | "-a" | "-w" | "-n" => println!("{}", help),
             "-am" => {
                 image(String::from("-a"));
-                gui(true);
+                gui(true, true);
             },
             "-at" => {
                 image(String::from("-a"));
-                gui(false);
+                gui(false, true);
             },
             "-wm" => {
                 image(String::from("-w"));
-                gui(true);
+                gui(true, true);
             },
             "-wt" => {
                 image(String::from("-w"));
-                gui(false);
+                gui(false, true);
+            },
+            "-nt" => {
+                gui(false, false);
+            },
+            "-nm" => {
+                gui(true, false);
             },
             "-m" => {
                 image(String::new());
-                gui(true);
+                gui(true, true);
             },
             "-t" => {
                 image(String::new());
-                gui(false);
+                gui(false, true);
             },
             "-af" => {
                 image(String::from("-a"));
@@ -200,7 +259,10 @@ Social Options:
                 image(String::new());
                 save();
             },
-            _ => println!("Unknown option. Use the --help flag for Help.")
+            _ => println!("{}", help)
         }
+    }
+    else {
+        println!("{}", help);
     }
 }

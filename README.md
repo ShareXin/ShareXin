@@ -35,7 +35,3 @@
 #### [0.0.0] - 2017-07-19
 #### Added
 - First commit
-
-#### TODO
-- Tweet without an image
-- Word wrap for TextView
