@@ -13,11 +13,16 @@
 * Notifications
 * Works with Wayland (On Gnome only) and X11 (On everything since the 90s)
 
-#### Installation
+#### Installation (via Github)
 1. `git clone https://github.com/ShareXin/`
 2. `cargo install`
 3. Login to Twitter and/or Mastodon using t and/or toot
 4. Explore `--help`
+
+#### Installation (via Crates.io)
+1. `cargo install sharexin`
+2. Login to Twitter and/or Mastodon using t and/or toot
+3. Explore `--help`
 
 #### Troubleshooting
 - If 't' won't send your tweet, check your $PATH. Your terminal may be able to launch it, but your WM/DE may not.
