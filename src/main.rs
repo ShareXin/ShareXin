@@ -16,7 +16,7 @@ fn toot_img(txt: String)
 {
     println!("Text: {}", txt);
     let _mastodon = Command::new("toot")
-    .arg("post").arg("-m").arg("/tmp/sharexin_img.png").arg(&txt)
+    .args(&["post", "-m", "/tmp/sharexin_img.png", &txt])
     .output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
     Notification::new().summary("Sent to Mastodon")
@@ -26,10 +26,14 @@ fn toot_img(txt: String)
 fn twitter_img(txt: String)
 {
     println!("Text: {}", txt);
-    let _t = Command::new("t")
-    .args(&["update", &txt, "-f", "/tmp/sharexin_img.png"])
-    .output().expect("Nope");
-    println!("{}", String::from_utf8_lossy(&_t.stdout));
+    let mut _t = Command::new("t");
+    if !txt.is_empty() {
+        _t.args(&["update", &txt, "-f", "/tmp/sharexin_img.png"]).output().expect("Nope");
+    }
+    else {
+        _t.args(&["update", "-f", "/tmp/sharexin_img.png"]).output().expect("Nope");
+    }
+    //println!("{}", String::from_utf8_lossy(&_t.stdout));
     Notification::new().summary("Sent to Twitter")
         .body(&txt).icon("file:///tmp/sharexin_img.png").show().unwrap();
 }
@@ -38,7 +42,7 @@ fn toot(txt: String)
 {
     println!("Text: {}", txt);
     let _mastodon = Command::new("toot")
-    .arg("post").arg(&txt).output().expect("Nope");
+    .args(&["post", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
     Notification::new().summary("Sent to Mastodon")
         .body(&txt).show().unwrap();
@@ -117,10 +121,19 @@ fn gui(mort: bool, morti: bool)
     text.set_hexpand(true);
     text.set_vexpand(true);
     text.set_wrap_mode(gtk::WrapMode::Char);
+    text.set_accepts_tab(false);
     grid.attach(&text, 0, 0, 3, 3);
     let cancel = Button::new_with_label("Cancel");
     cancel.set_size_request(40, 30);
-    let send = Button::new_with_label("Send");
+    let send = Button::new();
+    if mort {
+        let button_txt = Label::new_with_mnemonic(Some("Toot"));
+        send.add(&button_txt);
+    }
+    else {
+        let button_txt = Label::new_with_mnemonic(Some("Tweet"));
+        send.add(&button_txt);
+    }
     send.set_size_request(40, 30);
     grid.attach(&cancel, 1, 4, 1, 1);
     grid.attach(&send, 2, 4, 1, 1);
