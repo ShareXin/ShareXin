@@ -23,6 +23,11 @@
 - If 't' won't send your tweet, check your $PATH. Your terminal may be able to launch it, but your WM/DE may not.
 
 ### Changelog
+#### [0.2.2] - 2017-07-21
+- TextView now word wraps
+- Ability to simply just tweet without an image
+- Mort
+
 #### [0.2.1] - 2017-07-20
 - Centered window (why isn't .set_position() IN THE DOCS)
 
