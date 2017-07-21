@@ -34,6 +34,10 @@
 - If `t` takes forever to send a tweet, remember that it's only a Ruby app...
 
 #### Changelog
+### [0.2.4] - 2017-07-21
+- Added version info
+- Made --help prettier
+
 ### [0.2.3] - 2017-07-21
 - Send button now says Toot or Tweet depending on where you're going
 - TextView no longer accepts tabs

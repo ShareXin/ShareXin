@@ -208,28 +208,33 @@ fn gui(mort: bool, morti: bool)
 
 fn main()
 {
+    let version = String::from("sharexin 0.2.4");
     let help = String::from(
-"Usage: sharerust [OPTION (Image,Social)]
-Examples: 
-sharerust -at
-sharerust --help
-sharerust -wm
-sharerust -m
+"ShareXin
+
+Usage:
+    sharerust [options]
+    sharerust -at
+    sharerust --help
+    sharerust -wm
+    sharerust -m
 
 Image Options:
-\t-h --help\tDisplay this message
-\t-a\t\tCapture an area (default is Fullscreen)
-\t-w\t\tCapture the current window (default is Fullscreen)
-\t-n\t\tNo Image will be taken, will tweet without an image
+    -h, --help\t\tDisplay this help message
+    -V, --version\tPrint version info and exit
+    -a\t\t\tCapture an area (default is Fullscreen)
+    -w\t\t\tCapture the current window (default is Fullscreen)
+    -n\t\t\tNo Image will be taken, will tweet without an image
 
 Social Options:
-\t-m\t\tUpload to Mastodon (uses \"toot\")
-\t-t\t\tUpload to Twitter (uses \"t\")
-\t-f\t\tOnly save file");
+    -m\t\tUpload to Mastodon (uses \"toot\")
+    -t\t\tUpload to Twitter (uses \"t\")
+    -f\t\tOnly save file");
         let args: Vec<_> = env::args().collect();
     if args.len() > 1 {
         match args[1].as_ref() {
             "-h" | "--help" | "-a" | "-w" | "-n" => println!("{}", help),
+            "-V" | "--version" => println!("{}", version),
             "-am" => {
                 image(String::from("-a"));
                 gui(true, true);
