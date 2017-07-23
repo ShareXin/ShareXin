@@ -227,7 +227,7 @@ fn gui(mort: bool, morti: bool)
 
 fn main()
 {
-    let version = String::from("sharexin 0.2.5");
+    let version = String::from("sharexin 0.2.6");
     let help = String::from(
 "ShareXin
 

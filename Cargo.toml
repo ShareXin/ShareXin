@@ -1,6 +1,6 @@
 [package]
 name = "sharexin"
-version = "0.2.5"
+version = "0.2.6"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux"
 homepage = "https://github.com/thebitstick/ShareXin"

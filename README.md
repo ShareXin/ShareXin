@@ -34,6 +34,9 @@
 - If `t` takes forever to send a tweet, remember that it's only a Ruby app...
 
 ### Changelog
+#### [0.2.6] - 2017-07-23
+- Forgot to update the version # for 0.2.5 from 0.2.4 and Crates wouldn't allow a reupload so....
+
 #### [0.2.5] - 2017-07-23
 - Better word wrap
 - Better temp dir
