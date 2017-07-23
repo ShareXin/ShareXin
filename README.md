@@ -36,6 +36,8 @@
 ### Changelog
 #### [0.2.5] - 2017-07-23
 - Better word wrap
+- Better temp dir
+- Notification actually shows image now
 
 #### [0.2.4] - 2017-07-21
 - Added version info

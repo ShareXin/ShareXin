@@ -14,28 +14,38 @@ use notify_rust::Notification;
 
 fn toot_img(txt: String)
 {
+    let mut tmp = env::temp_dir();
+    tmp.push("sharexin.png");
+    let temp = tmp.to_str().unwrap().clone();
     println!("Text: {}", txt);
     let _mastodon = Command::new("toot")
-    .args(&["post", "-m", "/tmp/sharexin_img.png", &txt])
+    .args(&["post", "-m", temp.clone(), &txt])
     .output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
     Notification::new().summary("Sent to Mastodon")
-        .body(&txt).icon("file:///tmp/sharexin_img.png").show().unwrap();
+        .body(&txt).icon(temp).show().unwrap();
 }
 
 fn twitter_img(txt: String)
 {
+    let mut tmp = env::temp_dir();
+    tmp.push("sharexin.png");
+    let temp = tmp.to_str().unwrap().clone();
     println!("Text: {}", txt);
-    let mut _t = Command::new("t");
     if !txt.is_empty() {
-        _t.args(&["update", &txt, "-f", "/tmp/sharexin_img.png"]).output().expect("Nope");
+        let mut _t = Command::new("t")
+        .args(&["update", &txt, "-f", temp.clone()]).output().expect("Nope");
+        println!("{}", String::from_utf8_lossy(&_t.stdout));
+        Notification::new().summary("Sent to Twitter")
+        .body(&txt).icon(temp).show().unwrap();
     }
     else {
-        _t.args(&["update", "-f", "/tmp/sharexin_img.png"]).output().expect("Nope");
+        let mut _t = Command::new("t")
+        .args(&["update", "-f", temp.clone()]).output().expect("Nope");
+        println!("{}", String::from_utf8_lossy(&_t.stdout));
+        Notification::new().summary("Sent to Twitter")
+        .body(&txt).icon(temp).show().unwrap();
     }
-    //println!("{}", String::from_utf8_lossy(&_t.stdout));
-    Notification::new().summary("Sent to Twitter")
-        .body(&txt).icon("file:///tmp/sharexin_img.png").show().unwrap();
 }
 
 fn toot(txt: String)
@@ -60,19 +70,24 @@ fn twitter(txt: String)
 
 fn image(cmd: String)
 {
+    let mut tmp = env::temp_dir();
+    tmp.push("sharexin.png");
+    let temp = tmp.to_str().unwrap().clone();
+    let mut file = String::from("--file=");
+    file.push_str(temp);
     if cmd == "-a" { 
         let _before_image = Command::new("gnome-screenshot")
-        .arg("--file=/tmp/sharexin_img.png").output().expect("Nope");
-        let _feh = Command::new("feh").arg("/tmp/sharexin_img.png").arg("-F")
+        .arg(file.clone()).output().expect("Nope");
+        let _feh = Command::new("feh").arg(temp).arg("-F")
         .spawn().expect("Nope");
         let _image = Command::new("gnome-screenshot").arg(&cmd)
-        .arg("--file=/tmp/sharexin_img.png").output().expect("Nope");
+        .arg(file.clone()).output().expect("Nope");
         println!("{}", String::from_utf8_lossy(&_image.stdout));
         let _kill = Command::new("killall").arg("feh").output().expect("Nope");
     }
     else {
         let _image = Command::new("gnome-screenshot").arg(&cmd)
-        .arg("--file=/tmp/sharexin_img.png").output().expect("Nope");
+        .arg(file).output().expect("Nope");
         println!("{}", String::from_utf8_lossy(&_image.stdout));
     }
     save();
@@ -80,6 +95,8 @@ fn image(cmd: String)
 
 fn save()
 {
+    let mut tmp = env::temp_dir();
+    tmp.push("sharexin.png");
     let user = get_user_by_uid(get_current_uid()).unwrap();
     let username = String::from(user.name());
     let mut pictures = String::from("/home/");
@@ -87,14 +104,16 @@ fn save()
     pictures.push_str("/Pictures/ShareXin");
     #[allow(unused_must_use)]
     let _ = std::fs::create_dir(pictures);
-    let mut new_file = String::from("/home/jorge/Pictures/ShareXin/sharexin-");
+    let mut new_file = String::from("/home/");
+    new_file.push_str(&username);
+    new_file.push_str("/Pictures/ShareXin/sharexin-");
     let time = String::from(time::strftime("%Y-%m-%d-%T", &time::now()).unwrap());
     new_file.push_str(&time);
     new_file.push_str(".png");
     #[allow(unused_must_use)]
-    let _ = std::fs::copy("/tmp/sharexin_img.png", new_file);
+    let _ = std::fs::copy(tmp.clone(), new_file);
     Notification::new().summary("File saved")
-    .icon("file:///tmp/sharexin_img.png").show().unwrap();
+    .icon(tmp.to_str().unwrap().clone()).show().unwrap();
 }
 
 fn gui(mort: bool, morti: bool)
