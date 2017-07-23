@@ -19,11 +19,13 @@
 
 ### Installation (via Github)
 1. `git clone https://github.com/ShareXin/`
+2. Mac Users: `brew install gtk+3`
 2. `cargo install`
 3. Login to Twitter and/or Mastodon using t and/or toot
 4. Explore `--help`
 
 ### Installation (via Crates.io)
+1. Mac Users: `brew install gtk+3`
 1. `cargo install sharexin`
 2. Login to Twitter and/or Mastodon using t and/or toot
 3. Explore `--help`
