@@ -120,7 +120,7 @@ fn gui(mort: bool, morti: bool)
     let text = gtk::TextView::new();
     text.set_hexpand(true);
     text.set_vexpand(true);
-    text.set_wrap_mode(gtk::WrapMode::Char);
+    text.set_wrap_mode(gtk::WrapMode::WordChar);
     text.set_accepts_tab(false);
     grid.attach(&text, 0, 0, 3, 3);
     let cancel = Button::new_with_label("Cancel");
