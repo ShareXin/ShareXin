@@ -1,16 +1,14 @@
 extern crate gtk;
 extern crate glib;
-extern crate notify_rust;
 extern crate time;
-extern crate users;
-use users::{get_user_by_uid, get_current_uid};
+extern crate libnotify;
 use gtk::*;
+use libnotify::Notification;
 #[allow(unused_imports)]
 use std::fs;
 use std::env;
 use std::thread;
 use std::process::Command;
-use notify_rust::Notification;
 
 fn toot_img(txt: String)
 {
@@ -22,8 +20,10 @@ fn toot_img(txt: String)
     .args(&["post", "-m", temp.clone(), &txt])
     .output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
-    Notification::new().summary("Sent to Mastodon")
-        .body(&txt).icon(temp).show().unwrap();
+    libnotify::init("ShareXin").unwrap();
+    let not = Notification::new("Sent to Mastodon", None, temp);
+    not.show().unwrap();
+    libnotify::uninit();
 }
 
 fn twitter_img(txt: String)
@@ -36,15 +36,19 @@ fn twitter_img(txt: String)
         let mut _t = Command::new("t")
         .args(&["update", &txt, "-f", temp.clone()]).output().expect("Nope");
         println!("{}", String::from_utf8_lossy(&_t.stdout));
-        Notification::new().summary("Sent to Twitter")
-        .body(&txt).icon(temp).show().unwrap();
+        libnotify::init("ShareXin").unwrap();
+        let not = Notification::new("Sent to Mastodon", None, temp);
+        not.show().unwrap();
+        libnotify::uninit();
     }
     else {
         let mut _t = Command::new("t")
         .args(&["update", "-f", temp.clone()]).output().expect("Nope");
         println!("{}", String::from_utf8_lossy(&_t.stdout));
-        Notification::new().summary("Sent to Twitter")
-        .body(&txt).icon(temp).show().unwrap();
+        libnotify::init("ShareXin").unwrap();
+        let not = Notification::new("Sent to Twitter", None, temp);
+        not.show().unwrap();
+        libnotify::uninit();
     }
 }
 
@@ -54,8 +58,10 @@ fn toot(txt: String)
     let _mastodon = Command::new("toot")
     .args(&["post", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
-    Notification::new().summary("Sent to Mastodon")
-        .body(&txt).show().unwrap();
+    libnotify::init("ShareXin").unwrap();
+    let not = Notification::new("Sent to Mastodon", None, None);
+    not.show().unwrap();
+    libnotify::uninit();
 }
 
 fn twitter(txt: String)
@@ -64,8 +70,10 @@ fn twitter(txt: String)
     let _t = Command::new("t")
     .args(&["update", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_t.stdout));
-    Notification::new().summary("Sent to Twitter")
-        .body(&txt).show().unwrap();
+    libnotify::init("ShareXin").unwrap();
+    let not = Notification::new("Sent to Twitter", None, None);
+    not.show().unwrap();
+    libnotify::uninit();
 }
 
 fn image(cmd: String)
@@ -97,8 +105,7 @@ fn save()
 {
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
-    let user = get_user_by_uid(get_current_uid()).unwrap();
-    let username = String::from(user.name());
+    let username = env::var("USER").unwrap();
     let mut pictures = String::from("/home/");
     pictures.push_str(&username);
     pictures.push_str("/Pictures/ShareXin");
@@ -112,8 +119,10 @@ fn save()
     new_file.push_str(".png");
     #[allow(unused_must_use)]
     let _ = std::fs::copy(tmp.clone(), new_file);
-    Notification::new().summary("File saved")
-    .icon(tmp.to_str().unwrap().clone()).show().unwrap();
+    libnotify::init("ShareXin").unwrap();
+    let not = Notification::new("File saved", None, None);
+    not.show().unwrap();
+    libnotify::uninit();
 }
 
 fn gui(mort: bool, morti: bool)
@@ -193,7 +202,10 @@ fn gui(mort: bool, morti: bool)
                  });
             }
             else {
-                Notification::new().summary("Tweet empty | Not Sent").show().unwrap();
+                libnotify::init("ShareXin").unwrap();
+                let not = Notification::new("Toot empty | Not Sent", None, None);
+                not.show().unwrap();
+                libnotify::uninit();
             }
         }
         else {
@@ -216,7 +228,10 @@ fn gui(mort: bool, morti: bool)
                  });
             }
             else {
-                Notification::new().summary("Toot empty | Not Sent").show().unwrap();
+                libnotify::init("ShareXin").unwrap();
+                let not = Notification::new("Tweet empty | Not Sent", None, None);
+                not.show().unwrap();
+                libnotify::uninit();
             }
         }
        window.hide();

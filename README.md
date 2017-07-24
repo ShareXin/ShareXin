@@ -10,17 +10,17 @@
 ## Dependencies for compiling
 * gtk3   
 * cairo  
-* dbus  
+* libnotify  
 * pango  
 * gdk-pixbuf2
 * atk
 
-#### Compiled releases coming soon
+#### Compiled musl releases coming soon  
 
 ## Features
 * Uploads to Twitter and Mastodon  
 * Allows taking screenshots and saving them to files  
-* Notifications via dbus (couldn't find libnotify)  
+* Notifications via libnotify  
 * Works with Wayland (On Gnome only) and X11 (On everything since the 90s)  
 * Works with anything GTK has support for (including Mac and Windows with a bit of hacking)  
 * Saves screenshots to folder in Pictures dir  
@@ -53,6 +53,10 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.  
 
 ## Changelog  
+#### [0.2.7] - 2017-07-24
+- Notifications via libnotify (bye bye dbus)
+- Username gotten by $USER var, rather than an entire library (thanks std!)
+
 #### [0.2.6] - 2017-07-23  
 - Forgot to update the version # for 0.2.5 from 0.2.4 and Crates wouldn't allow a reupload so....  
 
