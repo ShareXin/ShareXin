@@ -244,7 +244,7 @@ fn main()
 {
     let version = String::from("sharexin 0.2.7");
     let help = String::from(
-"ShareXin
+"ShareXin - 0.2.7 (2017 Jul 24)
 
 Usage:
     sharerust [options]
