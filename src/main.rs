@@ -37,7 +37,7 @@ fn twitter_img(txt: String)
         .args(&["update", &txt, "-f", temp.clone()]).output().expect("Nope");
         println!("{}", String::from_utf8_lossy(&_t.stdout));
         libnotify::init("ShareXin").unwrap();
-        let not = Notification::new("Sent to Mastodon", None, temp);
+        let not = Notification::new("Sent to Twitter", None, temp);
         not.show().unwrap();
         libnotify::uninit();
     }
