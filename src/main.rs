@@ -12,7 +12,7 @@ use std::env;
 use std::thread;
 use std::process::*;
 
-static VERSION: &'static str = "\nsharexin 0.2.9";
+static VERSION: &'static str = "\nsharexin 0.3.0";
 
 fn toot_img(txt: String)
 {
@@ -229,6 +229,29 @@ Opcioj de sociaj:
     ");
 
 
+    let mut help_de = String::from(VERSION);
+    help_de.push_str(" (2017 Jul 25)
+
+Anwendung:
+    sharexin [optionen]
+    sharexin -at
+    sharexin --help
+    sharexin -wm
+    sharexin -m
+Optionen:
+    -h, --help\t\tZeige diese Nachricht an
+    -V, --version\tGebe Version aus und beende
+Bildoptionen:
+    -a\t\t\tNehme einen Bereich auf (standardmäßig Vollbild)
+    -w\t\t\tNehme das aktuelle Fenster auf (standardmäßig Vollbild)
+    -n\t\t\tEs wird kein Bild aufgenommen, Tweet ohne Bild wird veröffentlicht
+Optionen zu sozialen Netzwerken:
+    -m\t\tAuf Mastodon veröffentlichen (benutzt \"toot\")
+    -t\t\tAuf Twitter veröffentlichen (benutzt \"t\")
+    -f\t\tDatei nur speichern
+    ");
+
+
     let mut help_es = String::from(VERSION);
     help_es.push_str(" (2017 Jul 25)
 
@@ -294,6 +317,9 @@ Social Options:
     }
     else if lang.contains("jp") {
         println!("{}", help_jp);
+    }
+    else if lang.contains("de") {
+        println!("{}", help_de);
     }
     else { println!("{}", help);}
 }
