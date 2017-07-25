@@ -1,8 +1,8 @@
 # ShareXin  
 
-![Crates.io](https://img.shields.io/crates/v/sharexin.svg?style=flat-square)(https://crates.io/crates/sharexin)
-![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?style=flat-square)(https://github.com/thebitstick/ShareXin)
-![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?style=flat-square)(https://crates.io/crates/sharexin)
+[![Crates.io](https://img.shields.io/crates/v/sharexin.svg?style=flat-square)](https://crates.io/crates/sharexin)
+[![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?style=flat-square)](https://github.com/thebitstick/ShareXin)
+[![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?style=flat-square)](https://crates.io/crates/sharexin)
 
 ![Arc-Dark on i3](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
 
