@@ -7,7 +7,9 @@
 ![Arc-Dark on i3](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
 
 ## Requirements
-* gnome-screenshot (for now, next release switching to maim)  
+* maim  
+* slop  
+* imagemagick  
 * [t](https://github.com/sferik/t) (for now)  
 * [toot](https://github.com/ihabunek/toot) (for now)  
 
@@ -25,8 +27,7 @@
 * Uploads to Twitter and Mastodon  
 * Allows taking screenshots and saving them to files  
 * Notifications via libnotify  
-* Works with Wayland (On Gnome only) and X11 (On everything since the 90s)  
-* Works with anything GTK has support for (including Mac and Windows with a bit of hacking)  
+* Works with anything GTK has support for (including Mac and Windows with a bit of hacking, screenshotting only works on X11)  
 * Saves screenshots to folder in Pictures dir  
 
 ## Installation (via Github)  
@@ -57,6 +58,11 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.  
 
 ## Changelog  
+#### [0.2.8] - 2017-07-25
+- Maim replacing Gnome-screenshot
+- Shadow added to area screenshots using ImageMagick
+- Notification adds back tweet text
+
 #### [0.2.7] - 2017-07-24
 - Notifications via libnotify (bye bye dbus)
 - Username gotten by $USER var, rather than an entire library (thanks std!)

@@ -2,13 +2,15 @@ extern crate gtk;
 extern crate glib;
 extern crate time;
 extern crate libnotify;
+extern crate pipers;
 use gtk::*;
+use pipers::Pipe;
 use libnotify::Notification;
 #[allow(unused_imports)]
 use std::fs;
 use std::env;
 use std::thread;
-use std::process::Command;
+use std::process::*;
 
 fn toot_img(txt: String)
 {
@@ -16,7 +18,7 @@ fn toot_img(txt: String)
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
     let text: &str = &txt.clone()[..];
-    println!("Text: {}", txt);
+    println!("[Toot]: {}", txt);
     let _mastodon = Command::new("toot")
     .args(&["post", "-m", temp.clone(), &txt])
     .output().expect("Nope");
@@ -25,6 +27,7 @@ fn toot_img(txt: String)
     let not = Notification::new("Sent to Mastodon", Some(text), temp);
     not.show().unwrap();
     libnotify::uninit();
+    println!("[Notification]");
 }
 
 fn twitter_img(txt: String)
@@ -33,7 +36,7 @@ fn twitter_img(txt: String)
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
     let text: &str = &txt.clone()[..];
-    println!("Text: {}", txt);
+    println!("[Tweet]: {}", txt);
     if !txt.is_empty() {
         let mut _t = Command::new("t")
         .args(&["update", &txt, "-f", temp.clone()]).output().expect("Nope");
@@ -42,6 +45,7 @@ fn twitter_img(txt: String)
         let not = Notification::new("Sent to Twitter", Some(text), temp);
         not.show().unwrap();
         libnotify::uninit();
+        println!("[Notification]");
     }
     else {
         let mut _t = Command::new("t")
@@ -51,13 +55,14 @@ fn twitter_img(txt: String)
         let not = Notification::new("Sent to Twitter", Some(text), temp);
         not.show().unwrap();
         libnotify::uninit();
+        println!("[Notification]");
     }
 }
 
 fn toot(txt: String)
 {
     let text: &str = &txt.clone()[..];
-    println!("Text: {}", txt);
+    println!("[Toot]: {}", txt);
     let _mastodon = Command::new("toot")
     .args(&["post", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
@@ -65,12 +70,13 @@ fn toot(txt: String)
     let not = Notification::new("Sent to Mastodon", Some(text), None);
     not.show().unwrap();
     libnotify::uninit();
+    println!("[Notification]");
 }
 
 fn twitter(txt: String)
 {
     let text: &str = &txt.clone()[..];
-    println!("Text: {}", txt);
+    println!("[Tweet]: {}", txt);
     let _t = Command::new("t")
     .args(&["update", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_t.stdout));
@@ -78,35 +84,48 @@ fn twitter(txt: String)
     let not = Notification::new("Sent to Twitter", Some(text), None);
     not.show().unwrap();
     libnotify::uninit();
+    println!("[Notification]");
 }
 
 fn image(cmd: String)
 {
-    let maim = String::from(
-"maim /tmp/sharexin.png && feh -F /tmp/sharexin.png & maim -s | convert - \\( +clone -background black -shadow 80x3+5+5 \\) +swap -background none -layers merge +repage /tmp/sharexin.png && killall feh");
-    let ma = String::from(
-"maim -i $(xdotool getactivewindow) /tmp/sharexin.png");
-    let mai = String::from(
-"maim /tmp/sharexin.png");
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
-    let mut file = String::from("--file=");
-    file.push_str(temp);
-    if cmd == "-a" { 
-        let _before_image = Command::new("gnome-screenshot")
-        .arg(file.clone()).output().expect("Nope");
-        let _feh = Command::new("feh").arg(temp).arg("-F")
+    if cmd == "-s" { 
+        let _before_image = Command::new("maim")
+        .arg(temp.clone()).output().expect("Nope");
+        println!("[Before Image] {}", String::from_utf8_lossy(&_before_image.stdout));
+        let _feh = Command::new("feh").arg(temp.clone()).arg("-F")
         .spawn().expect("Nope");
-        let _image = Command::new("gnome-screenshot").arg(&cmd)
-        .arg(file.clone()).output().expect("Nope");
-        println!("{}", String::from_utf8_lossy(&_image.stdout));
+        let _sleep = Command::new("sleep").arg("2").output().expect("Nope");
+        println!("[Sleep] {}", String::from_utf8_lossy(&_sleep.stdout));
+        //let _image = Command::new("maim")
+        //.arg(&cmd).stdout(Stdio::piped()).spawn().expect("Nope");
+        //let _magick = Command::new("convert")
+        //.args(&[&_image.stdout, "(", "+clone", "-background",
+        //"black", "-shadow", "80x3+5+5", ")", "+swap", "-background",
+        //"none", "-layers", "merge", "+repage", temp.clone()])
+        //.output().expect("Nope");
+        let _image = Pipe::new("maim -s")
+        .then("convert - ( +clone -background black -shadow 80x3+5+5 ) +swap -background none -layers merge +repage /tmp/sharexin.png")
+        .finally()
+        .expect("Nope")
+        .wait_with_output()
+        .expect("NopeNope");
         let _kill = Command::new("killall").arg("feh").output().expect("Nope");
+        println!("[Feh Kill] {}", String::from_utf8_lossy(&_kill.stdout));
+    }
+    else if cmd == "-i" {
+        let _image = Command::new("maim")
+        .args(&[&cmd, "$(xdotool getactivewindow)", temp])
+        .output().expect("Nope");
+        println!("[Window Image] {}", String::from_utf8_lossy(&_image.stdout));
     }
     else {
-        let _image = Command::new("gnome-screenshot").arg(&cmd)
-        .arg(file).output().expect("Nope");
-        println!("{}", String::from_utf8_lossy(&_image.stdout));
+        let _image = Command::new("maim")
+        .arg(temp).output().expect("Nope");
+        println!("[Full Image] {}", String::from_utf8_lossy(&_image.stdout));
     }
     save();
 }
@@ -121,6 +140,7 @@ fn save()
     pictures.push_str("/Pictures/ShareXin");
     #[allow(unused_must_use)]
     let _ = std::fs::create_dir(pictures);
+    println!("[Creating Folder]");
     let mut new_file = String::from("/home/");
     new_file.push_str(&username);
     new_file.push_str("/Pictures/ShareXin/sharexin-");
@@ -129,10 +149,44 @@ fn save()
     new_file.push_str(".png");
     #[allow(unused_must_use)]
     let _ = std::fs::copy(tmp.clone(), new_file);
+    println!("[Saving image]");
     libnotify::init("ShareXin").unwrap();
     let not = Notification::new("File saved", None, None);
     not.show().unwrap();
     libnotify::uninit();
+    println!("[Notification]");
+}
+
+fn help()
+{
+    let help = String::from("
+ShareXin - 0.2.7 (2017 Jul 24)
+
+Usage:
+    sharerust [options]
+    sharerust -at
+    sharerust --help
+    sharerust -wm
+    sharerust -m
+
+Image Options:
+    -h, --help\t\tDisplay this help message
+    -V, --version\tPrint version info and exit
+    -a\t\t\tCapture an area (default is Fullscreen)
+    -w\t\t\tCapture the current window (default is Fullscreen)
+    -n\t\t\tNo Image will be taken, will tweet without an image
+
+Social Options:
+    -m\t\tUpload to Mastodon (uses \"toot\")
+    -t\t\tUpload to Twitter (uses \"t\")
+    -f\t\tOnly save file");
+    println!("{}", help);
+}
+
+fn version()
+{
+    let version = String::from("sharexin 0.2.7");
+    println!("{}", version);
 }
 
 fn gui(mort: bool, morti: bool)
@@ -252,47 +306,25 @@ fn gui(mort: bool, morti: bool)
 
 fn main()
 {
-    let version = String::from("sharexin 0.2.7");
-    let help = String::from(
-"ShareXin - 0.2.7 (2017 Jul 24)
-
-Usage:
-    sharerust [options]
-    sharerust -at
-    sharerust --help
-    sharerust -wm
-    sharerust -m
-
-Image Options:
-    -h, --help\t\tDisplay this help message
-    -V, --version\tPrint version info and exit
-    -a\t\t\tCapture an area (default is Fullscreen)
-    -w\t\t\tCapture the current window (default is Fullscreen)
-    -n\t\t\tNo Image will be taken, will tweet without an image
-
-Social Options:
-    -m\t\tUpload to Mastodon (uses \"toot\")
-    -t\t\tUpload to Twitter (uses \"t\")
-    -f\t\tOnly save file");
         let args: Vec<_> = env::args().collect();
     if args.len() > 1 {
         match args[1].as_ref() {
-            "-h" | "--help" | "-a" | "-w" | "-n" => println!("{}", help),
-            "-V" | "--version" => println!("{}", version),
+            "-h" | "--help" | "-a" | "-w" | "-n" => help(),
+            "-V" | "--version" => version(),
             "-am" => {
-                image(String::from("-a"));
+                image(String::from("-s"));
                 gui(true, true);
             },
             "-at" => {
-                image(String::from("-a"));
+                image(String::from("-s"));
                 gui(false, true);
             },
             "-wm" => {
-                image(String::from("-w"));
+                image(String::from("-i"));
                 gui(true, true);
             },
             "-wt" => {
-                image(String::from("-w"));
+                image(String::from("-i"));
                 gui(false, true);
             },
             "-nt" => {
@@ -310,21 +342,18 @@ Social Options:
                 gui(false, true);
             },
             "-af" => {
-                image(String::from("-a"));
-                save();
+                image(String::from("-s"));
             },
             "-wf" => {
-                image(String::from("-w"));
-                save();
+                image(String::from("-i"));
             },
             "-f" => {
                 image(String::new());
-                save();
             },
-            _ => println!("{}", help)
+            _ => help()
         }
     }
     else {
-        println!("{}", help);
+        help();
     }
 }
