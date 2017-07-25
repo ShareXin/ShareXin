@@ -15,13 +15,14 @@ fn toot_img(txt: String)
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
+    let text: &str = &txt.clone()[..];
     println!("Text: {}", txt);
     let _mastodon = Command::new("toot")
     .args(&["post", "-m", temp.clone(), &txt])
     .output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
     libnotify::init("ShareXin").unwrap();
-    let not = Notification::new("Sent to Mastodon", None, temp);
+    let not = Notification::new("Sent to Mastodon", Some(text), temp);
     not.show().unwrap();
     libnotify::uninit();
 }
@@ -31,13 +32,14 @@ fn twitter_img(txt: String)
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
+    let text: &str = &txt.clone()[..];
     println!("Text: {}", txt);
     if !txt.is_empty() {
         let mut _t = Command::new("t")
         .args(&["update", &txt, "-f", temp.clone()]).output().expect("Nope");
         println!("{}", String::from_utf8_lossy(&_t.stdout));
         libnotify::init("ShareXin").unwrap();
-        let not = Notification::new("Sent to Twitter", None, temp);
+        let not = Notification::new("Sent to Twitter", Some(text), temp);
         not.show().unwrap();
         libnotify::uninit();
     }
@@ -46,7 +48,7 @@ fn twitter_img(txt: String)
         .args(&["update", "-f", temp.clone()]).output().expect("Nope");
         println!("{}", String::from_utf8_lossy(&_t.stdout));
         libnotify::init("ShareXin").unwrap();
-        let not = Notification::new("Sent to Twitter", None, temp);
+        let not = Notification::new("Sent to Twitter", Some(text), temp);
         not.show().unwrap();
         libnotify::uninit();
     }
@@ -54,30 +56,38 @@ fn twitter_img(txt: String)
 
 fn toot(txt: String)
 {
+    let text: &str = &txt.clone()[..];
     println!("Text: {}", txt);
     let _mastodon = Command::new("toot")
     .args(&["post", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
     libnotify::init("ShareXin").unwrap();
-    let not = Notification::new("Sent to Mastodon", None, None);
+    let not = Notification::new("Sent to Mastodon", Some(text), None);
     not.show().unwrap();
     libnotify::uninit();
 }
 
 fn twitter(txt: String)
 {
+    let text: &str = &txt.clone()[..];
     println!("Text: {}", txt);
     let _t = Command::new("t")
     .args(&["update", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_t.stdout));
     libnotify::init("ShareXin").unwrap();
-    let not = Notification::new("Sent to Twitter", None, None);
+    let not = Notification::new("Sent to Twitter", Some(text), None);
     not.show().unwrap();
     libnotify::uninit();
 }
 
 fn image(cmd: String)
 {
+    let maim = String::from(
+"maim /tmp/sharexin.png && feh -F /tmp/sharexin.png & maim -s | convert - \\( +clone -background black -shadow 80x3+5+5 \\) +swap -background none -layers merge +repage /tmp/sharexin.png && killall feh");
+    let ma = String::from(
+"maim -i $(xdotool getactivewindow) /tmp/sharexin.png");
+    let mai = String::from(
+"maim /tmp/sharexin.png");
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
