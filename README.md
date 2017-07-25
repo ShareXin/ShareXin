@@ -67,7 +67,7 @@ I can't test Mac at the moment, all I know is that it compiles.
 ## Changelog  
 #### [0.3.0] - 2017-07-25  
 - Die Deutsche Sprache!  
-- Falsche Kompierungsdatum  
+- Falsche Kompilierungsdatum  
 
 #### [0.2.9] - 2017-07-25  
 - Multaj Lingovj! Added French, Spanish, Esperanto, and Japanese translations for --help!  
