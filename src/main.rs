@@ -152,7 +152,7 @@ fn save()
 fn help()
 {
     let mut help_fr = String::from(VERSION);
-    help_fr.push_str(" (2017 Juil 24)
+    help_fr.push_str(" (2017 Juil 25)
 
 Utilisation:
     sharexin [options]
@@ -178,7 +178,7 @@ Options sociales:
 
 
     let mut help_eo = String::from(VERSION);
-    help_eo.push_str(" (2017 Jul 24)
+    help_eo.push_str(" (2017 Jul 25)
 
 Uzo:
     sharexin [opcioj]
@@ -204,7 +204,7 @@ Opcioj de sociaj:
 
 
     let mut help_jp = String::from(VERSION);
-    help_jp.push_str(" (平成29年7月24日)
+    help_jp.push_str(" (平成29年7月25日)
 
 使用:
     sharexin [オプション]
@@ -230,7 +230,7 @@ Opcioj de sociaj:
 
 
     let mut help_es = String::from(VERSION);
-    help_es.push_str(" (2017 Jul 24)
+    help_es.push_str(" (2017 Jul 25)
 
 Utilización:
     sharexin [opciones]
@@ -256,7 +256,7 @@ Opciones de social:
 
 
     let mut help = String::from(VERSION);
-    help.push_str(" (2017 Jul 24)
+    help.push_str(" (2017 Jul 25)
 
 Usage:
     sharexin [options]
