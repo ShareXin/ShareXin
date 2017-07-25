@@ -65,6 +65,9 @@ I can't test Mac at the moment, all I know is that it compiles.
 - German by [@qwertxzy](https://twitter.com/qwertxzy)  
 
 ## Changelog  
+#### [0.3.1] - 2017-07-25  
+- Separated main.rs into {main, help, file, send}.rs, less scrolling
+
 #### [0.3.0] - 2017-07-25  
 - Die Deutsche Sprache!  
 - Falsche Kompilierungsdatum  
