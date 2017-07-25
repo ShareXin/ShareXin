@@ -1,5 +1,7 @@
 # ShareXin  
 
+![](https://img.shields.io/crates/v/sharexin.svg)
+
 ![](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
 
 ## Requirements
