@@ -3,7 +3,7 @@
 ![](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
 
 ## Requirements
-* gnome-screenshot (for now)  
+* gnome-screenshot (for now, next release switching to maim)  
 * [t](https://github.com/sferik/t) (for now)  
 * [toot](https://github.com/ihabunek/toot) (for now)  
 
@@ -15,7 +15,7 @@
 * gdk-pixbuf2
 * atk
 
-#### Compiled musl releases coming soon  
+#### Compiled binary hasn't been completely tested  
 
 ## Features
 * Uploads to Twitter and Mastodon  
