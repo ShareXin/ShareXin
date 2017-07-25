@@ -1,8 +1,10 @@
 # ShareXin  
 
-![](https://img.shields.io/crates/v/sharexin.svg)
+![](https://img.shields.io/crates/v/sharexin.svg?style=flat-square)
+![](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?style=flat-square)
+![](https://img.shields.io/crates/d/sharexin.svg?style=flat-square)
 
-![](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
+![Arc-Dark on i3](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
 
 ## Requirements
 * gnome-screenshot (for now, next release switching to maim)  
