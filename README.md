@@ -1,8 +1,8 @@
 # ShareXin  
 
-[![Crates.io](https://img.shields.io/crates/v/sharexin.svg?style=flat-square)](https://crates.io/crates/sharexin)
-[![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?style=flat-square)](https://github.com/thebitstick/ShareXin)
-[![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?style=flat-square)](https://crates.io/crates/sharexin)
+[![Crates.io](https://img.shields.io/crates/v/sharexin.svg?)](https://crates.io/crates/sharexin)
+[![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
+[![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?)](https://crates.io/crates/sharexin)
 
 ![Arc-Dark on i3](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)
 
@@ -60,7 +60,13 @@ Remember that it's only a Ruby app...
 #### No command line parameters work on Mac
 I can't test Mac at the moment, all I know is that it compiles.  
 
+## Translations
+- French by [@Eleoryth](https://twitter.com/Eleoryth)
+
 ## Changelog  
+#### [0.2.9] - 2017-07-25
+- Multaj Lingovj! Added French, Spanish, Esperanto, and Japanese translations for --help!
+
 #### [0.2.8] - 2017-07-25
 - Maim replacing Gnome-screenshot
 - Shadow added to area screenshots using ImageMagick
