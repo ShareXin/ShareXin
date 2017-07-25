@@ -21,13 +21,16 @@
 * gdk-pixbuf2
 * atk
 
-#### Compiled binary hasn't been completely tested  
+### Binary works out of the box on
+- Ubuntu 16.04 and up  
+- Fedora 25 and up  
 
 ## Features
 * Uploads to Twitter and Mastodon  
 * Allows taking screenshots and saving them to files  
 * Notifications via libnotify  
-* Works with anything GTK has support for (including Mac and Windows with a bit of hacking, screenshotting only works on X11)  
+* GUI works with Wayland and X11  
+* Screenshotting works with X11  
 * Saves screenshots to folder in Pictures dir  
 
 ## Installation (via Github)  
