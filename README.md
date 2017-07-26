@@ -37,14 +37,174 @@
 1. `git clone https://github.com/ShareXin/`  
 2. Mac Users: `brew install gtk+3`  
 2. `cargo install`  
-3. Login to Twitter and/or Mastodon using t and/or toot  
+3. Login to Twitter and/or Mastodon using `t` and/or `toot`  
 4. Explore `--help`  
 
 ## Installation (via Crates.io)  
 1. Mac Users: `brew install gtk+3`  
 1. `cargo install sharexin`  
-2. Login to Twitter and/or Mastodon using t and/or toot  
+2. Login to Twitter and/or Mastodon using `t` and/or `toot`  
 3. Explore `--help`  
+
+## `--help`  
+#### English  
+```
+sharexin 0.3.1 (2017 Jul 25)
+
+Usage:
+    sharexin [options]
+    sharexin -at
+    sharexin --help
+    sharexin -wm
+    sharexin -m
+
+Options:
+    -h, --help		Display this help message
+    -V, --version	Print version info and exit
+
+Image Options:
+    -a			Capture an area (default is Fullscreen)
+    -w			Capture the current window (default is Fullscreen)
+    -n			No Image will be taken, will tweet without an image
+
+Social Options:
+    -m		Upload to Mastodon (uses "toot")
+    -t		Upload to Twitter (uses "t")
+    -f		Only save file
+
+```  
+
+#### Esperanta  
+```
+sharexin 0.3.1 (2017 Jul 25)
+
+Uzo:
+    sharexin [opcioj]
+    sharexin -at
+    sharexin --help
+    sharexin -wm
+    sharexin -m
+
+Opcioj:
+    -h, --help		Montru la helpo mesaĝon
+    -V, --version	Printversio informoj kaj eliro
+
+Opcioj de bildo:
+    -a			Kapti regionon / zono (plena ekrano defaŭlte)
+    -w			Kapti la aktiva fenestro (Plena defaŭlta ekrano)
+    -n			Neniu bildoj estos prenita, la alŝuto sendiĝos sen bildo
+
+Opcioj de sociaj:
+    -m		Alŝutu al Mastodon (uzante "toot")
+    -t		Alŝutu al Twitter (uzante "t")
+    -f		Nur konservu la dosieron
+    
+```  
+
+#### Deutsche
+```
+sharexin 0.3.1 (2017 Jul 25)
+
+Anwendung:
+    sharexin [optionen]
+    sharexin -at
+    sharexin --help
+    sharexin -wm
+    sharexin -m
+Optionen:
+    -h, --help		Zeige diese Nachricht an
+    -V, --version	Gebe Version aus und beende
+Bildoptionen:
+    -a			Nehme einen Bereich auf (standardmäßig Vollbild)
+    -w			Nehme das aktuelle Fenster auf (standardmäßig Vollbild)
+    -n			Es wird kein Bild aufgenommen, Tweet ohne Bild wird veröffentlicht
+Optionen zu sozialen Netzwerken:
+    -m		Auf Mastodon veröffentlichen (benutzt "toot")
+    -t		Auf Twitter veröffentlichen (benutzt "t")
+    -f		Datei nur speichern
+    
+```  
+
+#### Français
+```
+sharexin 0.3.1 (2017 Juil 25)
+
+Utilisation:
+    sharexin [options]
+    sharexin -at
+    sharexin --help
+    sharexin -wm
+    sharexin -m
+
+Options:
+    -h, --help		Afficher le message d'aide
+    -V, --version	Imprimer les informations de la version et quitter
+
+Options d'image:
+    -a			Capturer une région/zone (Plein écran par défaut)
+    -w			Capturer la fenêtre active(Plein écran par défaut)
+    -n			Aucune image n'est sera prise, l'upload sera envoyé sans image
+
+Options sociales:
+    -m		Upload vers Mastodon (en utilisant "toot") 
+    -t		Upload vers Twitter (en utilisant "t") 
+    -f		Sauvegarder le fichier uniquement
+    
+```
+
+#### 日本語
+```
+sharexin 0.3.1 (平成29年7月25日)
+
+使用:
+    sharexin [オプション]
+    sharexin -at
+    sharexin --help
+    sharexin -wm
+    sharexin -m
+
+オプション:
+    -h, --help		標準出力に使用方法のメッセージを出力して正常終了する。
+    -V, --version	標準出力にバージョン情報を出力して正常終了する。
+
+スクリーンショットのオプション:
+    -a			地域スクリーンショットのキャプチャ（全デフォルト画面）
+    -w			アクティブなウィンドウをキャプチャ（全デフォルト画面）
+    -n			スクリーンショットは取得されず、送信されません
+
+ソーシャルのオプション:
+    -m		マストドンにアップロード（使用して「ｔｏｏｔ」)
+    -t		ツイッターにアップロード（使用して「ｔ」)
+    -f		ファイルを保存のみ
+
+```
+
+#### Español
+```    
+sharexin 0.3.1 (2017 Jul 25)
+
+Utilización:
+    sharexin [opciones]
+    sharexin -at
+    sharexin --help
+    sharexin -wm
+    sharexin -m
+
+Opciones:
+    -h, --help		Mostrar el mensaje de ayuda
+    -V, --version	Imprimir información de la versión y sale
+
+Opciones de imagen:
+    -a			Capturar una región (pantalla completa por defecto)
+    -w			Capturar la ventana activa (pantalla completa por defecto)
+    -n			No se tomarán imágenes, la carga será enviado sin imagen
+
+Opciones de social:
+    -m		Sube a Mastodon (usando "toot")
+    -t		Sube a Twitter (usando "toot")
+    -f		Guarde el archivo sólo
+
+```
 
 ## Known issues  
 #### If `t` won't send your tweet  
