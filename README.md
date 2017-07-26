@@ -51,7 +51,7 @@
 #### English  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 25)
+sharexin 0.3.2 (2017 Jul 26)
 
 Usage: sharexin <options>
 
@@ -79,7 +79,7 @@ Examples:
 #### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
 
 ```rust
-sharexin 0.3.2 (2017 Juil 25)
+sharexin 0.3.2 (2017 Juil 26)
 
 Utilisation: sharexin <options>
 
@@ -107,7 +107,7 @@ Exemples:
 #### Español  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 25)
+sharexin 0.3.2 (2017 Jul 26)
 
 Utilización: sharexin <opciones>
 
@@ -135,7 +135,7 @@ Ejemplos:
 #### Esperanto  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 25)
+sharexin 0.3.2 (2017 Jul 26)
 
 Uzo: sharexin <opcioj>
 
@@ -163,7 +163,7 @@ Ekzemploj:
 #### 日本語  
 
 ```rust
-sharexin 0.3.2 (平成29年7月25日)
+sharexin 0.3.2 (平成29年7月26日)
 
 使用方法: sharexin <オプション>
 
@@ -191,7 +191,7 @@ sharexin 0.3.2 (平成29年7月25日)
 #### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 25)
+sharexin 0.3.2 (2017 Jul 26)
 
 Anwendung: sharexin <optionen>
 
@@ -231,8 +231,14 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
-#### [0.3.2] - 2017-07-25
-- Cleaned help messages, used GNU coreutil messages for some items
+#### [0.3.3] - 2017-07-26  
+- New UI thanks to Glade  
+- Notifications now have language support  
+- Pressing Control+Return sends your message  
+- Native Buttons, language changes!  
+
+#### [0.3.2] - 2017-07-25  
+- Cleaned help messages, used GNU coreutil messages for some items  
 
 #### [0.3.1] - 2017-07-25  
 - Separated main.rs into {main, help, file, send}.rs, less scrolling  

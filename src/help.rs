@@ -5,7 +5,7 @@ pub fn help()
 {
     let mut help_fr = String::from("\n");
     help_fr.push_str(VERSION);
-    help_fr.push_str(" (2017 Juil 25)
+    help_fr.push_str(" (2017 Juil 26)
 
 Utilisation: sharexin <options>
 
@@ -33,7 +33,7 @@ Exemples:
 
     let mut help_eo = String::from("\n");
     help_eo.push_str(VERSION);
-    help_eo.push_str(" (2017 Jul 25)
+    help_eo.push_str(" (2017 Jul 26)
 
 Uzo: sharexin <opcioj>
 
@@ -61,7 +61,7 @@ Ekzemploj:
 
     let mut help_jp = String::from("\n");
     help_jp.push_str(VERSION);
-    help_jp.push_str(" (平成29年7月25日)
+    help_jp.push_str(" (平成29年7月26日)
 
 使用方法: sharexin <オプション>
 
@@ -89,7 +89,7 @@ Ekzemploj:
 
     let mut help_de = String::from("\n");
     help_de.push_str(VERSION);
-    help_de.push_str(" (2017 Jul 25)
+    help_de.push_str(" (2017 Jul 26)
 
 Anwendung: sharexin <optionen>
 
@@ -117,7 +117,7 @@ Beispiele:
 
     let mut help_es = String::from("\n");
     help_es.push_str(VERSION);
-    help_es.push_str(" (2017 Jul 25)
+    help_es.push_str(" (2017 Jul 26)
 
 Utilización: sharexin <opciones>
 
@@ -145,7 +145,7 @@ Ejemplos:
 
     let mut help = String::from("\n");
     help.push_str(VERSION);
-    help.push_str(" (2017 Jul 25)
+    help.push_str(" (2017 Jul 26)
 
 Usage: sharexin <options>
 
