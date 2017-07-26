@@ -10,7 +10,7 @@ mod send;
 mod file;
 mod help;
 
-static VERSION: &'static str = "sharexin 0.3.1";
+static VERSION: &'static str = "sharexin 0.3.2";
 
 fn gui(mort: bool, morti: bool)
 {

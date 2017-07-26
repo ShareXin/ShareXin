@@ -7,26 +7,27 @@ pub fn help()
     help_fr.push_str(VERSION);
     help_fr.push_str(" (2017 Juil 25)
 
-Utilisation:
-    sharexin [options]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+Utilisation: sharexin <options>
 
 Options:
-    -h, --help\t\tAfficher le message d'aide
-    -V, --version\tImprimer les informations de la version et quitter
+  -h, --help\tAfficher le message d'aide
+  -V, --version\tImprimer les informations de la version et quitter
 
 Options d'image:
-    -a\t\t\tCapturer une région/zone (Plein écran par défaut)
-    -w\t\t\tCapturer la fenêtre active(Plein écran par défaut)
-    -n\t\t\tAucune image n'est sera prise, l'upload sera envoyé sans image
+  -a\t\tCapturer une zone de l'écran plutôt que l'écran complet
+  -w\t\tCapturer la fenêtre active plutôt que l'écran complet
+  -n\t\tAucune image n'est sera prise, l'upload sera envoyé sans image
 
 Options sociales:
-    -m\t\tUpload vers Mastodon (en utilisant \"toot\") 
-    -t\t\tUpload vers Twitter (en utilisant \"t\") 
-    -f\t\tSauvegarder le fichier uniquement
+  -m\t\tUpload vers Mastodon (en utilisant \"toot\") 
+  -t\t\tUpload vers Twitter (en utilisant \"t\") 
+  -f\t\tSauvegarder le fichier uniquement
+
+Exemples:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
     ");
 
 
@@ -34,26 +35,27 @@ Options sociales:
     help_eo.push_str(VERSION);
     help_eo.push_str(" (2017 Jul 25)
 
-Uzo:
-    sharexin [opcioj]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+Uzo: sharexin <opcioj>
 
 Opcioj:
-    -h, --help\t\tMontru la helpo mesaĝon
-    -V, --version\tPrintversio informoj kaj eliro
+  -h, --help\tMontru la helpo mesaĝon
+  -V, --version\tPrintversio informoj kaj eliro
 
 Opcioj de bildo:
-    -a\t\t\tKapti regionon / zono (plena ekrano defaŭlte)
-    -w\t\t\tKapti la aktiva fenestro (Plena defaŭlta ekrano)
-    -n\t\t\tNeniu bildoj estos prenita, la alŝuto sendiĝos sen bildo
+  -a\t\tKapti areon de la ekrano anstataŭ ol la tuta ekrano
+  -w\t\tKapti la aktivan fenestron anstataŭ ol la tuta ekrano
+  -n\t\tNeniu bildoj estos prenita, la alŝuto sendiĝos sen bildo
 
 Opcioj de sociaj:
-    -m\t\tAlŝutu al Mastodon (uzante \"toot\")
-    -t\t\tAlŝutu al Twitter (uzante \"t\")
-    -f\t\tNur konservu la dosieron
+  -m\t\tAlŝutu al Mastodon (uzante \"toot\")
+  -t\t\tAlŝutu al Twitter (uzante \"t\")
+  -f\t\tNur konservu la dosieron
+
+Ekzemploj:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
     ");
 
 
@@ -61,26 +63,27 @@ Opcioj de sociaj:
     help_jp.push_str(VERSION);
     help_jp.push_str(" (平成29年7月25日)
 
-使用:
-    sharexin [オプション]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+使用方法: sharexin <オプション>
 
 オプション:
-    -h, --help\t\t標準出力に使用方法のメッセージを出力して正常終了する。
-    -V, --version\t標準出力にバージョン情報を出力して正常終了する。
+  -h, --help\t標準出力に使用方法のメッセージを出力して正常終了する。
+  -V, --version\t標準出力にバージョン情報を出力して正常終了する。
 
 スクリーンショットのオプション:
-    -a\t\t\t地域スクリーンショットのキャプチャ（全デフォルト画面）
-    -w\t\t\tアクティブなウィンドウをキャプチャ（全デフォルト画面）
-    -n\t\t\tスクリーンショットは取得されず、送信されません
+  -a\t\t画面全体ではなく一部を取得する
+  -w\t\t画面全体ではなくウィンドウ単体を取得する
+  -n\t\tスクリーンショットは作成されず、送信されません
 
 ソーシャルのオプション:
-    -m\t\tマストドンにアップロード（使用して「ｔｏｏｔ」)
-    -t\t\tツイッターにアップロード（使用して「ｔ」)
-    -f\t\tファイルを保存のみ
+  -m\t\tマストドンにアップロード（使用して「ｔｏｏｔ」)
+  -t\t\tツイッターにアップロード（使用して「ｔ」)
+  -f\t\tファイルを保存のみ
+
+例:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
     ");
 
 
@@ -88,23 +91,27 @@ Opcioj de sociaj:
     help_de.push_str(VERSION);
     help_de.push_str(" (2017 Jul 25)
 
-Anwendung:
-    sharexin [optionen]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+Anwendung: sharexin <optionen>
+
 Optionen:
-    -h, --help\t\tZeige diese Nachricht an
-    -V, --version\tGebe Version aus und beende
+  -h, --help\tZeige diese Nachricht an
+  -V, --version\tGebe Version aus und beende
+
 Bildoptionen:
-    -a\t\t\tNehme einen Bereich auf (standardmäßig Vollbild)
-    -w\t\t\tNehme das aktuelle Fenster auf (standardmäßig Vollbild)
-    -n\t\t\tEs wird kein Bild aufgenommen, Tweet ohne Bild wird veröffentlicht
+  -a\t\tNur einen Bereich anstatt des gesamten Bildschirms aufnehmen
+  -w\t\tNur ein Fenster anstatt des gesamten Bildschirms aufnehmen
+  -n\t\tEs wird kein Bild aufgenommen, Tweet ohne Bild wird veröffentlicht
+
 Optionen zu sozialen Netzwerken:
-    -m\t\tAuf Mastodon veröffentlichen (benutzt \"toot\")
-    -t\t\tAuf Twitter veröffentlichen (benutzt \"t\")
-    -f\t\tDatei nur speichern
+  -m\t\tAuf Mastodon veröffentlichen (benutzt \"toot\")
+  -t\t\tAuf Twitter veröffentlichen (benutzt \"t\")
+  -f\t\tDatei nur speichern
+
+Beispiele:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
     ");
 
 
@@ -112,26 +119,27 @@ Optionen zu sozialen Netzwerken:
     help_es.push_str(VERSION);
     help_es.push_str(" (2017 Jul 25)
 
-Utilización:
-    sharexin [opciones]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+Utilización: sharexin <opciones>
 
 Opciones:
-    -h, --help\t\tMostrar el mensaje de ayuda
-    -V, --version\tImprimir información de la versión y sale
+  -h, --help\tMostrar el mensaje de ayuda y sale
+  -V, --version\tImprimir información de la versión y sale
 
 Opciones de imagen:
-    -a\t\t\tCapturar una región (pantalla completa por defecto)
-    -w\t\t\tCapturar la ventana activa (pantalla completa por defecto)
-    -n\t\t\tNo se tomarán imágenes, la carga será enviado sin imagen
+  -a\t\tCapturar un área de la pantalla en lugar de la pantalla entera
+  -w\t\tCapturar una ventana en vez de la pantalla entera
+  -n\t\tNo se tomarán imágenes, la carga será enviado sin imagen
 
 Opciones de social:
-    -m\t\tSube a Mastodon (usando \"toot\")
-    -t\t\tSube a Twitter (usando \"toot\")
-    -f\t\tGuarde el archivo sólo
+  -m\t\tSube a Mastodon (usando \"toot\")
+  -t\t\tSube a Twitter (usando \"toot\")
+  -f\t\tGuarde el archivo sólo
+
+Ejemplos:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
     ");
 
 
@@ -139,26 +147,27 @@ Opciones de social:
     help.push_str(VERSION);
     help.push_str(" (2017 Jul 25)
 
-Usage:
-    sharexin [options]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+Usage: sharexin <options>
 
 Options:
-    -h, --help\t\tDisplay this help message
-    -V, --version\tPrint version info and exit
+  -h, --help\tDisplay this help message
+  -V, --version\tPrint version info and exit
 
 Image Options:
-    -a\t\t\tCapture an area (default is Fullscreen)
-    -w\t\t\tCapture the current window (default is Fullscreen)
-    -n\t\t\tNo Image will be taken, will tweet without an image
+  -a\t\tGrab an area of the screen instead of the entire screen
+  -w\t\tGrab the current window instead of the entire screen
+  -n\t\tNo Image will be taken, will tweet without an image
 
 Social Options:
-    -m\t\tUpload to Mastodon (uses \"toot\")
-    -t\t\tUpload to Twitter (uses \"t\")
-    -f\t\tOnly save file
+  -m\t\tUpload to Mastodon (uses \"toot\")
+  -t\t\tUpload to Twitter (uses \"t\")
+  -f\t\tOnly save file
+
+Examples:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
     ");
 
 

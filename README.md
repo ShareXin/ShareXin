@@ -47,164 +47,174 @@
 3. Explore `--help`  
 
 ## `--help`  
-#### English  
-```
-sharexin 0.3.1 (2017 Jul 25)
 
-Usage:
-    sharexin [options]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+#### English  
+
+```rust
+sharexin 0.3.2 (2017 Jul 25)
+
+Usage: sharexin <options>
 
 Options:
-    -h, --help		Display this help message
-    -V, --version	Print version info and exit
+  -h, --help	Display this help message
+  -V, --version	Print version info and exit
 
 Image Options:
-    -a			Capture an area (default is Fullscreen)
-    -w			Capture the current window (default is Fullscreen)
-    -n			No Image will be taken, will tweet without an image
+  -a		Grab an area of the screen instead of the entire screen
+  -w		Grab the current window instead of the entire screen
+  -n		No Image will be taken, will tweet without an image
 
 Social Options:
-    -m		Upload to Mastodon (uses "toot")
-    -t		Upload to Twitter (uses "t")
-    -f		Only save file
+  -m		Upload to Mastodon (uses "toot")
+  -t		Upload to Twitter (uses "t")
+  -f		Only save file
 
+Examples:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
 ```  
 
-#### Esperanta  
-```
-sharexin 0.3.1 (2017 Jul 25)
+#### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
 
-Uzo:
-    sharexin [opcioj]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+```rust
+sharexin 0.3.2 (2017 Juil 25)
 
-Opcioj:
-    -h, --help		Montru la helpo mesaĝon
-    -V, --version	Printversio informoj kaj eliro
-
-Opcioj de bildo:
-    -a			Kapti regionon / zono (plena ekrano defaŭlte)
-    -w			Kapti la aktiva fenestro (Plena defaŭlta ekrano)
-    -n			Neniu bildoj estos prenita, la alŝuto sendiĝos sen bildo
-
-Opcioj de sociaj:
-    -m		Alŝutu al Mastodon (uzante "toot")
-    -t		Alŝutu al Twitter (uzante "t")
-    -f		Nur konservu la dosieron
-    
-```  
-
-#### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)
-```
-sharexin 0.3.1 (2017 Jul 25)
-
-Anwendung:
-    sharexin [optionen]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
-Optionen:
-    -h, --help		Zeige diese Nachricht an
-    -V, --version	Gebe Version aus und beende
-Bildoptionen:
-    -a			Nehme einen Bereich auf (standardmäßig Vollbild)
-    -w			Nehme das aktuelle Fenster auf (standardmäßig Vollbild)
-    -n			Es wird kein Bild aufgenommen, Tweet ohne Bild wird veröffentlicht
-Optionen zu sozialen Netzwerken:
-    -m		Auf Mastodon veröffentlichen (benutzt "toot")
-    -t		Auf Twitter veröffentlichen (benutzt "t")
-    -f		Datei nur speichern
-    
-```  
-
-#### Français by [@Eleoryth](https://twitter.com/Eleoryth) 
-```
-sharexin 0.3.1 (2017 Juil 25)
-
-Utilisation:
-    sharexin [options]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+Utilisation: sharexin <options>
 
 Options:
-    -h, --help		Afficher le message d'aide
-    -V, --version	Imprimer les informations de la version et quitter
+  -h, --help	Afficher le message d'aide
+  -V, --version	Imprimer les informations de la version et quitter
 
 Options d'image:
-    -a			Capturer une région/zone (Plein écran par défaut)
-    -w			Capturer la fenêtre active(Plein écran par défaut)
-    -n			Aucune image n'est sera prise, l'upload sera envoyé sans image
+  -a		Capturer une zone de l'écran plutôt que l'écran complet
+  -w		Capturer la fenêtre active plutôt que l'écran complet
+  -n		Aucune image n'est sera prise, l'upload sera envoyé sans image
 
 Options sociales:
-    -m		Upload vers Mastodon (en utilisant "toot") 
-    -t		Upload vers Twitter (en utilisant "t") 
-    -f		Sauvegarder le fichier uniquement
-    
-```
+  -m		Upload vers Mastodon (en utilisant "toot") 
+  -t		Upload vers Twitter (en utilisant "t") 
+  -f		Sauvegarder le fichier uniquement
 
-#### 日本語
-```
-sharexin 0.3.1 (平成29年7月25日)
+Exemples:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
+```  
 
-使用:
-    sharexin [オプション]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+#### Español  
 
-オプション:
-    -h, --help		標準出力に使用方法のメッセージを出力して正常終了する。
-    -V, --version	標準出力にバージョン情報を出力して正常終了する。
+```rust
+sharexin 0.3.2 (2017 Jul 25)
 
-スクリーンショットのオプション:
-    -a			地域スクリーンショットのキャプチャ（全デフォルト画面）
-    -w			アクティブなウィンドウをキャプチャ（全デフォルト画面）
-    -n			スクリーンショットは取得されず、送信されません
-
-ソーシャルのオプション:
-    -m		マストドンにアップロード（使用して「ｔｏｏｔ」)
-    -t		ツイッターにアップロード（使用して「ｔ」)
-    -f		ファイルを保存のみ
-
-```
-
-#### Español
-```    
-sharexin 0.3.1 (2017 Jul 25)
-
-Utilización:
-    sharexin [opciones]
-    sharexin -at
-    sharexin --help
-    sharexin -wm
-    sharexin -m
+Utilización: sharexin <opciones>
 
 Opciones:
-    -h, --help		Mostrar el mensaje de ayuda
-    -V, --version	Imprimir información de la versión y sale
+  -h, --help	Mostrar el mensaje de ayuda y sale
+  -V, --version	Imprimir información de la versión y sale
 
 Opciones de imagen:
-    -a			Capturar una región (pantalla completa por defecto)
-    -w			Capturar la ventana activa (pantalla completa por defecto)
-    -n			No se tomarán imágenes, la carga será enviado sin imagen
+  -a		Capturar un área de la pantalla en lugar de la pantalla entera
+  -w		Capturar una ventana en vez de la pantalla entera
+  -n		No se tomarán imágenes, la carga será enviado sin imagen
 
 Opciones de social:
-    -m		Sube a Mastodon (usando "toot")
-    -t		Sube a Twitter (usando "toot")
-    -f		Guarde el archivo sólo
+  -m		Sube a Mastodon (usando "toot")
+  -t		Sube a Twitter (usando "toot")
+  -f		Guarde el archivo sólo
 
-```
+Ejemplos:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
+```  
+
+#### Esperanto  
+
+```rust
+sharexin 0.3.2 (2017 Jul 25)
+
+Uzo: sharexin <opcioj>
+
+Opcioj:
+  -h, --help	Montru la helpo mesaĝon
+  -V, --version	Printversio informoj kaj eliro
+
+Opcioj de bildo:
+  -a		Kapti areon de la ekrano anstataŭ ol la tuta ekrano
+  -w		Kapti la aktivan fenestron anstataŭ ol la tuta ekrano
+  -n		Neniu bildoj estos prenita, la alŝuto sendiĝos sen bildo
+
+Opcioj de sociaj:
+  -m		Alŝutu al Mastodon (uzante "toot")
+  -t		Alŝutu al Twitter (uzante "t")
+  -f		Nur konservu la dosieron
+
+Ekzemploj:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
+```  
+
+#### 日本語  
+
+```rust
+sharexin 0.3.2 (平成29年7月25日)
+
+使用方法: sharexin <オプション>
+
+オプション:
+  -h, --help	標準出力に使用方法のメッセージを出力して正常終了する。
+  -V, --version	標準出力にバージョン情報を出力して正常終了する。
+
+スクリーンショットのオプション:
+  -a		画面全体ではなく一部を取得する
+  -w		画面全体ではなくウィンドウ単体を取得する
+  -n		スクリーンショットは作成されず、送信されません
+
+ソーシャルのオプション:
+  -m		マストドンにアップロード（使用して「ｔｏｏｔ」)
+  -t		ツイッターにアップロード（使用して「ｔ」)
+  -f		ファイルを保存のみ
+
+例:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
+```  
+
+#### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
+
+```rust
+sharexin 0.3.2 (2017 Jul 25)
+
+Anwendung: sharexin <optionen>
+
+Optionen:
+  -h, --help	Zeige diese Nachricht an
+  -V, --version	Gebe Version aus und beende
+
+Bildoptionen:
+  -a		Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen
+  -w		Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen
+  -n		Es wird kein Bild aufgenommen, Tweet ohne Bild wird veröffentlicht
+
+Optionen zu sozialen Netzwerken:
+  -m		Auf Mastodon veröffentlichen (benutzt "toot")
+  -t		Auf Twitter veröffentlichen (benutzt "t")
+  -f		Datei nur speichern
+
+Beispiele:
+  sharexin -at
+  sharexin -wm
+  sharexin -m
+  sharexin -nt
+```  
 
 ## Known issues  
 #### If `t` won't send your tweet  
@@ -221,8 +231,11 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
+#### [0.3.2] - 2017-07-25
+- Cleaned help messages, used GNU coreutil messages for some items
+
 #### [0.3.1] - 2017-07-25  
-- Separated main.rs into {main, help, file, send}.rs, less scrolling
+- Separated main.rs into {main, help, file, send}.rs, less scrolling  
 
 #### [0.3.0] - 2017-07-25  
 - Die Deutsche Sprache!  
