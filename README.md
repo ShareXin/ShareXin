@@ -56,7 +56,7 @@ sharexin 0.3.2 (2017 Jul 25)
 Usage: sharexin <options>
 
 Options:
-  -h, --help	Display this help message
+  -h, --help	Display this help message and exit
   -V, --version	Print version info and exit
 
 Image Options:
@@ -84,7 +84,7 @@ sharexin 0.3.2 (2017 Juil 25)
 Utilisation: sharexin <options>
 
 Options:
-  -h, --help	Afficher le message d'aide
+  -h, --help	Afficher le message d'aide et quitter
   -V, --version	Imprimer les informations de la version et quitter
 
 Options d'image:
@@ -140,7 +140,7 @@ sharexin 0.3.2 (2017 Jul 25)
 Uzo: sharexin <opcioj>
 
 Opcioj:
-  -h, --help	Montru la helpo mesaĝon
+  -h, --help	Montru la helpo mesaĝon kaj eliro
   -V, --version	Printversio informoj kaj eliro
 
 Opcioj de bildo:
@@ -196,7 +196,7 @@ sharexin 0.3.2 (2017 Jul 25)
 Anwendung: sharexin <optionen>
 
 Optionen:
-  -h, --help	Zeige diese Nachricht an
+  -h, --help	Zeige diese Nachricht an und beende
   -V, --version	Gebe Version aus und beende
 
 Bildoptionen:

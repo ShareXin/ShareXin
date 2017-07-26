@@ -10,7 +10,7 @@ pub fn help()
 Utilisation: sharexin <options>
 
 Options:
-  -h, --help\tAfficher le message d'aide
+  -h, --help\tAfficher le message d'aide et quitter
   -V, --version\tImprimer les informations de la version et quitter
 
 Options d'image:
@@ -38,7 +38,7 @@ Exemples:
 Uzo: sharexin <opcioj>
 
 Opcioj:
-  -h, --help\tMontru la helpo mesaĝon
+  -h, --help\tMontru la helpo mesaĝon kaj eliro
   -V, --version\tPrintversio informoj kaj eliro
 
 Opcioj de bildo:
@@ -94,7 +94,7 @@ Ekzemploj:
 Anwendung: sharexin <optionen>
 
 Optionen:
-  -h, --help\tZeige diese Nachricht an
+  -h, --help\tZeige diese Nachricht an und beende
   -V, --version\tGebe Version aus und beende
 
 Bildoptionen:
@@ -150,7 +150,7 @@ Ejemplos:
 Usage: sharexin <options>
 
 Options:
-  -h, --help\tDisplay this help message
+  -h, --help\tDisplay this help message and exit
   -V, --version\tPrint version info and exit
 
 Image Options:
