@@ -52,7 +52,7 @@
 #### English  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 26)
+sharexin 0.3.3 (2017 Jul 26)
 
 Usage: sharexin <options>
 
@@ -80,7 +80,7 @@ Examples:
 #### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
 
 ```rust
-sharexin 0.3.2 (2017 Juil 26)
+sharexin 0.3.3 (2017 Juil 26)
 
 Utilisation: sharexin <options>
 
@@ -108,7 +108,7 @@ Exemples:
 #### Español  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 26)
+sharexin 0.3.3 (2017 Jul 26)
 
 Utilización: sharexin <opciones>
 
@@ -136,7 +136,7 @@ Ejemplos:
 #### Esperanto  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 26)
+sharexin 0.3.3 (2017 Jul 26)
 
 Uzo: sharexin <opcioj>
 
@@ -164,7 +164,7 @@ Ekzemploj:
 #### 日本語  
 
 ```rust
-sharexin 0.3.2 (平成29年7月26日)
+sharexin 0.3.3 (平成29年7月26日)
 
 使用方法: sharexin <オプション>
 
@@ -192,7 +192,7 @@ sharexin 0.3.2 (平成29年7月26日)
 #### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
 
 ```rust
-sharexin 0.3.2 (2017 Jul 26)
+sharexin 0.3.3 (2017 Jul 26)
 
 Anwendung: sharexin <optionen>
 
