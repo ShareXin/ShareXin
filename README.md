@@ -101,7 +101,7 @@ Opcioj de sociaj:
     
 ```  
 
-#### Deutsche
+#### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)
 ```
 sharexin 0.3.1 (2017 Jul 25)
 
@@ -125,7 +125,7 @@ Optionen zu sozialen Netzwerken:
     
 ```  
 
-#### Français
+#### Français by [@Eleoryth](https://twitter.com/Eleoryth) 
 ```
 sharexin 0.3.1 (2017 Juil 25)
 
@@ -218,11 +218,7 @@ Add `$HOME/.cargo/bin` to your `$PATH`.
 Remember that it's only a Ruby app...  
 
 #### No command line parameters work on Mac
-I can't test Mac at the moment, all I know is that it compiles.  
-
-## Translations
-- French by [@Eleoryth](https://twitter.com/Eleoryth)  
-- German by [@qwertxzy](https://twitter.com/qwertxzy)  
+I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
 #### [0.3.1] - 2017-07-25  
