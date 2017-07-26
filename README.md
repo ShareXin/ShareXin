@@ -4,7 +4,8 @@
 [![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)  
 [![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?)](https://crates.io/crates/sharexin)  
 
-![Arc-Dark on i3](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui.png)  
+![Mastodon](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-mastodon.png)
+![Twitter](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-twitter.png)  
 
 ## Requirements  
 * maim  
