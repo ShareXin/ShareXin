@@ -1,6 +1,6 @@
 [package]
 name = "sharexin"
-version = "0.3.3"
+version = "0.3.4"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux"
 homepage = "https://github.com/thebitstick/ShareXin"
@@ -8,17 +8,12 @@ repository = "https://github.com/thebitstick/ShareXin"
 license = "MIT"
 
 [dependencies]
-gtk = "^0.1.3"
-glib = "^0.1.3"
-libnotify = "^1.0.1"
-gdk = "^0.5.3"
-time = "^0.1.38"
-pipers = "^1.0.1"
+gtk = "^0"
+glib = "^0"
+libnotify = "^1"
+gdk = "^0"
+time = "^0"
+pipers = "^1"
 
 [features]
 default = ["gtk/v3_10"]
-gtk_3_10 = ["gtk/v3_10"]
-gtk_3_16 = ["gtk_3_10", "gtk/v3_16"]
-gtk_3_18 = ["gtk_3_16", "gtk/v3_18"] #for CI tools
-gtk_3_20 = ["gtk_3_18", "gtk/v3_20"] #for CI tools
-gtk_3_22 = ["gtk_3_20", "gtk/v3_22"] #for CI tools
