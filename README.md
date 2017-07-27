@@ -52,169 +52,181 @@
 #### English  
 
 ```rust
-sharexin 0.3.4 (2017 Jul 26)
 
-Usage: sharexin <options>
+sharexin 0.3.5 (2017 Jul 27)
+
+Usage: sharexin <options> [destination] <image options>
 
 Options:
   -h, --help	Display this help message and exit
   -V, --version	Print version info and exit
+  -U, --upgrade	Check for new updates
 
 Image Options:
-  -a		Grab an area of the screen instead of the entire screen
-  -w		Grab the current window instead of the entire screen
-  -n		No Image will be taken, will tweet without an image
+  area		Grab an area of the screen instead of the entire screen
+  window	Grab the current window instead of the entire screen
+  full		Gran the entire screen
 
-Social Options:
-  -m		Upload to Mastodon (uses "toot")
-  -t		Upload to Twitter (uses "t")
-  -f		Only save file
+Destinations:
+  toot		Upload to Mastodon (uses "toot")
+  tweet		Upload to Twitter (uses "t")
+  file		Only save file
 
 Examples:
-  sharexin -at
-  sharexin -wm
-  sharexin -m
-  sharexin -nt
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
 ```  
 
 #### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
 
 ```rust
-sharexin 0.3.4 (2017 Juil 26)
 
-Utilisation: sharexin <options>
+sharexin 0.3.5 (2017 Juil 27)
+
+Utilisation: sharexin <option> [destination] <option d'image>
 
 Options:
   -h, --help	Afficher le message d'aide et quitter
   -V, --version	Imprimer les informations de la version et quitter
+  -U, --upgrade	Vérifiez les nouvelles mises à jour
 
 Options d'image:
-  -a		Capturer une zone de l'écran plutôt que l'écran complet
-  -w		Capturer la fenêtre active plutôt que l'écran complet
-  -n		Aucune image n'est sera prise, l'upload sera envoyé sans image
+  area		Capturer une zone de l'écran plutôt que l'écran complet
+  window	Capturer la fenêtre active plutôt que l'écran complet
+  full		Capturer l'écran complet
 
-Options sociales:
-  -m		Upload vers Mastodon (en utilisant "toot") 
-  -t		Upload vers Twitter (en utilisant "t") 
-  -f		Sauvegarder le fichier uniquement
+Destinations:
+  toot		Upload vers Mastodon (en utilisant "toot") 
+  tweet		Upload vers Twitter (en utilisant "t") 
+  file		Sauvegarder le fichier uniquement
 
 Exemples:
-  sharexin -at
-  sharexin -wm
-  sharexin -m
-  sharexin -nt
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
 ```  
 
 #### Español  
 
 ```rust
-sharexin 0.3.4 (2017 Jul 26)
 
-Utilización: sharexin <opciones>
+sharexin 0.3.5 (2017 Jul 27)
+
+Utilización: sharexin <opciones> [destino] <opcion de imagen>
 
 Opciones:
   -h, --help	Mostrar el mensaje de ayuda y sale
   -V, --version	Imprimir información de la versión y sale
+  -U, --upgrade	Busque nuevas actualizaciones
 
 Opciones de imagen:
-  -a		Capturar un área de la pantalla en lugar de la pantalla entera
-  -w		Capturar una ventana en vez de la pantalla entera
-  -n		No se tomarán imágenes, la carga será enviado sin imagen
+  area		Capturar un área de la pantalla en lugar de la pantalla entera
+  window	Capturar una ventana en vez de la pantalla entera
+  full		Capturar la pantalla completa
 
-Opciones de social:
-  -m		Sube a Mastodon (usando "toot")
-  -t		Sube a Twitter (usando "toot")
-  -f		Guarde el archivo sólo
+Destinos:
+  toot		Sube a Mastodon (usando "toot") 
+  tweet		Sube a Twitter (usando "t") 
+  file		Guarde el archivo sólo
 
 Ejemplos:
-  sharexin -at
-  sharexin -wm
-  sharexin -m
-  sharexin -nt
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
 ```  
 
 #### Esperanto  
 
 ```rust
-sharexin 0.3.4 (2017 Jul 26)
 
-Uzo: sharexin <opcioj>
+sharexin 0.3.5 (2017 Jul 27)
+
+Uzo: sharexin <opcioj> [celon] <opcio de bildo>
 
 Opcioj:
   -h, --help	Montru la helpo mesaĝon kaj eliro
   -V, --version	Printversio informoj kaj eliro
+  -U, --upgrade	Kontrolu por novaj ĝisdatigoj
 
 Opcioj de bildo:
-  -a		Kapti areon de la ekrano anstataŭ ol la tuta ekrano
-  -w		Kapti la aktivan fenestron anstataŭ ol la tuta ekrano
-  -n		Neniu bildoj estos prenita, la alŝuto sendiĝos sen bildo
+  area		Kapti areon de la ekrano anstataŭ ol la tuta ekrano
+  window	Kapti la aktivan fenestron anstataŭ ol la tuta ekrano
+  full		Kapti la plena ekrano
 
-Opcioj de sociaj:
-  -m		Alŝutu al Mastodon (uzante "toot")
-  -t		Alŝutu al Twitter (uzante "t")
-  -f		Nur konservu la dosieron
+Celoj:
+  toot		Alŝutu al Mastodon (uzante "toot")
+  tweet		Alŝutu al Twitter (uzante "t")
+  file		Nur konservu la dosieron
 
 Ekzemploj:
-  sharexin -at
-  sharexin -wm
-  sharexin -m
-  sharexin -nt
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
 ```  
 
 #### 日本語  
 
 ```rust
-sharexin 0.3.4 (平成29年7月26日)
 
-使用方法: sharexin <オプション>
+sharexin 0.3.5 (平成29年7月27日)
+
+使用方法: sharexin <オプション> [先] <スクリーンショットのオプション>
 
 オプション:
   -h, --help	標準出力に使用方法のメッセージを出力して正常終了する。
   -V, --version	標準出力にバージョン情報を出力して正常終了する。
+  -U, --upgrade	新しい更新を確認する。
 
 スクリーンショットのオプション:
-  -a		画面全体ではなく一部を取得する
-  -w		画面全体ではなくウィンドウ単体を取得する
-  -n		スクリーンショットは作成されず、送信されません
+  area		画面全体ではなく一部を取得する
+  window	画面全体ではなくウィンドウ単体を取得する
+  full		画面全体を取得する
 
-ソーシャルのオプション:
-  -m		マストドンにアップロード（使用して「ｔｏｏｔ」)
-  -t		ツイッターにアップロード（使用して「ｔ」)
-  -f		ファイルを保存のみ
+先:
+  toot		マストドンにアップロード（使用して「ｔｏｏｔ」)
+  tweet		ツイッターにアップロード（使用して「ｔ」)
+  file		ファイルを保存のみ
 
 例:
-  sharexin -at
-  sharexin -wm
-  sharexin -m
-  sharexin -nt
-```  
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
+```
 
 #### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
 
 ```rust
-sharexin 0.3.4 (2017 Jul 26)
 
-Anwendung: sharexin <optionen>
+sharexin 0.3.5 (2017 Jul 27)
+
+Anwendung: sharexin <optionen> [reiseziel] <bildoptionen>
 
 Optionen:
   -h, --help	Zeige diese Nachricht an und beende
   -V, --version	Gebe Version aus und beende
+  -U, --upgrade	Auf neue Updates prüfen
 
 Bildoptionen:
-  -a		Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen
-  -w		Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen
-  -n		Es wird kein Bild aufgenommen, Tweet ohne Bild wird veröffentlicht
+  area		Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen
+  window	Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen
+  full		Gesamten Bildschirms aufnehmen
 
-Optionen zu sozialen Netzwerken:
-  -m		Auf Mastodon veröffentlichen (benutzt "toot")
-  -t		Auf Twitter veröffentlichen (benutzt "t")
-  -f		Datei nur speichern
+Reiseziele:
+  toot		Auf Mastodon veröffentlichen (benutzt "toot")
+  tweet		Auf Twitter veröffentlichen (benutzt "t")
+  file		Datei nur speichern
 
 Beispiele:
-  sharexin -at
-  sharexin -wm
-  sharexin -m
-  sharexin -nt
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
 ```  
 
 ## Known issues  
@@ -232,6 +244,13 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
+#### [0.3.5] - 2017-07-27  
+- Added button to check your image  
+- Added upgrade checker  
+- Added character count  
+- Beautified code  
+- New command line args  
+
 #### [0.3.4] - 2017-07-26  
 - Window screenshot adds shadow  
 - Separated main.rs function gui()  

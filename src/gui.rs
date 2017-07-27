@@ -2,13 +2,14 @@ extern crate time;
 extern crate gtk;
 extern crate glib;
 extern crate gdk;
+extern crate open;
 use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
 use gtk::traits::*;
 use gtk::*;
 use std::*;
-use send;
+use mort;
 
 pub fn gui(mort: bool, morti: bool)
 {
@@ -23,6 +24,9 @@ pub fn gui(mort: bool, morti: bool)
     let text: gtk::TextView = builder.get_object("text").unwrap();
     let cancel: gtk::Button = builder.get_object("cancel").unwrap();
     let send: gtk::Button = builder.get_object("send").unwrap();
+    let image: gtk::Button = builder.get_object("image").unwrap();
+    let count: gtk::Label = builder.get_object("count").unwrap();
+    count.set_label("0");
     window.set_title("ShareXin");
     if mort {
         header.set_subtitle("Mastodon");
@@ -30,6 +34,17 @@ pub fn gui(mort: bool, morti: bool)
     else {
         header.set_subtitle("Twitter");
     }
+
+    if !morti {
+        image.destroy();
+    }
+
+    image.connect_clicked(move |_| {
+        let mut tmp = env::temp_dir();
+        tmp.push("sharexin.png");
+        let temp = tmp.to_str().unwrap().clone();
+        let _ = open::that(temp);
+    });
 
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
@@ -40,77 +55,55 @@ pub fn gui(mort: bool, morti: bool)
         gtk::main_quit();
     });
 
-    let wrap_send = Rc::new(RefCell::new(send));
+    let wrap_send = Rc::new(RefCell::new(send.clone()));
     let wrap_widow = Rc::new(RefCell::new(window.clone()));
+    let wrap_text = Rc::new(RefCell::new(text.clone()));
 
     {
         let send = wrap_send.clone();
         let window = wrap_widow.clone();
+        let text = wrap_text.clone();
         send.borrow().connect_clicked(move |_| {
-            let buffer = TextView::get_buffer(&text).unwrap();
+            let buffer = TextView::get_buffer(&text.borrow()).unwrap();
             let sent: Option<String> = TextBuffer::get_text(&buffer,
             &TextBuffer::get_start_iter(&buffer),
             &TextBuffer::get_end_iter(&buffer), false);
             let tweet: String = sent.unwrap();
-            if mort {
-                if morti {
-                    thread::spawn(move || {
-                        glib::idle_add(move || {
-                            send::toot_img(tweet.clone());
-                            gtk::main_quit();
-                            Continue(false)
-                        });
-                     });
-                }
-                else if !tweet.is_empty() {
-                    thread::spawn(move || {
-                        glib::idle_add(move || {
-                            send::toot(tweet.clone());
-                            gtk::main_quit();
-                            Continue(false)
-                        });
-                     });
-                }
-                else {
-                    send::notification_3(mort);
+            thread::spawn(move || {
+                glib::idle_add(move || {
+                    mort::thread(mort.clone(), morti.clone(), tweet.clone());
                     gtk::main_quit();
-                }
-            }
-            else {
-                if morti {
-                    thread::spawn(move || {
-                        glib::idle_add(move || {
-                            send::twitter_img(tweet.clone());
-                            gtk::main_quit();
-                            Continue(false)
-                        });
-                     });
-                }
-                else if !tweet.is_empty() {
-                    thread::spawn(move || {
-                        glib::idle_add(move || {
-                            send::twitter(tweet.clone());
-                            gtk::main_quit();
-                            Continue(false)
-                        });
-                     });
-                }
-                else {
-                    send::notification_3(mort);
-                    gtk::main_quit();
-                }
-            }
+                    Continue(false)
+                });
+            });
             window.borrow().hide();
         });
         }
     {
         let send = wrap_send.clone();
         let window = wrap_widow.clone();
+        let text = wrap_text.clone();
         window.borrow().connect_key_press_event(move |_,key| {
             if key.get_state().intersects(gdk::CONTROL_MASK) {
                 match key.get_keyval() {
                     key::Return => send.borrow().clicked(),
                     _ => ()
+                }
+            }
+            let buffer = TextView::get_buffer(&text.borrow()).unwrap();
+            let sent: Option<String> = TextBuffer::get_text(&buffer,
+            &TextBuffer::get_start_iter(&buffer),
+            &TextBuffer::get_end_iter(&buffer), false);
+            let tweet: String = sent.unwrap();
+            count.set_label(&tweet.len().to_string());
+            if mort {
+                if tweet.len() == 500 {
+                    text.borrow().set_editable(false);
+                }
+            }
+            else if !mort {
+                if tweet.len() == 140 {
+                    text.borrow().set_editable(false);
                 }
             }
             Inhibit(false)

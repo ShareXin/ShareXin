@@ -3,51 +3,88 @@ extern crate libnotify;
 extern crate gtk;
 extern crate glib;
 extern crate gdk;
+extern crate open;
 use std::*;
+mod notification;
 mod send;
 mod file;
 mod help;
 mod gui;
+mod mort;
 use gui::gui;
 
-static VERSION: &'static str = "sharexin 0.3.4";
+static VERSION: &'static str = env!("CARGO_PKG_VERSION");
+static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
 
 fn main()
 {
     let args: Vec<_> = env::args().collect();
-    if args.len() > 1 {
+    if args.len() >= 2 {
         match args[1].as_ref() {
-            "-h" | "--help" | "-a" | "-w" | "-n" => help::help(),
-            "-V" | "--version" => println!("{}", VERSION),
-            "-am" => {
-                file::image(String::from("-s"));
-                gui(true, true);
+            "-V" | "--version" | "version" => println!("sharexin {}", VERSION),
+            "-U" | "--upgrade" | "upgrade" => help::upgrade(),
+            "toot" => {
+                if args.len() == 3 {
+                    match args[2].as_ref() {
+                        "area" | "-a" => {
+                            file::image(String::from("-s"));
+                            gui(true, true);
+                        },
+                        "window" | "-w" => {
+                            file::image(String::from("-i"));
+                            gui(true, true);
+                        },
+                        "full" => {
+                            file::image(String::new());
+                            gui(true, true);
+                        },
+                        _ => help::help()
+                    }
+                }
+                else {
+                    gui(true, false);
+                }
             },
-            "-at" => {
-                file::image(String::from("-s"));
-                gui(false, true);
+            "tweet" => {
+                if args.len() == 3 {
+                    println!("Two argument passed");
+                    match args[2].as_ref() {
+                        "area" | "-a" => {
+                            file::image(String::from("-s"));
+                            gui(false, true);
+                        },
+                        "window" | "-w" => {
+                            file::image(String::from("-i"));
+                            gui(false, true);
+                        },
+                        "full" => {
+                            file::image(String::new());
+                            gui(false, true);
+                        },
+                        _ => help::help()
+                    }
+                }
+                else {
+                    gui(false, false);
+                }
             },
-            "-wm" => {
-                file::image(String::from("-i"));
-                gui(true, true);
+            "file" => {
+                if args.len() == 3 {
+                    println!("Two argument passed");
+                    match args[2].as_ref() {
+                        "area" | "-a" => {
+                            file::image(String::from("-s"));
+                        },
+                        "window" | "-w" => {
+                            file::image(String::from("-i"));
+                        },
+                        "full" => {
+                            file::image(String::new());
+                        },
+                        _ => help::help()
+                    }
+                }
             },
-            "-wt" => {
-                file::image(String::from("-i"));
-                gui(false, true);
-            },
-            "-nt" => gui(false, false),
-            "-nm" => gui(true, false),
-            "-m" => {
-                file::image(String::new());
-                gui(true, true);
-            },
-            "-t" => {
-                file::image(String::new());
-                gui(false, true);
-            },
-            "-af" => file::image(String::from("-s")),
-            "-wf" => file::image(String::from("-i")),
-            "-f" => file::image(String::new()),
             _ => help::help()
         }
     }

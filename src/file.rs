@@ -3,7 +3,7 @@ use pipers::Pipe;
 use std::env;
 use std;
 use std::process::*;
-use send;
+use notification;
 
 pub fn image(cmd: String)
 {
@@ -74,5 +74,5 @@ pub fn save()
     new_file.push_str(".png");
     #[allow(unused_must_use)]
     let _ = std::fs::copy(tmp.clone(), new_file);
-    send::notification_2();
+    notification::file_saved();
 }
