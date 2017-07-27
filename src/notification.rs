@@ -44,12 +44,36 @@ fn language<'a>(service: bool, option: u32) -> &'a str
                 string = "Sendita al Twitter";
             }
         }
+        else if lang.contains("cn") {
+            if service {
+                string = "它已被发送到Mastodon";
+            }
+            else {
+                string = "它已被发送到Twitter";
+            }
+        }
+        else if lang.contains("tw") {
+            if service {
+                string = "它已被發送到Mastodon";
+            }
+            else {
+                string = "它已被發送到Twitter";
+            }
+        }
         else if lang.contains("ja") {
             if service {
                 string = "Mastodonに送信";
             }
             else {
                 string = "Twitterに送信";
+            }
+        }
+        else if lang.contains("ko") {
+            if service {
+                string = "Mastodon에 보냈습니다";
+            }
+            else {
+                string = "Twitter에 보냈습니다";
             }
         }
         else {
@@ -74,8 +98,17 @@ fn language<'a>(service: bool, option: u32) -> &'a str
         else if lang.contains("eo") {
             string = "Dosieron konservis";
         }
+        else if lang.contains("cn") {
+            string = "文件已保存";
+        }
+        else if lang.contains("tw") {
+            string = "文件已保存";
+        }
         else if lang.contains("ja") {
             string = "ファイルが保存された";
+        }
+        else if lang.contains("ko") {
+            string = "파일이 저장된";
         }
         else {
             string = "File saved";
@@ -114,12 +147,36 @@ fn language<'a>(service: bool, option: u32) -> &'a str
                 string = "Malplena Tweet | Ne estis sendita";
             }
         }
+        else if lang.contains("cn") {
+            if service {
+                string = "Toot是空 | 它不会发送到Mastodon";
+            }
+            else {
+                string = "Tweet是空 | 它不会发送到Twitter";
+            }
+        }
+        else if lang.contains("tw") {
+            if service {
+                string = "Toot是空 | 它不會發送到Mastodon";
+            }
+            else {
+                string = "Tweet是空 | 它不會發送到Twitter";
+            }
+        }
         else if lang.contains("ja") {
             if service {
                 string = "Tootは空です | それはMastodonに送られなかった";
             }
             else {
                 string = "Tweetは空です | それはTwitterに送られなかった";
+            }
+        }
+        else if lang.contains("ko") {
+            if service {
+                string = "Toot 비어 있습니다 | 그것은 Mastodon에 보내지지 않았다";
+            }
+            else {
+                string = "Tweet 비어 있습니다 | 그것은 Twitter에 보내지지 않았다";
             }
         }
         else {

@@ -14,8 +14,14 @@ Vérifiez les nouvelles mises à jour à l'adresse suivante: ");
 Busque nuevas actualizaciones en: ");
     let mut version_eo = String::from("
 Kontrolu por novaj ĝisdatigoj ĉe: ");
+    let mut version_cn = String::from("
+要检查是否有新的更新：\n");
+    let mut version_tw = String::from("
+要檢查是否有新的更新：\n");
     let mut version_ja = String::from("
 新しいアップデートを確認する：\n");
+    let mut version_ko = String::from("
+새로운 업데이트 확인 :\n");
     let mut version_de = String::from("
 Überprüfen Sie nach neuen Updates unter: ");
     let mut version = String::from("
@@ -23,7 +29,10 @@ Check for new updates at: ");
     version_fr.push_str(SHAREXIN);
     version_es.push_str(SHAREXIN);
     version_eo.push_str(SHAREXIN);
+    version_cn.push_str(SHAREXIN);
+    version_tw.push_str(SHAREXIN);
     version_ja.push_str(SHAREXIN);
+    version_ko.push_str(SHAREXIN);
     version_de.push_str(SHAREXIN);
     version.push_str(SHAREXIN);
     if lang.contains("fr") {
@@ -35,8 +44,17 @@ Check for new updates at: ");
     else if lang.contains("eo") {
         println!("{}", version_eo);
     }
+    else if lang.contains("cn") {
+        println!("{}", version_cn);
+    }
+    else if lang.contains("tw") {
+        println!("{}", version_tw);
+    }
     else if lang.contains("ja") {
         println!("{}", version_ja);
+    }
+    else if lang.contains("ko") {
+        println!("{}", version_ko);
     }
     else if lang.contains("de") {
         println!("{}", version_de);
@@ -133,6 +151,64 @@ Ekzemploj:
     ");
 
 
+    let mut help_cn = String::from("\nsharexin ");
+    help_cn.push_str(VERSION);
+    help_cn.push_str(" (2017年7月27日)
+
+使用方法： sharexin <选项> [目的地] <截图选项>
+
+选项:
+  -h, --help\t退出标准成功输出输出用法消息。
+  -V, --version\t在成功完成输出版本信息到标准输出。
+  -U, --upgrade\t要检查新的更新。
+
+选项截图:
+  area\t\t截取屏幕的一个区域，而不是整个屏幕
+  window\t截取窗口，而不是整个屏幕
+  full\t\t为了让整个屏幕
+
+目的地:
+  toot\t\t上传到Mastodon（使用 “toot”）
+  tweet\t\t它上传到Twitter（使用 “t”）
+  file\t\t保存文件只
+
+案件:
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
+    ");
+
+
+    let mut help_tw = String::from("\nsharexin ");
+    help_tw.push_str(VERSION);
+    help_tw.push_str(" (平成29年7月27日)
+
+使用方法：sharexin <選項> [目的地] <截圖選項>
+
+選項:
+  -h, --help\t退出標準成功輸出輸出用法消息。
+  -V, --version\t在成功完成輸出版本信息到標準輸出。
+  -U, --upgrade\t要檢查新的更新。
+
+選項截圖:
+  area\t\t擷取畫面的一個區域而不是整個畫面
+  window\t擷取單一視窗而不是整個畫面
+  full\t\t為了讓整個屏幕
+
+目的地:
+  toot\t\t上傳到Mastodon（使用 “toot”）
+  tweet\t\t它上傳到Twitter（使用 “t”）
+  file\t\t保存文件只
+
+案件:
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
+    ");
+
+
     let mut help_ja = String::from("\nsharexin ");
     help_ja.push_str(VERSION);
     help_ja.push_str(" (平成29年7月27日)
@@ -155,6 +231,35 @@ Ekzemploj:
   file\t\tファイルを保存のみ
 
 例:
+  sharexin toot
+  sharexin tweet full
+  sharexin file window
+  sharexin toot area
+    ");
+
+
+    let mut help_ko = String::from("\nsharexin ");
+    help_ko.push_str(VERSION);
+    help_ko.push_str(" (2017년7월27일)
+
+사용 방법: sharexin <옵션> [목적지] <스크린 샷 옵션>
+
+옵션:
+  -h, --help\t표준 출력으로 사용법을 출력하고 정상적으로 종료한다.
+  -V, --version\t표준 출력으로 버전 정보를 출력하고 정상적으로 종료한다.
+  -U, --upgrade\t새로운 업데이트를 확인한다.
+
+스크린 샷 옵션:
+  area\t\t전체 화면 대신에 화면의 일정 영역을 찍습니다
+  window\t전체 화면 대신에 창을 찍습니다
+  full\t\t전체 화면을 얻을
+
+목적지:
+  toot\t\tMastodon에 업로드 (사용 \"toot\")
+  tweet\t\tTwitter에 업로드 (사용 \"t\")
+  file\t\t파일을 저장 만
+
+예:
   sharexin toot
   sharexin tweet full
   sharexin file window
@@ -230,8 +335,17 @@ Examples:
     else if lang.contains("eo") {
         println!("{}", help_eo);
     }
+    else if lang.contains("cn") {
+        println!("{}", help_cn);
+    }
+    else if lang.contains("tw") {
+        println!("{}", help_tw);
+    }
     else if lang.contains("ja") {
         println!("{}", help_ja);
+    }
+    else if lang.contains("ko") {
+        println!("{}", help_ko);
     }
     else if lang.contains("de") {
         println!("{}", help_de);
