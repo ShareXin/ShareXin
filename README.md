@@ -49,8 +49,6 @@
 
 ## `--help`  
 
-#### English  
-
 ```rust
 
 sharexin 0.3.5 (2017 Jul 27)
@@ -79,155 +77,17 @@ Examples:
   sharexin toot area
 ```  
 
+## Language support  
+
+#### English  
 #### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
-
-```rust
-
-sharexin 0.3.5 (2017 Juil 27)
-
-Utilisation: sharexin <option> [destination] <option d'image>
-
-Options:
-  -h, --help	Afficher le message d'aide et quitter
-  -V, --version	Imprimer les informations de la version et quitter
-  -U, --upgrade	Vérifiez les nouvelles mises à jour
-
-Options d'image:
-  area		Capturer une zone de l'écran plutôt que l'écran complet
-  window	Capturer la fenêtre active plutôt que l'écran complet
-  full		Capturer l'écran complet
-
-Destinations:
-  toot		Upload vers Mastodon (en utilisant "toot") 
-  tweet		Upload vers Twitter (en utilisant "t") 
-  file		Sauvegarder le fichier uniquement
-
-Exemples:
-  sharexin toot
-  sharexin tweet full
-  sharexin file window
-  sharexin toot area
-```  
-
 #### Español  
-
-```rust
-
-sharexin 0.3.5 (2017 Jul 27)
-
-Utilización: sharexin <opciones> [destino] <opcion de imagen>
-
-Opciones:
-  -h, --help	Mostrar el mensaje de ayuda y sale
-  -V, --version	Imprimir información de la versión y sale
-  -U, --upgrade	Busque nuevas actualizaciones
-
-Opciones de imagen:
-  area		Capturar un área de la pantalla en lugar de la pantalla entera
-  window	Capturar una ventana en vez de la pantalla entera
-  full		Capturar la pantalla completa
-
-Destinos:
-  toot		Sube a Mastodon (usando "toot") 
-  tweet		Sube a Twitter (usando "t") 
-  file		Guarde el archivo sólo
-
-Ejemplos:
-  sharexin toot
-  sharexin tweet full
-  sharexin file window
-  sharexin toot area
-```  
-
 #### Esperanto  
-
-```rust
-
-sharexin 0.3.5 (2017 Jul 27)
-
-Uzo: sharexin <opcioj> [celon] <opcio de bildo>
-
-Opcioj:
-  -h, --help	Montru la helpo mesaĝon kaj eliro
-  -V, --version	Printversio informoj kaj eliro
-  -U, --upgrade	Kontrolu por novaj ĝisdatigoj
-
-Opcioj de bildo:
-  area		Kapti areon de la ekrano anstataŭ ol la tuta ekrano
-  window	Kapti la aktivan fenestron anstataŭ ol la tuta ekrano
-  full		Kapti la plena ekrano
-
-Celoj:
-  toot		Alŝutu al Mastodon (uzante "toot")
-  tweet		Alŝutu al Twitter (uzante "t")
-  file		Nur konservu la dosieron
-
-Ekzemploj:
-  sharexin toot
-  sharexin tweet full
-  sharexin file window
-  sharexin toot area
-```  
-
+#### 简体中文  
+#### 繁體中文  
 #### 日本語  
-
-```rust
-
-sharexin 0.3.5 (平成29年7月27日)
-
-使用方法: sharexin <オプション> [行き先] <スクリーンショットのオプション>
-
-オプション:
-  -h, --help	標準出力に使用方法のメッセージを出力して正常終了する。
-  -V, --version	標準出力にバージョン情報を出力して正常終了する。
-  -U, --upgrade	新しい更新を確認する。
-
-スクリーンショットのオプション:
-  area		画面全体ではなく一部を取得する
-  window	画面全体ではなくウィンドウ単体を取得する
-  full		画面全体を取得する
-
-行き先:
-  toot		マストドンにアップロード（使用して「ｔｏｏｔ」)
-  tweet		ツイッターにアップロード（使用して「ｔ」)
-  file		ファイルを保存のみ
-
-例:
-  sharexin toot
-  sharexin tweet full
-  sharexin file window
-  sharexin toot area
-```
-
+#### 한국어  
 #### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
-
-```rust
-
-sharexin 0.3.5 (2017 Jul 27)
-
-Anwendung: sharexin <optionen> [reiseziel] <bildoptionen>
-
-Optionen:
-  -h, --help	Zeige diese Nachricht an und beende
-  -V, --version	Gebe Version aus und beende
-  -U, --upgrade	Auf neue Updates prüfen
-
-Bildoptionen:
-  area		Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen
-  window	Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen
-  full		Gesamten Bildschirms aufnehmen
-
-Reiseziele:
-  toot		Auf Mastodon veröffentlichen (benutzt "toot")
-  tweet		Auf Twitter veröffentlichen (benutzt "t")
-  file		Datei nur speichern
-
-Beispiele:
-  sharexin toot
-  sharexin tweet full
-  sharexin file window
-  sharexin toot area
-```  
 
 ## Known issues  
 #### If `t` won't send your tweet  
