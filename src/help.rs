@@ -137,7 +137,7 @@ Ekzemploj:
     help_ja.push_str(VERSION);
     help_ja.push_str(" (平成29年7月27日)
 
-使用方法: sharexin <オプション> [先] <スクリーンショットのオプション>
+使用方法: sharexin <オプション> [行き先] <スクリーンショットのオプション>
 
 オプション:
   -h, --help\t標準出力に使用方法のメッセージを出力して正常終了する。
