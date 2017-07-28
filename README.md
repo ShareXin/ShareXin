@@ -51,7 +51,7 @@
 
 ```rust
 
-sharexin 0.3.5 (2017 Jul 27)
+sharexin 0.3.6 (2017 Jul 28)
 
 Usage: sharexin <options> [destination] <image options>
 
@@ -104,6 +104,14 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
+#### [0.3.6] - 2017-07-28  
+- Character count now turns red when over the limit  
+- You can't send a toot or tweet if it's over the limit  
+- Double the ImageMagick shadow  
+- No longer using Pipers crate  
+- Changed those weird "mort" and "morti" variables  
+- Commented most of the code, cleaned up  
+
 #### [0.3.5] - 2017-07-27  
 - Added button to check your image  
 - Added upgrade checker  

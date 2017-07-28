@@ -1,6 +1,6 @@
 [package]
 name = "sharexin"
-version = "0.3.5"
+version = "0.3.6"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux"
 homepage = "https://github.com/thebitstick/ShareXin"
@@ -13,7 +13,6 @@ glib = "^0"
 libnotify = "^1"
 gdk = "^0"
 time = "^0"
-pipers = "^1"
 open = "^1"
 
 [features]

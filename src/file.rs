@@ -1,5 +1,4 @@
 extern crate time;
-use pipers::Pipe;
 use std::env;
 use std;
 use std::process::*;
@@ -7,72 +6,110 @@ use notification;
 
 pub fn image(cmd: String)
 {
-    let mut convert_area: String =
-    "convert - ( +clone -background black -shadow 80x3+5+5 ) +swap -background none -layers merge +repage ".to_owned();
-    let mut convert_window: String =
-    "convert ".to_owned();
+    //tmp gets the temporary directory of the system
+
     let mut tmp = env::temp_dir();
+    //adds filename
+
     tmp.push("sharexin.png");
+    //makes a string
+
     let temp = tmp.to_str().unwrap().clone();
-    convert_area.push_str(temp.clone());
-    convert_window.push_str(temp.clone());
-    convert_window.push_str(" ");
-    convert_window.push_str("( +clone -background black -shadow 80x3+5+5 ) +swap -background none -layers merge +repage ");
-    convert_window.push_str(temp.clone());
     if cmd == "-s" {
+
+        //_before_image takes a full screenshot using maim
+
         let _before_image = Command::new("maim")
         .arg(temp.clone()).output().expect("Nope");
-        println!("{}", String::from_utf8_lossy(&_before_image.stdout));
+
+        //_feh displays it and _sleeps waits for _image
+
         let _feh = Command::new("feh").arg(temp.clone()).arg("-F")
         .spawn().expect("Nope");
         let _sleep = Command::new("sleep").arg("0.5").output().expect("Nope");
-        println!("{}", String::from_utf8_lossy(&_sleep.stdout));
-        let _image = Pipe::new("maim -s")
-        .then(&convert_area)
-        .finally()
-        .expect("Nope")
-        .wait_with_output()
-        .expect("NopeNope");
+
+        //_image lets to select
+
+        let _image = Command::new("maim").arg("-s").arg(temp.clone())
+        .output().expect("Nope");
+
+        //_convert_area adds a shadow
+
+        let _convert_area = Command::new("convert").arg(temp.clone())
+        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
+        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
+        .arg(temp.clone()).spawn().expect("Nope");
+
+        //double shadow cause mac dev amiright
+
+        let _ = Command::new("convert").arg(temp.clone())
+        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
+        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
+        .arg(temp.clone()).spawn().expect("Nope");
+
+        //_kill closes _feh, gently
+
         let _kill = Command::new("killall").arg("feh").output().expect("Nope");
-        println!("{}", String::from_utf8_lossy(&_kill.stdout));
     }
     else if cmd == "-i" {
+
+        //_xdo gets the active window
+
         let _xdo = Command::new("xdotool").arg("getactivewindow")
         .output().expect("Nope");
-        let mut _before_command = String::from("maim -i ");
-        _before_command.push_str(&String::from_utf8_lossy(&_xdo.stdout));
-        _before_command.push_str(" ");
-        _before_command.push_str(&temp.clone());
-        let _before_image = Pipe::new(&_before_command)
-        .finally().expect("Nope").wait_with_output().expect("Nope");
-        let _image = Pipe::new(&convert_window)
-        .finally().expect("Nope").wait_with_output().expect("NopeNope");
+
+        //_image uses maim to take the window gotten from xdo
+
+        let xdo = String::from_utf8_lossy(&_xdo.stdout);
+        let _image = Command::new("maim").arg("-i")
+        .args(&[&xdo, temp.clone()]).output().expect("Nope");
+        
+        //_convert_window adds shadow
+
+        let _convert_window = Command::new("convert").arg(temp.clone())
+        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
+        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
+        .arg(temp.clone()).spawn().expect("Nope");
+
+        //double shadow cause mac dev amiright
+        let _ = Command::new("convert").arg(temp.clone())
+        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
+        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
+        .arg(temp.clone()).spawn().expect("Nope");
     }
     else {
+
+        //_image uses maim to take screenshot
+
         let _image = Command::new("maim")
-        .arg(temp).output().expect("Nope");
-        println!("{}", String::from_utf8_lossy(&_image.stdout));
+        .arg(temp.clone()).output().expect("Nope");
     }
     save();
 }
 
 pub fn save()
 {
+    //tmp gets temporary dir
+
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
-    let username = env::var("USER").unwrap();
-    let mut pictures = String::from("/home/");
-    pictures.push_str(&username);
+    //home gets the user's name
+    
+    let home = env::var("HOME").unwrap();
+    let mut pictures = String::from(home.clone());
     pictures.push_str("/Pictures/ShareXin");
-    #[allow(unused_must_use)]
+    //_ creates pictures dir if not already there
+
     let _ = std::fs::create_dir(pictures);
-    let mut new_file = String::from("/home/");
-    new_file.push_str(&username);
+    let mut new_file = String::from(home);
     new_file.push_str("/Pictures/ShareXin/sharexin-");
+    //time gets the time in a nice format
+
     let time = String::from(time::strftime("%Y-%m-%d-%T", &time::now()).unwrap());
     new_file.push_str(&time);
     new_file.push_str(".png");
-    #[allow(unused_must_use)]
+    //_ copies the temp file to your home pic dir
+
     let _ = std::fs::copy(tmp.clone(), new_file);
     notification::file_saved();
 }

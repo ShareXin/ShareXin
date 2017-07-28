@@ -4,7 +4,9 @@ use std::env;
 
 fn language<'a>(service: bool, option: u32) -> &'a str
 {
+    //string creates result string, modified later
     let mut string = "";
+    //gets user var for language (hopefully?)
     let mut lang = env::var("LANG").unwrap();
     lang = lang.to_lowercase();
     //0 is for notification_0, telling the user their toot/tweet with an image has been sent
@@ -193,6 +195,7 @@ fn language<'a>(service: bool, option: u32) -> &'a str
 
 pub fn image_sent(service: bool, text: &str, img: &str)
 {
+    //when the tweet/toot with an image is sent
     let string = language(service.clone(), 0);
     if service {
         libnotify::init("ShareXin").unwrap();
@@ -210,6 +213,7 @@ pub fn image_sent(service: bool, text: &str, img: &str)
 
 pub fn message_sent(service: bool, text: &str)
 {
+    //when the tweet/toot without an image is sent
     let string = language(service.clone(), 0);
     if service {
         libnotify::init("ShareXin").unwrap();
@@ -227,6 +231,7 @@ pub fn message_sent(service: bool, text: &str)
 
 pub fn file_saved()
 {
+    //when the file has been saved
     let string = language(true, 2);
     libnotify::init("ShareXin").unwrap();
     let not = Notification::new(string, None, None);
@@ -236,6 +241,7 @@ pub fn file_saved()
 
 pub fn empty(service: bool)
 {
+    //if tweet/toot is empty
     let string = language(service.clone(), 3);
     if service {
         libnotify::init("ShareXin").unwrap();
