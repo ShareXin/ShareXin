@@ -1,7 +1,8 @@
 extern crate time;
-use std::env;
-use std;
+use std::time::Duration;
 use std::process::*;
+use std::*;
+use std;
 use notification;
 
 pub fn image(cmd: String)
@@ -110,6 +111,8 @@ pub fn save()
     new_file.push_str(".png");
     //_ copies the temp file to your home pic dir
 
+    let _sleep = Duration::new(1,0);
+    thread::sleep(_sleep);
     let _ = std::fs::copy(tmp.clone(), new_file);
     notification::file_saved();
 }
