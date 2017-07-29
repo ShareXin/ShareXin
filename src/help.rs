@@ -366,7 +366,7 @@ Image Options:
 
 Destinations:
   toot\t\tUpload to Mastodon (uses \"toot\")
-  tweet\t\tUpload to Twitter (uses \"t\" for images)
+  tweet\t\tUpload to Twitter (uses \"t\")
   imgur\t\tUpload to Imgur
   file\t\tOnly save file
 
