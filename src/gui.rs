@@ -10,15 +10,16 @@ use gtk::traits::*;
 use gtk::*;
 use std::*;
 use service;
+use Destination;
 
-pub fn gui(service: bool, image_bool: bool)
+pub fn gui(service: Destination, image_bool: bool)
 {
     //if gtk dont init, ends program
 
-    if gtk::init().is_err() {
-        println!("GTK did not init.");
-        return;
-    }
+    match gtk::init() {
+        Ok(ok) => ok,
+        Err(e) => panic!("GTK could not initialize. {:?}", e),
+    };
 
     //all theses get objects from a glade builder
 
@@ -34,8 +35,8 @@ pub fn gui(service: bool, image_bool: bool)
     //readying widgets
     count.set_label("0");
     window.set_title("ShareXin");
-    if service {header.set_subtitle("Mastodon");}
-    else {header.set_subtitle("Twitter");}
+    if service.mastodon {header.set_subtitle("Mastodon");}
+    else if service.twitter {header.set_subtitle("Twitter");}
 
     //if non-image toot/tweet, doesnt show button
     if !image_bool {image.destroy();}
@@ -45,7 +46,10 @@ pub fn gui(service: bool, image_bool: bool)
         let mut tmp = env::temp_dir();
         tmp.push("sharexin.png");
         let temp = tmp.to_str().unwrap().clone();
-        let _ = open::that(temp);
+        match open::that(temp) {
+            Ok(ok) => ok,
+            Err(e) => panic!("Could not open. {:?}", e),
+        };
     });
 
     window.connect_delete_event(|_, _| {
@@ -56,13 +60,14 @@ pub fn gui(service: bool, image_bool: bool)
     cancel.connect_clicked(|_| {gtk::main_quit();});
 
     let wrap_send = Rc::new(RefCell::new(send.clone()));
-    let wrap_widow = Rc::new(RefCell::new(window.clone()));
+    let wrap_window = Rc::new(RefCell::new(window.clone()));
     let wrap_text = Rc::new(RefCell::new(text.clone()));
+    let wrap_count = Rc::new(RefCell::new(count.clone()));
 
     {
         //the magic of button clicks
         let send = wrap_send.clone();
-        let window = wrap_widow.clone();
+        let window = wrap_window.clone();
         let text = wrap_text.clone();
         send.borrow().connect_clicked(move |_| {
             //gets buffer text from TextView item
@@ -72,11 +77,12 @@ pub fn gui(service: bool, image_bool: bool)
             &TextBuffer::get_end_iter(&buffer), false);
             let tweet: String = sent.unwrap();
             //creates thread, but first checks if character count is over limit
-            if service {
+            if service.mastodon {
                 if tweet.len() < 500 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-                            service::thread(service.clone(), image_bool.clone(), tweet.clone());
+                            service::thread(
+                            service, image_bool.clone(), tweet.clone());
                             gtk::main_quit();
                             Continue(false)
                         });
@@ -84,11 +90,11 @@ pub fn gui(service: bool, image_bool: bool)
                     window.borrow().hide();
                 }
             }
-            else {
+            else if service.twitter {
                 if tweet.len() < 140 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-                            service::thread(service.clone(), image_bool.clone(), tweet.clone());
+                            service::thread(service, image_bool.clone(), tweet.clone());
                             gtk::main_quit();
                             Continue(false)
                         });
@@ -101,8 +107,9 @@ pub fn gui(service: bool, image_bool: bool)
     {
         //Control+Return also the Character Counter
         let send = wrap_send.clone();
-        let window = wrap_widow.clone();
+        let window = wrap_window.clone();
         let text = wrap_text.clone();
+        let count = wrap_count.clone();
         window.borrow().connect_key_press_event(move |_,key| {
             let buffer = TextView::get_buffer(&text.borrow()).unwrap();
             let sent: Option<String> = TextBuffer::get_text(&buffer,
@@ -112,10 +119,10 @@ pub fn gui(service: bool, image_bool: bool)
             let mut markup = String::from("<span foreground=\"#DA2E37\">");
             markup.push_str(&tweet.len().to_string());
             markup.push_str("</span>");
-            if service {
-                if tweet.len() >= 500 {count.set_markup(&markup);}
+            if service.mastodon {
+                if tweet.len() >= 500 {count.borrow().set_markup(&markup);}
                 else {
-                    count.set_label(&tweet.len().to_string());
+                    count.borrow().set_label(&tweet.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -124,10 +131,10 @@ pub fn gui(service: bool, image_bool: bool)
                     }
                 }
             }
-            else if !service {
-                if tweet.len() >= 140 {count.set_markup(&markup);}
+            else if service.twitter {
+                if tweet.len() >= 140 {count.borrow().set_markup(&markup);}
                 else {
-                    count.set_label(&tweet.len().to_string());
+                    count.borrow().set_label(&tweet.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -138,6 +145,51 @@ pub fn gui(service: bool, image_bool: bool)
             }
             Inhibit(false)
         });
+    }
+
+    {
+
+        //Control+Return also the Character Counter
+        let send = wrap_send.clone();
+        let window = wrap_window.clone();
+        let text = wrap_text.clone();
+        let count = wrap_count.clone();
+        window.borrow().connect_key_release_event(move |_,key| {
+            let buffer = TextView::get_buffer(&text.borrow()).unwrap();
+            let sent: Option<String> = TextBuffer::get_text(&buffer,
+            &TextBuffer::get_start_iter(&buffer),
+            &TextBuffer::get_end_iter(&buffer), false);
+            let tweet: String = sent.unwrap();
+            let mut markup = String::from("<span foreground=\"#DA2E37\">");
+            markup.push_str(&tweet.len().to_string());
+            markup.push_str("</span>");
+            if service.mastodon {
+                if tweet.len() >= 500 {count.borrow().set_markup(&markup);}
+                else {
+                    count.borrow().set_label(&tweet.len().to_string());
+                    if key.get_state().intersects(gdk::CONTROL_MASK) {
+                        match key.get_keyval() {
+                            key::Return => send.borrow().clicked(),
+                            _ => ()
+                        }
+                    }
+                }
+            }
+            else if service.twitter {
+                if tweet.len() >= 140 {count.borrow().set_markup(&markup);}
+                else {
+                    count.borrow().set_label(&tweet.len().to_string());
+                    if key.get_state().intersects(gdk::CONTROL_MASK) {
+                        match key.get_keyval() {
+                            key::Return => send.borrow().clicked(),
+                            _ => ()
+                        }
+                    }
+                }
+            }
+            Inhibit(false)
+        });
+
     }
 
     window.show_all();

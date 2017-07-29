@@ -51,7 +51,7 @@
 
 ```rust
 
-sharexin 0.3.6 (2017 Jul 28)
+sharexin 0.3.7 (2017 Jul 29)
 
 Usage: sharexin <options> [destination] <image options>
 
@@ -104,6 +104,15 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
+#### [0.3.7] - 2017-07-29  
+- Custom error handles  
+- Added experimental `open` Image Option, lets you select an image (animated or not) or possibly a video and send to a destination  
+- Update checker implemented properly  
+- Fixed service variables, now using structs  
+- Readying code for more destinations  
+- `auth` option not working at this current moment in time due to immature twitter apis available for Rust  
+- `imgur` option hints at what will be the next Destination  
+
 #### [0.3.6] - 2017-07-28  
 - Character count now turns red when over the limit  
 - You can't send a toot or tweet if it's over the limit  

@@ -5,6 +5,23 @@ use std::*;
 use std;
 use notification;
 
+pub fn open(file: String)
+{
+    //tmp gets temporary dir
+
+    let mut tmp = env::temp_dir();
+    tmp.push("sharexin.png");
+
+    //_ copies file to temp
+
+    let _sleep = Duration::new(1,0);
+    thread::sleep(_sleep);
+    let _ = match std::fs::copy(file, tmp.clone()) {
+        Ok(ok) => ok,
+        Err(e) => panic!("Unable to save file. {:?}", e),
+    };
+}
+
 pub fn image(cmd: String)
 {
     //tmp gets the temporary directory of the system
@@ -96,23 +113,36 @@ pub fn save()
     tmp.push("sharexin.png");
     //home gets the user's name
     
-    let home = env::var("HOME").unwrap();
+    let home = match env::var("HOME") {
+        Ok(home) => home,
+        Err(e) => panic!("Could not read $HOME. {:?}", e),
+    };
     let mut pictures = String::from(home.clone());
     pictures.push_str("/Pictures/ShareXin");
     //_ creates pictures dir if not already there
 
-    let _ = std::fs::create_dir(pictures);
+    let _ = match std::fs::create_dir(pictures) {
+        Ok(ok) => ok,
+        Err(e) => print!("Unable to create folder. {:?}", e),
+    };
     let mut new_file = String::from(home);
     new_file.push_str("/Pictures/ShareXin/sharexin-");
     //time gets the time in a nice format
 
-    let time = String::from(time::strftime("%Y-%m-%d-%T", &time::now()).unwrap());
+    let time = String::from(
+    match time::strftime("%Y-%m-%d-%T", &time::now()) {
+        Ok(ok) => ok,
+        Err(e) => panic!("Couldn't get time. {:?}", e),
+    });
     new_file.push_str(&time);
     new_file.push_str(".png");
     //_ copies the temp file to your home pic dir
 
     let _sleep = Duration::new(1,0);
     thread::sleep(_sleep);
-    let _ = std::fs::copy(tmp.clone(), new_file);
+    let _ = match std::fs::copy(tmp.clone(), new_file) {
+        Ok(ok) => ok,
+        Err(e) => panic!("Unable to save file. {:?}", e),
+    };
     notification::file_saved();
 }

@@ -1,3 +1,5 @@
+extern crate curl;
+use self::curl::easy::Easy;
 use std::env;
 use open;
 use VERSION;
@@ -5,8 +7,57 @@ use SHAREXIN;
 
 pub fn upgrade()
 {
-    let _ = open::that(SHAREXIN);
-    let _lang = env::var("LANG").unwrap();
+    let mut dst = Vec::new();
+    let mut latest = Easy::new();
+    latest.url("https://raw.githubusercontent.com/thebitstick/ShareXin/master/version").unwrap();
+    let mut transfer = latest.transfer();
+    transfer.write_function(|data| {
+        dst.extend_from_slice(data);
+        let mut latest_utf = String::from_utf8(dst.clone()).unwrap();
+        while latest_utf.ends_with("\n") {
+            let len = latest_utf.len();
+            let new_len = len.saturating_sub("\n".len());
+            latest_utf.truncate(new_len);
+        }
+        let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
+            Ok(ok) => ok,
+            Err(e) => panic!("Unable to get current version. {:?}", e),
+        };
+        let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
+            Ok(ok) => ok,
+            Err(e) => panic!("Unable to get current version. {:?}", e),
+        };
+        if latest_version > current_version {
+            println!("Installed Version: {}\nLatest Version: {}", VERSION, latest_utf);
+            println!("You are out-of-date!");
+            open_update();
+        }
+        else if latest_version < current_version {
+            println!("Installed Version: {}\nLatest Version: {}", VERSION, latest_utf);
+            println!("You are too up-to-date! Are you the dev perhaps?");
+        }
+        else if latest_version == current_version {
+            println!("Installed Version: {}\nLatest Version: {}", VERSION, latest_utf);
+            println!("You are up-to-date!");
+        }
+        Ok(data.len())
+    }).unwrap();
+    match transfer.perform() {
+        Ok(ok) => ok,
+        Err(e) => panic!("Unable to get current version. {:?}", e),
+    };
+}
+
+fn open_update()
+{
+    match open::that(SHAREXIN) {
+        Ok(ok) => ok,
+        Err(e) => panic!("Could not open. {:?}", e),
+    };
+    let _lang = match env::var("LANG") {
+        Ok(ok) => ok,
+        Err(e) => panic!("Unable to get $LANG. {:?}", e),
+    };
     let lang = &_lang.to_lowercase();
     let mut upgrade_fr = String::from("
 Vérifiez les nouvelles mises à jour à l'adresse suivante: ");
@@ -66,7 +117,7 @@ pub fn help()
 {
     let mut help_fr = String::from("\nsharexin ");
     help_fr.push_str(VERSION);
-    help_fr.push_str(" (2017 Juil 28)
+    help_fr.push_str(" (2017 Juil 29)
 
 Utilisation: sharexin <option> [destination] <option d'image>
 
@@ -95,7 +146,7 @@ Exemples:
 
     let mut help_es = String::from("\nsharexin ");
     help_es.push_str(VERSION);
-    help_es.push_str(" (2017 Jul 28)
+    help_es.push_str(" (2017 Jul 29)
 
 Utilización: sharexin <opciones> [destino] <opcion de imagen>
 
@@ -124,7 +175,7 @@ Ejemplos:
 
     let mut help_eo = String::from("\nsharexin ");
     help_eo.push_str(VERSION);
-    help_eo.push_str(" (2017 Jul 28)
+    help_eo.push_str(" (2017 Jul 29)
 
 Uzo: sharexin <opcioj> [celon] <opcio de bildo>
 
@@ -153,7 +204,7 @@ Ekzemploj:
 
     let mut help_cn = String::from("\nsharexin ");
     help_cn.push_str(VERSION);
-    help_cn.push_str(" (2017年7月28日)
+    help_cn.push_str(" (2017年7月29日)
 
 使用方法： sharexin <选项> [目的地] <截图选项>
 
@@ -182,7 +233,7 @@ Ekzemploj:
 
     let mut help_tw = String::from("\nsharexin ");
     help_tw.push_str(VERSION);
-    help_tw.push_str(" (2017年7月28日)
+    help_tw.push_str(" (2017年7月29日)
 
 使用方法：sharexin <選項> [目的地] <截圖選項>
 
@@ -211,7 +262,7 @@ Ekzemploj:
 
     let mut help_ja = String::from("\nsharexin ");
     help_ja.push_str(VERSION);
-    help_ja.push_str(" (平成29年7月28日)
+    help_ja.push_str(" (平成29年7月29日)
 
 使用方法: sharexin <オプション> [行き先] <スクリーンショットのオプション>
 
@@ -240,7 +291,7 @@ Ekzemploj:
 
     let mut help_ko = String::from("\nsharexin ");
     help_ko.push_str(VERSION);
-    help_ko.push_str(" (2017년7월28일)
+    help_ko.push_str(" (2017년7월29일)
 
 사용 방법: sharexin <옵션> [목적지] <스크린 샷 옵션>
 
@@ -269,7 +320,7 @@ Ekzemploj:
 
     let mut help_de = String::from("\nsharexin ");
     help_de.push_str(VERSION);
-    help_de.push_str(" (2017 Jul 28)
+    help_de.push_str(" (2017 Jul 29)
 
 Anwendung: sharexin <optionen> [reiseziel] <bildoptionen>
 
@@ -298,9 +349,9 @@ Beispiele:
 
     let mut help = String::from("\nsharexin ");
     help.push_str(VERSION);
-    help.push_str(" (2017 Jul 28)
+    help.push_str(" (2017 Jul 29)
 
-Usage: sharexin <options> [destination] <image options>
+Usage: sharexin <options> [destination] <image options> [FILE]
 
 Options:
   -h, --help\tDisplay this help message and exit
@@ -311,20 +362,30 @@ Image Options:
   area\t\tGrab an area of the screen instead of the entire screen
   window\tGrab the current window instead of the entire screen
   full\t\tGran the entire screen
+  open\t\tUse a file (experimental, only one file used)
 
 Destinations:
   toot\t\tUpload to Mastodon (uses \"toot\")
-  tweet\t\tUpload to Twitter (uses \"t\")
+  tweet\t\tUpload to Twitter (uses \"t\" for images)
+  imgur\t\tUpload to Imgur
   file\t\tOnly save file
+
+Tweet Options:
+  auth\t\tAuthenticate with Twitter
 
 Examples:
   sharexin toot
   sharexin tweet full
   sharexin file window
   sharexin toot area
+  sharexin imgur open [FILE]
+  sharexin tweet auth
     ");
 
-    let _lang = env::var("LANG").unwrap();
+    let _lang = match env::var("LANG") {
+        Ok(ok) => ok,
+        Err(e) => panic!("Unable to get $LANG. {:?}", e),
+    };
     let lang = &_lang.to_lowercase();
     if lang.contains("fr") {
         println!("{}", help_fr);

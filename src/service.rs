@@ -1,17 +1,20 @@
 use notification;
-use send;
+use twitter;
+use mastodon;
+use Destination;
 
-pub fn thread(service: bool, image: bool, tweet: String)
+pub fn thread(service: Destination, image: bool, message: String)
 {
-            //service is true for mastodon, false for twitter
-            if service {
+            //service is struct
+            if service.mastodon {
                 //image is true for yes image, false for no image
-                if image {send::toot_img(tweet.clone());}
+                if image {mastodon::image(message.clone());}
                 //if false, then if its not empty, send
-                else if !tweet.is_empty() {send::toot(tweet.clone());}
+                else if !message.is_empty() {mastodon::toot(message.clone());}
                 //if empty, cancel and notify
                 else {notification::empty(service);}}
-            else {
-                if image {send::twitter_img(tweet.clone());}
-                else if !tweet.is_empty() {send::twitter(tweet.clone());}
-                else {notification::empty(service);}}}
+            else if service.twitter {
+                if image {twitter::image(message.clone());}
+                else if !message.is_empty() {twitter::tweet(message.clone());}
+                else {notification::empty(service);}}
+}
