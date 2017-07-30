@@ -64,12 +64,12 @@ Image Options:
   area		Grab an area of the screen instead of the entire screen
   window	Grab the current window instead of the entire screen
   full		Gran the entire screen
-  open      Use a file
+  open		Use a file
 
 Destinations:
   toot		Upload to Mastodon (uses "toot")
   tweet		Upload to Twitter (uses "t")
-  imgur     Upload to Imgur
+  imgur		Upload to Imgur
   file		Only save file
 
 Examples:
