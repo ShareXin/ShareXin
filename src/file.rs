@@ -20,6 +20,7 @@ pub fn open(file: String)
         Ok(ok) => ok,
         Err(e) => panic!("Unable to save file. {:?}", e),
     };
+    notification::file_saved();
 }
 
 pub fn image(cmd: String)

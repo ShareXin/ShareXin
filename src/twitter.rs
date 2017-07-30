@@ -1,4 +1,3 @@
-extern crate egg_mode;
 use std::env;
 use std::process::*;
 use notification;
@@ -10,7 +9,7 @@ use open;
 
 pub fn image(txt: String)
 {
-    let twitter = Destination { twitter: true, mastodon: false, imgur: false };
+    let twitter = Destination::new(1);
     //gets file to send from temp dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
@@ -32,7 +31,7 @@ pub fn image(txt: String)
 
 pub fn tweet(txt: String)
 {
-    let twitter = Destination { twitter: true, mastodon: false, imgur: false };
+    let twitter = Destination::new(1);
     let text: &str = &txt.clone()[..];
     println!("[Tweet]: {}", txt);
     let _t = Command::new("t")

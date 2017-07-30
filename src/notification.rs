@@ -5,10 +5,7 @@ use language::{language, Language};
 
 pub fn image_sent(service: Destination, text: &str, img: &str)
 {
-    let langue = Language {
-        service: service,
-        option: 0,
-    };
+    let langue = Language::new(service, 0);
     //when the tweet/toot with an image is sent
     let string = language(langue);
     if service.mastodon {
@@ -51,10 +48,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str)
 
 pub fn message_sent(service: Destination, text: &str)
 {
-    let langue = Language {
-        service: service,
-        option: 0,
-    };
+    let langue = Language::new(service, 0);
     //when the tweet/toot without an image is sent
     let string = language(langue);
     if service.mastodon {
@@ -85,12 +79,7 @@ pub fn message_sent(service: Destination, text: &str)
 
 pub fn file_saved()
 {
-    let langue = Language {
-        service: Destination {
-        twitter: false, mastodon: false, 
-        imgur: false},
-        option: 2,
-    };
+    let langue = Language::new(Destination::new(3), 2);
     //when the file has been saved
     let string = language(langue);
     match libnotify::init("ShareXin") {
@@ -107,10 +96,7 @@ pub fn file_saved()
 
 pub fn empty(service: Destination)
 {
-    let langue = Language {
-        service: service,
-        option: 3,
-    };
+    let langue = Language::new(service, 3);
     //if tweet/toot is empty
     let string = language(langue);
     if service.mastodon {

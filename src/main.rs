@@ -6,6 +6,7 @@ extern crate gtk;
 extern crate glib;
 extern crate gdk;
 extern crate open;
+extern crate imgur as Imgur;
 use std::*;
 mod notification;
 mod twitter;
@@ -29,10 +30,27 @@ pub struct Destination {
     imgur: bool,
 }
 
+impl Destination {
+    pub fn new(id: u32) -> Destination {
+        if id == 0 {
+            Destination { twitter: false, mastodon: true, imgur: false }
+        }
+        else if id == 1 {
+            Destination { twitter: true, mastodon: false, imgur: false }
+        }
+        else if id == 2 {
+            Destination { twitter: false, mastodon: false, imgur: true }
+        }
+        else {
+            Destination { twitter: false, mastodon: false, imgur: false }
+        }
+    }
+}
+
 fn main()
 {
-    let twitter = Destination { twitter: true, mastodon: false, imgur: false };
-    let mastodon = Destination { twitter: false, mastodon: true, imgur: false };
+    let twitter = Destination::new(1);
+    let mastodon = Destination::new(0);
     //gets command args
     let args: Vec<_> = env::args().collect();
     //if at least one arg is passed (the command itself counts?? wtf)
@@ -92,7 +110,7 @@ fn main()
                             file::image(String::new());
                             gui(twitter, true);
                         },
-                        "auth" => println!("NO"),
+                        "auth" => println!("Not implemented yet."),
                         _ => help::help()
                     }
                 }
@@ -142,6 +160,9 @@ fn main()
                         },
                         _ => help::help()
                     }
+                }
+                else {
+                    help::help();
                 }
             },          
             //if first arg is file

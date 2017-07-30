@@ -51,9 +51,9 @@
 
 ```rust
 
-sharexin 0.3.7 (2017 Jul 29)
+sharexin 0.3.8 2017-07-30
 
-Usage: sharexin <options> [destination] <image options>
+Usage: sharexin <options> [destination] <image options> [FILE]
 
 Options:
   -h, --help	Display this help message and exit
@@ -64,10 +64,12 @@ Image Options:
   area		Grab an area of the screen instead of the entire screen
   window	Grab the current window instead of the entire screen
   full		Gran the entire screen
+  open      Use a file
 
 Destinations:
   toot		Upload to Mastodon (uses "toot")
   tweet		Upload to Twitter (uses "t")
+  imgur     Upload to Imgur
   file		Only save file
 
 Examples:
@@ -75,6 +77,7 @@ Examples:
   sharexin tweet full
   sharexin file window
   sharexin toot area
+  sharexin imgur open [FILE]
 ```  
 
 ## Language support  
@@ -104,6 +107,11 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
+#### [0.3.8] - 2017-07-30  
+- Better struct management  
+- Imgur support! Opens image in browser  
+- Changed date variable (had to change it manually everytime  
+
 #### [0.3.7] - 2017-07-29  
 - Custom error handles  
 - Added experimental `open` Image Option, lets you select an image (animated or not) or possibly a video and send to a destination  

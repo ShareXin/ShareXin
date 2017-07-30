@@ -5,7 +5,7 @@ use Destination;
 
 pub fn image(txt: String)
 {
-    let mastodon = Destination { twitter: false, mastodon: true, imgur: false };
+    let mastodon = Destination::new(0);
     //gets file to send from temp dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
@@ -21,7 +21,7 @@ pub fn image(txt: String)
 
 pub fn toot(txt: String)
 {
-    let mastodon = Destination { twitter: false, mastodon: true, imgur: false };
+    let mastodon = Destination::new(0);
     let text: &str = &txt.clone()[..];
     println!("[Toot]: {}", txt);
     let _mastodon = Command::new("toot")

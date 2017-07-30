@@ -1,6 +1,6 @@
 [package]
 name = "sharexin"
-version = "0.3.7"
+version = "0.3.8"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux"
 homepage = "https://github.com/thebitstick/ShareXin"
@@ -15,7 +15,8 @@ gdk = "^0"
 time = "^0"
 open = "^1"
 curl = "^0"
-egg-mode = "^0"
+imgur = "^0"
+ring = "0.11.0"
 
 [features]
 default = ["gtk/v3_10"]

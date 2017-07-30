@@ -7,6 +7,12 @@ pub struct Language {
     pub option: u32,
 }
 
+impl Language {
+    pub fn new(service: Destination, option: u32) -> Language {
+        Language { service: service, option: option }
+    }
+}
+
 pub fn language<'a>(langue: Language) -> &'a str
 {
     let service = langue.service;
@@ -26,34 +32,42 @@ pub fn language<'a>(langue: Language) -> &'a str
         if lang.contains("fr") {
             if service.mastodon {string = "Envoyé vers Mastodon"; }
             else if service.twitter {string = "Envoyé vers Twitter";}
+            else if service.imgur {string = "Envoyé vers Imgur";}
         }
         else if lang.contains("es") {
             if service.mastodon {string = "Enviado a Mastodon";}
             else if service.twitter {string = "Enviado a Twitter";}
+            else if service.imgur {string = "Enviado a Imgur";}
         }
         else if lang.contains("eo") {
             if service.mastodon {string = "Sendita al Mastodon";}
             else if service.twitter {string = "Sendita al Twitter";}
+            else if service.imgur {string = "Sendita al Imgur";}
         }
         else if lang.contains("cn") {
             if service.mastodon {string = "它已被发送到Mastodon";}
             else if service.twitter {string = "它已被发送到Twitter";}
+            else if service.imgur {string = "它已被发送到Imgur";}
         }
         else if lang.contains("tw") {
             if service.mastodon {string = "它已被發送到Mastodon";}
             else if service.twitter {string = "它已被發送到Twitter";}
+            else if service.imgur {string = "它已被發送到Imgur";}
         }
         else if lang.contains("ja") {
             if service.mastodon {string = "Mastodonに送信";}
             else if service.twitter {string = "Twitterに送信";}
+            else if service.imgur {string = "Imgurに送信";}
         }
         else if lang.contains("ko") {
             if service.mastodon {string = "Mastodon에 보냈습니다";}
             else if service.twitter {string = "Twitter에 보냈습니다";}
+            else if service.imgur {string = "Imgur에 보냈습니다";}
         }
         else if lang.contains("de") {
             if service.mastodon {string = "Auf Mastodon veröffentlicht";}
             else if service.twitter {string = "Auf Twitter veröffentlicht";}
+            else if service.imgur {string = "Auf Imgur veröffentlicht";}
         }
         else {
             if service.mastodon {string = "Sent to Mastodon";}
