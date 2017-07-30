@@ -78,6 +78,7 @@ Examples:
   sharexin file window
   sharexin toot area
   sharexin imgur open [FILE]
+
 ```  
 
 ## Language support  
