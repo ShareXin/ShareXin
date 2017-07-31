@@ -34,6 +34,7 @@ pub fn image(cmd: String)
     //makes a string
 
     let temp = tmp.to_str().unwrap().clone();
+
     if cmd == "-s" {
 
         //_before_image takes a full screenshot using maim
@@ -94,7 +95,7 @@ pub fn image(cmd: String)
         let _ = Command::new("convert").arg(temp.clone())
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp.clone()).spawn().expect("Nope");
+        .arg(temp).spawn().expect("Nope");
     }
     else {
 
@@ -102,6 +103,20 @@ pub fn image(cmd: String)
 
         let _image = Command::new("maim")
         .arg(temp.clone()).output().expect("Nope");
+
+        //_convert_area adds a shadow
+
+        let _convert_area = Command::new("convert").arg(temp.clone())
+        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
+        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
+        .arg(temp.clone()).spawn().expect("Nope");
+
+        //double shadow cause mac dev amiright
+
+        let _ = Command::new("convert").arg(temp.clone())
+        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
+        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
+        .arg(temp).spawn().expect("Nope");
     }
     save();
 }
