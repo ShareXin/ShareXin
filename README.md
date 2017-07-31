@@ -51,7 +51,7 @@
 
 ```rust
 
-sharexin 0.3.8 2017-07-30
+sharexin 0.3.9 2017-07-31
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -108,6 +108,9 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
+#### [0.3.9] - 2017-07-31  
+- Bug fixes  
+
 #### [0.3.8] - 2017-07-30  
 - Better struct management  
 - Imgur support! Opens image in browser  

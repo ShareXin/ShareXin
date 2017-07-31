@@ -4,7 +4,9 @@ use notification;
 use Destination;
 use std::io::*;
 use std::fs::File;
-use auth::gui;
+use gtk::*;
+use gtk;
+use std::*;
 use open;
 
 pub fn image(txt: String)
@@ -38,4 +40,37 @@ pub fn tweet(txt: String)
     .args(&["update", &txt]).output().expect("Nope");
     println!("{}", String::from_utf8_lossy(&_t.stdout));
     notification::message_sent(twitter, text);
+}
+
+
+
+
+fn gui()
+{
+    //if gtk dont init, ends program
+
+    match gtk::init() {
+        Ok(ok) => ok,
+        Err(e) => panic!("GTK could not initialize. {:?}", e),
+    };
+
+    //all theses get objects from a glade builder
+
+    let builder = gtk::Builder::new_from_string(include_str!("auth.glade"));
+    let window: gtk::Window = builder.get_object("window").unwrap();
+    #[allow(unused_variables)]
+    let entry: gtk::Entry = builder.get_object("entry").unwrap();
+    let ok: gtk::Button = builder.get_object("ok").unwrap();
+
+    window.connect_delete_event(|_, _| {
+        gtk::main_quit();
+        Inhibit(false)
+    });
+
+    ok.connect_clicked(move |_| {
+        gtk::main_quit();
+    });
+
+    window.show_all();
+    gtk::main();
 }

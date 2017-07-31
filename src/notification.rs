@@ -1,5 +1,5 @@
-extern crate libnotify;
 use libnotify::Notification;
+use libnotify;
 use Destination;
 use language::{language, Language};
 

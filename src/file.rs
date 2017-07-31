@@ -1,9 +1,9 @@
-extern crate time;
 use std::time::Duration;
 use std::process::*;
 use std::*;
 use std;
 use notification;
+use time;
 
 pub fn open(file: String)
 {
@@ -51,7 +51,16 @@ pub fn image(cmd: String)
         //_image lets to select
 
         let _image = Command::new("maim").arg("-s").arg(temp.clone())
-        .output().expect("Nope");
+        .status().expect("Nope");
+
+        //_kill closes _feh, gently
+
+        let _kill = Command::new("killall").arg("feh").output().expect("Nope");
+
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
 
         //_convert_area adds a shadow
 
@@ -67,9 +76,6 @@ pub fn image(cmd: String)
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
         .arg(temp.clone()).spawn().expect("Nope");
 
-        //_kill closes _feh, gently
-
-        let _kill = Command::new("killall").arg("feh").output().expect("Nope");
     }
     else if cmd == "-i" {
 
@@ -81,9 +87,15 @@ pub fn image(cmd: String)
         //_image uses maim to take the window gotten from xdo
 
         let xdo = String::from_utf8_lossy(&_xdo.stdout);
+
         let _image = Command::new("maim").arg("-i")
-        .args(&[&xdo, temp.clone()]).output().expect("Nope");
-        
+        .args(&[&xdo, temp.clone()]).status().expect("Nope");
+
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+
         //_convert_window adds shadow
 
         let _convert_window = Command::new("convert").arg(temp.clone())
@@ -96,17 +108,23 @@ pub fn image(cmd: String)
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
         .arg(temp).spawn().expect("Nope");
+
     }
     else {
 
         //_image uses maim to take screenshot
 
         let _image = Command::new("maim")
-        .arg(temp.clone()).output().expect("Nope");
+        .arg(temp.clone()).status().expect("Nope");
 
-        //_convert_area adds a shadow
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
 
-        let _convert_area = Command::new("convert").arg(temp.clone())
+        //_convert adds a shadow
+
+        let _convert = Command::new("convert").arg(temp.clone())
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
         .arg(temp.clone()).spawn().expect("Nope");
@@ -117,6 +135,7 @@ pub fn image(cmd: String)
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
         .arg(temp).spawn().expect("Nope");
+
     }
     save();
 }

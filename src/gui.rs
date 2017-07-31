@@ -1,15 +1,16 @@
-extern crate time;
-extern crate gtk;
-extern crate glib;
-extern crate gdk;
-extern crate open;
 use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
 use gtk::traits::*;
 use gtk::*;
 use std::*;
-use service;
+use gtk;
+use gdk;
+use glib;
+use open;
+use notification;
+use twitter;
+use mastodon;
 use Destination;
 
 pub fn gui(service: Destination, image_bool: bool)
@@ -75,14 +76,26 @@ pub fn gui(service: Destination, image_bool: bool)
             let sent: Option<String> = TextBuffer::get_text(&buffer,
             &TextBuffer::get_start_iter(&buffer),
             &TextBuffer::get_end_iter(&buffer), false);
-            let tweet: String = sent.unwrap();
+            let message: String = sent.unwrap();
             //creates thread, but first checks if character count is over limit
             if service.mastodon {
-                if tweet.len() < 500 {
+                if message.len() < 500 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-                            service::thread(
-                            service, image_bool.clone(), tweet.clone());
+                            
+//service is struct
+if service.mastodon {
+    //image_bool is true for yes image, false for no image
+    if image_bool {mastodon::image(message.clone());}
+    //if false, then if its not empty, send
+    else if !message.is_empty() {mastodon::toot(message.clone());}
+    //if empty, cancel and notify
+    else {notification::empty(service);}}
+else if service.twitter {
+    if image_bool {twitter::image(message.clone());}
+    else if !message.is_empty() {twitter::tweet(message.clone());}
+    else {notification::empty(service);}}
+
                             gtk::main_quit();
                             Continue(false)
                         });
@@ -91,10 +104,23 @@ pub fn gui(service: Destination, image_bool: bool)
                 }
             }
             else if service.twitter {
-                if tweet.len() < 140 {
+                if message.len() < 140 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-                            service::thread(service, image_bool.clone(), tweet.clone());
+                            
+//service is struct
+if service.mastodon {
+    //image_bool is true for yes image, false for no image
+    if image_bool {mastodon::image(message.clone());}
+    //if false, then if its not empty, send
+    else if !message.is_empty() {mastodon::toot(message.clone());}
+    //if empty, cancel and notify
+    else {notification::empty(service);}}
+else if service.twitter {
+    if image_bool {twitter::image(message.clone());}
+    else if !message.is_empty() {twitter::tweet(message.clone());}
+    else {notification::empty(service);}}
+
                             gtk::main_quit();
                             Continue(false)
                         });
@@ -115,14 +141,14 @@ pub fn gui(service: Destination, image_bool: bool)
             let sent: Option<String> = TextBuffer::get_text(&buffer,
             &TextBuffer::get_start_iter(&buffer),
             &TextBuffer::get_end_iter(&buffer), false);
-            let tweet: String = sent.unwrap();
+            let message: String = sent.unwrap();
             let mut markup = String::from("<span foreground=\"#DA2E37\">");
-            markup.push_str(&tweet.len().to_string());
+            markup.push_str(&message.len().to_string());
             markup.push_str("</span>");
             if service.mastodon {
-                if tweet.len() >= 500 {count.borrow().set_markup(&markup);}
+                if message.len() >= 500 {count.borrow().set_markup(&markup);}
                 else {
-                    count.borrow().set_label(&tweet.len().to_string());
+                    count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -132,9 +158,9 @@ pub fn gui(service: Destination, image_bool: bool)
                 }
             }
             else if service.twitter {
-                if tweet.len() >= 140 {count.borrow().set_markup(&markup);}
+                if message.len() >= 140 {count.borrow().set_markup(&markup);}
                 else {
-                    count.borrow().set_label(&tweet.len().to_string());
+                    count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -159,14 +185,14 @@ pub fn gui(service: Destination, image_bool: bool)
             let sent: Option<String> = TextBuffer::get_text(&buffer,
             &TextBuffer::get_start_iter(&buffer),
             &TextBuffer::get_end_iter(&buffer), false);
-            let tweet: String = sent.unwrap();
+            let message: String = sent.unwrap();
             let mut markup = String::from("<span foreground=\"#DA2E37\">");
-            markup.push_str(&tweet.len().to_string());
+            markup.push_str(&message.len().to_string());
             markup.push_str("</span>");
             if service.mastodon {
-                if tweet.len() >= 500 {count.borrow().set_markup(&markup);}
+                if message.len() >= 500 {count.borrow().set_markup(&markup);}
                 else {
-                    count.borrow().set_label(&tweet.len().to_string());
+                    count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -176,9 +202,9 @@ pub fn gui(service: Destination, image_bool: bool)
                 }
             }
             else if service.twitter {
-                if tweet.len() >= 140 {count.borrow().set_markup(&markup);}
+                if message.len() >= 140 {count.borrow().set_markup(&markup);}
                 else {
-                    count.borrow().set_label(&tweet.len().to_string());
+                    count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),

@@ -1,11 +1,10 @@
-extern crate curl;
-use self::curl::easy::Easy;
+use curl::easy::Easy;
 use std::env;
 use open;
 use VERSION;
 use SHAREXIN;
 
-static DATE: &'static str = "2017-07-30";
+static DATE: &'static str = "2017-07-31";
 
 pub fn upgrade()
 {
