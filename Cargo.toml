@@ -16,7 +16,6 @@ time = "^0"
 open = "^1"
 curl = "^0"
 imgur = "^0"
-ring = "0.11.0"
 
 [features]
 default = ["gtk/v3_10"]
