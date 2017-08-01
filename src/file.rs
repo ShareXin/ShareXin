@@ -11,6 +11,7 @@ pub fn open(file: String)
 
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
+    let temp = tmp.to_str().unwrap();
 
     //_ copies file to temp
 
@@ -20,10 +21,18 @@ pub fn open(file: String)
         Ok(ok) => ok,
         Err(e) => panic!("Unable to save file. {:?}", e),
     };
+
+    //adds a shadow
+
+    let _ = Command::new("convert").arg(temp.clone())
+    .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
+    .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
+    .arg(temp.clone()).spawn().expect("Nope");
+
     notification::file_saved();
 }
 
-pub fn image(cmd: String)
+pub fn image(maim: String)
 {
     //tmp gets the temporary directory of the system
 
@@ -35,22 +44,22 @@ pub fn image(cmd: String)
 
     let temp = tmp.to_str().unwrap().clone();
 
-    if cmd == "-s" {
+    if maim == "-s" {
 
         //_before_image takes a full screenshot using maim
 
         let _before_image = Command::new("maim")
-        .arg(temp.clone()).output().expect("Nope");
+        .arg("-uo").arg(temp.clone()).output().expect("Nope");
 
         //_feh displays it and _sleeps waits for _image
 
         let _feh = Command::new("feh").arg(temp.clone()).arg("-F")
         .spawn().expect("Nope");
-        let _sleep = Command::new("sleep").arg("0.5").output().expect("Nope");
+        let _sleep = Command::new("sleep").arg("1").output().expect("Nope");
 
         //_image lets to select
 
-        let _image = Command::new("maim").arg("-s").arg(temp.clone())
+        let _image = Command::new("maim").arg("-so").arg("-u").arg(temp.clone())
         .status().expect("Nope");
 
         //_kill closes _feh, gently
@@ -62,14 +71,7 @@ pub fn image(cmd: String)
             process::exit(1);
         }
 
-        //_convert_area adds a shadow
-
-        let _convert_area = Command::new("convert").arg(temp.clone())
-        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
-        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp.clone()).spawn().expect("Nope");
-
-        //double shadow cause mac dev amiright
+        //adds a shadow
 
         let _ = Command::new("convert").arg(temp.clone())
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
@@ -77,7 +79,7 @@ pub fn image(cmd: String)
         .arg(temp.clone()).spawn().expect("Nope");
 
     }
-    else if cmd == "-i" {
+    else if maim == "-i" {
 
         //_xdo gets the active window
 
@@ -88,7 +90,7 @@ pub fn image(cmd: String)
 
         let xdo = String::from_utf8_lossy(&_xdo.stdout);
 
-        let _image = Command::new("maim").arg("-i")
+        let _image = Command::new("maim").arg("-ou").arg("-i")
         .args(&[&xdo, temp.clone()]).status().expect("Nope");
 
         if _image.code() == Some(1) {
@@ -96,45 +98,31 @@ pub fn image(cmd: String)
             process::exit(1);
         }
 
-        //_convert_window adds shadow
+        //adds a shadow
 
-        let _convert_window = Command::new("convert").arg(temp.clone())
-        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
-        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp.clone()).spawn().expect("Nope");
-
-        //double shadow cause mac dev amiright
         let _ = Command::new("convert").arg(temp.clone())
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp).spawn().expect("Nope");
-
+        .arg(temp.clone()).spawn().expect("Nope");
     }
     else {
 
         //_image uses maim to take screenshot
 
         let _image = Command::new("maim")
-        .arg(temp.clone()).status().expect("Nope");
+        .arg("-ou").arg(temp.clone()).status().expect("Nope");
 
         if _image.code() == Some(1) {
             println!("Exiting...");
             process::exit(1);
         }
 
-        //_convert adds a shadow
-
-        let _convert = Command::new("convert").arg(temp.clone())
-        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
-        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp.clone()).spawn().expect("Nope");
-
-        //double shadow cause mac dev amiright
+        //adds a shadow
 
         let _ = Command::new("convert").arg(temp.clone())
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp).spawn().expect("Nope");
+        .arg(temp.clone()).spawn().expect("Nope");
 
     }
     save();
@@ -165,7 +153,7 @@ pub fn save()
     //time gets the time in a nice format
 
     let time = String::from(
-    match time::strftime("%Y-%m-%d-%T", &time::now()) {
+    match time::strftime("%Y-%m-%d-%H_%M_%S", &time::now()) {
         Ok(ok) => ok,
         Err(e) => panic!("Couldn't get time. {:?}", e),
     });

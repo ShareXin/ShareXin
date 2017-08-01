@@ -38,7 +38,7 @@ pub fn cmd()
                         _ => help::help()
                     }
                 }
-                if args.len() >= 3 {
+                else if args.len() >= 3 {
                     match args[2].as_ref() {
                         "open" => { 
                             if args.len() == 4 {
@@ -74,7 +74,7 @@ pub fn cmd()
                         _ => help::help()
                     }
                 }
-                if args.len() >= 3 {
+                else if args.len() >= 3 {
                     match args[2].as_ref() {
                         "open" => { 
                             if args.len() == 4 {
@@ -136,7 +136,7 @@ pub fn cmd()
                         _ => help::help()
                     }
                 }
-                if args.len() >= 3 {
+                else if args.len() >= 3 {
                     match args[2].as_ref() {
                         "open" => { 
                             if args.len() == 4 {

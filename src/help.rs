@@ -4,7 +4,7 @@ use open;
 use VERSION;
 use SHAREXIN;
 
-static DATE: &'static str = "2017-07-31";
+static DATE: &'static str = "2017-08-01";
 
 pub fn upgrade()
 {

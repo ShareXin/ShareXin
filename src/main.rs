@@ -15,7 +15,6 @@ mod gui;
 mod imgur;
 mod cmd;
 mod language;
-use cmd::cmd;
 
 static VERSION: &'static str = env!("CARGO_PKG_VERSION");
 static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
@@ -46,5 +45,5 @@ impl Destination {
 
 fn main()
 {
-    cmd();
+    cmd::cmd();
 }

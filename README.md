@@ -1,7 +1,7 @@
 # ShareXin  
 
-[![Crates.io](https://img.shields.io/crates/v/sharexin.svg?)](https://crates.io/crates/sharexin)  
-[![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)  
+[![Crates.io](https://img.shields.io/crates/v/sharexin.svg?)](https://crates.io/crates/sharexin)
+[![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
 [![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?)](https://crates.io/crates/sharexin)  
 
 ![Mastodon](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-mastodon.png)
@@ -51,7 +51,7 @@
 
 ```rust
 
-sharexin 0.3.9 2017-07-31
+sharexin 0.4.0 2017-08-01
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -108,6 +108,11 @@ Remember that it's only a Ruby app...
 I can't test Mac at the moment, all I know is that it compiles.    
 
 ## Changelog  
+#### [0.4.0] - 2017-08-01  
+- Cursor hidden in all screenshots  
+- Removed double shadow  
+- Bug fixes  
+
 #### [0.3.9] - 2017-07-31  
 - Bug fixes  
 
