@@ -8,7 +8,8 @@
 ![Twitter](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-twitter.png)  
 
 ## Requirements  
-* xdg  
+* Rust Nightly  
+* xdg (probably already installed)  
 * maim (on non-Gnome/KDE x11 desktops)  
 * slop (on non-Gnome/KDE x11 desktops)  
 * imagemagick  
@@ -43,9 +44,9 @@
 * atk-devel  
 * openssl-devel  
 
-### Binary works out of the box on  
-- Ubuntu 17.04  
-- Fedora 26  
+#### Ubuntu binary tested on Ubuntu 17.04  
+#### Fedora binary tested on and works on literally anything besides Ubuntu  
+## Note: Binary may be older than current version, as compiling on each system takes time (and I'm not using Docker)  
 
 ## Features  
 * Uploads to Twitter and Mastodon  
@@ -55,13 +56,21 @@
 * Screenshotting works with X11 and Gnome/Plasma/Sway for Wayland  
 * Saves screenshots to a folder in your Pictures directory  
 
-## Installation (via Github)  
+## If the compiled binary doesn't work, then you must manually compile  
+
+### Dependency installation on Fedora  
+`sudo dnf install gtk3-devel cairo-devel libnotify-devel pango-devel gdk-pixbuf2-devel atk-devel openssl-devel`  
+
+### Dependency installation on Ubuntu  
+`sudo apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
+
+### Compiling (via Github)  
 1. `git clone https://github.com/thebitstick/ShareXin/`  
 2. `cargo install`  
 3. Login to Twitter and/or Mastodon using `t` and/or `toot`  
 4. Explore `--help`  
 
-## Installation (via Crates.io)  
+### Compiling (via Crates.io)  
 1. `cargo install sharexin`  
 2. Login to Twitter and/or Mastodon using `t` and/or `toot`  
 3. Explore `--help`  
