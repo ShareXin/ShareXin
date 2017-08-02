@@ -1,3 +1,6 @@
+#![allow(unused_assignments)]
+#![allow(unused_variables)]
+
 use std::time::Duration;
 use std::process::*;
 use std::*;
@@ -32,35 +35,60 @@ pub fn open(file: String)
     notification::file_saved();
 }
 
-pub fn image(maim: String)
+fn screenshot(args: String, temp: &str)
 {
-    //tmp gets the temporary directory of the system
+    let mut _session = String::new();
+    _session = match env::var("XDG_SESSION_TYPE") {
+        Ok(ok) => ok,
+        Err(e) => panic!("XDG not found. {:?}", e),
+    };
+    let session = &_session.to_lowercase();
+    let mut _desktop = String::new();
+    _desktop = match env::var("DESKTOP_SESSION") {
+        Ok(ok) => ok,
+        Err(e) => panic!("XDG not found. {:?}", e),
+    };
+    let desktop = &_desktop.to_lowercase();
 
-    let mut tmp = env::temp_dir();
-    //adds filename
+    if session.contains("wayland") {
+        if desktop.contains("gnome") {gnome(args.clone(), temp.clone());}
+        else if desktop.contains("plasma") {kde(args.clone(), temp.clone());}
+        else if desktop.contains("sway") {sway(args.clone(), temp.clone());}
+        else {panic!("Only Gnome/Plasma/Sway desktops supported for Wayland.\nUnable to figure out desktop.");}
+    }
+    else if session.contains("x11") {
+        if desktop.contains("gnome") {gnome(args.clone(), temp.clone());}
+        else if desktop.contains("plasma") {kde(args.clone(), temp.clone());}
+        else {maim(args.clone(), temp.clone());}
+    }
+    else {panic!("Unable to figure out session type. Check XDG variable.");}
+}
 
-    tmp.push("sharexin.png");
-    //makes a string
+fn sway(args: String, temp: &str)
+{
+    //sway selection grab: swaygrab /tmp/sharexin.png && convert /tmp/sharexin.png -crop "$(slop)" /tmp/sharexin.png
+    if args == "-s" {
 
-    let temp = tmp.to_str().unwrap().clone();
+        //_before_image takes a full screenshot using swaygrab
 
-    if maim == "-s" {
-
-        //_before_image takes a full screenshot using maim
-
-        let _before_image = Command::new("maim")
-        .arg("-uo").arg(temp.clone()).output().expect("Nope");
+        let _before_image = Command::new("swaygrab")
+            .arg(temp.clone()).output().expect("Nope");
 
         //_feh displays it and _sleeps waits for _image
+        println!("Feh may not display properly due to tiling and Wayland.");
 
         let _feh = Command::new("feh").arg(temp.clone()).arg("-F")
-        .spawn().expect("Nope");
-        let _sleep = Command::new("sleep").arg("1").output().expect("Nope");
+            .spawn().expect("Nope");
 
-        //_image lets to select
+        let _sleep = Command::new("sleep").arg("0.3").output().expect("Nope");
 
-        let _image = Command::new("maim").arg("-so").arg("-u").arg(temp.clone())
-        .status().expect("Nope");
+        //_image lets use _slop to select
+
+        let _slop = Command::new("slop").output().expect("Nope");
+        let slop = String::from_utf8_lossy(&_slop.stdout);
+        let _image = Command::new("convert")
+            .args(&[temp.clone(), "-crop", &slop, temp.clone()])
+            .status().expect("Nope");
 
         //_kill closes _feh, gently
 
@@ -70,16 +98,166 @@ pub fn image(maim: String)
             println!("Exiting...");
             process::exit(1);
         }
-
-        //adds a shadow
-
-        let _ = Command::new("convert").arg(temp.clone())
-        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
-        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp.clone()).spawn().expect("Nope");
-
     }
-    else if maim == "-i" {
+    else if args == "-i" {
+
+        //_image uses swaygrab to get "focused" window and take screenshot
+
+        let _image = Command::new("swaygrab").arg("-f")
+            .arg(temp.clone()).status().expect("Nope");
+
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+    else {
+
+        //_image uses swaygrab to take screenshot
+
+        let _image = Command::new("swaygrab")
+            .arg(temp.clone()).status().expect("Nope");
+
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+}
+
+fn gnome(args: String, temp: &str)
+{
+    if args == "-s" {
+
+        //_before_image takes a full screenshot using gnome-screenshot
+
+        let _before_image = Command::new("gnome-screenshot")
+            .arg("-f").arg(temp.clone()).output().expect("Nope");
+
+        //_feh displays it and _sleeps waits for _image
+
+        let _feh = Command::new("feh").arg(temp.clone()).arg("-F")
+            .spawn().expect("Nope");
+
+        let _sleep = Command::new("sleep").arg("0.3").output().expect("Nope");
+
+        //_image lets you select
+
+        let _image = Command::new("gnome-screenshot").arg("-a")
+            .args(&["-f", temp.clone()]).status().expect("Nope");
+
+        //_kill closes _feh, gently
+
+        let _kill = Command::new("killall").arg("feh").output().expect("Nope");
+
+        println!("gnome-screenshot doesnt give exit codes but maybe one day");
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+    else if args == "-i" {
+
+        //_image uses gnome-screenshot to get current window and take screenshot
+
+        let _image = Command::new("gnome-screenshot").arg("-w")
+        .args(&["-f", temp.clone()]).status().expect("Nope");
+
+        println!("gnome-screenshot doesnt give exit codes but maybe one day");
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+    else {
+
+        //_image uses gnome-screenshot to take screenshot
+
+        let _image = Command::new("gnome-screenshot")
+        .arg("-f").arg(temp.clone()).status().expect("Nope");
+
+        println!("gnome-screenshot doesnt give exit codes but maybe one day");
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+}
+
+fn kde(args: String, temp: &str)
+{
+    if args == "-s" {
+
+        //_image pauses screen and lets you select
+
+        let _image = Command::new("spectacle").arg("-rbno").arg(temp.clone())
+            .status().expect("Nope");
+
+        println!("spectacle doesnt give exit codes but maybe one day");
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+    else if args == "-i" {
+
+        //_image uses spectacle to get current window and take screenshot
+
+        let _image = Command::new("spectacle").arg("-abno")
+            .arg(temp.clone()).status().expect("Nope");
+
+        println!("spectacle doesnt give exit codes but maybe one day");
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+    else {
+
+        //_image uses spectacle to take screenshot
+
+        let _image = Command::new("spectacle")
+            .arg("-fbno").arg(temp.clone()).status().expect("Nope");
+
+        println!("spectacle doesnt give exit codes but maybe one day");
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+}
+
+fn maim(args: String, temp: &str)
+{
+    if args == "-s" {
+
+        //_before_image takes a full screenshot using maim
+
+        let _before_image = Command::new("maim")
+            .arg("-u").arg(temp.clone()).output().expect("Nope");
+
+        //_feh displays it and _sleeps waits for _image
+
+        let _feh = Command::new("feh").arg(temp.clone()).arg("-F")
+            .spawn().expect("Nope");
+
+        let _sleep = Command::new("sleep").arg("0.3").output().expect("Nope");
+
+        //_image lets you select
+
+        let _image = Command::new("maim").arg("-su").arg(temp.clone())
+            .status().expect("Nope");
+
+        //_kill closes _feh, gently
+
+        let _kill = Command::new("killall").arg("feh").output().expect("Nope");
+
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    }
+    else if args == "-i" {
 
         //_xdo gets the active window
 
@@ -90,41 +268,48 @@ pub fn image(maim: String)
 
         let xdo = String::from_utf8_lossy(&_xdo.stdout);
 
-        let _image = Command::new("maim").arg("-ou").arg("-i")
-        .args(&[&xdo, temp.clone()]).status().expect("Nope");
+        let _image = Command::new("maim").arg("-ui")
+            .args(&[&xdo, temp.clone()]).status().expect("Nope");
 
         if _image.code() == Some(1) {
             println!("Exiting...");
             process::exit(1);
         }
-
-        //adds a shadow
-
-        let _ = Command::new("convert").arg(temp.clone())
-        .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
-        .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
-        .arg(temp.clone()).spawn().expect("Nope");
     }
     else {
 
         //_image uses maim to take screenshot
 
         let _image = Command::new("maim")
-        .arg("-ou").arg(temp.clone()).status().expect("Nope");
+            .arg("-u").arg(temp.clone()).status().expect("Nope");
 
         if _image.code() == Some(1) {
             println!("Exiting...");
             process::exit(1);
         }
+    }
+}
 
-        //adds a shadow
+pub fn image(args: String)
+{
+    //tmp gets the temporary directory of the system
 
-        let _ = Command::new("convert").arg(temp.clone())
+    let mut tmp = env::temp_dir();
+    //adds filename
+
+    tmp.push("sharexin.png");
+    //makes a string
+
+    let temp = tmp.to_str().unwrap();
+
+    screenshot(args, temp.clone());
+
+    //adds a shadow
+    let _ = Command::new("convert").arg(temp.clone())
         .args(&["(", "+clone", "-background", "black", "-shadow", "80x3+5+5"])
         .args(&[")", "+swap", "-background", "none", "-layers", "merge", "+repage"])
         .arg(temp.clone()).spawn().expect("Nope");
 
-    }
     save();
 }
 

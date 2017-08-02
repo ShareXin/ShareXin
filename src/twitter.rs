@@ -2,12 +2,12 @@ use std::env;
 use std::process::*;
 use notification;
 use Destination;
-use std::io::*;
-use std::fs::File;
-use gtk::*;
-use gtk;
 use std::*;
-use open;
+//use std::io::*;
+//use std::fs::File;
+//use gtk::*;
+//use gtk;
+//use open;
 
 pub fn image(txt: String)
 {
@@ -42,10 +42,7 @@ pub fn tweet(txt: String)
     notification::message_sent(twitter, text);
 }
 
-
-
-
-fn gui()
+/*fn gui()
 {
     //if gtk dont init, ends program
 
@@ -73,4 +70,4 @@ fn gui()
 
     window.show_all();
     gtk::main();
-}
+}*/

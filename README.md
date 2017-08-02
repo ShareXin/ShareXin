@@ -8,8 +8,9 @@
 ![Twitter](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-twitter.png)  
 
 ## Requirements  
-* maim  
-* slop  
+* xdg  
+* maim (on non-Gnome/KDE x11 desktops)  
+* slop (on non-Gnome/KDE x11 desktops)  
 * imagemagick  
 * [t](https://github.com/sferik/t) (for now)  
 * [toot](https://github.com/ihabunek/toot) (for now)  
@@ -30,12 +31,12 @@
 * Uploads to Twitter and Mastodon  
 * Allows taking screenshots and saving them to files  
 * Notifications via libnotify  
-* GUI works with Wayland and X11  
-* Screenshotting works with X11  
-* Saves screenshots to folder in Pictures dir  
+* GUI works with X11 and Wayland  
+* Screenshotting works with X11 and Gnome/Plasma/Sway for Wayland  
+* Saves screenshots to a folder in your Pictures directory  
 
 ## Installation (via Github)  
-1. `git clone https://github.com/ShareXin/`  
+1. `git clone https://github.com/thebitstick/ShareXin/`  
 2. `cargo install`  
 3. Login to Twitter and/or Mastodon using `t` and/or `toot`  
 4. Explore `--help`  
@@ -49,7 +50,7 @@
 
 ```rust
 
-sharexin 0.4.0 2017-08-01
+sharexin 0.4.1 2017-08-02
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -84,7 +85,7 @@ Examples:
 #### English  
 #### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
 #### Español  
-#### Esperanto  
+#### Esperanta  
 #### 简体中文  
 #### 繁體中文  
 #### 日本語  
@@ -92,17 +93,29 @@ Examples:
 #### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
 
 ## Known issues  
-#### If `t` won't send your tweet  
+#### If `sharexin`, `toot`, or `t` aren't found  
 Check your $PATH. Your terminal may be able to launch it, but your WM/DE may not.  
 If you have a WM like i3, you can add it to your PATH in your `.xprofile`.  
-
-#### If `sharexin` isn't found  
-Add `$HOME/.cargo/bin` to your `$PATH`.  
 
 #### If `t` takes forever to send a tweet  
 Remember that it's only a Ruby app...  
 
+#### If Rust crashes with `Only Gnome/Plasma/Sway desktops supported for Wayland.`  
+Only Gnome, KDE, and Sway desktops are supported at this time. Screenshotting on Wayland is hell, but it makes it "secure" for the current year.  
+
+#### If Rust crashes with `Unable to figure out session type. Check XDG variable.`  
+Check your `$XDG_SESSION_TYPE` variable. If it's not x11 or wayland, it crashes as a failsafe.  
+
+#### If Rust crashes with `XDG not found.`  
+XDG variables were not found. Check `$DESKTOP_SESSION` and `$XDG_SESSION_TYPE`.  
+
 ## Changelog  
+#### [0.4.1] - 2017-08-02  
+- Partial Wayland support for Gnome, Plasma, and Sway  
+- Gnome-Screenshot used on Gnome  
+- Spectacle used on Plasma/KDE  
+- Swaygrab used on Sway (i3-clone)  
+
 #### [0.4.0] - 2017-08-01  
 - Cursor hidden in all screenshots  
 - Removed double shadow  
