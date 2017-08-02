@@ -21,12 +21,12 @@ pub fn image(txt: String)
     //t has troubles with empty args, so if txt is empty, it wont be send
     if !txt.is_empty() {
         let _ = Command::new("t")
-        .args(&["update", &txt, "-f", temp.clone()]).spawn().expect("Nope");
+        .args(&["update", &txt, "-f", temp.clone()]).spawn().expect("t not found");
         notification::image_sent(twitter, text, temp);
     }
     else {
         let _ = Command::new("t")
-        .args(&["update", "-f", temp.clone()]).spawn().expect("Nope");
+        .args(&["update", "-f", temp.clone()]).spawn().expect("t not found");
         notification::image_sent(twitter, text, temp);
     }
 }
@@ -37,7 +37,7 @@ pub fn tweet(txt: String)
     let text: &str = &txt.clone()[..];
     println!("[Tweet]: {}", txt);
     let _t = Command::new("t")
-    .args(&["update", &txt]).output().expect("Nope");
+    .args(&["update", &txt]).output().expect("t not found");
     println!("{}", String::from_utf8_lossy(&_t.stdout));
     notification::message_sent(twitter, text);
 }

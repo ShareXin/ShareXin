@@ -15,7 +15,7 @@ pub fn image(txt: String)
     //uses toot to toot (mastodon api too confusing, but on the TODO)
     let _ = Command::new("toot")
     .args(&["post", "-m", temp.clone(), &txt])
-    .spawn().expect("Nope");
+    .spawn().expect("toot not found");
     notification::image_sent(mastodon, text, temp);
 }
 
@@ -25,7 +25,7 @@ pub fn toot(txt: String)
     let text: &str = &txt.clone()[..];
     println!("[Toot]: {}", txt);
     let _mastodon = Command::new("toot")
-    .args(&["post", &txt]).output().expect("Nope");
+    .args(&["post", &txt]).output().expect("toot not found");
     println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
     notification::message_sent(mastodon, text);
 }
