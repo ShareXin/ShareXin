@@ -22,10 +22,30 @@
 * pango  
 * gdk-pixbuf2  
 * atk  
+* openssl  
+
+### Ubuntu dependencies  
+* libgtk-3-dev  
+* libcairo2-dev  
+* libnotify-dev  
+* libpango1.0-dev  
+* libgdk-pixbuf2.0-dev  
+* libatk1.0-dev  
+* libssl1.0-dev  
+* libssl-dev  
+
+### Fedora dependencies  
+* gtk3-devel  
+* cairo-devel  
+* libnotify-devel  
+* pango-devel  
+* gdk-pixbuf2-devel  
+* atk-devel  
+* openssl-devel  
 
 ### Binary works out of the box on  
-- Ubuntu 16.04 and up  
-- Fedora 25 and up  
+- Ubuntu 17.04  
+- Fedora 26  
 
 ## Features  
 * Uploads to Twitter and Mastodon  
