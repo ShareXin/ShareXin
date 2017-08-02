@@ -4,6 +4,7 @@
 [![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
 [![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?)](https://crates.io/crates/sharexin)  
 
+## Screenshots
 ![Mastodon](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-mastodon.png)
 ![Twitter](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-twitter.png)  
 
@@ -44,9 +45,9 @@
 * atk-devel  
 * openssl-devel  
 
+## Note: Binary may be older than current version, as compiling on each system takes time (and I'm not using Docker)  
 #### Ubuntu binary tested on Ubuntu 17.04  
 #### Fedora binary tested on and works on literally anything besides Ubuntu  
-## Note: Binary may be older than current version, as compiling on each system takes time (and I'm not using Docker)  
 
 ## Features  
 * Uploads to Twitter and Mastodon  
