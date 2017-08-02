@@ -15,15 +15,13 @@ use Destination;
 
 pub fn gui(service: Destination, image_bool: bool)
 {
-    //if gtk dont init, ends program
-
+    // if gtk dont init, ends program
     match gtk::init() {
         Ok(ok) => ok,
         Err(e) => panic!("GTK could not initialize. {:?}", e),
     };
 
-    //all theses get objects from a glade builder
-
+    // all theses get objects from a glade builder
     let builder = gtk::Builder::new_from_string(include_str!("sharexin.glade"));
     let window: gtk::Window = builder.get_object("window").unwrap();
     let header: gtk::HeaderBar = builder.get_object("header").unwrap();
@@ -33,16 +31,16 @@ pub fn gui(service: Destination, image_bool: bool)
     let image: gtk::Button = builder.get_object("image").unwrap();
     let count: gtk::Label = builder.get_object("count").unwrap();
 
-    //readying widgets
+    // readying widgets
     count.set_label("0");
     window.set_title("ShareXin");
     if service.mastodon {header.set_subtitle("Mastodon");}
     else if service.twitter {header.set_subtitle("Twitter");}
 
-    //if non-image toot/tweet, doesnt show button
+    // if non-image toot/tweet, doesnt show file button
     if !image_bool {image.destroy();}
 
-    //opens image
+    // opens image if image "file" button is clicked
     image.connect_clicked(move |_| {
         let mut tmp = env::temp_dir();
         tmp.push("sharexin.png");
@@ -60,41 +58,41 @@ pub fn gui(service: Destination, image_bool: bool)
 
     cancel.connect_clicked(|_| {gtk::main_quit();});
 
+    // rust security bypasses
     let wrap_send = Rc::new(RefCell::new(send.clone()));
     let wrap_window = Rc::new(RefCell::new(window.clone()));
     let wrap_text = Rc::new(RefCell::new(text.clone()));
     let wrap_count = Rc::new(RefCell::new(count.clone()));
 
     {
-        //the magic of button clicks
+        // rust security bypass
         let send = wrap_send.clone();
         let window = wrap_window.clone();
         let text = wrap_text.clone();
+
+        // checks textview and sends message to predefined destination/service
         send.borrow().connect_clicked(move |_| {
-            //gets buffer text from TextView item
+            // gets buffer text from TextView item
             let buffer = TextView::get_buffer(&text.borrow()).unwrap();
+
             let sent: Option<String> = TextBuffer::get_text(&buffer,
             &TextBuffer::get_start_iter(&buffer),
             &TextBuffer::get_end_iter(&buffer), false);
             let message: String = sent.unwrap();
-            //creates thread, but first checks if character count is over limit
+            // checks if character count is over limit, then creates thread for sending and closes
             if service.mastodon {
                 if message.len() < 500 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-                            
-//service is struct
-if service.mastodon {
-    //image_bool is true for yes image, false for no image
+
+    // image_bool is true for yes image, false for no image
     if image_bool {mastodon::image(message.clone());}
-    //if false, then if its not empty, send
+
+    // if false, then if its not empty, send
     else if !message.is_empty() {mastodon::toot(message.clone());}
-    //if empty, cancel and notify
-    else {notification::empty(service);}}
-else if service.twitter {
-    if image_bool {twitter::image(message.clone());}
-    else if !message.is_empty() {twitter::tweet(message.clone());}
-    else {notification::empty(service);}}
+
+    // if empty, cancel and notify
+    else {notification::empty(service);}
 
                             gtk::main_quit();
                             Continue(false)
@@ -107,19 +105,13 @@ else if service.twitter {
                 if message.len() < 140 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-                            
-//service is struct
-if service.mastodon {
-    //image_bool is true for yes image, false for no image
-    if image_bool {mastodon::image(message.clone());}
-    //if false, then if its not empty, send
-    else if !message.is_empty() {mastodon::toot(message.clone());}
-    //if empty, cancel and notify
-    else {notification::empty(service);}}
-else if service.twitter {
+
+    // image_bool is true for yes image, false for no image
     if image_bool {twitter::image(message.clone());}
+    // if false, then if its not empty, send
     else if !message.is_empty() {twitter::tweet(message.clone());}
-    else {notification::empty(service);}}
+    // if empty, cancel and notify
+    else {notification::empty(service);}
 
                             gtk::main_quit();
                             Continue(false)
@@ -131,7 +123,8 @@ else if service.twitter {
         });
         }
     {
-        //Control+Return also the Character Counter
+        // control+return sends message
+        // if twitter, 140 char limit, if mastodon 500 CHAR LIMIT
         let send = wrap_send.clone();
         let window = wrap_window.clone();
         let text = wrap_text.clone();
@@ -142,6 +135,8 @@ else if service.twitter {
             &TextBuffer::get_start_iter(&buffer),
             &TextBuffer::get_end_iter(&buffer), false);
             let message: String = sent.unwrap();
+
+            // uses markdown to set color
             let mut markup = String::from("<span foreground=\"#DA2E37\">");
             markup.push_str(&message.len().to_string());
             markup.push_str("</span>");
@@ -175,7 +170,7 @@ else if service.twitter {
 
     {
 
-        //Control+Return also the Character Counter
+        // same as connect_key_press but when any key is released
         let send = wrap_send.clone();
         let window = wrap_window.clone();
         let text = wrap_text.clone();

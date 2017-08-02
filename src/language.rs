@@ -18,16 +18,19 @@ pub fn language<'a>(langue: Language) -> &'a str
     let service = langue.service;
     //string creates result string, modified later
     let mut string = "";
-    //gets user var for language (hopefully?)
+
+    // check $LANG
     let mut lang = match env::var("LANG") {
         Ok(ok) => ok,
         Err(e) => panic!("Unable to get $LANG. {:?}", e),
     };
     lang = lang.to_lowercase();
-    //0 is for image_sent, telling the user their toot/tweet with an image has been sent
-    //0 is also for message_sent, telling the user their toot/tweet has been sent
-    //2 is for file_saved, telling the user the file is saved
-    //3 is for empty, telling the user their message-only toot/tweet was empty
+
+    // 0 is for image_sent, telling the user their toot/tweet with an image has been sent
+    // 0 is also for message_sent, telling the user their toot/tweet has been sent
+    // 2 is for file_saved, telling the user the file is saved
+    // 3 is for empty, telling the user their message-only toot/tweet was empty
+
     if langue.option == 0 {
         if lang.contains("fr") {
             if service.mastodon {string = "Envoyé vers Mastodon"; }

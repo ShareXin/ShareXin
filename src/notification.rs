@@ -3,11 +3,11 @@ use libnotify;
 use Destination;
 use language::{language, Language};
 
+// when the tweet/toot with an image is sent
+// uses language.rs to get proper language string in your language
 pub fn image_sent(service: Destination, text: &str, img: &str)
 {
-    let langue = Language::new(service, 0);
-    //when the tweet/toot with an image is sent
-    let string = language(langue);
+    let string = language(Language::new(service, 0));
     if service.mastodon {
         match libnotify::init("ShareXin") {
             Ok(ok) => ok,
@@ -46,11 +46,11 @@ pub fn image_sent(service: Destination, text: &str, img: &str)
     }
 }
 
+// when the tweet/toot without an image is sent
+// uses language.rs to get proper language string in your language
 pub fn message_sent(service: Destination, text: &str)
 {
-    let langue = Language::new(service, 0);
-    //when the tweet/toot without an image is sent
-    let string = language(langue);
+    let string = language(Language::new(service, 0));
     if service.mastodon {
         match libnotify::init("ShareXin") {
             Ok(ok) => ok,
@@ -77,11 +77,11 @@ pub fn message_sent(service: Destination, text: &str)
     }
 }
 
+// when the file has been saved
+// uses language.rs to get proper language string in your language
 pub fn file_saved()
 {
-    let langue = Language::new(Destination::new(3), 2);
-    //when the file has been saved
-    let string = language(langue);
+    let string = language(Language::new(Destination::new(3), 2));
     match libnotify::init("ShareXin") {
         Ok(ok) => ok,
         Err(e) => panic!("Unable to init notification library. {:?}", e),
@@ -94,11 +94,11 @@ pub fn file_saved()
     libnotify::uninit();
 }
 
+// if a tweet/toot with an image is empty
+// uses language.rs to get proper language string in your language
 pub fn empty(service: Destination)
 {
-    let langue = Language::new(service, 3);
-    //if tweet/toot is empty
-    let string = language(langue);
+    let string = language(Language::new(service, 3));
     if service.mastodon {
         match libnotify::init("ShareXin") {
             Ok(ok) => ok,

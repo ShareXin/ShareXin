@@ -10,6 +10,8 @@ pub fn upgrade()
 {
     let mut dst = Vec::new();
     let mut latest = Easy::new();
+
+    // file made to check version number
     latest.url("https://raw.githubusercontent.com/thebitstick/ShareXin/master/version").unwrap();
     let mut transfer = latest.transfer();
     transfer.write_function(|data| {
@@ -43,6 +45,7 @@ pub fn upgrade()
         }
         Ok(data.len())
     }).unwrap();
+
     match transfer.perform() {
         Ok(ok) => ok,
         Err(e) => panic!("Unable to get current version. {:?}", e),
@@ -55,11 +58,14 @@ fn open_update()
         Ok(ok) => ok,
         Err(e) => panic!("Could not open. {:?}", e),
     };
+
+    // checks $LANG variable, should work universally on unix-like systems
     let _lang = match env::var("LANG") {
         Ok(ok) => ok,
         Err(e) => panic!("Unable to get $LANG. {:?}", e),
     };
     let lang = &_lang.to_lowercase();
+
     let mut upgrade_fr = String::from("
 Vérifiez les nouvelles mises à jour à l'adresse suivante: ");
     let mut upgrade_es = String::from("
@@ -87,6 +93,7 @@ Check for new updates at: ");
     upgrade_ko.push_str(SHAREXIN);
     upgrade_de.push_str(SHAREXIN);
     upgrade.push_str(SHAREXIN);
+
     if lang.contains("fr") {
         println!("{}", upgrade_fr);
     }
@@ -421,6 +428,7 @@ Examples:
   sharexin imgur open [FILE]
     ");
 
+    // checks $LANG variable, should work universally on unix-like systems
     let _lang = match env::var("LANG") {
         Ok(ok) => ok,
         Err(e) => panic!("Unable to get $LANG. {:?}", e),

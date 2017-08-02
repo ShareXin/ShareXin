@@ -11,17 +11,21 @@ pub fn cmd()
 {
     let twitter = Destination::new(1);
     let mastodon = Destination::new(0);
-    //gets command args
+
+    // fetches user arguments
     let args: Vec<_> = env::args().collect();
-    //if at least one arg is passed (the command itself counts?? wtf)
+
+    // since the actual command itself counts as an arguments, this checks if at least one non-command argument is made
     if args.len() >= 2 {
-        //check the first arg
+
+        // checks the first arguments
         match args[1].as_ref() {
             "-V" | "--version" | "version" => println!("sharexin {}", VERSION),
             "-U" | "--upgrade" | "upgrade" => help::upgrade(),
+
+            // if the first arg is for mastodon, it checks for an acceptable argument
             "toot" => {
                 if args.len() == 3 {
-                    //if first arg is for mastodon, check if its an acceptable arg
                     match args[2].as_ref() {
                         "area" | "-a" => {
                             file::image(String::from("-s"));
@@ -50,13 +54,12 @@ pub fn cmd()
                         _ => help::help()
                     }
                 }
-                //if its only toot, then no image will be taken
+                // if no additional argument is passed, then the user only wants to post an imageless toot
                 else {gui(mastodon, false);}
             },
-            //if first arg is twitter
+            // if the first arg is for twitter, it checks for an acceptable argument
             "tweet" => {
                 if args.len() == 3 {
-                    //check any more args
                     match args[2].as_ref() {
                         "area" | "-a" => {
                             file::image(String::from("-s"));
@@ -86,14 +89,13 @@ pub fn cmd()
                         _ => help::help()
                     }
                 }
-                //or just tweet
+                // if no additonal argument is passed, then the user only wants to post an imageless tweet
                 else {gui(twitter, false);}
             },
-            //if first arg is imgur
+            // if the first arg is imgur, it checks for an acceptable argument
             "imgur" => {
                 if args.len() == 3 {
                     match args[2].as_ref() {
-                        //check for args
                         "area" | "-a" => {
                             file::image(String::from("-s"));
                             imgur::send();
@@ -125,11 +127,10 @@ pub fn cmd()
                     help::help();
                 }
             },
-            //if first arg is file
+            // if the first arg is file, it checks for an acceptable argument
             "file" => {
                 if args.len() == 3 {
                     match args[2].as_ref() {
-                        //check for args
                         "area" | "-a" => file::image(String::from("-s")),
                         "window" | "-w" => file::image(String::from("-i")),
                         "full" => file::image(String::new()),
@@ -152,10 +153,10 @@ pub fn cmd()
                     }
                 }
             },
-            //or else give them help, you cant save nothing.
+            // if no argument is passed, then show user help
             _ => help::help()
         }
     }
-    //if no args at all
+    // if only the command is passed, or if somehow there are no arguments, then show user help
     else {help::help();}
 }
