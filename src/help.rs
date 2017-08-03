@@ -4,47 +4,62 @@ use open;
 use VERSION;
 use SHAREXIN;
 
-static DATE: &'static str = "2017-08-02";
+static DATE: &'static str = "2017-08-03";
 
-pub fn upgrade()
-{
+pub fn upgrade() {
     let mut dst = Vec::new();
     let mut latest = Easy::new();
 
     // file made to check version number
-    latest.url("https://raw.githubusercontent.com/thebitstick/ShareXin/master/version").unwrap();
+    latest
+        .url(
+            "https://raw.githubusercontent.com/thebitstick/ShareXin/master/version",
+        )
+        .unwrap();
     let mut transfer = latest.transfer();
-    transfer.write_function(|data| {
-        dst.extend_from_slice(data);
-        let mut latest_utf = String::from_utf8(dst.clone()).unwrap();
-        while latest_utf.ends_with("\n") {
-            let len = latest_utf.len();
-            let new_len = len.saturating_sub("\n".len());
-            latest_utf.truncate(new_len);
-        }
-        let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
-            Ok(ok) => ok,
-            Err(e) => panic!("Unable to get current version. {:?}", e),
-        };
-        let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
-            Ok(ok) => ok,
-            Err(e) => panic!("Unable to get current version. {:?}", e),
-        };
-        if latest_version > current_version {
-            println!("Installed Version: {}\nLatest Version: {}", VERSION, latest_utf);
-            println!("You are out-of-date!");
-            open_update();
-        }
-        else if latest_version < current_version {
-            println!("Installed Version: {}\nLatest Version: {}", VERSION, latest_utf);
-            println!("You are too up-to-date! Are you the dev perhaps?");
-        }
-        else if latest_version == current_version {
-            println!("Installed Version: {}\nLatest Version: {}", VERSION, latest_utf);
-            println!("You are up-to-date!");
-        }
-        Ok(data.len())
-    }).unwrap();
+    transfer
+        .write_function(|data| {
+            dst.extend_from_slice(data);
+            let mut latest_utf = String::from_utf8(dst.clone()).unwrap();
+            while latest_utf.ends_with("\n") {
+                let len = latest_utf.len();
+                let new_len = len.saturating_sub("\n".len());
+                latest_utf.truncate(new_len);
+            }
+            let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
+                Ok(ok) => ok,
+                Err(e) => panic!("Unable to get current version. {:?}", e),
+            };
+            let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
+                Ok(ok) => ok,
+                Err(e) => panic!("Unable to get current version. {:?}", e),
+            };
+            if latest_version > current_version {
+                println!(
+                    "Installed Version: {}\nLatest Version: {}",
+                    VERSION,
+                    latest_utf
+                );
+                println!("You are out-of-date!");
+                open_update();
+            } else if latest_version < current_version {
+                println!(
+                    "Installed Version: {}\nLatest Version: {}",
+                    VERSION,
+                    latest_utf
+                );
+                println!("You are too up-to-date! Are you the dev perhaps?");
+            } else if latest_version == current_version {
+                println!(
+                    "Installed Version: {}\nLatest Version: {}",
+                    VERSION,
+                    latest_utf
+                );
+                println!("You are up-to-date!");
+            }
+            Ok(data.len())
+        })
+        .unwrap();
 
     match transfer.perform() {
         Ok(ok) => ok,
@@ -52,8 +67,7 @@ pub fn upgrade()
     };
 }
 
-fn open_update()
-{
+fn open_update() {
     match open::that(SHAREXIN) {
         Ok(ok) => ok,
         Err(e) => panic!("Could not open. {:?}", e),
@@ -66,24 +80,42 @@ fn open_update()
     };
     let lang = &_lang.to_lowercase();
 
-    let mut upgrade_fr = String::from("
-Vérifiez les nouvelles mises à jour à l'adresse suivante: ");
-    let mut upgrade_es = String::from("
-Busque nuevas actualizaciones en: ");
-    let mut upgrade_eo = String::from("
-Kontrolu por novaj ĝisdatigoj ĉe: ");
-    let mut upgrade_cn = String::from("
-要检查是否有新的更新：\n");
-    let mut upgrade_tw = String::from("
-要檢查是否有新的更新：\n");
-    let mut upgrade_ja = String::from("
-新しいアップデートを確認する：\n");
-    let mut upgrade_ko = String::from("
-새로운 업데이트 확인 :\n");
-    let mut upgrade_de = String::from("
-Überprüfen Sie nach neuen Updates unter: ");
-    let mut upgrade = String::from("
-Check for new updates at: ");
+    let mut upgrade_fr = String::from(
+        "
+Vérifiez les nouvelles mises à jour à l'adresse suivante: ",
+    );
+    let mut upgrade_es = String::from(
+        "
+Busque nuevas actualizaciones en: ",
+    );
+    let mut upgrade_eo = String::from(
+        "
+Kontrolu por novaj ĝisdatigoj ĉe: ",
+    );
+    let mut upgrade_cn = String::from(
+        "
+要检查是否有新的更新：\n",
+    );
+    let mut upgrade_tw = String::from(
+        "
+要檢查是否有新的更新：\n",
+    );
+    let mut upgrade_ja = String::from(
+        "
+新しいアップデートを確認する：\n",
+    );
+    let mut upgrade_ko = String::from(
+        "
+새로운 업데이트 확인 :\n",
+    );
+    let mut upgrade_de = String::from(
+        "
+Überprüfen Sie nach neuen Updates unter: ",
+    );
+    let mut upgrade = String::from(
+        "
+Check for new updates at: ",
+    );
     upgrade_fr.push_str(SHAREXIN);
     upgrade_es.push_str(SHAREXIN);
     upgrade_eo.push_str(SHAREXIN);
@@ -96,38 +128,32 @@ Check for new updates at: ");
 
     if lang.contains("fr") {
         println!("{}", upgrade_fr);
-    }
-    else if lang.contains("es") {
+    } else if lang.contains("es") {
         println!("{}", upgrade_es);
-    }
-    else if lang.contains("eo") {
+    } else if lang.contains("eo") {
         println!("{}", upgrade_eo);
-    }
-    else if lang.contains("cn") {
+    } else if lang.contains("cn") {
         println!("{}", upgrade_cn);
-    }
-    else if lang.contains("tw") {
+    } else if lang.contains("tw") {
         println!("{}", upgrade_tw);
-    }
-    else if lang.contains("ja") {
+    } else if lang.contains("ja") {
         println!("{}", upgrade_ja);
-    }
-    else if lang.contains("ko") {
+    } else if lang.contains("ko") {
         println!("{}", upgrade_ko);
-    }
-    else if lang.contains("de") {
+    } else if lang.contains("de") {
         println!("{}", upgrade_de);
+    } else {
+        println!("{}", upgrade);
     }
-    else { println!("{}", upgrade);}
 }
 
-pub fn help()
-{
+pub fn help() {
     let mut help_fr = String::from("\nsharexin ");
     help_fr.push_str(VERSION);
     help_fr.push_str(" ");
     help_fr.push_str(DATE);
-    help_fr.push_str("
+    help_fr.push_str(
+        "
 
 Utilisation: sharexin <option> [destination] <option d'image> [FICHIER]
 
@@ -143,8 +169,8 @@ Options d'image:
   open\t\tUtiliser un fichier
 
 Destinations:
-  toot\t\tUpload vers Mastodon (en utilisant \"toot\") 
-  tweet\t\tUpload vers Twitter (en utilisant \"t\") 
+  toot\t\tUpload vers Mastodon (en utilisant \"toot\")
+  tweet\t\tUpload vers Twitter (en utilisant \"t\")
   imgur\t\tUpload vers Imgur
   file\t\tSauvegarder le fichier uniquement
 
@@ -154,14 +180,16 @@ Exemples:
   sharexin file window
   sharexin toot area
   sharexin imgur open [FICHIER]
-    ");
+    ",
+    );
 
 
     let mut help_es = String::from("\nsharexin ");
     help_es.push_str(VERSION);
     help_es.push_str(" ");
     help_es.push_str(DATE);
-    help_es.push_str("
+    help_es.push_str(
+        "
 
 Utilización: sharexin <opciones> [destino] <opcion de imagen> [ARCHIVO]
 
@@ -177,8 +205,8 @@ Opciones de imagen:
   open\t\tUtilice un archive
 
 Destinos:
-  toot\t\tSube a Mastodon (usando \"toot\") 
-  tweet\t\tSube a Twitter (usando \"t\") 
+  toot\t\tSube a Mastodon (usando \"toot\")
+  tweet\t\tSube a Twitter (usando \"t\")
   imgur\t\tSube a Imgur
   file\t\tGuarde el archivo sólo
 
@@ -188,14 +216,16 @@ Ejemplos:
   sharexin file window
   sharexin toot area
   sharexin imgur open [ARCHIVE]
-    ");
+    ",
+    );
 
 
     let mut help_eo = String::from("\nsharexin ");
     help_eo.push_str(VERSION);
     help_eo.push_str(" ");
     help_eo.push_str(DATE);
-    help_eo.push_str("
+    help_eo.push_str(
+        "
 
 Uzo: sharexin <opcioj> [celon] <opcio de bildo> [DOSIERO]
 
@@ -222,14 +252,16 @@ Ekzemploj:
   sharexin file window
   sharexin toot area
   sharexin imgur open [DOSIERO]
-    ");
+    ",
+    );
 
 
     let mut help_cn = String::from("\nsharexin ");
     help_cn.push_str(VERSION);
     help_eo.push_str(" ");
     help_eo.push_str(DATE);
-    help_eo.push_str("
+    help_eo.push_str(
+        "
 
 使用方法： sharexin <选项> [目的地] <截图选项> [文件]
 
@@ -256,14 +288,16 @@ Ekzemploj:
   sharexin file window
   sharexin toot area
   sharexin imgur open [文件]
-    ");
+    ",
+    );
 
 
     let mut help_tw = String::from("\nsharexin ");
     help_tw.push_str(VERSION);
     help_tw.push_str(" ");
     help_tw.push_str(DATE);
-    help_tw.push_str("
+    help_tw.push_str(
+        "
 
 使用方法：sharexin <選項> [目的地] <截圖選項> [文件]
 
@@ -290,7 +324,8 @@ Ekzemploj:
   sharexin file window
   sharexin toot area
   sharexin imgur open [文件]
-    ");
+    ",
+    );
 
 
     let mut help_ja = String::from("\nsharexin ");
@@ -331,7 +366,8 @@ Ekzemploj:
     help_ko.push_str(VERSION);
     help_ko.push_str(" ");
     help_ko.push_str(DATE);
-    help_ko.push_str("
+    help_ko.push_str(
+        "
 
 사용 방법: sharexin <옵션> [목적지] <스크린 샷 옵션> [파일]
 
@@ -358,14 +394,16 @@ Ekzemploj:
   sharexin file window
   sharexin toot area
   sharexin imgur open [파일]
-    ");
+    ",
+    );
 
 
     let mut help_de = String::from("\nsharexin ");
     help_de.push_str(VERSION);
     help_de.push_str(" ");
     help_de.push_str(DATE);
-    help_de.push_str("
+    help_de.push_str(
+        "
 
 Anwendung: sharexin <optionen> [reiseziel] <bildoptionen> [DATEI]
 
@@ -392,14 +430,16 @@ Beispiele:
   sharexin file window
   sharexin toot area
   sharexin imgur open [DATEI]
-    ");
+    ",
+    );
 
 
     let mut help = String::from("\nsharexin ");
     help.push_str(VERSION);
     help.push_str(" ");
     help.push_str(DATE);
-    help.push_str("
+    help.push_str(
+        "
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -426,7 +466,8 @@ Examples:
   sharexin file window
   sharexin toot area
   sharexin imgur open [FILE]
-    ");
+    ",
+    );
 
     // checks $LANG variable, should work universally on unix-like systems
     let _lang = match env::var("LANG") {
@@ -436,27 +477,21 @@ Examples:
     let lang = &_lang.to_lowercase();
     if lang.contains("fr") {
         println!("{}", help_fr);
-    }
-    else if lang.contains("es") {
+    } else if lang.contains("es") {
         println!("{}", help_es);
-    }
-    else if lang.contains("eo") {
+    } else if lang.contains("eo") {
         println!("{}", help_eo);
-    }
-    else if lang.contains("cn") {
+    } else if lang.contains("cn") {
         println!("{}", help_cn);
-    }
-    else if lang.contains("tw") {
+    } else if lang.contains("tw") {
         println!("{}", help_tw);
-    }
-    else if lang.contains("ja") {
+    } else if lang.contains("ja") {
         println!("{}", help_ja);
-    }
-    else if lang.contains("ko") {
+    } else if lang.contains("ko") {
         println!("{}", help_ko);
-    }
-    else if lang.contains("de") {
+    } else if lang.contains("de") {
         println!("{}", help_de);
+    } else {
+        println!("{}", help);
     }
-    else { println!("{}", help);}
 }

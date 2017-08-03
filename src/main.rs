@@ -5,12 +5,18 @@
         image-based commands launch file.rs, fn:open being if you're using a pre-made file
             fn:image being taking a screenshot with an appropriate screenshot application
             fn:image then calls fn:save, to save the file to a location in your Pictures folder
-        when gui.rs is called, it decides whether to call itself Mastodon or Twitter depending on the Destination struct,
-            and when the user sends their message, it launches the appropriate service function
-        when imgur.rs is called, the file is sent to imgur and a notification is displayed and the link is opened
-        notification.rs first identifies which type of notification it may be {file saved, sent to twitter, etc..}
-            but first calls language to get the string itself, in various different languages, depending on $LANG
-        help.rs is what cmd.rs calls if the user doesn't know what they're doing, and it too has many languages
+        when gui.rs is called, it decides whether to call itself Mastodon or Twitter
+            depending on the Destination struct,
+            and when the user sends their message
+            it launches the appropriate service function
+        when imgur.rs is called, the file is sent to imgur
+            and a notification is displayed and the link is opened
+        notification.rs first identifies which type of notification
+            it may be {file saved, sent to twitter, etc..}
+            but first calls language to get the string itself
+                in various different languages, depending on $LANG
+        help.rs is what cmd.rs calls if the user doesn't know what they're doing
+            and it too has many languages
 */
 
 extern crate libnotify;
@@ -44,21 +50,33 @@ pub struct Destination {
 impl Destination {
     pub fn new(id: u32) -> Destination {
         if id == 0 {
-            Destination { twitter: false, mastodon: true, imgur: false }
-        }
-        else if id == 1 {
-            Destination { twitter: true, mastodon: false, imgur: false }
-        }
-        else if id == 2 {
-            Destination { twitter: false, mastodon: false, imgur: true }
-        }
-        else {
-            Destination { twitter: false, mastodon: false, imgur: false }
+            Destination {
+                twitter: false,
+                mastodon: true,
+                imgur: false,
+            }
+        } else if id == 1 {
+            Destination {
+                twitter: true,
+                mastodon: false,
+                imgur: false,
+            }
+        } else if id == 2 {
+            Destination {
+                twitter: false,
+                mastodon: false,
+                imgur: true,
+            }
+        } else {
+            Destination {
+                twitter: false,
+                mastodon: false,
+                imgur: false,
+            }
         }
     }
 }
 
-fn main()
-{
+fn main() {
     cmd::cmd();
 }
