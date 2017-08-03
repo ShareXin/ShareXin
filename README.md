@@ -45,9 +45,9 @@
 * atk-devel  
 * openssl-devel  
 
-## Note: Binary may be older than current version, as compiling on each system takes time (and I'm not using Docker)  
+## Note: Ubuntu binary may be older  
 #### Ubuntu binary tested on Ubuntu 17.04  
-#### Fedora binary tested on and works on literally anything besides Ubuntu  
+#### Regular binary tested on and works on literally anything besides Ubuntu  
 
 ## Features  
 * Uploads to Twitter and Mastodon  
@@ -60,10 +60,10 @@
 ## If the compiled binary doesn't work, then you must manually compile  
 
 ### Dependency installation on Fedora  
-`sudo dnf install gtk3-devel cairo-devel libnotify-devel pango-devel gdk-pixbuf2-devel atk-devel openssl-devel`  
+`dnf install gtk3-devel cairo-devel libnotify-devel pango-devel gdk-pixbuf2-devel atk-devel openssl-devel`  
 
 ### Dependency installation on Ubuntu  
-`sudo apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
+`apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
 
 ### Compiling (via Github)  
 1. `git clone https://github.com/thebitstick/ShareXin/`  
@@ -140,6 +140,10 @@ Check your `$XDG_SESSION_TYPE` variable. If it's not x11 or wayland, it crashes 
 XDG variables were not found. Check `$DESKTOP_SESSION` and `$XDG_SESSION_TYPE`.  
 
 ## Changelog  
+#### [0.4.2] - 2017-08-03  
+- Bug fixes  
+- Cleaner code  
+
 #### [0.4.1] - 2017-08-02  
 - Partial Wayland support for Gnome, Plasma, and Sway  
 - Gnome-Screenshot used on Gnome  
