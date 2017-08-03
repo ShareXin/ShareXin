@@ -80,7 +80,7 @@
 
 ```rust
 
-sharexin 0.4.1 2017-08-02
+sharexin 0.4.3 2017-08-03
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -140,7 +140,7 @@ Check your `$XDG_SESSION_TYPE` variable. If it's not x11 or wayland, it crashes 
 XDG variables were not found. Check `$DESKTOP_SESSION` and `$XDG_SESSION_TYPE`.  
 
 ## Changelog  
-#### [0.4.2] - 2017-08-03  
+#### [0.4.3] - 2017-08-03  
 - Bug fixes  
 - Cleaner code  
 
