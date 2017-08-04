@@ -15,7 +15,6 @@ pub fn open(file: String) {
 
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
-    let temp = tmp.to_str().unwrap();
 
     // copy copies file to temp
 
@@ -25,34 +24,13 @@ pub fn open(file: String) {
         Err(e) => panic!("Unable to save file. {:?}", e),
     };
 
-    // convert adds a shadow using convert/ImageMagick
-
-    let _convert = Command::new("convert")
-        .arg(temp.clone())
-        .args(&[
-            "(",
-            "+clone",
-            "-background",
-            "black",
-            "-shadow",
-            "80x3+5+5",
-        ])
-        .args(&[
-            ")",
-            "+swap",
-            "-background",
-            "none",
-            "-layers",
-            "merge",
-            "+repage",
-        ])
-        .arg(temp.clone())
-        .spawn()
-        .expect("ImageMagick not found");
-
     notification::file_saved();
 }
 
+#[cfg(target_os = "macos")]
+fn screenshot(args: String, temp: &str) {}
+
+#[cfg(target_os = "linux")]
 fn screenshot(args: String, temp: &str) {
     // x11/wayland session info gotten here
     let mut _session = String::new();
@@ -100,6 +78,7 @@ fn screenshot(args: String, temp: &str) {
     }
 }
 
+#[cfg(target_os = "linux")]
 fn sway(args: String, temp: &str) {
     if args == "-s" {
 
@@ -166,6 +145,7 @@ fn sway(args: String, temp: &str) {
     }
 }
 
+#[cfg(target_os = "linux")]
 fn gnome(args: String, temp: &str) {
     if args == "-s" {
 
@@ -234,6 +214,7 @@ fn gnome(args: String, temp: &str) {
     }
 }
 
+#[cfg(target_os = "linux")]
 fn kde(args: String, temp: &str) {
     if args == "-s" {
 
@@ -280,6 +261,7 @@ fn kde(args: String, temp: &str) {
     }
 }
 
+#[cfg(target_os = "linux")]
 fn maim(args: String, temp: &str) {
     if args == "-s" {
 
@@ -363,31 +345,34 @@ pub fn image(args: String) {
     // makes a string
     let temp = tmp.to_str().unwrap();
 
-    screenshot(args, temp.clone());
+    screenshot(args.clone(), temp.clone());
+    if !tmp.exists() {
+        panic!("File not saved");
+    }
 
-    //  adds a shadow
-    let _ = Command::new("convert")
-        .arg(temp.clone())
-        .args(&[
-            "(",
-            "+clone",
-            "-background",
-            "black",
-            "-shadow",
-            "80x3+5+5",
-        ])
-        .args(&[
-            ")",
-            "+swap",
-            "-background",
-            "none",
-            "-layers",
-            "merge",
-            "+repage",
-        ])
-        .arg(temp.clone())
-        .spawn()
-        .expect("ImageMagick not found");
+    if args == "-i" {
+        //  adds a shadow
+        let _ = Command::new("convert")
+            .arg(temp.clone())
+            .args(&[
+                "(",
+                "+clone",
+                "-background",
+                "black",
+                "-shadow",
+                "80x3+5+5",
+                ")",
+                "+swap",
+                "-background",
+                "none",
+                "-layers",
+                "merge",
+                "+repage",
+            ])
+            .arg(temp.clone())
+            .spawn()
+            .expect("ImageMagick not found");
+    }
 
     save();
 }

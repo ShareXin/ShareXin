@@ -1,6 +1,6 @@
 [package]
 name = "sharexin"
-version = "0.4.3"
+version = "0.4.4"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux"
 homepage = "https://github.com/thebitstick/ShareXin"
@@ -10,12 +10,17 @@ license = "MIT"
 [dependencies]
 gtk = "^0"
 glib = "^0"
-libnotify = "^1"
 gdk = "^0"
 time = "^0"
 open = "^1"
 curl = "^0"
 imgur = "^0"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+mac-notification-sys = "^0"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+notify-rust = "^3"
 
 [features]
 default = ["gtk/v3_10"]

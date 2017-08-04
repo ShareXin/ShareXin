@@ -4,7 +4,7 @@ use open;
 use VERSION;
 use SHAREXIN;
 
-static DATE: &'static str = "2017-08-03";
+static DATE: &'static str = "2017-08-04";
 
 pub fn upgrade() {
     let mut dst = Vec::new();

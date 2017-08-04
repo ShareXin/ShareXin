@@ -23,9 +23,9 @@ pub fn send() {
     match handle.upload(&image) {
         Ok(info) => match info.link() {
             Some(link) => copy_link.push_str(link),
-            None => println!("Unknown error."),
+            None => panic!("Unknown error with Imgur."),
         },
-        Err(e) => println!("Error uploading: {:?}", e),
+        Err(e) => panic!("Error uploading: {:?}", e),
     }
     notification::image_sent(Destination::new(2), &copy_link, tmp.to_str().unwrap());
     match open::that(copy_link) {

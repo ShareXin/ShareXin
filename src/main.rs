@@ -19,7 +19,12 @@
             and it too has many languages
 */
 
-extern crate libnotify;
+#[cfg(target_os = "linux")]
+extern crate notify_rust;
+
+#[cfg(target_os = "macos")]
+extern crate mac_notification_sys;
+
 extern crate gtk;
 extern crate glib;
 extern crate gdk;
@@ -73,6 +78,17 @@ impl Destination {
                 mastodon: false,
                 imgur: false,
             }
+        }
+    }
+    pub fn name(self) -> String {
+        if self.mastodon {
+            "Mastodon".to_owned()
+        } else if self.twitter {
+            "Twitter".to_owned()
+        } else if self.imgur {
+            "Imgur".to_owned()
+        } else {
+            "".to_owned()
         }
     }
 }

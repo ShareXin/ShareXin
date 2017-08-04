@@ -3,8 +3,8 @@ use Destination;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Language {
-    pub service: Destination,
-    pub option: u32,
+    service: Destination,
+    option: u32,
 }
 
 impl Language {
@@ -16,16 +16,34 @@ impl Language {
     }
 }
 
+#[cfg(target_os = "linux")]
+fn locale() -> String {
+    match env::var("LANG") {
+        Ok(ok) => ok,
+        Err(e) => panic!("Unable to get $LANG. {:?}", e),
+    }
+}
+
+#[cfg(target_os = "macos")]
+fn locale() -> String {
+    match env::var("LANG") {
+        Ok(ok) => ok,
+        Err(e) => panic!("Unable to get $LANG. {:?}", e),
+    }
+}
+
+#[cfg(target_os = "windows")]
+fn locale() -> String {
+    String::from("en_US")
+}
+
 pub fn language<'a>(langue: Language) -> &'a str {
     let service = langue.service;
     //string creates result string, modified later
     let mut string = "";
 
     // check $LANG
-    let mut lang = match env::var("LANG") {
-        Ok(ok) => ok,
-        Err(e) => panic!("Unable to get $LANG. {:?}", e),
-    };
+    let mut lang = locale();
     lang = lang.to_lowercase();
 
     // 0 is for image_sent, telling the user their toot/tweet with an image has been sent

@@ -80,7 +80,7 @@
 
 ```rust
 
-sharexin 0.4.3 2017-08-03
+sharexin 0.4.4 2017-08-04
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -140,6 +140,12 @@ Check your `$XDG_SESSION_TYPE` variable. If it's not x11 or wayland, it crashes 
 XDG variables were not found. Check `$DESKTOP_SESSION` and `$XDG_SESSION_TYPE`.  
 
 ## Changelog  
+#### [0.4.4] - 2017-08-04  
+- Untested Mac notifications  
+- Shadows only added to Window screenshots  
+- Mac screenshot support coming soon  
+- Bug fixes? Cleaner code? Maybe  
+
 #### [0.4.3] - 2017-08-03  
 - Bug fixes  
 - Cleaner code  
