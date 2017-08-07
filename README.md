@@ -45,7 +45,7 @@ Options:
 Image Options:
   area		Grab an area of the screen instead of the entire screen
   window	Grab the current window instead of the entire screen
-  full		Gran the entire screen
+  full		Grab the entire screen
   file		Use a file
 
 Destinations:
