@@ -1,7 +1,9 @@
-use std::env;
+#![allow(unused_variables)]
 use VERSION;
+use error;
+use std::*;
 
-static DATE: &'static str = "2017-08-06";
+static DATE: &'static str = "2017-08-07";
 
 pub fn help() {
     let mut help_fr = String::from("\nsharexin ");
@@ -310,7 +312,10 @@ Examples:
     // checks $LANG variable, should work universally on unix-like systems
     let _lang = match env::var("LANG") {
         Ok(ok) => ok,
-        Err(e) => panic!("Unable to get $LANG. {:?}", e),
+        Err(e) => {
+            println!("{}", error::message(1));
+            process::exit(1)
+        }
     };
     let lang = &_lang.to_lowercase();
     if lang.contains("fr") {

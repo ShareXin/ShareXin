@@ -1,4 +1,6 @@
-use std::env;
+#![allow(unused_variables)]
+use std::*;
+use error;
 use Destination;
 
 #[derive(Debug, Clone, Copy)]
@@ -20,7 +22,10 @@ impl Language {
 fn locale() -> String {
     match env::var("LANG") {
         Ok(ok) => ok,
-        Err(e) => panic!("Unable to get $LANG. {:?}", e),
+        Err(e) => {
+            println!("{}", error::message(1));
+            process::exit(1)
+        }
     }
 }
 

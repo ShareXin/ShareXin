@@ -1,3 +1,4 @@
+#![allow(unused_variables)]
 use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
@@ -12,12 +13,16 @@ use notification;
 use twitter;
 use mastodon;
 use Destination;
+use error;
 
 pub fn gui(service: Destination, image_bool: bool) {
     // if gtk dont init, ends program
     match gtk::init() {
         Ok(ok) => ok,
-        Err(e) => panic!("GTK could not initialize. {:?}", e),
+        Err(e) => {
+            println!("{}", error::message(11));
+            process::exit(1)
+        }
     };
 
     // all theses get objects from a glade builder
@@ -51,7 +56,10 @@ pub fn gui(service: Destination, image_bool: bool) {
         let temp = tmp.to_str().unwrap().clone();
         match open::that(temp) {
             Ok(ok) => ok,
-            Err(e) => panic!("Could not open. {:?}", e),
+            Err(e) => {
+                println!("{}", error::message(9));
+                process::exit(1)
+            }
         };
     });
 

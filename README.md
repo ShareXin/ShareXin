@@ -10,14 +10,72 @@
 
 ## Requirements  
 * Rust Nightly  
+* Unix-like system  
 * xdg (probably already installed)  
 * maim (on non-Gnome/KDE x11 desktops)  
 * slop (on non-Gnome/KDE x11 desktops)  
 * imagemagick  
+* openssl  
 * [t](https://github.com/sferik/t) (for now)  
 * [toot](https://github.com/ihabunek/toot) (for now)  
 
-## Dependencies for compiling  
+## Features  
+* Uploads to Twitter and Mastodon  
+* Allows taking screenshots and saving them to files  
+* Notifications via libnotify  
+* GUI works with X11 and Wayland  
+* Screenshotting works with X11 and Gnome/Plasma/Sway for Wayland  
+* Saves screenshots to a folder in your Pictures directory  
+
+##### ShareXin binary tested on Arch Linux  
+
+## `--help`  
+
+```rust
+
+sharexin 0.4.5 2017-08-07
+
+Usage: sharexin <options> [destination] <image options> [FILE]
+
+Options:
+  -h, --help	Display this help message and exit
+  -V, --version	Print version info and exit
+  -U, --upgrade	Check for new updates
+
+Image Options:
+  area		Grab an area of the screen instead of the entire screen
+  window	Grab the current window instead of the entire screen
+  full		Gran the entire screen
+  file		Use a file
+
+Destinations:
+  toot		Upload to Mastodon (uses "toot")
+  tweet		Upload to Twitter (uses "t")
+  imgur		Upload to Imgur
+
+Examples:
+  sharexin toot
+  sharexin tweet full
+  sharexin toot area
+  sharexin imgur open [FILE]
+
+```  
+
+## Language support  
+
+#### English  
+#### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
+#### Español  
+#### Esperanta  
+#### 简体中文  
+#### 繁體中文  
+#### 日本語  
+#### 한국어  
+#### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
+
+## Compiling
+
+### Dependencies for compiling  
 * gtk3  
 * cairo  
 * libnotify  
@@ -45,25 +103,25 @@
 * atk-devel  
 * openssl-devel  
 
-## Note: Ubuntu binary may be older  
-#### Ubuntu binary tested on Ubuntu 17.04  
-#### Regular binary tested on and works on literally anything besides Ubuntu  
+### FreeBSD dependencies  
+* openssl-devel
+* gmake  
+* gcc  
 
-## Features  
-* Uploads to Twitter and Mastodon  
-* Allows taking screenshots and saving them to files  
-* Notifications via libnotify  
-* GUI works with X11 and Wayland  
-* Screenshotting works with X11 and Gnome/Plasma/Sway for Wayland  
-* Saves screenshots to a folder in your Pictures directory  
-
-## If the compiled binary doesn't work, then you must manually compile  
+### Compling tested on  
+- Ubuntu 17.04  
+- Fedora 26  
+- Arch Linux with i3  
+- FreeBSD with Xfce  
 
 ### Dependency installation on Fedora  
 `dnf install gtk3-devel cairo-devel libnotify-devel pango-devel gdk-pixbuf2-devel atk-devel openssl-devel`  
 
 ### Dependency installation on Ubuntu  
 `apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
+
+### Dependency installation on FreeBSD  
+`pkg install openssl-devel gmake gcc`
 
 ### Compiling (via Github)  
 1. `git clone https://github.com/thebitstick/ShareXin/`  
@@ -76,70 +134,14 @@
 2. Login to Twitter and/or Mastodon using `t` and/or `toot`  
 3. Explore `--help`  
 
-## `--help`  
-
-```rust
-
-sharexin 0.4.4 2017-08-04
-
-Usage: sharexin <options> [destination] <image options> [FILE]
-
-Options:
-  -h, --help	Display this help message and exit
-  -V, --version	Print version info and exit
-  -U, --upgrade	Check for new updates
-
-Image Options:
-  area		Grab an area of the screen instead of the entire screen
-  window	Grab the current window instead of the entire screen
-  full		Gran the entire screen
-  open		Use a file
-
-Destinations:
-  toot		Upload to Mastodon (uses "toot")
-  tweet		Upload to Twitter (uses "t")
-  imgur		Upload to Imgur
-  file		Only save file
-
-Examples:
-  sharexin toot
-  sharexin tweet full
-  sharexin file window
-  sharexin toot area
-  sharexin imgur open [FILE]
-
-```  
-
-## Language support  
-
-#### English  
-#### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
-#### Español  
-#### Esperanta  
-#### 简体中文  
-#### 繁體中文  
-#### 日本語  
-#### 한국어  
-#### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
-
-## Known issues  
-#### If `sharexin`, `toot`, or `t` aren't found  
-Check your $PATH. Your terminal may be able to launch it, but your WM/DE may not.  
-If you have a WM like i3, you can add it to your PATH in your `.xprofile`.  
-
-#### If `t` takes forever to send a tweet  
-Remember that it's only a Ruby app...  
-
-#### If Rust crashes with `Only Gnome/Plasma/Sway desktops supported for Wayland.`  
-Only Gnome, KDE, and Sway desktops are supported at this time. Screenshotting on Wayland is hell, but it makes it "secure" for the current year.  
-
-#### If Rust crashes with `Unable to figure out session type. Check XDG variable.`  
-Check your `$XDG_SESSION_TYPE` variable. If it's not x11 or wayland, it crashes as a failsafe.  
-
-#### If Rust crashes with `XDG not found.`  
-XDG variables were not found. Check `$DESKTOP_SESSION` and `$XDG_SESSION_TYPE`.  
-
 ## Changelog  
+#### [0.4.5] - 2017-08-07  
+- BSD support, tested on FreeBSD with Xfce  
+- Rather than panicking, ShareXin exits with an error message  
+- Cleaner command line parsing  
+- Error messages now multi-lingual, that is if the error doesn't include $LANG  
+- Bug fixes  
+
 #### [0.4.4] - 2017-08-04  
 - Untested Mac notifications  
 - Shadows only added to Window screenshots  

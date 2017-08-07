@@ -1,6 +1,8 @@
+#![allow(unused_variables)]
 use VERSION;
 use SHAREXIN;
 use open;
+use std::*;
 use curl::easy::Easy;
 use std::env;
 use error;
@@ -27,11 +29,17 @@ pub fn upgrade() {
             }
             let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
-                Err(e) => panic!("Unable to get current version. {:?}", e),
+                Err(e) => {
+                    println!("{}", error::message(8));
+                    process::exit(1)
+                }
             };
             let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
-                Err(e) => panic!("Unable to get current version. {:?}", e),
+                Err(e) => {
+                    println!("{}", error::message(8));
+                    process::exit(1)
+                }
             };
             println!(
                 "{}",
@@ -43,15 +51,20 @@ pub fn upgrade() {
 
     match transfer.perform() {
         Ok(ok) => ok,
-        Err(e) => panic!("Unable to communicate with Github {:?}", e),
+        Err(e) => {
+            println!("{}", error::message(2));
+            process::exit(1)
+        }
     };
 }
 
 fn check_update(latest_version: usize, current_version: usize, latest_utf: String) -> String {
-    #[allow(unused_variables)]
     let _lang = match env::var("LANG") {
         Ok(ok) => ok,
-        Err(e) => panic!("{}", error::message(1)),
+        Err(e) => {
+            println!("{}", error::message(1));
+            process::exit(1)
+        }
     };
     let lang = &_lang.to_lowercase();
 
@@ -190,13 +203,19 @@ fn check_update(latest_version: usize, current_version: usize, latest_utf: Strin
 fn open_update() {
     match open::that(SHAREXIN) {
         Ok(ok) => ok,
-        Err(e) => panic!("Could not open. {:?}", e),
+        Err(e) => {
+            println!("{}", error::message(9));
+            process::exit(1)
+        }
     };
 
     // checks $LANG variable, should work universally on unix-like systems
     let _lang = match env::var("LANG") {
         Ok(ok) => ok,
-        Err(e) => panic!("Unable to get $LANG. {:?}", e),
+        Err(e) => {
+            println!("{}", error::message(1));
+            process::exit(1)
+        }
     };
     let lang = &_lang.to_lowercase();
 
