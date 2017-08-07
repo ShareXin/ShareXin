@@ -203,16 +203,16 @@ fn check_update(latest_version: usize, current_version: usize, latest_utf: Strin
 fn open_update() {
     match open::that(SHAREXIN) {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(9));
-            process::exit(1)
+            return;
         }
     };
 
     // checks $LANG variable, should work universally on unix-like systems
     let _lang = match env::var("LANG") {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(1));
             process::exit(1)
         }

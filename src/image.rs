@@ -16,7 +16,7 @@ use notification;
 use time;
 use error;
 
-pub fn open(file: String) {
+pub fn file(file: String) {
 
     // tmp gets temporary dir
     let mut tmp = env::temp_dir();
@@ -520,7 +520,10 @@ pub fn save() {
     // _dir creates pictures dir if not already there
     let _dir = match std::fs::create_dir(pictures) {
         Ok(ok) => ok,
-        Err(e) => println!("{}", error::message(25)),
+        Err(e) => {
+            println!("{}", error::message(25));
+            return;
+        }
     };
     let mut new_file = String::from(home);
     new_file.push_str("/Pictures/ShareXin/sharexin-");
@@ -542,7 +545,7 @@ pub fn save() {
         Ok(ok) => ok,
         Err(e) => {
             println!("{}", error::message(13));
-            process::exit(1)
+            return;
         }
     };
     notification::file_saved();

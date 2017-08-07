@@ -2,7 +2,7 @@ use Destination;
 use std::*;
 use gui::gui;
 use help;
-use file;
+use image;
 use imgur;
 use VERSION;
 use upgrade;
@@ -24,45 +24,45 @@ pub fn cmd() {
         3 => match args[1].as_ref() {
             "toot" => match args[2].as_ref() {
                 "area" => {
-                    file::image(String::from("-s"));
+                    image::image(String::from("-s"));
                     gui(mastodon, true);
                 }
                 "window" => {
-                    file::image(String::from("-i"));
+                    image::image(String::from("-i"));
                     gui(mastodon, true);
                 }
                 "full" => {
-                    file::image(String::new());
+                    image::image(String::new());
                     gui(mastodon, true);
                 }
                 _ => help::help(),
             },
             "tweet" => match args[2].as_ref() {
                 "area" => {
-                    file::image(String::from("-s"));
+                    image::image(String::from("-s"));
                     gui(twitter, true);
                 }
                 "window" => {
-                    file::image(String::from("-i"));
+                    image::image(String::from("-i"));
                     gui(twitter, true);
                 }
                 "full" => {
-                    file::image(String::new());
+                    image::image(String::new());
                     gui(twitter, true);
                 }
                 _ => help::help(),
             },
             "imgur" => match args[2].as_ref() {
                 "area" => {
-                    file::image(String::from("-s"));
+                    image::image(String::from("-s"));
                     imgur::send();
                 }
                 "window" => {
-                    file::image(String::from("-i"));
+                    image::image(String::from("-i"));
                     imgur::send();
                 }
                 "full" => {
-                    file::image(String::new());
+                    image::image(String::new());
                     imgur::send();
                 }
                 _ => help::help(),
@@ -72,21 +72,21 @@ pub fn cmd() {
         4 => match args[1].as_ref() {
             "toot" => match args[2].as_ref() {
                 "file" => {
-                    file::open(args[3].clone());
+                    image::file(args[3].clone());
                     gui(mastodon, true);
                 }
                 _ => help::help(),
             },
             "tweet" => match args[2].as_ref() {
                 "file" => {
-                    file::open(args[3].clone());
+                    image::file(args[3].clone());
                     gui(twitter, true);
                 }
                 _ => help::help(),
             },
             "imgur" => match args[2].as_ref() {
                 "file" => {
-                    file::open(args[3].clone());
+                    image::file(args[3].clone());
                     imgur::send();
                 }
                 _ => help::help(),

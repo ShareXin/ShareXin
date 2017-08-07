@@ -19,7 +19,7 @@ extern crate imgur as Imgur;
 mod notification;
 mod twitter;
 mod mastodon;
-mod file;
+mod image;
 mod help;
 mod gui;
 mod imgur;
