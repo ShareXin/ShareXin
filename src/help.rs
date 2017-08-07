@@ -35,7 +35,7 @@ Exemples:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [FICHIER]
+  sharexin imgur file [FICHIER]
     ",
     );
 
@@ -69,7 +69,7 @@ Ejemplos:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [ARCHIVE]
+  sharexin imgur file [ARCHIVE]
     ",
     );
 
@@ -103,7 +103,7 @@ Ekzemploj:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [DOSIERO]
+  sharexin imgur file [DOSIERO]
     ",
     );
 
@@ -137,7 +137,7 @@ Ekzemploj:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [文件]
+  sharexin imgur file [文件]
     ",
     );
 
@@ -171,7 +171,7 @@ Ekzemploj:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [文件]
+  sharexin imgur file [文件]
     ",
     );
 
@@ -204,7 +204,7 @@ Ekzemploj:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [ファイル]
+  sharexin imgur file [ファイル]
     ");
 
 
@@ -237,7 +237,7 @@ Ekzemploj:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [파일]
+  sharexin imgur file [파일]
     ",
     );
 
@@ -271,7 +271,7 @@ Beispiele:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [DATEI]
+  sharexin imgur file [DATEI]
     ",
     );
 
@@ -305,7 +305,7 @@ Examples:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [FILE]
+  sharexin imgur file [FILE]
     ",
     );
 
