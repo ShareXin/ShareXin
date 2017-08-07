@@ -16,25 +16,12 @@ impl Language {
     }
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(target_family = "unix")]
 fn locale() -> String {
     match env::var("LANG") {
         Ok(ok) => ok,
         Err(e) => panic!("Unable to get $LANG. {:?}", e),
     }
-}
-
-#[cfg(target_os = "macos")]
-fn locale() -> String {
-    match env::var("LANG") {
-        Ok(ok) => ok,
-        Err(e) => panic!("Unable to get $LANG. {:?}", e),
-    }
-}
-
-#[cfg(target_os = "windows")]
-fn locale() -> String {
-    String::from("en_US")
 }
 
 pub fn language<'a>(langue: Language) -> &'a str {

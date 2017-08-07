@@ -1,6 +1,6 @@
 [package]
 name = "sharexin"
-version = "0.4.4"
+version = "0.4.5"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux"
 homepage = "https://github.com/thebitstick/ShareXin"
@@ -18,6 +18,8 @@ imgur = "^0"
 
 [target.'cfg(target_os = "macos")'.dependencies]
 mac-notification-sys = "^0"
+screenshot = "^0"
+image = "^0"
 
 [target.'cfg(target_os = "linux")'.dependencies]
 notify-rust = "^3"

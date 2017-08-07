@@ -3,6 +3,9 @@
 // args may be "-s" for selection screenshots
 //     "-i" for window screenshots, or empty for fullscreenshots
 
+#[cfg(target_os = "macos")]
+use screenshot::get_screenshot;
+
 use std::time::Duration;
 use std::process::*;
 use std::*;
@@ -11,8 +14,8 @@ use notification;
 use time;
 
 pub fn open(file: String) {
-    // tmp gets temporary dir, temp stores it as a String
 
+    // tmp gets temporary dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
 
@@ -28,9 +31,25 @@ pub fn open(file: String) {
 }
 
 #[cfg(target_os = "macos")]
-fn screenshot(args: String, temp: &str) {}
+fn screenshot(args: String, temp: &str) {
 
-#[cfg(target_os = "linux")]
+    // tmp gets temporary dir
+    let mut tmp = env::temp_dir();
+    tmp.push("sharexin.png");
+
+    let screenshot = get_screenshot(0).unwrap();
+
+    image::save_buffer(
+        &Path::new(tmp),
+        s.as_slice(),
+        s.width() as u32,
+        s.height() as u32,
+        image::RGBA(8),
+    ).unwrap();
+}
+
+#[cfg(not(target_os = "macos"))]
+#[cfg(target_family = "unix")]
 fn screenshot(args: String, temp: &str) {
     // x11/wayland session info gotten here
     let mut _session = String::new();
@@ -48,37 +67,27 @@ fn screenshot(args: String, temp: &str) {
     };
     let desktop = &_desktop.to_lowercase();
 
-    // if the session contains the string wayland, it'll check for compatible wayland desktops
-    if session.contains("wayland") {
-        if desktop.contains("gnome") {
-            gnome(args.clone(), temp.clone());
-        } else if desktop.contains("plasma") {
-            kde(args.clone(), temp.clone());
-        } else if desktop.contains("sway") {
-            sway(args.clone(), temp.clone());
-        } else {
-            panic!(
+    match session.as_ref() {
+        "wayland" => match desktop.as_ref() {
+            "gnome" => gnome(args, temp),
+            "plasma" => kde(args, temp),
+            "sway" => sway(args, temp),
+            _ => panic!(
                 "Only Gnome/Plasma/Sway desktops supported for Wayland.
                 Unable to figure out desktop."
-            );
-        }
-    }
-    // if the session contains the string x11
-    //     it'll check for special desktops, or default to fn:maim
-    else if session.contains("x11") {
-        if desktop.contains("gnome") {
-            gnome(args.clone(), temp.clone());
-        } else if desktop.contains("plasma") {
-            kde(args.clone(), temp.clone());
-        } else {
-            maim(args.clone(), temp.clone());
-        }
-    } else {
-        panic!("Unable to figure out session type. Check XDG variable.");
+            ),
+        },
+        "x11" => match desktop.as_ref() {
+            "gnome" => gnome(args, temp),
+            "plasma" => kde(args, temp),
+            _ => maim(args, temp),
+        },
+        _ => panic!("Unable to figure out session type. Check XDG variable."),
     }
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(not(target_os = "macos"))]
+#[cfg(target_family = "unix")]
 fn sway(args: String, temp: &str) {
     if args == "-s" {
 
@@ -145,7 +154,8 @@ fn sway(args: String, temp: &str) {
     }
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(not(target_os = "macos"))]
+#[cfg(target_family = "unix")]
 fn gnome(args: String, temp: &str) {
     if args == "-s" {
 
@@ -214,7 +224,8 @@ fn gnome(args: String, temp: &str) {
     }
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(not(target_os = "macos"))]
+#[cfg(target_family = "unix")]
 fn kde(args: String, temp: &str) {
     if args == "-s" {
 
@@ -261,7 +272,8 @@ fn kde(args: String, temp: &str) {
     }
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(not(target_os = "macos"))]
+#[cfg(target_family = "unix")]
 fn maim(args: String, temp: &str) {
     if args == "-s" {
 

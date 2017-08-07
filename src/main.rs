@@ -1,29 +1,13 @@
-/*
-    Flow of program:
-        main.rs only defines a Destination struct, and opens cmd.rs
-        cmd.rs checks user cmd args and launches the appropriate functions
-        image-based commands launch file.rs, fn:open being if you're using a pre-made file
-            fn:image being taking a screenshot with an appropriate screenshot application
-            fn:image then calls fn:save, to save the file to a location in your Pictures folder
-        when gui.rs is called, it decides whether to call itself Mastodon or Twitter
-            depending on the Destination struct,
-            and when the user sends their message
-            it launches the appropriate service function
-        when imgur.rs is called, the file is sent to imgur
-            and a notification is displayed and the link is opened
-        notification.rs first identifies which type of notification
-            it may be {file saved, sent to twitter, etc..}
-            but first calls language to get the string itself
-                in various different languages, depending on $LANG
-        help.rs is what cmd.rs calls if the user doesn't know what they're doing
-            and it too has many languages
-*/
-
-#[cfg(target_os = "linux")]
+#[cfg(not(target_os = "macos"))]
+#[cfg(target_family = "unix")]
 extern crate notify_rust;
 
 #[cfg(target_os = "macos")]
 extern crate mac_notification_sys;
+#[cfg(target_os = "macos")]
+extern crate image;
+#[cfg(target_os = "macos")]
+extern crate screenshot;
 
 extern crate gtk;
 extern crate glib;
@@ -40,7 +24,9 @@ mod help;
 mod gui;
 mod imgur;
 mod cmd;
+mod error;
 mod language;
+mod upgrade;
 
 static VERSION: &'static str = env!("CARGO_PKG_VERSION");
 static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
@@ -94,5 +80,7 @@ impl Destination {
 }
 
 fn main() {
-    cmd::cmd();
+    if !cfg!(target_os = "windows") {
+        cmd::cmd();
+    }
 }
