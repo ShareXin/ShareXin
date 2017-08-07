@@ -357,7 +357,11 @@ fn maim(args: String, temp: &str) {
     if args == "-s" {
 
         // _before_image takes a full screenshot using maim
-        let _before_image = match Command::new("maim").arg("-u").arg(temp.clone()).output() {
+        let _before_image = match Command::new("maim")
+            .arg("--hidecursor")
+            .arg(temp.clone())
+            .output()
+        {
             Ok(ok) => ok,
             Err(e) => {
                 println!("{}", error::message(17));
@@ -377,7 +381,11 @@ fn maim(args: String, temp: &str) {
         thread::sleep(Duration::new(0, 500000000));
 
         // _image lets you select
-        let _image = match Command::new("maim").arg("-su").arg(temp.clone()).status() {
+        let _image = match Command::new("maim")
+            .args(&["--hidecursor", "-s"])
+            .arg(temp.clone())
+            .status()
+        {
             Ok(ok) => ok,
             Err(e) => {
                 println!("{}", error::message(17));
@@ -407,7 +415,7 @@ fn maim(args: String, temp: &str) {
         let xdo = String::from_utf8_lossy(&_xdo.stdout);
 
         let _image = match Command::new("maim")
-            .arg("-ui")
+            .args(&["--hidecursor", "-i"])
             .args(&[&xdo, temp.clone()])
             .status()
         {
@@ -425,7 +433,11 @@ fn maim(args: String, temp: &str) {
     } else {
 
         // _image uses maim to take screenshot
-        let _image = match Command::new("maim").arg("-u").arg(temp.clone()).status() {
+        let _image = match Command::new("maim")
+            .arg("--hidecursor")
+            .arg(temp.clone())
+            .status()
+        {
             Ok(ok) => ok,
             Err(e) => {
                 println!("{}", error::message(17));
@@ -508,7 +520,7 @@ pub fn save() {
     // _dir creates pictures dir if not already there
     let _dir = match std::fs::create_dir(pictures) {
         Ok(ok) => ok,
-        Err(e) => println!("{}", error::message(13)),
+        Err(e) => println!("{}", error::message(25)),
     };
     let mut new_file = String::from(home);
     new_file.push_str("/Pictures/ShareXin/sharexin-");

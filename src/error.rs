@@ -25,6 +25,7 @@
         22 - ImageMagick unavailable
         23 - Slop command unavailable
         24 - Unable to read file
+        25 - Folder exists
 */
 
 use std::env;
@@ -179,6 +180,12 @@ pub fn message(code: usize) -> String {
             _return.push_str("Unable to read file");
         } else {
             _return.push_str("Unable to read file");
+        }
+    } else if code == 25 {
+        if lang.contains("fr") {
+            _return.push_str("Folder exists");
+        } else {
+            _return.push_str("Folder exists");
         }
     }
 
