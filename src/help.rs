@@ -293,7 +293,7 @@ Options:
 Image Options:
   area\t\tGrab an area of the screen instead of the entire screen
   window\tGrab the current window instead of the entire screen
-  full\t\tGran the entire screen
+  full\t\tGrab the entire screen
   file\t\tUse a file
 
 Destinations:
