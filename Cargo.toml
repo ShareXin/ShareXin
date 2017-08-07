@@ -21,7 +21,7 @@ mac-notification-sys = "^0"
 screenshot = "^0"
 image = "^0"
 
-[target.'cfg(target_os = "linux")'.dependencies]
+[target.'cfg(not(target_os = "macos"))'.dependencies]
 notify-rust = "^3"
 
 [features]
