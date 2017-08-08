@@ -22,8 +22,8 @@
 ## Features  
 * Uploads to Twitter and Mastodon and Imgur  
 * Allows taking screenshots and saving them to files  
-* Notifications via libnotify  
-* GUI works with X11 and Wayland  
+* Notifications via dbus  
+* GUI works with GTK  
 * Screenshotting works with X11 and Gnome/Plasma/Sway for Wayland  
 * Saves screenshots to a folder in your Pictures directory  
 
