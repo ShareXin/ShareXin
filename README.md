@@ -20,7 +20,7 @@
 * [toot](https://github.com/ihabunek/toot) (for now)  
 
 ## Features  
-* Uploads to Twitter and Mastodon  
+* Uploads to Twitter and Mastodon and Imgur  
 * Allows taking screenshots and saving them to files  
 * Notifications via libnotify  
 * GUI works with X11 and Wayland  
