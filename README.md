@@ -71,7 +71,7 @@ Examples:
 #### 繁體中文  
 #### 日本語  
 #### 한국어  
-#### Deutsche by [@qwertxzy](https://twitter.com/qwertxzy)  
+#### Deutsch by [@qwertxzy](https://twitter.com/qwertxzy)  
 
 ## Compiling
 
