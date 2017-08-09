@@ -109,9 +109,9 @@ Ekzemploj:
 
     let mut help_cn = String::from("\nsharexin ");
     help_cn.push_str(VERSION);
-    help_eo.push_str(" ");
-    help_eo.push_str(DATE);
-    help_eo.push_str(
+    help_cn.push_str(" ");
+    help_cn.push_str(DATE);
+    help_cn.push_str(
         "
 
 使用方法： sharexin <选项> [目的地] [截图选项] [文件]
