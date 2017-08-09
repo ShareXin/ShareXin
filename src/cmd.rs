@@ -130,10 +130,10 @@ pub fn cmd() {
 
 fn check() {
     if !check_exists("t") {
-        println!("{}", error::message(4));
+        println!("Error 4: {}", error::message(4));
     }
     if !check_exists("toot") {
-        println!("{}", error::message(5));
+        println!("Error 5: {}", error::message(5));
     }
 }
 

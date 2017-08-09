@@ -18,13 +18,13 @@ pub fn image(txt: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            println!("{}", error::message(5));
+            println!("Error 5: {}", error::message(5));
             notification::not_sent(mastodon);
             process::exit(1)
         }
     };
     if _toot.code() == Some(2) {
-        println!("{}", error::message(26));
+        println!("Error 26: {}", error::message(26));
         notification::not_sent(mastodon);
         process::exit(1);
     }
@@ -37,13 +37,13 @@ pub fn toot(txt: String) {
     let _toot = match Command::new("toot").args(&["post", &txt]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            println!("{}", error::message(5));
+            println!("Error 5: {}", error::message(5));
             notification::not_sent(mastodon);
             process::exit(1)
         }
     };
     if _toot.code() == Some(2) {
-        println!("{}", error::message(26));
+        println!("Error 26: {}", error::message(26));
         notification::not_sent(mastodon);
         process::exit(1);
     }

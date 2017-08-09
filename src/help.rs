@@ -1,8 +1,8 @@
 use VERSION;
-use error;
 use std::*;
+use language;
 
-static DATE: &'static str = "2017-08-08";
+static DATE: &'static str = "2017-08-09";
 
 pub fn help() {
     let mut help_fr = String::from("\nsharexin ");
@@ -309,13 +309,7 @@ Examples:
     );
 
     // checks $LANG variable, should work universally on unix-like systems
-    let _lang = match env::var("LANG") {
-        Ok(ok) => ok,
-        Err(_) => {
-            println!("{}", error::message(1));
-            String::from("en_US.utf8")
-        }
-    };
+    let _lang = language::locale();
     let lang = &_lang.to_lowercase();
     if lang.contains("fr") {
         println!("{}", help_fr);

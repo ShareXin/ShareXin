@@ -19,11 +19,11 @@ impl Language {
 }
 
 #[cfg(target_family = "unix")]
-fn locale() -> String {
+pub fn locale() -> String {
     match env::var("LANG") {
         Ok(ok) => ok,
         Err(e) => {
-            println!("{}", error::message(1));
+            println!("Error 1: {}", error::message(1));
             String::from("en_US.utf8")
         }
     }
@@ -197,9 +197,51 @@ pub fn language<'a>(langue: Language) -> &'a str {
     } else if langue.option == 4 {
         if lang.contains("fr") {
             if service.mastodon {
-                string = "Toot not sent";
+                string = "Toot n'a pas été envoyé";
             } else if service.twitter {
-                string = "Tweet not sent";
+                string = "Tweet n'a pas été envoyé";
+            }
+        } else if lang.contains("es") {
+            if service.mastodon {
+                string = "Toot no fue enviado";
+            } else if service.twitter {
+                string = "Tweet no fue enviado";
+            }
+        } else if lang.contains("eo") {
+            if service.mastodon {
+                string = "Toot ne estis sendita";
+            } else if service.twitter {
+                string = "Tweet ne estis sendita";
+            }
+        } else if lang.contains("cn") {
+            if service.mastodon {
+                string = "Toot没有发送";
+            } else if service.twitter {
+                string = "Tweet没有发送";
+            }
+        } else if lang.contains("tw") {
+            if service.mastodon {
+                string = "Toot沒有發送";
+            } else if service.twitter {
+                string = "Tweet沒有發送";
+            }
+        } else if lang.contains("ja") {
+            if service.mastodon {
+                string = "Tootが送られなかった";
+            } else if service.twitter {
+                string = "Tweetが送られなかった";
+            }
+        } else if lang.contains("ko") {
+            if service.mastodon {
+                string = "Toot이 보내지지 않았다";
+            } else if service.twitter {
+                string = "Tweet이 보내지지 않았다";
+            }
+        } else if lang.contains("de") {
+            if service.mastodon {
+                string = "Toot wurde nicht gesendet";
+            } else if service.twitter {
+                string = "Tweet wurde nicht gesendet";
             }
         } else {
             if service.mastodon {

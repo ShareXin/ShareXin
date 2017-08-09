@@ -9,7 +9,7 @@
 ![Twitter](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-twitter.png)  
 
 ## Requirements  
-* Rust Nightly  
+* **Rust Nightly**  
 * Unix-like system  
 * xdg (probably already installed)  
 * maim (on non-Gnome/KDE x11 desktops)  
@@ -24,7 +24,7 @@
 * Allows taking screenshots and saving them to files  
 * Notifications via dbus  
 * GUI works with GTK  
-* Screenshotting works with X11 and Gnome/Plasma/Sway for Wayland  
+* Screenshotting works with X11 and Wayland (on supported desktops)  
 * Saves screenshots to a folder in your Pictures directory  
 
 ##### ShareXin binary tested on Arch Linux  
@@ -33,7 +33,7 @@
 
 ```rust
 
-sharexin 0.4.5 2017-08-07
+sharexin 0.4.6 2017-08-09
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -66,7 +66,7 @@ Examples:
 #### English  
 #### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
 #### Español  
-#### Esperanta  
+#### Esperanto  
 #### 简体中文  
 #### 繁體中文  
 #### 日本語  
@@ -113,6 +113,7 @@ Examples:
 - Fedora 26  
 - Arch Linux with i3  
 - FreeBSD with Xfce  
+- TrueOS  
 
 ### Dependency installation on Fedora  
 `dnf install gtk3-devel cairo-devel libnotify-devel pango-devel gdk-pixbuf2-devel atk-devel openssl-devel`  
@@ -120,7 +121,7 @@ Examples:
 ### Dependency installation on Ubuntu  
 `apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
 
-### Dependency installation on FreeBSD  
+### Dependency installation on FreeBSD or TrueOS  
 `pkg install openssl-devel gmake gcc`
 
 ### Compiling (via Github)  
@@ -135,6 +136,15 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.4.6] - 2017-08-09  
+- Error messages now translated  
+- When uploading an image to Twitter, the character limit is reduced to 117, just like on ShareX  
+- Less panicking  
+- Less repetitiveness  
+- t and toot now show notification if command fails to run (API troubles or no internet), rather than just showing you the "Sent" notification  
+- Bug fixes  
+- **Known issue**: In order to get t working correctly without a terminal, it must `killall vim`, so consider it a feature-bug  
+
 #### [0.4.5] - 2017-08-07  
 - BSD support, tested on FreeBSD with Xfce  
 - Rather than panicking, ShareXin exits with an error message  

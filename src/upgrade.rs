@@ -3,8 +3,8 @@ use SHAREXIN;
 use open;
 use std::*;
 use curl::easy::Easy;
-use std::env;
 use error;
+use language;
 
 pub fn upgrade() {
     let mut dst = Vec::new();
@@ -29,14 +29,14 @@ pub fn upgrade() {
             let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
                 Err(_) => {
-                    println!("{}", error::message(8));
+                    println!("Error 8: {}", error::message(8));
                     process::exit(1)
                 }
             };
             let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
                 Err(_) => {
-                    println!("{}", error::message(8));
+                    println!("Error 8: {}", error::message(8));
                     process::exit(1)
                 }
             };
@@ -51,20 +51,14 @@ pub fn upgrade() {
     match transfer.perform() {
         Ok(ok) => ok,
         Err(_) => {
-            println!("{}", error::message(2));
+            println!("Error 2: {}", error::message(2));
             process::exit(1)
         }
     };
 }
 
 fn check_update(latest_version: usize, current_version: usize, latest_utf: String) -> String {
-    let _lang = match env::var("LANG") {
-        Ok(ok) => ok,
-        Err(_) => {
-            println!("{}", error::message(1));
-            String::from("en_US.utf8")
-        }
-    };
+    let _lang = language::locale();
     let lang = &_lang.to_lowercase();
 
     let mut _return = String::new();
@@ -203,19 +197,13 @@ fn open_update() {
     match open::that(SHAREXIN) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("{}", error::message(9));
+            println!("Error 9: {}", error::message(9));
             return;
         }
     };
 
     // checks $LANG variable, should work universally on unix-like systems
-    let _lang = match env::var("LANG") {
-        Ok(ok) => ok,
-        Err(_) => {
-            println!("{}", error::message(1));
-            String::from("en_US.utf8")
-        }
-    };
+    let _lang = language::locale();
     let lang = &_lang.to_lowercase();
 
     let mut upgrade_fr = String::from(

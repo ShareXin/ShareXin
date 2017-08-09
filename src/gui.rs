@@ -19,7 +19,7 @@ pub fn gui(service: Destination, image_bool: bool) {
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => {
-            println!("{}", error::message(11));
+            println!("Error 11: {}", error::message(11));
             process::exit(1)
         }
     };
@@ -56,7 +56,7 @@ pub fn gui(service: Destination, image_bool: bool) {
         match open::that(temp) {
             Ok(ok) => ok,
             Err(_) => {
-                println!("{}", error::message(9));
+                println!("Error 9: {}", error::message(9));
                 process::exit(1)
             }
         };
