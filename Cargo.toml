@@ -1,8 +1,8 @@
 [package]
 name = "sharexin"
-version = "0.4.5"
+version = "0.4.6"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
-description = "ShareX for Linux"
+description = "ShareX for Unix-like systems"
 homepage = "https://github.com/thebitstick/ShareXin"
 repository = "https://github.com/thebitstick/ShareXin"
 license = "MIT"

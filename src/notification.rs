@@ -98,3 +98,25 @@ pub fn empty(service: Destination) {
     set_application(&bundle).unwrap();
     send_notification("ShareXin", &Some(&service.name()), string, &None).unwrap();
 }
+
+// if a tweet/toot is unable to send
+// uses language.rs to get proper language string in your language
+#[cfg(not(target_os = "macos"))]
+#[cfg(target_family = "unix")]
+pub fn not_sent(service: Destination) {
+    let string = language(Language::new(service, 4));
+    Notification::new()
+        .appname("ShareXin")
+        .summary(string)
+        .timeout(5000)
+        .show()
+        .unwrap();
+}
+
+#[cfg(target_os = "macos")]
+pub fn not_sent(service: Destination) {
+    let string = language(Language::new(service, 4));
+    let bundle = mac_notification_sys::get_bundle_identifier("ShareXin").unwrap();
+    set_application(&bundle).unwrap();
+    send_notification("ShareXin", &Some(&service.name()), string, &None).unwrap();
+}

@@ -24,7 +24,7 @@ fn locale() -> String {
         Ok(ok) => ok,
         Err(e) => {
             println!("{}", error::message(1));
-            process::exit(1)
+            String::from("en_US.utf8")
         }
     }
 }
@@ -42,6 +42,7 @@ pub fn language<'a>(langue: Language) -> &'a str {
     // 0 is also for message_sent, telling the user their toot/tweet has been sent
     // 2 is for file_saved, telling the user the file is saved
     // 3 is for empty, telling the user their message-only toot/tweet was empty
+    // 4 is if the tweet and toot did not send
 
     if langue.option == 0 {
         if lang.contains("fr") {
@@ -191,6 +192,20 @@ pub fn language<'a>(langue: Language) -> &'a str {
                 string = "Toot empty | Not sent";
             } else if service.twitter {
                 string = "Tweet empty | Not sent";
+            }
+        }
+    } else if langue.option == 4 {
+        if lang.contains("fr") {
+            if service.mastodon {
+                string = "Toot not sent";
+            } else if service.twitter {
+                string = "Tweet not sent";
+            }
+        } else {
+            if service.mastodon {
+                string = "Toot not sent";
+            } else if service.twitter {
+                string = "Tweet not sent";
             }
         }
     }

@@ -1,4 +1,3 @@
-#![allow(unused_variables)]
 use notification;
 use Destination;
 use std::fs::File;
@@ -15,7 +14,7 @@ pub fn send() {
     tmp.push("sharexin.png");
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(24));
             process::exit(1)
         }
@@ -23,7 +22,7 @@ pub fn send() {
     let mut image = Vec::new();
     match file.read_to_end(&mut image) {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(24));
             process::exit(1)
         }
@@ -41,7 +40,7 @@ pub fn send() {
                 process::exit(1)
             }
         },
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(3));
             process::exit(1)
         }
@@ -49,7 +48,7 @@ pub fn send() {
     notification::image_sent(Destination::new(2), &copy_link, tmp.to_str().unwrap());
     match open::that(copy_link) {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(9));
             process::exit(1)
         }

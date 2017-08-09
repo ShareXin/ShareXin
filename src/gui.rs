@@ -1,4 +1,3 @@
-#![allow(unused_variables)]
 use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
@@ -19,7 +18,7 @@ pub fn gui(service: Destination, image_bool: bool) {
     // if gtk dont init, ends program
     match gtk::init() {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(11));
             process::exit(1)
         }
@@ -56,7 +55,7 @@ pub fn gui(service: Destination, image_bool: bool) {
         let temp = tmp.to_str().unwrap().clone();
         match open::that(temp) {
             Ok(ok) => ok,
-            Err(e) => {
+            Err(_) => {
                 println!("{}", error::message(9));
                 process::exit(1)
             }
@@ -120,16 +119,12 @@ pub fn gui(service: Destination, image_bool: bool) {
                     window.borrow().hide();
                 }
             } else if service.twitter {
-                if message.len() < 140 {
+                if message.len() < 140 && !image_bool {
                     thread::spawn(move || {
                         glib::idle_add(move || {
 
-                            // image_bool is true for yes image, false for no image
-                            if image_bool {
-                                twitter::image(message.clone());
-                            }
-                            // if false, then if its not empty, send
-                            else if !message.is_empty() {
+                            // if its not empty, send
+                            if !message.is_empty() {
                                 twitter::tweet(message.clone());
                             }
                             // if empty, cancel and notify
@@ -137,6 +132,15 @@ pub fn gui(service: Destination, image_bool: bool) {
                                 notification::empty(service);
                             }
 
+                            gtk::main_quit();
+                            Continue(false)
+                        });
+                    });
+                    window.borrow().hide();
+                } else if message.len() < 117 && image_bool {
+                    thread::spawn(move || {
+                        glib::idle_add(move || {
+                            twitter::image(message.clone());
                             gtk::main_quit();
                             Continue(false)
                         });
@@ -180,7 +184,9 @@ pub fn gui(service: Destination, image_bool: bool) {
                     }
                 }
             } else if service.twitter {
-                if message.len() >= 140 {
+                if message.len() >= 140 && !image_bool {
+                    count.borrow().set_markup(&markup);
+                } else if message.len() >= 117 && image_bool {
                     count.borrow().set_markup(&markup);
                 } else {
                     count.borrow().set_label(&message.len().to_string());
@@ -212,6 +218,8 @@ pub fn gui(service: Destination, image_bool: bool) {
                 false,
             );
             let message: String = sent.unwrap();
+
+            // uses markdown to set color
             let mut markup = String::from("<span foreground=\"#DA2E37\">");
             markup.push_str(&message.len().to_string());
             markup.push_str("</span>");
@@ -228,7 +236,9 @@ pub fn gui(service: Destination, image_bool: bool) {
                     }
                 }
             } else if service.twitter {
-                if message.len() >= 140 {
+                if message.len() >= 140 && !image_bool {
+                    count.borrow().set_markup(&markup);
+                } else if message.len() >= 117 && image_bool {
                     count.borrow().set_markup(&markup);
                 } else {
                     count.borrow().set_label(&message.len().to_string());
@@ -242,7 +252,6 @@ pub fn gui(service: Destination, image_bool: bool) {
             }
             Inhibit(false)
         });
-
     }
 
     window.show_all();

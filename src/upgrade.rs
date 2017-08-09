@@ -1,4 +1,3 @@
-#![allow(unused_variables)]
 use VERSION;
 use SHAREXIN;
 use open;
@@ -29,14 +28,14 @@ pub fn upgrade() {
             }
             let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
-                Err(e) => {
+                Err(_) => {
                     println!("{}", error::message(8));
                     process::exit(1)
                 }
             };
             let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
-                Err(e) => {
+                Err(_) => {
                     println!("{}", error::message(8));
                     process::exit(1)
                 }
@@ -51,7 +50,7 @@ pub fn upgrade() {
 
     match transfer.perform() {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(2));
             process::exit(1)
         }
@@ -61,9 +60,9 @@ pub fn upgrade() {
 fn check_update(latest_version: usize, current_version: usize, latest_utf: String) -> String {
     let _lang = match env::var("LANG") {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(1));
-            process::exit(1)
+            String::from("en_US.utf8")
         }
     };
     let lang = &_lang.to_lowercase();
@@ -214,7 +213,7 @@ fn open_update() {
         Ok(ok) => ok,
         Err(_) => {
             println!("{}", error::message(1));
-            process::exit(1)
+            String::from("en_US.utf8")
         }
     };
     let lang = &_lang.to_lowercase();

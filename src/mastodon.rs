@@ -1,4 +1,3 @@
-#![allow(unused_variables)]
 use std::*;
 use std::process::*;
 use notification;
@@ -6,34 +5,47 @@ use Destination;
 use error;
 
 pub fn image(txt: String) {
+    let mastodon = Destination::new(0);
+
     // gets file to send from temp dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
-    println!("[Toot]: {}", txt);
 
-    let _ = match Command::new("toot")
+    let _toot = match Command::new("toot")
         .args(&["post", "-m", temp.clone(), &txt])
-        .spawn()
+        .status()
     {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(5));
+            notification::not_sent(mastodon);
             process::exit(1)
         }
     };
-    notification::image_sent(Destination::new(0), &txt, temp);
+    if _toot.code() == Some(2) {
+        println!("{}", error::message(26));
+        notification::not_sent(mastodon);
+        process::exit(1);
+    }
+    notification::image_sent(mastodon, &txt, temp);
 }
 
 pub fn toot(txt: String) {
-    println!("[Toot]: {}", txt);
-    let _mastodon = match Command::new("toot").args(&["post", &txt]).output() {
+    let mastodon = Destination::new(0);
+
+    let _toot = match Command::new("toot").args(&["post", &txt]).status() {
         Ok(ok) => ok,
-        Err(e) => {
+        Err(_) => {
             println!("{}", error::message(5));
+            notification::not_sent(mastodon);
             process::exit(1)
         }
     };
-    println!("{}", String::from_utf8_lossy(&_mastodon.stdout));
-    notification::message_sent(Destination::new(0), &txt);
+    if _toot.code() == Some(2) {
+        println!("{}", error::message(26));
+        notification::not_sent(mastodon);
+        process::exit(1);
+    }
+    notification::message_sent(mastodon, &txt);
 }
