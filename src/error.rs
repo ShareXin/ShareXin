@@ -41,7 +41,7 @@ pub fn message(code: usize) -> String {
         _return.push_str("Error getting $LANG variable");
     } else if code == 0 {
         if lang.contains("fr") {
-            _return.push_str("Error getting $HOME variable");
+            _return.push_str("Erreur lors de la réception de la variable $HOME");
         } else if lang.contains("es") {
             _return.push_str("Error al obtener la variable $HOME");
         } else if lang.contains("eo") {
@@ -63,7 +63,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 2 {
         if lang.contains("fr") {
-            _return.push_str("Github unreachable");
+            _return.push_str("Github inaccessible");
         } else if lang.contains("es") {
             _return.push_str("Github inalcanzable");
         } else if lang.contains("eo") {
@@ -83,7 +83,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 3 {
         if lang.contains("fr") {
-            _return.push_str("Imgur unreachable");
+            _return.push_str("Imgur inaccessible");
         } else if lang.contains("es") {
             _return.push_str("Imgur inalcanzable");
         } else if lang.contains("eo") {
@@ -103,7 +103,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 4 {
         if lang.contains("fr") {
-            _return.push_str("t command unavailable");
+            _return.push_str("Commande t indisponible");
         } else if lang.contains("es") {
             _return.push_str("t comando no disponible");
         } else if lang.contains("eo") {
@@ -123,7 +123,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 5 {
         if lang.contains("fr") {
-            _return.push_str("toot command unavailable");
+            _return.push_str("Commande toot indisponible");
         } else if lang.contains("es") {
             _return.push_str("toot comando no disponible");
         } else if lang.contains("eo") {
@@ -143,7 +143,9 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 6 {
         if lang.contains("fr") {
-            _return.push_str("Error getting $XDG_SESSION_TYPE variable");
+            _return.push_str(
+                "Erreur lors de la réception de la variable $XDG_SESSION_TYPE",
+            );
         } else if lang.contains("es") {
             _return.push_str("Error al obtener la variable $XDG_SESSION_TYPE");
         } else if lang.contains("eo") {
@@ -167,7 +169,9 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 7 {
         if lang.contains("fr") {
-            _return.push_str("Error getting $DESKTOP_SESSION variable");
+            _return.push_str(
+                "Erreur lors de la réception de la variable $DESKTOP_SESSION",
+            );
         } else if lang.contains("es") {
             _return.push_str("Error al obtener la variable $DESKTOP_SESSION");
         } else if lang.contains("eo") {
@@ -191,7 +195,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 8 {
         if lang.contains("fr") {
-            _return.push_str("Error on parsing latest version number");
+            _return.push_str("Erreur d'analyse de la dernière version");
         } else if lang.contains("es") {
             _return.push_str("Error al analizar el último número de versión");
         } else if lang.contains("eo") {
@@ -215,7 +219,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 9 {
         if lang.contains("fr") {
-            _return.push_str("Unable to open file or webpage");
+            _return.push_str("Incapable d'ouvrir le fichier ou la page web");
         } else if lang.contains("es") {
             _return.push_str("Error al abrir el archivo o la página web");
         } else if lang.contains("eo") {
@@ -239,7 +243,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 10 {
         if lang.contains("fr") {
-            _return.push_str("Error uploading to Imgur");
+            _return.push_str("Erreur lors de l'envoi vers Imgur");
         } else if lang.contains("es") {
             _return.push_str("Error al subir a Imgur");
         } else if lang.contains("eo") {
@@ -263,7 +267,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 11 {
         if lang.contains("fr") {
-            _return.push_str("GTK initialize error");
+            _return.push_str("Erreur d'initialisation GTK");
         } else if lang.contains("es") {
             _return.push_str("Error de inicialización de GTK");
         } else if lang.contains("eo") {
@@ -283,7 +287,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 12 {
         if lang.contains("fr") {
-            _return.push_str("Unable to get current time");
+            _return.push_str("L'heure locale n'est pas disponible");
         } else if lang.contains("es") {
             _return.push_str("Hora local no disponible");
         } else if lang.contains("eo") {
@@ -303,7 +307,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 13 {
         if lang.contains("fr") {
-            _return.push_str("File not saved");
+            _return.push_str("Le fichier n'est pas sauvegardé");
         } else if lang.contains("es") {
             _return.push_str("El archivo no se ha guardado");
         } else if lang.contains("eo") {
@@ -323,7 +327,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 14 {
         if lang.contains("fr") {
-            _return.push_str("gnome-screenshot command unavailable");
+            _return.push_str("Commande gnome-screenshot indisponible");
         } else if lang.contains("es") {
             _return.push_str("Comando gnome-screenshot no disponible");
         } else if lang.contains("eo") {
@@ -347,7 +351,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 15 {
         if lang.contains("fr") {
-            _return.push_str("spectacle command unavailable");
+            _return.push_str("Commande spectacle indisponible");
         } else if lang.contains("es") {
             _return.push_str("Comando spectacle no disponible");
         } else if lang.contains("eo") {
@@ -369,7 +373,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 16 {
         if lang.contains("fr") {
-            _return.push_str("swaygrab command unavailable");
+            _return.push_str("Commande swaygrab indisponible");
         } else if lang.contains("es") {
             _return.push_str("Comando swaygrab no disponible");
         } else if lang.contains("eo") {
@@ -391,7 +395,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 17 {
         if lang.contains("fr") {
-            _return.push_str("maim command unavailable");
+            _return.push_str("Commande maim indisponible");
         } else if lang.contains("es") {
             _return.push_str("Comando maim no disponible");
         } else if lang.contains("eo") {
@@ -411,7 +415,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 18 {
         if lang.contains("fr") {
-            _return.push_str("Unsupported Wayland desktop environment");
+            _return.push_str("L'environnement de bureau Wayland n'est pas pris en charge");
         } else if lang.contains("es") {
             _return.push_str("Wayland Entorno de escritorio no compatible");
         } else if lang.contains("eo") {
@@ -435,7 +439,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 19 {
         if lang.contains("fr") {
-            _return.push_str("Unsupported desktop environment");
+            _return.push_str("L'environnement de bureau n'est pas pris en charge");
         } else if lang.contains("es") {
             _return.push_str("Entorno de escritorio no compatible");
         } else if lang.contains("eo") {
@@ -457,7 +461,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 20 {
         if lang.contains("fr") {
-            _return.push_str("xdotool command unavailable");
+            _return.push_str("Commande xdotool indisponible");
         } else if lang.contains("es") {
             _return.push_str("Comando xdotool no disponible");
         } else if lang.contains("eo") {
@@ -477,7 +481,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 21 {
         if lang.contains("fr") {
-            _return.push_str("feh command unavailable");
+            _return.push_str("Commande feh indisponible");
         } else if lang.contains("es") {
             _return.push_str("Comando feh no disponible");
         } else if lang.contains("eo") {
@@ -497,7 +501,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 22 {
         if lang.contains("fr") {
-            _return.push_str("ImageMagick unavailable");
+            _return.push_str("ImageMagick indisponible");
         } else if lang.contains("es") {
             _return.push_str("ImageMagick no disponible");
         } else if lang.contains("eo") {
@@ -519,7 +523,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 23 {
         if lang.contains("fr") {
-            _return.push_str("slop command unavailable");
+            _return.push_str("Commande slop indisponible");
         } else if lang.contains("es") {
             _return.push_str("Comando slop no disponible");
         } else if lang.contains("eo") {
@@ -539,7 +543,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 24 {
         if lang.contains("fr") {
-            _return.push_str("Unable to read file");
+            _return.push_str("Fichier non lisible");
         } else if lang.contains("es") {
             _return.push_str("Archivo no legible");
         } else if lang.contains("eo") {
@@ -559,7 +563,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 25 {
         if lang.contains("fr") {
-            _return.push_str("Folder exists");
+            _return.push_str("Le dossier existe déjà");
         } else if lang.contains("es") {
             _return.push_str("La carpeta ya existe");
         } else if lang.contains("eo") {
@@ -579,7 +583,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 26 {
         if lang.contains("fr") {
-            _return.push_str("Unable to send to Mastodon");
+            _return.push_str("Impossible de publier sur Mastodon");
         } else if lang.contains("es") {
             _return.push_str("Error al publicar al Mastodon");
         } else if lang.contains("eo") {
@@ -599,7 +603,7 @@ pub fn message(code: usize) -> String {
         }
     } else if code == 27 {
         if lang.contains("fr") {
-            _return.push_str("Unable to send to Twitter");
+            _return.push_str("Impossible de publier sur Twitter");
         } else if lang.contains("es") {
             _return.push_str("Error al publicar al Twitter");
         } else if lang.contains("eo") {

@@ -95,7 +95,7 @@ pub fn gui(service: Destination, image_bool: bool) {
             let message: String = sent.unwrap();
             // checks if character count is over limit, then creates thread for sending and closes
             if service.mastodon {
-                if message.len() < 500 {
+                if message.len() <= 500 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
 
@@ -119,7 +119,7 @@ pub fn gui(service: Destination, image_bool: bool) {
                     window.borrow().hide();
                 }
             } else if service.twitter {
-                if message.len() < 140 && !image_bool {
+                if message.len() <= 140 && !image_bool {
                     thread::spawn(move || {
                         glib::idle_add(move || {
 
@@ -137,7 +137,7 @@ pub fn gui(service: Destination, image_bool: bool) {
                         });
                     });
                     window.borrow().hide();
-                } else if message.len() < 117 && image_bool {
+                } else if message.len() <= 117 && image_bool {
                     thread::spawn(move || {
                         glib::idle_add(move || {
                             twitter::image(message.clone());
@@ -168,12 +168,17 @@ pub fn gui(service: Destination, image_bool: bool) {
             let message: String = sent.unwrap();
 
             // uses markdown to set color
-            let mut markup = String::from("<span foreground=\"#DA2E37\">");
-            markup.push_str(&message.len().to_string());
-            markup.push_str("</span>");
+            let mut limit = String::from("<span foreground=\"#DA2E37\">");
+            limit.push_str(&message.len().to_string());
+            limit.push_str("</span>");
+            let mut hit = String::from("<span foreground=\"#e4e543\">");
+            hit.push_str(&message.len().to_string());
+            hit.push_str("</span>");
             if service.mastodon {
-                if message.len() >= 500 {
-                    count.borrow().set_markup(&markup);
+                if message.len() == 500 {
+                    count.borrow().set_markup(&hit);
+                } else if message.len() > 500 {
+                    count.borrow().set_markup(&limit);
                 } else {
                     count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
@@ -184,10 +189,14 @@ pub fn gui(service: Destination, image_bool: bool) {
                     }
                 }
             } else if service.twitter {
-                if message.len() >= 140 && !image_bool {
-                    count.borrow().set_markup(&markup);
+                if message.len() > 140 && !image_bool {
+                    count.borrow().set_markup(&limit);
+                } else if message.len() == 140 && !image_bool {
+                    count.borrow().set_markup(&hit);
                 } else if message.len() >= 117 && image_bool {
-                    count.borrow().set_markup(&markup);
+                    count.borrow().set_markup(&limit);
+                } else if message.len() == 117 && image_bool {
+                    count.borrow().set_markup(&hit);
                 } else {
                     count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
@@ -220,12 +229,17 @@ pub fn gui(service: Destination, image_bool: bool) {
             let message: String = sent.unwrap();
 
             // uses markdown to set color
-            let mut markup = String::from("<span foreground=\"#DA2E37\">");
-            markup.push_str(&message.len().to_string());
-            markup.push_str("</span>");
+            let mut limit = String::from("<span foreground=\"#DA2E37\">");
+            limit.push_str(&message.len().to_string());
+            limit.push_str("</span>");
+            let mut hit = String::from("<span foreground=\"#e4e543\">");
+            hit.push_str(&message.len().to_string());
+            hit.push_str("</span>");
             if service.mastodon {
-                if message.len() >= 500 {
-                    count.borrow().set_markup(&markup);
+                if message.len() == 500 {
+                    count.borrow().set_markup(&hit);
+                } else if message.len() > 500 {
+                    count.borrow().set_markup(&limit);
                 } else {
                     count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
@@ -236,10 +250,14 @@ pub fn gui(service: Destination, image_bool: bool) {
                     }
                 }
             } else if service.twitter {
-                if message.len() >= 140 && !image_bool {
-                    count.borrow().set_markup(&markup);
-                } else if message.len() >= 117 && image_bool {
-                    count.borrow().set_markup(&markup);
+                if message.len() > 140 && !image_bool {
+                    count.borrow().set_markup(&limit);
+                } else if message.len() == 140 && !image_bool {
+                    count.borrow().set_markup(&hit);
+                } else if message.len() > 117 && image_bool {
+                    count.borrow().set_markup(&limit);
+                } else if message.len() == 117 && image_bool {
+                    count.borrow().set_markup(&hit);
                 } else {
                     count.borrow().set_label(&message.len().to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
