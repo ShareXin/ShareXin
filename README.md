@@ -33,7 +33,7 @@
 
 ```rust
 
-sharexin 0.4.6 2017-08-09
+sharexin 0.4.7 2017-08-09
 
 Usage: sharexin <options> [destination] <image options> [FILE]
 
@@ -136,6 +136,14 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.4.7] - 2017-08-09  
+- Character count now shows when you've hit the limit and when you've passed
+the limit  
+- Rather than crashing, if notify-rust is unable to show you a notification,
+it'll display an error message and exit nicely  
+- Added French error messages  
+- Bug fixes  
+
 #### [0.4.6] - 2017-08-09  
 - Error messages now translated  
 - When uploading an image to Twitter, the character limit is reduced to 117, just like on ShareX  

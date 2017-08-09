@@ -28,6 +28,7 @@
         25 - Folder exists
         26 - Unable to send to Mastodon
         27 - Unable to send to Twitter
+        28 - Unable to show notification
 */
 
 use language;
@@ -620,6 +621,26 @@ pub fn message(code: usize) -> String {
             _return.push_str("Fehler beim veröffentlichen auf Twitter");
         } else {
             _return.push_str("Unable to send to Twitter");
+        }
+    } else if code == 28 {
+        if lang.contains("fr") {
+            _return.push_str("Impossible d'afficher une notification");
+        } else if lang.contains("es") {
+            _return.push_str("No se puede mostrar la notificación");
+        } else if lang.contains("eo") {
+            _return.push_str("Ne eblas montri sciigon");
+        } else if lang.contains("cn") {
+            _return.push_str("我无法显示通知");
+        } else if lang.contains("tw") {
+            _return.push_str("我無法顯示通知");
+        } else if lang.contains("ja") {
+            _return.push_str("通知を表示できません");
+        } else if lang.contains("ko") {
+            _return.push_str("통지를 표시 할 수 없습니다");
+        } else if lang.contains("de") {
+            _return.push_str("Kann keine Benachrichtigung anzeigen");
+        } else {
+            _return.push_str("Unable to show notification");
         }
     }
 

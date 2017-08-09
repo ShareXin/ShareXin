@@ -55,7 +55,6 @@ fn screenshot(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-#[cfg(target_family = "unix")]
 fn screenshot(args: String, temp: &str) {
     // x11/wayland session info gotten here
     let mut _session = String::new();
@@ -102,7 +101,6 @@ fn screenshot(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-#[cfg(target_family = "unix")]
 fn sway(args: String, temp: &str) {
     if args == "-s" {
 
@@ -193,7 +191,6 @@ fn sway(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-#[cfg(target_family = "unix")]
 fn gnome(args: String, temp: &str) {
     if args == "-s" {
 
@@ -286,7 +283,6 @@ fn gnome(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-#[cfg(target_family = "unix")]
 fn kde(args: String, temp: &str) {
     if args == "-s" {
 
@@ -352,7 +348,6 @@ fn kde(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-#[cfg(target_family = "unix")]
 fn maim(args: String, temp: &str) {
     if args == "-s" {
 

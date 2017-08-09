@@ -1,14 +1,9 @@
-#[cfg(not(target_os = "macos"))]
-#[cfg(target_family = "unix")]
-extern crate notify_rust;
-
-#[cfg(target_os = "macos")]
-extern crate mac_notification_sys;
 #[cfg(target_os = "macos")]
 extern crate image;
 #[cfg(target_os = "macos")]
 extern crate screenshot;
 
+extern crate notify_rust;
 extern crate gtk;
 extern crate glib;
 extern crate gdk;
@@ -80,7 +75,5 @@ impl Destination {
 }
 
 fn main() {
-    if !cfg!(target_os = "windows") {
-        cmd::cmd();
-    }
+    cmd::cmd();
 }

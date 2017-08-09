@@ -18,7 +18,6 @@ impl Language {
     }
 }
 
-#[cfg(target_family = "unix")]
 pub fn locale() -> String {
     match env::var("LANG") {
         Ok(ok) => ok,
