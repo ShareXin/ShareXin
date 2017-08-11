@@ -28,7 +28,7 @@ pub fn file(file: String) {
     let _copy = match std::fs::copy(file, tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 13: {}", error::message(13));
+            eprintln!("Error 13: {}", error::message(13));
             process::exit(1)
         }
     };
@@ -61,7 +61,7 @@ fn screenshot(args: String, temp: &str) {
     _session = match env::var("XDG_SESSION_TYPE") {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 6: {}", error::message(6));
+            eprintln!("Error 6: {}", error::message(6));
             String::from("x11")
         }
     };
@@ -72,7 +72,7 @@ fn screenshot(args: String, temp: &str) {
     _desktop = match env::var("DESKTOP_SESSION") {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 7: {}", error::message(7));
+            eprintln!("Error 7: {}", error::message(7));
             process::exit(1)
         }
     };
@@ -84,7 +84,7 @@ fn screenshot(args: String, temp: &str) {
             "plasma" => kde(args, temp),
             "sway" => sway(args, temp),
             _ => {
-                println!("Error 18: {}", error::message(18));
+                eprintln!("Error 18: {}", error::message(18));
                 process::exit(1)
             }
         },
@@ -94,7 +94,7 @@ fn screenshot(args: String, temp: &str) {
             _ => maim(args, temp),
         },
         _ => {
-            println!("Error 19: {}", error::message(19));
+            eprintln!("Error 19: {}", error::message(19));
             process::exit(1)
         }
     }
@@ -108,7 +108,7 @@ fn sway(args: String, temp: &str) {
         match Command::new("swaygrab").arg(temp.clone()).output() {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 16: {}", error::message(16));
+                eprintln!("Error 16: {}", error::message(16));
                 process::exit(1)
             }
         };
@@ -119,7 +119,7 @@ fn sway(args: String, temp: &str) {
         match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 21: {}", error::message(21));
+                eprintln!("Error 21: {}", error::message(21));
                 process::exit(1)
             }
         };
@@ -130,7 +130,7 @@ fn sway(args: String, temp: &str) {
         let _slop = match Command::new("slop").output() {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 23: {}", error::message(23));
+                eprintln!("Error 23: {}", error::message(23));
                 process::exit(1)
             }
         };
@@ -141,7 +141,7 @@ fn sway(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 22: {}", error::message(22));
+                eprintln!("Error 22: {}", error::message(22));
                 process::exit(1)
             }
         };
@@ -163,7 +163,7 @@ fn sway(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 16: {}", error::message(16));
+                eprintln!("Error 16: {}", error::message(16));
                 process::exit(1)
             }
         };
@@ -178,7 +178,7 @@ fn sway(args: String, temp: &str) {
         let _image = match Command::new("swaygrab").arg(temp.clone()).status() {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 16: {}", error::message(16));
+                eprintln!("Error 16: {}", error::message(16));
                 process::exit(1)
             }
         };
@@ -202,7 +202,7 @@ fn gnome(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 14: {}", error::message(14));
+                eprintln!("Error 14: {}", error::message(14));
                 process::exit(1)
             }
         };
@@ -211,7 +211,7 @@ fn gnome(args: String, temp: &str) {
         match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 21: {}", error::message(21));
+                eprintln!("Error 21: {}", error::message(21));
                 process::exit(1)
             }
         };
@@ -226,7 +226,7 @@ fn gnome(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 14: {}", error::message(14));
+                eprintln!("Error 14: {}", error::message(14));
                 process::exit(1)
             }
         };
@@ -249,7 +249,7 @@ fn gnome(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 14: {}", error::message(14));
+                eprintln!("Error 14: {}", error::message(14));
                 process::exit(1)
             }
         };
@@ -269,7 +269,7 @@ fn gnome(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 14: {}", error::message(14));
+                eprintln!("Error 14: {}", error::message(14));
                 process::exit(1)
             }
         };
@@ -294,7 +294,7 @@ fn kde(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 15: {}", error::message(15));
+                eprintln!("Error 15: {}", error::message(15));
                 process::exit(1)
             }
         };
@@ -314,7 +314,7 @@ fn kde(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 15: {}", error::message(15));
+                eprintln!("Error 15: {}", error::message(15));
                 process::exit(1)
             }
         };
@@ -334,7 +334,7 @@ fn kde(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 15: {}", error::message(15));
+                eprintln!("Error 15: {}", error::message(15));
                 process::exit(1)
             }
         };
@@ -359,7 +359,7 @@ fn maim(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 17: {}", error::message(17));
+                eprintln!("Error 17: {}", error::message(17));
                 process::exit(1)
             }
         };
@@ -368,7 +368,7 @@ fn maim(args: String, temp: &str) {
         match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 21: {}", error::message(21));
+                eprintln!("Error 21: {}", error::message(21));
                 process::exit(1)
             }
         };
@@ -383,7 +383,7 @@ fn maim(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 17: {}", error::message(17));
+                eprintln!("Error 17: {}", error::message(17));
                 process::exit(1)
             }
         };
@@ -401,7 +401,7 @@ fn maim(args: String, temp: &str) {
         let _xdo = match Command::new("xdotool").arg("getactivewindow").output() {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 20: {}", error::message(20));
+                eprintln!("Error 20: {}", error::message(20));
                 process::exit(1)
             }
         };
@@ -416,7 +416,7 @@ fn maim(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 17: {}", error::message(17));
+                eprintln!("Error 17: {}", error::message(17));
                 process::exit(1)
             }
         };
@@ -435,7 +435,7 @@ fn maim(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 17: {}", error::message(17));
+                eprintln!("Error 17: {}", error::message(17));
                 process::exit(1)
             }
         };
@@ -459,7 +459,7 @@ pub fn image(args: String) {
 
     screenshot(args.clone(), temp.clone());
     if !tmp.exists() {
-        println!("Error 13: {}", error::message(13));
+        eprintln!("Error 13: {}", error::message(13));
         process::exit(1);
     }
 
@@ -487,7 +487,7 @@ pub fn image(args: String) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                println!("Error 22: {}", error::message(22));
+                eprintln!("Error 22: {}", error::message(22));
                 process::exit(1)
             }
         };
@@ -505,7 +505,7 @@ fn save() {
     let home = match env::var("HOME") {
         Ok(home) => home,
         Err(_) => {
-            println!("Error 0: {}", error::message(0));
+            eprintln!("Error 0: {}", error::message(0));
             process::exit(1)
         }
     };
@@ -516,7 +516,7 @@ fn save() {
     let _dir = match std::fs::create_dir(pictures) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 25: {}", error::message(25));
+            eprintln!("Error 25: {}", error::message(25));
         }
     };
     let mut new_file = String::from(home);
@@ -526,7 +526,7 @@ fn save() {
     let time = String::from(match time::strftime("%Y-%m-%d-%H_%M_%S", &time::now()) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 12: {}", error::message(12));
+            eprintln!("Error 12: {}", error::message(12));
             process::exit(1)
         }
     });
@@ -538,7 +538,7 @@ fn save() {
     let _clone = match std::fs::copy(tmp.clone(), new_file) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 13: {}", error::message(13));
+            eprintln!("Error 13: {}", error::message(13));
             return;
         }
     };

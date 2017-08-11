@@ -18,14 +18,14 @@ pub fn image(txt: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 4: {}", error::message(4));
+            eprintln!("Error 4: {}", error::message(4));
             notification::not_sent(twitter);
             process::exit(1)
         }
     };
     Command::new("killall").arg("vim");
     if _t.code() == Some(1) {
-        println!("Error 27: {}", error::message(27));
+        eprintln!("Error 27: {}", error::message(27));
         process::exit(1);
     }
     notification::image_sent(twitter, &txt, temp);
@@ -37,14 +37,14 @@ pub fn tweet(txt: String) {
     let _t = match Command::new("t").args(&["update", &txt]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 4: {}", error::message(4));
+            eprintln!("Error 4: {}", error::message(4));
             notification::not_sent(twitter);
             process::exit(1)
         }
     };
     Command::new("killall").arg("vim");
     if _t.code() == Some(1) {
-        println!("Error 27: {}", error::message(27));
+        eprintln!("Error 27: {}", error::message(27));
         process::exit(1);
     }
     notification::message_sent(twitter, &txt);

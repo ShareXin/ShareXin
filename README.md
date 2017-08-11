@@ -32,10 +32,8 @@
 ## `--help`  
 
 ```rust
-
-sharexin 0.4.7 2017-08-09
-
-Usage: sharexin <options> [destination] <image options> [FILE]
+sharexin 0.4.8
+Usage: sharexin <options> [destination] [image options] [FILE]
 
 Options:
   -h, --help	Display this help message and exit
@@ -57,7 +55,8 @@ Examples:
   sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur open [FILE]
+  sharexin imgur file [FILE]
+
 
 ```  
 
@@ -136,6 +135,12 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.4.8] - 2017-08-11  
+- Stderr used for errors  
+- Returns for String methods rather than variables  
+- Completely remade the help function, universal syntax  
+- Bug fixes  
+
 #### [0.4.7] - 2017-08-09  
 - Character count now shows when you've hit the limit and when you've passed
 the limit  

@@ -29,14 +29,14 @@ pub fn upgrade() {
             let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
                 Err(_) => {
-                    println!("Error 8: {}", error::message(8));
+                    eprintln!("Error 8: {}", error::message(8));
                     process::exit(1)
                 }
             };
             let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
                 Err(_) => {
-                    println!("Error 8: {}", error::message(8));
+                    eprintln!("Error 8: {}", error::message(8));
                     process::exit(1)
                 }
             };
@@ -51,7 +51,7 @@ pub fn upgrade() {
     match transfer.perform() {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 2: {}", error::message(2));
+            eprintln!("Error 2: {}", error::message(2));
             process::exit(1)
         }
     };
@@ -197,7 +197,7 @@ fn open_update() {
     match open::that(SHAREXIN) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 9: {}", error::message(9));
+            eprintln!("Error 9: {}", error::message(9));
             return;
         }
     };

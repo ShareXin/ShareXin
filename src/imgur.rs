@@ -15,7 +15,7 @@ pub fn send() {
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Erorr 24: {}", error::message(24));
+            eprintln!("Erorr 24: {}", error::message(24));
             process::exit(1)
         }
     };
@@ -23,7 +23,7 @@ pub fn send() {
     match file.read_to_end(&mut image) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 24: {}", error::message(24));
+            eprintln!("Error 24: {}", error::message(24));
             process::exit(1)
         }
     };
@@ -36,12 +36,12 @@ pub fn send() {
         Ok(info) => match info.link() {
             Some(link) => copy_link.push_str(link),
             None => {
-                println!("Erorr 10: {}", error::message(10));
+                eprintln!("Erorr 10: {}", error::message(10));
                 process::exit(1)
             }
         },
         Err(_) => {
-            println!("Error 3: {}", error::message(3));
+            eprintln!("Error 3: {}", error::message(3));
             process::exit(1)
         }
     }
@@ -49,7 +49,7 @@ pub fn send() {
     match open::that(copy_link) {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 9: {}", error::message(9));
+            eprintln!("Error 9: {}", error::message(9));
             process::exit(1)
         }
     };

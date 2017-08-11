@@ -22,7 +22,7 @@ pub fn locale() -> String {
     match env::var("LANG") {
         Ok(ok) => ok,
         Err(e) => {
-            println!("Error 1: {}", error::message(1));
+            eprintln!("Error 1: {}", error::message(1));
             String::from("en_US.utf8")
         }
     }
@@ -30,8 +30,6 @@ pub fn locale() -> String {
 
 pub fn language<'a>(langue: Language) -> &'a str {
     let service = langue.service;
-    //string creates result string, modified later
-    let mut string = "";
 
     // check $LANG
     let mut lang = locale();
@@ -46,209 +44,209 @@ pub fn language<'a>(langue: Language) -> &'a str {
     if langue.option == 0 {
         if lang.contains("fr") {
             if service.mastodon {
-                string = "Envoyé vers Mastodon";
+                return "Envoyé vers Mastodon";
             } else if service.twitter {
-                string = "Envoyé vers Twitter";
+                return "Envoyé vers Twitter";
             } else if service.imgur {
-                string = "Envoyé vers Imgur";
+                return "Envoyé vers Imgur";
             }
         } else if lang.contains("es") {
             if service.mastodon {
-                string = "Enviado a Mastodon";
+                return "Enviado a Mastodon";
             } else if service.twitter {
-                string = "Enviado a Twitter";
+                return "Enviado a Twitter";
             } else if service.imgur {
-                string = "Enviado a Imgur";
+                return "Enviado a Imgur";
             }
         } else if lang.contains("eo") {
             if service.mastodon {
-                string = "Sendita al Mastodon";
+                return "Sendita al Mastodon";
             } else if service.twitter {
-                string = "Sendita al Twitter";
+                return "Sendita al Twitter";
             } else if service.imgur {
-                string = "Sendita al Imgur";
+                return "Sendita al Imgur";
             }
         } else if lang.contains("cn") {
             if service.mastodon {
-                string = "它已被发送到Mastodon";
+                return "它已被发送到Mastodon";
             } else if service.twitter {
-                string = "它已被发送到Twitter";
+                return "它已被发送到Twitter";
             } else if service.imgur {
-                string = "它已被发送到Imgur";
+                return "它已被发送到Imgur";
             }
         } else if lang.contains("tw") {
             if service.mastodon {
-                string = "它已被發送到Mastodon";
+                return "它已被發送到Mastodon";
             } else if service.twitter {
-                string = "它已被發送到Twitter";
+                return "它已被發送到Twitter";
             } else if service.imgur {
-                string = "它已被發送到Imgur";
+                return "它已被發送到Imgur";
             }
         } else if lang.contains("ja") {
             if service.mastodon {
-                string = "Mastodonに送信";
+                return "Mastodonに送信";
             } else if service.twitter {
-                string = "Twitterに送信";
+                return "Twitterに送信";
             } else if service.imgur {
-                string = "Imgurに送信";
+                return "Imgurに送信";
             }
         } else if lang.contains("ko") {
             if service.mastodon {
-                string = "Mastodon에 보냈습니다";
+                return "Mastodon에 보냈습니다";
             } else if service.twitter {
-                string = "Twitter에 보냈습니다";
+                return "Twitter에 보냈습니다";
             } else if service.imgur {
-                string = "Imgur에 보냈습니다";
+                return "Imgur에 보냈습니다";
             }
         } else if lang.contains("de") {
             if service.mastodon {
-                string = "Auf Mastodon veröffentlicht";
+                return "Auf Mastodon veröffentlicht";
             } else if service.twitter {
-                string = "Auf Twitter veröffentlicht";
+                return "Auf Twitter veröffentlicht";
             } else if service.imgur {
-                string = "Auf Imgur veröffentlicht";
+                return "Auf Imgur veröffentlicht";
             }
         } else {
             if service.mastodon {
-                string = "Sent to Mastodon";
+                return "Sent to Mastodon";
             } else if service.twitter {
-                string = "Sent to Twitter";
+                return "Sent to Twitter";
             } else if service.imgur {
-                string = "Sent to Imgur";
+                return "Sent to Imgur";
             }
         }
     } else if langue.option == 2 {
         if lang.contains("fr") {
-            string = "Fichier sauvegardé";
+            return "Fichier sauvegardé";
         } else if lang.contains("es") {
-            string = "Archivo guardado";
+            return "Archivo guardado";
         } else if lang.contains("eo") {
-            string = "Dosieron konservis";
+            return "Dosieron konservis";
         } else if lang.contains("cn") {
-            string = "文件已保存";
+            return "文件已保存";
         } else if lang.contains("tw") {
-            string = "文件已保存";
+            return "文件已保存";
         } else if lang.contains("ja") {
-            string = "ファイルが保存された";
+            return "ファイルが保存された";
         } else if lang.contains("ko") {
-            string = "파일이 저장된";
+            return "파일이 저장된";
         } else if lang.contains("de") {
-            string = "Datei gespeichert";
+            return "Datei gespeichert";
         } else {
-            string = "File saved";
+            return "File saved";
         }
     } else if langue.option == 3 {
         if lang.contains("fr") {
             if service.mastodon {
-                string = "Toot vide | N'a pas été envoyé";
+                return "Toot vide | N'a pas été envoyé";
             } else if service.twitter {
-                string = "Tweet vide | N'a pas été envoyé";
+                return "Tweet vide | N'a pas été envoyé";
             }
         } else if lang.contains("es") {
             if service.mastodon {
-                string = "Toot vacío | No fue enviado";
+                return "Toot vacío | No fue enviado";
             } else if service.twitter {
-                string = "Tweet vacío | No fue enviado";
+                return "Tweet vacío | No fue enviado";
             }
         } else if lang.contains("eo") {
             if service.mastodon {
-                string = "Malplena Toot | Ne estis sendita";
+                return "Malplena Toot | Ne estis sendita";
             } else if service.twitter {
-                string = "Malplena Tweet | Ne estis sendita";
+                return "Malplena Tweet | Ne estis sendita";
             }
         } else if lang.contains("cn") {
             if service.mastodon {
-                string = "Toot是空 | 它不会发送到Mastodon";
+                return "Toot是空 | 它不会发送到Mastodon";
             } else if service.twitter {
-                string = "Tweet是空 | 它不会发送到Twitter";
+                return "Tweet是空 | 它不会发送到Twitter";
             }
         } else if lang.contains("tw") {
             if service.mastodon {
-                string = "Toot是空 | 它不會發送到Mastodon";
+                return "Toot是空 | 它不會發送到Mastodon";
             } else if service.twitter {
-                string = "Tweet是空 | 它不會發送到Twitter";
+                return "Tweet是空 | 它不會發送到Twitter";
             }
         } else if lang.contains("ja") {
             if service.mastodon {
-                string = "Tootは空です | それはMastodonに送られなかった";
+                return "Tootは空です | それはMastodonに送られなかった";
             } else if service.twitter {
-                string = "Tweetは空です | それはTwitterに送られなかった";
+                return "Tweetは空です | それはTwitterに送られなかった";
             }
         } else if lang.contains("ko") {
             if service.mastodon {
-                string = "Toot 비어 있습니다 | 그것은 Mastodon에 보내지지 않았다";
+                return "Toot 비어 있습니다 | 그것은 Mastodon에 보내지지 않았다";
             } else if service.twitter {
-                string = "Tweet 비어 있습니다 | 그것은 Twitter에 보내지지 않았다";
+                return "Tweet 비어 있습니다 | 그것은 Twitter에 보내지지 않았다";
             }
         } else if lang.contains("de") {
             if service.mastodon {
-                string = "Toot leer | Nicht gesendet";
+                return "Toot leer | Nicht gesendet";
             } else if service.twitter {
-                string = "Tweet leer | Nicht gesendet";
+                return "Tweet leer | Nicht gesendet";
             }
         } else {
             if service.mastodon {
-                string = "Toot empty | Not sent";
+                return "Toot empty | Not sent";
             } else if service.twitter {
-                string = "Tweet empty | Not sent";
+                return "Tweet empty | Not sent";
             }
         }
     } else if langue.option == 4 {
         if lang.contains("fr") {
             if service.mastodon {
-                string = "Toot n'a pas été envoyé";
+                return "Toot n'a pas été envoyé";
             } else if service.twitter {
-                string = "Tweet n'a pas été envoyé";
+                return "Tweet n'a pas été envoyé";
             }
         } else if lang.contains("es") {
             if service.mastodon {
-                string = "Toot no fue enviado";
+                return "Toot no fue enviado";
             } else if service.twitter {
-                string = "Tweet no fue enviado";
+                return "Tweet no fue enviado";
             }
         } else if lang.contains("eo") {
             if service.mastodon {
-                string = "Toot ne estis sendita";
+                return "Toot ne estis sendita";
             } else if service.twitter {
-                string = "Tweet ne estis sendita";
+                return "Tweet ne estis sendita";
             }
         } else if lang.contains("cn") {
             if service.mastodon {
-                string = "Toot没有发送";
+                return "Toot没有发送";
             } else if service.twitter {
-                string = "Tweet没有发送";
+                return "Tweet没有发送";
             }
         } else if lang.contains("tw") {
             if service.mastodon {
-                string = "Toot沒有發送";
+                return "Toot沒有發送";
             } else if service.twitter {
-                string = "Tweet沒有發送";
+                return "Tweet沒有發送";
             }
         } else if lang.contains("ja") {
             if service.mastodon {
-                string = "Tootが送られなかった";
+                return "Tootが送られなかった";
             } else if service.twitter {
-                string = "Tweetが送られなかった";
+                return "Tweetが送られなかった";
             }
         } else if lang.contains("ko") {
             if service.mastodon {
-                string = "Toot이 보내지지 않았다";
+                return "Toot이 보내지지 않았다";
             } else if service.twitter {
-                string = "Tweet이 보내지지 않았다";
+                return "Tweet이 보내지지 않았다";
             }
         } else if lang.contains("de") {
             if service.mastodon {
-                string = "Toot wurde nicht gesendet";
+                return "Toot wurde nicht gesendet";
             } else if service.twitter {
-                string = "Tweet wurde nicht gesendet";
+                return "Tweet wurde nicht gesendet";
             }
         } else {
             if service.mastodon {
-                string = "Toot not sent";
+                return "Toot not sent";
             } else if service.twitter {
-                string = "Tweet not sent";
+                return "Tweet not sent";
             }
         }
     }
-    string
+    return "";
 }

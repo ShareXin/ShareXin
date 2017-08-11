@@ -29,620 +29,599 @@
         26 - Unable to send to Mastodon
         27 - Unable to send to Twitter
         28 - Unable to show notification
+        29 - convert command unavailable
 */
 
 use language;
 
-pub fn message(code: usize) -> String {
-    let mut _return = String::new();
+pub fn message<'a>(code: usize) -> &'a str {
     let _lang = language::locale();
     let lang = &_lang.to_lowercase();
 
     if code == 1 {
-        _return.push_str("Error getting $LANG variable");
+        return "Error getting $LANG variable";
     } else if code == 0 {
         if lang.contains("fr") {
-            _return.push_str("Erreur lors de la réception de la variable $HOME");
+            return "Erreur lors de la réception de la variable $HOME";
         } else if lang.contains("es") {
-            _return.push_str("Error al obtener la variable $HOME");
+            return "Error al obtener la variable $HOME";
         } else if lang.contains("eo") {
-            _return.push_str("Eraro ricevanta la $HOME variablon");
+            return "Eraro ricevanta la $HOME variablon";
         } else if lang.contains("cn") {
-            _return.push_str("获取$HOME变量时发生错误");
+            return "获取$HOME变量时发生错误";
         } else if lang.contains("tw") {
-            _return.push_str("獲取$HOME變量時發生錯誤");
+            return "獲取$HOME變量時發生錯誤";
         } else if lang.contains("ja") {
-            _return.push_str("$HOME変数を取得中にエラーが発生しました");
+            return "$HOME変数を取得中にエラーが発生しました";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "$HOME 변수를 검색하는 동안 오류가 발생했습니다",
-            );
+            return "$HOME 변수를 검색하는 동안 오류가 발생했습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim lesen der $HOME Variable");
+            return "Fehler beim lesen der $HOME Variable";
         } else {
-            _return.push_str("Error getting $HOME variable");
+            return "Error getting $HOME variable";
         }
     } else if code == 2 {
         if lang.contains("fr") {
-            _return.push_str("Github inaccessible");
+            return "Github inaccessible";
         } else if lang.contains("es") {
-            _return.push_str("Github inalcanzable");
+            return "Github inalcanzable";
         } else if lang.contains("eo") {
-            _return.push_str("Github neŝanĝebla");
+            return "Github neŝanĝebla";
         } else if lang.contains("cn") {
-            _return.push_str("我不能到达Github");
+            return "我不能到达Github";
         } else if lang.contains("tw") {
-            _return.push_str("我不能到達Github");
+            return "我不能到達Github";
         } else if lang.contains("ja") {
-            _return.push_str("Githubに到達できない");
+            return "Githubに到達できない";
         } else if lang.contains("ko") {
-            _return.push_str("Github에 도달 할 수없는");
+            return "Github에 도달 할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("Github unerreichbar");
+            return "Github unerreichbar";
         } else {
-            _return.push_str("Github unreachable");
+            return "Github unreachable";
         }
     } else if code == 3 {
         if lang.contains("fr") {
-            _return.push_str("Imgur inaccessible");
+            return "Imgur inaccessible";
         } else if lang.contains("es") {
-            _return.push_str("Imgur inalcanzable");
+            return "Imgur inalcanzable";
         } else if lang.contains("eo") {
-            _return.push_str("Imgur neŝanĝebla");
+            return "Imgur neŝanĝebla";
         } else if lang.contains("cn") {
-            _return.push_str("我无法到达Imgur");
+            return "我无法到达Imgur";
         } else if lang.contains("tw") {
-            _return.push_str("我無法到達Imgur");
+            return "我無法到達Imgur";
         } else if lang.contains("ja") {
-            _return.push_str("Imgurに到達できない");
+            return "Imgurに到達できない";
         } else if lang.contains("ko") {
-            _return.push_str("Imgur에 도달 할 수없는");
+            return "Imgur에 도달 할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("Imgur unerreichbar");
+            return "Imgur unerreichbar";
         } else {
-            _return.push_str("Imgur unreachable");
+            return "Imgur unreachable";
         }
     } else if code == 4 {
         if lang.contains("fr") {
-            _return.push_str("Commande t indisponible");
+            return "Commande t indisponible";
         } else if lang.contains("es") {
-            _return.push_str("t comando no disponible");
+            return "t comando no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("t komando ne disponebla");
+            return "t komando ne disponebla";
         } else if lang.contains("cn") {
-            _return.push_str("「t」应用程序不可用");
+            return "「t」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「t」應用程序不可用");
+            return "「t」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str("「t」アプリケーションが利用できない");
+            return "「t」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「t」응용 프로그램을 사용할 수없는");
+            return "「t」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("t command nicht verfügbar");
+            return "t command nicht verfügbar";
         } else {
-            _return.push_str("t command unavailable");
+            return "t command unavailable";
         }
     } else if code == 5 {
         if lang.contains("fr") {
-            _return.push_str("Commande toot indisponible");
+            return "Commande toot indisponible";
         } else if lang.contains("es") {
-            _return.push_str("toot comando no disponible");
+            return "toot comando no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("toot komando ne disponebla");
+            return "toot komando ne disponebla";
         } else if lang.contains("cn") {
-            _return.push_str("「toot」应用程序不可用");
+            return "「toot」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「toot」應用程序不可用");
+            return "「toot」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str("「toot」アプリケーションが利用できない");
+            return "「toot」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「toot」응용 프로그램을 사용할 수없는");
+            return "「toot」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("toot command nicht verfügbar");
+            return "toot command nicht verfügbar";
         } else {
-            _return.push_str("toot command unavailable");
+            return "toot command unavailable";
         }
     } else if code == 6 {
         if lang.contains("fr") {
-            _return.push_str(
-                "Erreur lors de la réception de la variable $XDG_SESSION_TYPE",
-            );
+            return "Erreur lors de la réception de la variable $XDG_SESSION_TYPE";
         } else if lang.contains("es") {
-            _return.push_str("Error al obtener la variable $XDG_SESSION_TYPE");
+            return "Error al obtener la variable $XDG_SESSION_TYPE";
         } else if lang.contains("eo") {
-            _return.push_str("Eraro ricevanta la $XDG_SESSION_TYPE variablon");
+            return "Eraro ricevanta la $XDG_SESSION_TYPE variablon";
         } else if lang.contains("cn") {
-            _return.push_str("检索$XDG_SESSION_TYPE变量时发生错误");
+            return "检索$XDG_SESSION_TYPE变量时发生错误";
         } else if lang.contains("tw") {
-            _return.push_str("檢索$XDG_SESSION_TYPE變量時發生錯誤");
+            return "檢索$XDG_SESSION_TYPE變量時發生錯誤";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "$XDG_SESSION_TYPE変数を取得中にエラーが発生しました",
-            );
+            return "$XDG_SESSION_TYPE変数を取得中にエラーが発生しました";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "$XDG_SESSION_TYPE 변수를 검색하는 동안 오류가 발생했습니다",
-            );
+            return "$XDG_SESSION_TYPE 변수를 검색하는 동안 오류가 발생했습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim lesen der $XDG_SESSION_TYPE Variable");
+            return "Fehler beim lesen der $XDG_SESSION_TYPE Variable";
         } else {
-            _return.push_str("Error getting $XDG_SESSION_TYPE variable");
+            return "Error getting $XDG_SESSION_TYPE variable";
         }
     } else if code == 7 {
         if lang.contains("fr") {
-            _return.push_str(
-                "Erreur lors de la réception de la variable $DESKTOP_SESSION",
-            );
+            return "Erreur lors de la réception de la variable $DESKTOP_SESSION";
         } else if lang.contains("es") {
-            _return.push_str("Error al obtener la variable $DESKTOP_SESSION");
+            return "Error al obtener la variable $DESKTOP_SESSION";
         } else if lang.contains("eo") {
-            _return.push_str("Eraro ricevanta la $DESKTOP_SESSION variablon");
+            return "Eraro ricevanta la $DESKTOP_SESSION variablon";
         } else if lang.contains("cn") {
-            _return.push_str("检索$DESKTOP_SESSION变量时发生错误");
+            return "检索$DESKTOP_SESSION变量时发生错误";
         } else if lang.contains("tw") {
-            _return.push_str("檢索$ DESKTOP_SESSION變量時發生錯誤");
+            return "檢索$ DESKTOP_SESSION變量時發生錯誤";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "$DESKTOP_SESSION変数を取得中にエラーが発生しました",
-            );
+            return "$DESKTOP_SESSION変数を取得中にエラーが発生しました";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "$DESKTOP_SESSION 변수를 검색하는 동안 오류가 발생했습니다",
-            );
+            return "$DESKTOP_SESSION 변수를 검색하는 동안 오류가 발생했습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim lesen der $DESKTOP_SESSION Variable");
+            return "Fehler beim lesen der $DESKTOP_SESSION Variable";
         } else {
-            _return.push_str("Error getting $DESKTOP_SESSION variable");
+            return "Error getting $DESKTOP_SESSION variable";
         }
     } else if code == 8 {
         if lang.contains("fr") {
-            _return.push_str("Erreur d'analyse de la dernière version");
+            return "Erreur d'analyse de la dernière version";
         } else if lang.contains("es") {
-            _return.push_str("Error al analizar el último número de versión");
+            return "Error al analizar el último número de versión";
         } else if lang.contains("eo") {
-            _return.push_str("Eraro pri analizado de plej nova versio");
+            return "Eraro pri analizado de plej nova versio";
         } else if lang.contains("cn") {
-            _return.push_str("解析最新版本号时出现错误");
+            return "解析最新版本号时出现错误";
         } else if lang.contains("tw") {
-            _return.push_str("解析最新版本號時出現錯誤");
+            return "解析最新版本號時出現錯誤";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "最新のバージョン番号を解析中にエラーが発生しました",
-            );
+            return "最新のバージョン番号を解析中にエラーが発生しました";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "최신 버전 번호를 구문 분석하는 동안 오류가 발생했습니다",
-            );
+            return "최신 버전 번호를 구문 분석하는 동안 오류가 발생했습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim Parsen der neuesten Versionsnummer");
+            return "Fehler beim Parsen der neuesten Versionsnummer";
         } else {
-            _return.push_str("Error on parsing latest version number");
+            return "Error on parsing latest version number";
         }
     } else if code == 9 {
         if lang.contains("fr") {
-            _return.push_str("Incapable d'ouvrir le fichier ou la page web");
+            return "Incapable d'ouvrir le fichier ou la page web";
         } else if lang.contains("es") {
-            _return.push_str("Error al abrir el archivo o la página web");
+            return "Error al abrir el archivo o la página web";
         } else if lang.contains("eo") {
-            _return.push_str("Ne eblas malfermi dosieron aŭ retpaĝon");
+            return "Ne eblas malfermi dosieron aŭ retpaĝon";
         } else if lang.contains("cn") {
-            _return.push_str("打开文件或网页时出错");
+            return "打开文件或网页时出错";
         } else if lang.contains("tw") {
-            _return.push_str("打開文件或網頁時出錯");
+            return "打開文件或網頁時出錯";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "ファイルまたはWebページを開く際にエラーが発生しました",
-            );
+            return "ファイルまたはWebページを開く際にエラーが発生しました";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "파일 또는 Web 페이지를 열 때 오류가 발생했습니다",
-            );
+            return "파일 또는 Web 페이지를 열 때 오류가 발생했습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim Öffnen der Datei oder Webseite");
+            return "Fehler beim Öffnen der Datei oder Webseite";
         } else {
-            _return.push_str("Unable to open file or webpage");
+            return "Unable to open file or webpage";
         }
     } else if code == 10 {
         if lang.contains("fr") {
-            _return.push_str("Erreur lors de l'envoi vers Imgur");
+            return "Erreur lors de l'envoi vers Imgur";
         } else if lang.contains("es") {
-            _return.push_str("Error al subir a Imgur");
+            return "Error al subir a Imgur";
         } else if lang.contains("eo") {
-            _return.push_str("Eraro alŝuta al Imgur");
+            return "Eraro alŝuta al Imgur";
         } else if lang.contains("cn") {
-            _return.push_str("上传到Imgur时发生错误");
+            return "上传到Imgur时发生错误";
         } else if lang.contains("tw") {
-            _return.push_str("上傳到Imgur時發生錯誤");
+            return "上傳到Imgur時發生錯誤";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "Imgurへのアップロード中にエラーが発生しました",
-            );
+            return "Imgurへのアップロード中にエラーが発生しました";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "Imgur에 업로드하는 중에 오류가 발생했습니다",
-            );
+            return "Imgur에 업로드하는 중에 오류가 발생했습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim Uploaden auf Imgur");
+            return "Fehler beim Uploaden auf Imgur";
         } else {
-            _return.push_str("Error uploading to Imgur");
+            return "Error uploading to Imgur";
         }
     } else if code == 11 {
         if lang.contains("fr") {
-            _return.push_str("Erreur d'initialisation GTK");
+            return "Erreur d'initialisation GTK";
         } else if lang.contains("es") {
-            _return.push_str("Error de inicialización de GTK");
+            return "Error de inicialización de GTK";
         } else if lang.contains("eo") {
-            _return.push_str("GTK-komenca eraro");
+            return "GTK-komenca eraro";
         } else if lang.contains("cn") {
-            _return.push_str("GTK初始化错误");
+            return "GTK初始化错误";
         } else if lang.contains("tw") {
-            _return.push_str("GTK初始化錯誤");
+            return "GTK初始化錯誤";
         } else if lang.contains("ja") {
-            _return.push_str("GTK初期化エラー");
+            return "GTK初期化エラー";
         } else if lang.contains("ko") {
-            _return.push_str("GTK 초기화 오류");
+            return "GTK 초기화 오류";
         } else if lang.contains("de") {
-            _return.push_str("GTK Initialisierungsfehler");
+            return "GTK Initialisierungsfehler";
         } else {
-            _return.push_str("GTK initialize error");
+            return "GTK initialize error";
         }
     } else if code == 12 {
         if lang.contains("fr") {
-            _return.push_str("L'heure locale n'est pas disponible");
+            return "L'heure locale n'est pas disponible";
         } else if lang.contains("es") {
-            _return.push_str("Hora local no disponible");
+            return "Hora local no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("Ne eblas akiri aktualan tempon");
+            return "Ne eblas akiri aktualan tempon";
         } else if lang.contains("cn") {
-            _return.push_str("当地时间不可用");
+            return "当地时间不可用";
         } else if lang.contains("tw") {
-            _return.push_str("當地時間不可用");
+            return "當地時間不可用";
         } else if lang.contains("ja") {
-            _return.push_str("現地時間は利用できません");
+            return "現地時間は利用できません";
         } else if lang.contains("ko") {
-            _return.push_str("현지 시간은 사용할 수 없습니다");
+            return "현지 시간은 사용할 수 없습니다";
         } else if lang.contains("de") {
-            _return.push_str("Lokale Zeit nicht verfügbar");
+            return "Lokale Zeit nicht verfügbar";
         } else {
-            _return.push_str("Unable to get current time");
+            return "Unable to get current time";
         }
     } else if code == 13 {
         if lang.contains("fr") {
-            _return.push_str("Le fichier n'est pas sauvegardé");
+            return "Le fichier n'est pas sauvegardé";
         } else if lang.contains("es") {
-            _return.push_str("El archivo no se ha guardado");
+            return "El archivo no se ha guardado";
         } else if lang.contains("eo") {
-            _return.push_str("Dosiero ne savis");
+            return "Dosiero ne savis";
         } else if lang.contains("cn") {
-            _return.push_str("该文件未保存");
+            return "该文件未保存";
         } else if lang.contains("tw") {
-            _return.push_str("該文件未保存");
+            return "該文件未保存";
         } else if lang.contains("ja") {
-            _return.push_str("ファイルは保存されませんでした");
+            return "ファイルは保存されませんでした";
         } else if lang.contains("ko") {
-            _return.push_str("파일이 저장되지 않았습니다");
+            return "파일이 저장되지 않았습니다";
         } else if lang.contains("de") {
-            _return.push_str("Datei nicht gespeichert");
+            return "Datei nicht gespeichert";
         } else {
-            _return.push_str("File not saved");
+            return "File not saved";
         }
     } else if code == 14 {
         if lang.contains("fr") {
-            _return.push_str("Commande gnome-screenshot indisponible");
+            return "Commande gnome-screenshot indisponible";
         } else if lang.contains("es") {
-            _return.push_str("Comando gnome-screenshot no disponible");
+            return "Comando gnome-screenshot no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("gnome-screenshot ne ekzistas komando");
+            return "gnome-screenshot ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「gnome-screenshot」应用程序不可用");
+            return "「gnome-screenshot」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「gnome-screenshot」應用程序不可用");
+            return "「gnome-screenshot」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "「gnome-screenshot」アプリケーションが利用できない",
-            );
+            return "「gnome-screenshot」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "「gnome-screenshot」응용 프로그램을 사용할 수없는",
-            );
+            return "「gnome-screenshot」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("gnome-screenshot command nicht verfügbar");
+            return "gnome-screenshot command nicht verfügbar";
         } else {
-            _return.push_str("gnome-screenshot command unavailable");
+            return "gnome-screenshot command unavailable";
         }
     } else if code == 15 {
         if lang.contains("fr") {
-            _return.push_str("Commande spectacle indisponible");
+            return "Commande spectacle indisponible";
         } else if lang.contains("es") {
-            _return.push_str("Comando spectacle no disponible");
+            return "Comando spectacle no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("spectacle ne ekzistas komando");
+            return "spectacle ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「spectacle」应用程序不可用");
+            return "「spectacle」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「spectacle」應用程序不可用");
+            return "「spectacle」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "「spectacle」アプリケーションが利用できない",
-            );
+            return "「spectacle」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「spectacle」응용 프로그램을 사용할 수없는");
+            return "「spectacle」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("spectacle command nicht verfügbar");
+            return "spectacle command nicht verfügbar";
         } else {
-            _return.push_str("spectacle command unavailable");
+            return "spectacle command unavailable";
         }
     } else if code == 16 {
         if lang.contains("fr") {
-            _return.push_str("Commande swaygrab indisponible");
+            return "Commande swaygrab indisponible";
         } else if lang.contains("es") {
-            _return.push_str("Comando swaygrab no disponible");
+            return "Comando swaygrab no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("swaygrab ne ekzistas komando");
+            return "swaygrab ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「swaygrab」应用程序不可用");
+            return "「swaygrab」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「swaygrab」應用程序不可用");
+            return "「swaygrab」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "「swaygrab」アプリケーションが利用できない",
-            );
+            return "「swaygrab」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「swaygrab」응용 프로그램을 사용할 수없는");
+            return "「swaygrab」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("swaygrab command nicht verfügbar");
+            return "swaygrab command nicht verfügbar";
         } else {
-            _return.push_str("swaygrab command unavailable");
+            return "swaygrab command unavailable";
         }
     } else if code == 17 {
         if lang.contains("fr") {
-            _return.push_str("Commande maim indisponible");
+            return "Commande maim indisponible";
         } else if lang.contains("es") {
-            _return.push_str("Comando maim no disponible");
+            return "Comando maim no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("maim ne ekzistas komando");
+            return "maim ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「maim」应用程序不可用");
+            return "「maim」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「maim」應用程序不可用");
+            return "「maim」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str("「maim」アプリケーションが利用できない");
+            return "「maim」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「maim」응용 프로그램을 사용할 수없는");
+            return "「maim」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("maim command nicht verfügbar");
+            return "maim command nicht verfügbar";
         } else {
-            _return.push_str("maim command unavailable");
+            return "maim command unavailable";
         }
     } else if code == 18 {
         if lang.contains("fr") {
-            _return.push_str("L'environnement de bureau Wayland n'est pas pris en charge");
+            return "L'environnement de bureau Wayland n'est pas pris en charge";
         } else if lang.contains("es") {
-            _return.push_str("Wayland Entorno de escritorio no compatible");
+            return "Wayland Entorno de escritorio no compatible";
         } else if lang.contains("eo") {
-            _return.push_str("Wayland labortabla medio ne estas subtenata");
+            return "Wayland labortabla medio ne estas subtenata";
         } else if lang.contains("cn") {
-            _return.push_str("您的Wayland桌面环境不受支持");
+            return "您的Wayland桌面环境不受支持";
         } else if lang.contains("tw") {
-            _return.push_str("您的Wayland桌面環境不受支持");
+            return "您的Wayland桌面環境不受支持";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "君のWaylandデスクトップ環境はサポートされていません",
-            );
+            return "君のWaylandデスクトップ環境はサポートされていません";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "너의 Wayland 데스크탑 환경은 지원하지 않습니다",
-            );
+            return "너의 Wayland 데스크탑 환경은 지원하지 않습니다";
+;
         } else if lang.contains("de") {
-            _return.push_str("Wayland Desktopumgebung nicht unterstützt");
+            return "Wayland Desktopumgebung nicht unterstützt";
         } else {
-            _return.push_str("Unsupported Wayland desktop environment");
+            return "Unsupported Wayland desktop environment";
         }
     } else if code == 19 {
         if lang.contains("fr") {
-            _return.push_str("L'environnement de bureau n'est pas pris en charge");
+            return "L'environnement de bureau n'est pas pris en charge";
         } else if lang.contains("es") {
-            _return.push_str("Entorno de escritorio no compatible");
+            return "Entorno de escritorio no compatible";
         } else if lang.contains("eo") {
-            _return.push_str("Labortabla medio ne estas subtenata");
+            return "Labortabla medio ne estas subtenata";
         } else if lang.contains("cn") {
-            _return.push_str("您的桌面环境不受支持");
+            return "您的桌面环境不受支持";
         } else if lang.contains("tw") {
-            _return.push_str("您的桌面環境不受支持");
+            return "您的桌面環境不受支持";
         } else if lang.contains("ja") {
-            _return.push_str(
-                "君のデスクトップ環境はサポートされていません",
-            );
+            return "君のデスクトップ環境はサポートされていません";
         } else if lang.contains("ko") {
-            _return.push_str("너의 데스크탑 환경은 지원하지 않습니다");
+            return "너의 데스크탑 환경은 지원하지 않습니다";
         } else if lang.contains("de") {
-            _return.push_str("Desktopumgebung nicht unterstützt");
+            return "Desktopumgebung nicht unterstützt";
         } else {
-            _return.push_str("Unsupported desktop environment");
+            return "Unsupported desktop environment";
         }
     } else if code == 20 {
         if lang.contains("fr") {
-            _return.push_str("Commande xdotool indisponible");
+            return "Commande xdotool indisponible";
         } else if lang.contains("es") {
-            _return.push_str("Comando xdotool no disponible");
+            return "Comando xdotool no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("xdotool ne ekzistas komando");
+            return "xdotool ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「xdotool」应用程序不可用");
+            return "「xdotool」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「xdotool」應用程序不可用");
+            return "「xdotool」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str("「xdotool」アプリケーションが利用できない");
+            return "「xdotool」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「xdotool」응용 프로그램을 사용할 수없는");
+            return "「xdotool」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("xdotool command nicht verfügbar");
+            return "xdotool command nicht verfügbar";
         } else {
-            _return.push_str("xdotool command unavailable");
+            return "xdotool command unavailable";
         }
     } else if code == 21 {
         if lang.contains("fr") {
-            _return.push_str("Commande feh indisponible");
+            return "Commande feh indisponible";
         } else if lang.contains("es") {
-            _return.push_str("Comando feh no disponible");
+            return "Comando feh no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("feh ne ekzistas komando");
+            return "feh ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「feh」应用程序不可用");
+            return "「feh」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「feh」應用程序不可用");
+            return "「feh」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str("「feh」アプリケーションが利用できない");
+            return "「feh」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「feh」응용 프로그램을 사용할 수없는");
+            return "「feh」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("feh command nicht verfügbar");
+            return "feh command nicht verfügbar";
         } else {
-            _return.push_str("feh command unavailable");
+            return "feh command unavailable";
         }
     } else if code == 22 {
         if lang.contains("fr") {
-            _return.push_str("ImageMagick indisponible");
+            return "ImageMagick indisponible";
         } else if lang.contains("es") {
-            _return.push_str("ImageMagick no disponible");
+            return "ImageMagick no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("ImageMagick ne ekzistas komando");
+            return "ImageMagick ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「ImageMagick」应用程序不可用");
+            return "「ImageMagick」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「ImageMagick」應用程序不可用");
+            return "「ImageMagick」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str("「ImageMagick」アプリが利用できない");
+            return "「ImageMagick」アプリが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str(
-                "「ImageMagick」응용 프로그램을 사용할 수없는",
-            );
+            return "「ImageMagick」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("ImageMagick nicht verfügbar");
+            return "ImageMagick nicht verfügbar";
         } else {
-            _return.push_str("ImageMagick unavailable");
+            return "ImageMagick unavailable";
         }
     } else if code == 23 {
         if lang.contains("fr") {
-            _return.push_str("Commande slop indisponible");
+            return "Commande slop indisponible";
         } else if lang.contains("es") {
-            _return.push_str("Comando slop no disponible");
+            return "Comando slop no disponible";
         } else if lang.contains("eo") {
-            _return.push_str("slop ne ekzistas komando");
+            return "slop ne ekzistas komando";
         } else if lang.contains("cn") {
-            _return.push_str("「slop」应用程序不可用");
+            return "「slop」应用程序不可用";
         } else if lang.contains("tw") {
-            _return.push_str("「slop」應用程序不可用");
+            return "「slop」應用程序不可用";
         } else if lang.contains("ja") {
-            _return.push_str("「slop」アプリケーションが利用できない");
+            return "「slop」アプリケーションが利用できない";
         } else if lang.contains("ko") {
-            _return.push_str("「slop」응용 프로그램을 사용할 수없는");
+            return "「slop」응용 프로그램을 사용할 수없는";
         } else if lang.contains("de") {
-            _return.push_str("slop command nicht verfügbar");
+            return "slop command nicht verfügbar";
         } else {
-            _return.push_str("slop command unavailable");
+            return "slop command unavailable";
         }
     } else if code == 24 {
         if lang.contains("fr") {
-            _return.push_str("Fichier non lisible");
+            return "Fichier non lisible";
         } else if lang.contains("es") {
-            _return.push_str("Archivo no legible");
+            return "Archivo no legible";
         } else if lang.contains("eo") {
-            _return.push_str("Ne eblas legi dosieron");
+            return "Ne eblas legi dosieron";
         } else if lang.contains("cn") {
-            _return.push_str("我无法读取文件");
+            return "我无法读取文件";
         } else if lang.contains("tw") {
-            _return.push_str("我無法讀取文件");
+            return "我無法讀取文件";
         } else if lang.contains("ja") {
-            _return.push_str("ファイルが読めない");
+            return "ファイルが読めない";
         } else if lang.contains("ko") {
-            _return.push_str("파일을 읽을 수없는");
+            return "파일을 읽을 수없는";
         } else if lang.contains("de") {
-            _return.push_str("Datei nicht lesbar");
+            return "Datei nicht lesbar";
         } else {
-            _return.push_str("Unable to read file");
+            return "Unable to read file";
         }
     } else if code == 25 {
         if lang.contains("fr") {
-            _return.push_str("Le dossier existe déjà");
+            return "Le dossier existe déjà";
         } else if lang.contains("es") {
-            _return.push_str("La carpeta ya existe");
+            return "La carpeta ya existe";
         } else if lang.contains("eo") {
-            _return.push_str("La dosierujo jam ekzistas");
+            return "La dosierujo jam ekzistas";
         } else if lang.contains("cn") {
-            _return.push_str("文件夹已存在");
+            return "文件夹已存在";
         } else if lang.contains("tw") {
-            _return.push_str("文件夾已存在");
+            return "文件夾已存在";
         } else if lang.contains("ja") {
-            _return.push_str("フォルダは既に存在します");
+            return "フォルダは既に存在します";
         } else if lang.contains("ko") {
-            _return.push_str("폴더는 이미 존재합니다");
+            return "폴더는 이미 존재합니다";
         } else if lang.contains("de") {
-            _return.push_str("Ordner existiert bereits");
+            return "Ordner existiert bereits";
         } else {
-            _return.push_str("Folder exists");
+            return "Folder exists";
         }
     } else if code == 26 {
         if lang.contains("fr") {
-            _return.push_str("Impossible de publier sur Mastodon");
+            return "Impossible de publier sur Mastodon";
         } else if lang.contains("es") {
-            _return.push_str("Error al publicar al Mastodon");
+            return "Error al publicar al Mastodon";
         } else if lang.contains("eo") {
-            _return.push_str("Malsukcesis eldoni al Mastodon");
+            return "Malsukcesis eldoni al Mastodon";
         } else if lang.contains("cn") {
-            _return.push_str("无法上传到Mastodon");
+            return "无法上传到Mastodon";
         } else if lang.contains("tw") {
-            _return.push_str("無法上傳到Mastodon");
+            return "無法上傳到Mastodon";
         } else if lang.contains("ja") {
-            _return.push_str("Mastodonにアップロードできません");
+            return "Mastodonにアップロードできません";
         } else if lang.contains("ko") {
-            _return.push_str("Mastodon에 업로드 할 수 없습니다");
+            return "Mastodon에 업로드 할 수 없습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim veröffentlichen auf Mastodon");
+            return "Fehler beim veröffentlichen auf Mastodon";
         } else {
-            _return.push_str("Unable to send to Mastodon");
+            return "Unable to send to Mastodon";
         }
     } else if code == 27 {
         if lang.contains("fr") {
-            _return.push_str("Impossible de publier sur Twitter");
+            return "Impossible de publier sur Twitter";
         } else if lang.contains("es") {
-            _return.push_str("Error al publicar al Twitter");
+            return "Error al publicar al Twitter";
         } else if lang.contains("eo") {
-            _return.push_str("Malsukcesis eldoni al Twitter");
+            return "Malsukcesis eldoni al Twitter";
         } else if lang.contains("cn") {
-            _return.push_str("无法上传到Twitter");
+            return "无法上传到Twitter";
         } else if lang.contains("tw") {
-            _return.push_str("無法上傳到Twitter");
+            return "無法上傳到Twitter";
         } else if lang.contains("ja") {
-            _return.push_str("Twitterにアップロードできません");
+            return "Twitterにアップロードできません";
         } else if lang.contains("ko") {
-            _return.push_str("Twitter에 업로드 할 수 없습니다");
+            return "Twitter에 업로드 할 수 없습니다";
         } else if lang.contains("de") {
-            _return.push_str("Fehler beim veröffentlichen auf Twitter");
+            return "Fehler beim veröffentlichen auf Twitter";
         } else {
-            _return.push_str("Unable to send to Twitter");
+            return "Unable to send to Twitter";
         }
     } else if code == 28 {
         if lang.contains("fr") {
-            _return.push_str("Impossible d'afficher une notification");
+            return "Impossible d'afficher une notification";
         } else if lang.contains("es") {
-            _return.push_str("No se puede mostrar la notificación");
+            return "No se puede mostrar la notificación";
         } else if lang.contains("eo") {
-            _return.push_str("Ne eblas montri sciigon");
+            return "Ne eblas montri sciigon";
         } else if lang.contains("cn") {
-            _return.push_str("我无法显示通知");
+            return "我无法显示通知";
         } else if lang.contains("tw") {
-            _return.push_str("我無法顯示通知");
+            return "我無法顯示通知";
         } else if lang.contains("ja") {
-            _return.push_str("通知を表示できません");
+            return "通知を表示できません";
         } else if lang.contains("ko") {
-            _return.push_str("통지를 표시 할 수 없습니다");
+            return "통지를 표시 할 수 없습니다";
         } else if lang.contains("de") {
-            _return.push_str("Kann keine Benachrichtigung anzeigen");
+            return "Kann keine Benachrichtigung anzeigen";
         } else {
-            _return.push_str("Unable to show notification");
+            return "Unable to show notification";
+        }
+    } else if code == 29 {
+        if lang.contains("fr") {
+            return "Commande convert indisponible";
+        } else if lang.contains("es") {
+            return "convert comando no disponible";
+        } else if lang.contains("eo") {
+            return "convert komando ne disponebla";
+        } else if lang.contains("cn") {
+            return "「convert」应用程序不可用";
+        } else if lang.contains("tw") {
+            return "「convert」應用程序不可用";
+        } else if lang.contains("ja") {
+            return "「convert」アプリケーションが利用できない";
+        } else if lang.contains("ko") {
+            return "「convert」응용 프로그램을 사용할 수없는";
+        } else if lang.contains("de") {
+            return "convert command nicht verfügbar";
+        } else {
+            return "convert command unavailable";
         }
     }
 
-    _return
+    return "";
 }

@@ -19,7 +19,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 28: {}", error::message(28));
+            eprintln!("Error 28: {}", error::message(28));
             return;
         }
     };
@@ -38,7 +38,7 @@ pub fn message_sent(service: Destination, text: &str) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 28: {}", error::message(28));
+            eprintln!("Error 28: {}", error::message(28));
             return;
         }
     };
@@ -56,7 +56,7 @@ pub fn file_saved() {
     {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 28: {}", error::message(28));
+            eprintln!("Error 28: {}", error::message(28));
             return;
         }
     };
@@ -74,7 +74,7 @@ pub fn empty(service: Destination) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 28: {}", error::message(28));
+            eprintln!("Error 28: {}", error::message(28));
             return;
         }
     };
@@ -92,7 +92,7 @@ pub fn not_sent(service: Destination) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            println!("Error 28: {}", error::message(28));
+            eprintln!("Error 28: {}", error::message(28));
             return;
         }
     };

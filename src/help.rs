@@ -1,333 +1,360 @@
 use VERSION;
-use std::*;
 use language;
 
-static DATE: &'static str = "2017-08-09";
+static APP: &'static str = "sharexin ";
 
-pub fn help() {
-    let mut help_fr = String::from("\nsharexin ");
-    help_fr.push_str(VERSION);
-    help_fr.push_str(" ");
-    help_fr.push_str(DATE);
-    help_fr.push_str(
-        "
+pub fn help() -> String {
 
-Utilisation: sharexin <option> [destination] [option d'image] [FICHIER]
+    let usage_fr = "Utilisation: ";
+    let options_fr = "Options:";
+    let help_fr = "Afficher le message d'aide et quitter";
+    let version_fr = "Imprimer les informations de la version et quitter";
+    let upgrade_fr = "Vérifiez les nouvelles mises à jour";
+    let image_fr = "Options d'image:";
+    let area_fr = "Capturer une zone de l'écran plutôt que l'écran complet";
+    let window_fr = "Capturer la fenêtre active plutôt que l'écran complet";
+    let full_fr = "Capturer l'écran complet";
+    let file_fr = "Utiliser un fichier";
+    let destinations_fr = "Destinations:";
+    let toot_fr = "Upload vers Mastodon (en utilisant \"toot\")";
+    let tweet_fr = "Upload vers Twitter (en utilisant \"t\")";
+    let imgur_fr = "Upload vers Imgur";
+    let examples_fr = "Exemples:";
 
-Options:
-  -h, --help\tAfficher le message d'aide et quitter
-  -V, --version\tImprimer les informations de la version et quitter
-  -U, --upgrade\tVérifiez les nouvelles mises à jour
+    let usage_es = "Utilización: ";
+    let options_es = "Opciones:";
+    let help_es = "Mostrar el mensaje de ayuda y sale";
+    let version_es = "Imprimir información de la versión y sale";
+    let upgrade_es = "Busque nuevas actualizaciones";
+    let image_es = "Opciones de imagen:";
+    let area_es = "Capturar un área de la pantalla en lugar de la pantalla entera";
+    let window_es = "Capturar una ventana en vez de la pantalla entera";
+    let full_es = "Capturar la pantalla completa";
+    let file_es = "Utilice un archive";
+    let destinations_es = "Destinos:";
+    let toot_es = "Sube a Mastodon (usando \"toot\")";
+    let tweet_es = "Sube a Twitter (usando \"t\")";
+    let imgur_es = "Sube a Imgur";
+    let examples_es = "Ejemplos:";
 
-Options d'image:
-  area\t\tCapturer une zone de l'écran plutôt que l'écran complet
-  window\tCapturer la fenêtre active plutôt que l'écran complet
-  full\t\tCapturer l'écran complet
-  file\t\tUtiliser un fichier
+    let usage_eo = "Uzo: ";
+    let options_eo = "Opcioj:";
+    let help_eo = "Montru la helpo mesaĝon kaj eliro";
+    let version_eo = "Printversio informoj kaj eliro";
+    let upgrade_eo = "Kontrolu por novaj ĝisdatigoj";
+    let image_eo = "Opcioj de bildo:";
+    let area_eo = "Kapti areon de la ekrano anstataŭ ol la tuta ekrano";
+    let window_eo = "Kapti la aktivan fenestron anstataŭ ol la tuta ekrano";
+    let full_eo = "Kapti la plena ekrano";
+    let file_eo = "Uzu dosieron";
+    let destinations_eo = "Celoj:";
+    let toot_eo = "Alŝutu al Mastodon (uzante \"toot\")";
+    let tweet_eo = "Alŝutu al Twitter (uzante \"t\")";
+    let imgur_eo = "Alŝutu al Imgur";
+    let examples_eo = "Ekzemploj:";
 
-Destinations:
-  toot\t\tUpload vers Mastodon (en utilisant \"toot\")
-  tweet\t\tUpload vers Twitter (en utilisant \"t\")
-  imgur\t\tUpload vers Imgur
+    let usage_cn = "使用方法: ";
+    let options_cn = "选项:";
+    let help_cn = "退出标准成功输出输出用法消息。";
+    let version_cn = "在成功完成输出版本信息到标准输出。";
+    let upgrade_cn = "要检查新的更新。";
+    let image_cn = "选项截图:";
+    let area_cn = "截取屏幕的一个区域，而不是整个屏幕";
+    let window_cn = "截取窗口，而不是整个屏幕";
+    let full_cn = "为了让整个屏幕";
+    let file_cn = "使用文件";
+    let destinations_cn = "目的地:";
+    let toot_cn = "上传到Mastodon（使用 「toot」）";
+    let tweet_cn = "上传到Twitter（使用 「t」）";
+    let imgur_cn = "上传到Imgur";
+    let examples_cn = "案件:";
 
-Exemples:
-  sharexin toot
+    let usage_tw = "使用方法: ";
+    let options_tw = "選項:";
+    let help_tw = "退出標準成功輸出輸出用法消息。";
+    let version_tw = "在成功完成輸出版本信息到標準輸出。";
+    let upgrade_tw = "要檢查新的更新。";
+    let image_tw = "選項截圖:";
+    let area_tw = "擷取畫面的一個區域而不是整個畫面";
+    let window_tw = "擷取單一視窗而不是整個畫面";
+    let full_tw = "為了讓整個屏幕";
+    let file_tw = "使用文件";
+    let destinations_tw = "目的地:";
+    let toot_tw = "上傳到Mastodon（使用 「toot」）";
+    let tweet_tw = "上傳到Twitter（使用 「t」）";
+    let imgur_tw = "上傳到Imgur";
+    let examples_tw = "案件:";
+
+    let usage_ja = "使用方法: ";
+    let options_ja = "オプション:";
+    let help_ja = "標準出力に使用方法のメッセージを出力して正常終了する。";
+    let version_ja = "標準出力にバージョン情報を出力して正常終了する。";
+    let upgrade_ja = "新しい更新を確認する。";
+    let image_ja = "スクリーンショットのオプション:";
+    let area_ja = "画面全体ではなく一部を取得する";
+    let window_ja = "画面全体ではなくウィンドウ単体を取得する";
+    let full_ja = "画面全体を取得する";
+    let file_ja = "ファイルを使って";
+    let destinations_ja = "行き先:";
+    let toot_ja = "マストドンにアップロード（使用して「ｔｏｏｔ」)";
+    let tweet_ja = "ツイッターにアップロード（使用して「ｔ」)";
+    let imgur_ja = "Imgurにアップロード";
+    let examples_ja = "例:";
+
+    let usage_ko = "사용 방법: ";
+    let options_ko = "옵션:";
+    let help_ko = "표준 출력으로 사용법을 출력하고 정상적으로 종료한다.";
+    let version_ko = "표준 출력으로 버전 정보를 출력하고 정상적으로 종료한다.";
+    let upgrade_ko = "새로운 업데이트를 확인한다.";
+    let image_ko = "스크린 샷 옵션:";
+    let area_ko = "전체 화면 대신에 화면의 일정 영역을 찍습니다";
+    let window_ko = "전체 화면 대신에 창을 찍습니다";
+    let full_ko = "전체 화면을 얻을";
+    let file_ko = "파일을 사용하여";
+    let destinations_ko = "목적지:";
+    let toot_ko = "Mastodon에 업로드 (사용 「toot」)";
+    let tweet_ko = "Twitter에 업로드 (사용 「t」)";
+    let imgur_ko = "Imgur에 업로드";
+    let examples_ko = "예:";
+
+    let usage_de = "Anwendung: ";
+    let options_de = "Optionen:";
+    let help_de = "Zeige diese Nachricht an und beende";
+    let version_de = "Gebe Version aus und beende";
+    let upgrade_de = "Auf neue Updates prüfen";
+    let image_de = "Bildoptionen:";
+    let area_de = "Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen";
+    let window_de = "Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen";
+    let full_de = "Gesamten Bildschirms aufnehmen";
+    let file_de = "Benutze eine Datei";
+    let destinations_de = "Reiseziele:";
+    let toot_de = "Auf Mastodon veröffentlichen (benutzt \"toot\")";
+    let tweet_de = "Auf Twitter veröffentlichen (benutzt \"t\")";
+    let imgur_de = "Auf Imgur veröffentlichen";
+    let examples_de = "Beispiele:";
+
+    let usage_en = "Usage: ";
+    let options_en = "Options:";
+    let help_en = "Display this help message and exit";
+    let version_en = "Print version info and exit";
+    let upgrade_en = "Check for new updates";
+    let image_en = "Image Options:";
+    let area_en = "Grab an area of the screen instead of the entire screen";
+    let window_en = "Grab the current window instead of the entire screen";
+    let full_en = "Grab the entire screen";
+    let file_en = "Use a file";
+    let destinations_en = "Destinations:";
+    let toot_en = "Upload to Mastodon (uses \"toot\")";
+    let tweet_en = "Upload to Twitter (uses \"t\")";
+    let imgur_en = "Upload to Imgur";
+    let examples_en = "Examples:";
+
+    let usage_usage = "sharexin <options> [destination] [image options] [FILE]";
+    let usage_examples = "  sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur file [FICHIER]
-    ",
-    );
+  sharexin imgur file [FILE]";
 
-
-    let mut help_es = String::from("\nsharexin ");
-    help_es.push_str(VERSION);
-    help_es.push_str(" ");
-    help_es.push_str(DATE);
-    help_es.push_str(
-        "
-
-Utilización: sharexin <opciones> [destino] [opcion de imagen] [ARCHIVO]
-
-Opciones:
-  -h, --help\tMostrar el mensaje de ayuda y sale
-  -V, --version\tImprimir información de la versión y sale
-  -U, --upgrade\tBusque nuevas actualizaciones
-
-Opciones de imagen:
-  area\t\tCapturar un área de la pantalla en lugar de la pantalla entera
-  window\tCapturar una ventana en vez de la pantalla entera
-  full\t\tCapturar la pantalla completa
-  file\t\tUtilice un archive
-
-Destinos:
-  toot\t\tSube a Mastodon (usando \"toot\")
-  tweet\t\tSube a Twitter (usando \"t\")
-  imgur\t\tSube a Imgur
-
-Ejemplos:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [ARCHIVE]
-    ",
-    );
-
-
-    let mut help_eo = String::from("\nsharexin ");
-    help_eo.push_str(VERSION);
-    help_eo.push_str(" ");
-    help_eo.push_str(DATE);
-    help_eo.push_str(
-        "
-
-Uzo: sharexin <opcioj> [celon] [opcio de bildo] [DOSIERO]
-
-Opcioj:
-  -h, --help\tMontru la helpo mesaĝon kaj eliro
-  -V, --version\tPrintversio informoj kaj eliro
-  -U, --upgrade\tKontrolu por novaj ĝisdatigoj
-
-Opcioj de bildo:
-  area\t\tKapti areon de la ekrano anstataŭ ol la tuta ekrano
-  window\tKapti la aktivan fenestron anstataŭ ol la tuta ekrano
-  full\t\tKapti la plena ekrano
-  file\t\tUzu dosieron
-
-Celoj:
-  toot\t\tAlŝutu al Mastodon (uzante \"toot\")
-  tweet\t\tAlŝutu al Twitter (uzante \"t\")
-  imgur\t\tAlŝutu al Imgur
-
-Ekzemploj:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [DOSIERO]
-    ",
-    );
-
-
-    let mut help_cn = String::from("\nsharexin ");
-    help_cn.push_str(VERSION);
-    help_cn.push_str(" ");
-    help_cn.push_str(DATE);
-    help_cn.push_str(
-        "
-
-使用方法： sharexin <选项> [目的地] [截图选项] [文件]
-
-选项:
-  -h, --help\t退出标准成功输出输出用法消息。
-  -V, --version\t在成功完成输出版本信息到标准输出。
-  -U, --upgrade\t要检查新的更新。
-
-选项截图:
-  area\t\t截取屏幕的一个区域，而不是整个屏幕
-  window\t截取窗口，而不是整个屏幕
-  full\t\t为了让整个屏幕
-  file\t\t使用文件
-
-目的地:
-  toot\t\t上传到Mastodon（使用 “toot”）
-  tweet\t\t它上传到Twitter（使用 “t”）
-  imgur\t\t它上传到Imgur
-
-案件:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [文件]
-    ",
-    );
-
-
-    let mut help_tw = String::from("\nsharexin ");
-    help_tw.push_str(VERSION);
-    help_tw.push_str(" ");
-    help_tw.push_str(DATE);
-    help_tw.push_str(
-        "
-
-使用方法：sharexin <選項> [目的地] [截圖選項] [文件]
-
-選項:
-  -h, --help\t退出標準成功輸出輸出用法消息。
-  -V, --version\t在成功完成輸出版本信息到標準輸出。
-  -U, --upgrade\t要檢查新的更新。
-
-選項截圖:
-  area\t\t擷取畫面的一個區域而不是整個畫面
-  window\t擷取單一視窗而不是整個畫面
-  full\t\t為了讓整個屏幕
-  file\t\t使用文件
-
-目的地:
-  toot\t\t上傳到Mastodon（使用 “toot”）
-  tweet\t\t它上傳到Twitter（使用 “t”）
-  imgur\t\t它上傳到Imgur
-
-案件:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [文件]
-    ",
-    );
-
-
-    let mut help_ja = String::from("\nsharexin ");
-    help_ja.push_str(VERSION);
-    help_ja.push_str(" ");
-    help_ja.push_str(DATE);
-    help_ja.push_str("
-
-使用方法: sharexin <オプション> [行き先] [スクリーンショットのオプション] [ファイル]
-
-オプション:
-  -h, --help\t標準出力に使用方法のメッセージを出力して正常終了する。
-  -V, --version\t標準出力にバージョン情報を出力して正常終了する。
-  -U, --upgrade\t新しい更新を確認する。
-
-スクリーンショットのオプション:
-  area\t\t画面全体ではなく一部を取得する
-  window\t画面全体ではなくウィンドウ単体を取得する
-  full\t\t画面全体を取得する
-  file\t\tファイルを使って
-
-行き先:
-  toot\t\tマストドンにアップロード（使用して「ｔｏｏｔ」)
-  tweet\t\tツイッターにアップロード（使用して「ｔ」)
-  imgur\t\tImgurにアップロード
-
-例:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [ファイル]
-    ");
-
-
-    let mut help_ko = String::from("\nsharexin ");
-    help_ko.push_str(VERSION);
-    help_ko.push_str(" ");
-    help_ko.push_str(DATE);
-    help_ko.push_str(
-        "
-
-사용 방법: sharexin <옵션> [목적지] [스크린 샷 옵션] [파일]
-
-옵션:
-  -h, --help\t표준 출력으로 사용법을 출력하고 정상적으로 종료한다.
-  -V, --version\t표준 출력으로 버전 정보를 출력하고 정상적으로 종료한다.
-  -U, --upgrade\t새로운 업데이트를 확인한다.
-
-스크린 샷 옵션:
-  area\t\t전체 화면 대신에 화면의 일정 영역을 찍습니다
-  window\t전체 화면 대신에 창을 찍습니다
-  full\t\t전체 화면을 얻을
-  file\t\t파일을 사용하여
-
-목적지:
-  toot\t\tMastodon에 업로드 (사용 \"toot\")
-  tweet\t\tTwitter에 업로드 (사용 \"t\")
-  imgur\t\tImgur에 업로드
-
-예:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [파일]
-    ",
-    );
-
-
-    let mut help_de = String::from("\nsharexin ");
-    help_de.push_str(VERSION);
-    help_de.push_str(" ");
-    help_de.push_str(DATE);
-    help_de.push_str(
-        "
-
-Anwendung: sharexin <optionen> [reiseziel] [bildoptionen] [DATEI]
-
-Optionen:
-  -h, --help\tZeige diese Nachricht an und beende
-  -V, --version\tGebe Version aus und beende
-  -U, --upgrade\tAuf neue Updates prüfen
-
-Bildoptionen:
-  area\t\tNur einen Bereich anstatt des gesamten Bildschirms aufnehmen
-  window\tNur ein Fenster anstatt des gesamten Bildschirms aufnehmen
-  full\t\tGesamten Bildschirms aufnehmen
-  file\t\tBenutze eine Datei
-
-Reiseziele:
-  toot\t\tAuf Mastodon veröffentlichen (benutzt \"toot\")
-  tweet\t\tAuf Twitter veröffentlichen (benutzt \"t\")
-  imgur\t\tAuf Imgur veröffentlichen
-
-Beispiele:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [DATEI]
-    ",
-    );
-
-
-    let mut help = String::from("\nsharexin ");
-    help.push_str(VERSION);
-    help.push_str(" ");
-    help.push_str(DATE);
-    help.push_str(
-        "
-
-Usage: sharexin <options> [destination] [image options] [FILE]
-
-Options:
-  -h, --help\tDisplay this help message and exit
-  -V, --version\tPrint version info and exit
-  -U, --upgrade\tCheck for new updates
-
-Image Options:
-  area\t\tGrab an area of the screen instead of the entire screen
-  window\tGrab the current window instead of the entire screen
-  full\t\tGrab the entire screen
-  file\t\tUse a file
-
-Destinations:
-  toot\t\tUpload to Mastodon (uses \"toot\")
-  tweet\t\tUpload to Twitter (uses \"t\")
-  imgur\t\tUpload to Imgur
-
-Examples:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [FILE]
-    ",
-    );
+    let usage: &str;
+    let options: &str;
+    let help: &str;
+    let version: &str;
+    let upgrade: &str;
+    let image: &str;
+    let area: &str;
+    let window: &str;
+    let full: &str;
+    let file: &str;
+    let destinations: &str;
+    let toot: &str;
+    let tweet: &str;
+    let imgur: &str;
+    let examples: &str;
 
     // checks $LANG variable, should work universally on unix-like systems
     let _lang = language::locale();
     let lang = &_lang.to_lowercase();
     if lang.contains("fr") {
-        println!("{}", help_fr);
+        usage = usage_fr;
+        options = options_fr;
+        help = help_fr;
+        version = version_fr;
+        upgrade = upgrade_fr;
+        image = image_fr;
+        area = area_fr;
+        window = window_fr;
+        full = full_fr;
+        file = file_fr;
+        destinations = destinations_fr;
+        toot = toot_fr;
+        tweet = tweet_fr;
+        imgur = imgur_fr;
+        examples = examples_fr;
     } else if lang.contains("es") {
-        println!("{}", help_es);
+        usage = usage_es;
+        options = options_es;
+        help = help_es;
+        version = version_es;
+        upgrade = upgrade_es;
+        image = image_es;
+        area = area_es;
+        window = window_es;
+        full = full_es;
+        file = file_es;
+        destinations = destinations_es;
+        toot = toot_es;
+        tweet = tweet_es;
+        imgur = imgur_es;
+        examples = examples_es;
     } else if lang.contains("eo") {
-        println!("{}", help_eo);
+        usage = usage_eo;
+        options = options_eo;
+        help = help_eo;
+        version = version_eo;
+        upgrade = upgrade_eo;
+        image = image_eo;
+        area = area_eo;
+        window = window_eo;
+        full = full_eo;
+        file = file_eo;
+        destinations = destinations_eo;
+        toot = toot_eo;
+        tweet = tweet_eo;
+        imgur = imgur_eo;
+        examples = examples_eo;
     } else if lang.contains("cn") {
-        println!("{}", help_cn);
+        usage = usage_cn;
+        options = options_cn;
+        help = help_cn;
+        version = version_cn;
+        upgrade = upgrade_cn;
+        image = image_cn;
+        area = area_cn;
+        window = window_cn;
+        full = full_cn;
+        file = file_cn;
+        destinations = destinations_cn;
+        toot = toot_cn;
+        tweet = tweet_cn;
+        imgur = imgur_cn;
+        examples = examples_cn;
     } else if lang.contains("tw") {
-        println!("{}", help_tw);
+        usage = usage_tw;
+        options = options_tw;
+        help = help_tw;
+        version = version_tw;
+        upgrade = upgrade_tw;
+        image = image_tw;
+        area = area_tw;
+        window = window_tw;
+        full = full_tw;
+        file = file_tw;
+        destinations = destinations_tw;
+        toot = toot_tw;
+        tweet = tweet_tw;
+        imgur = imgur_tw;
+        examples = examples_tw;
     } else if lang.contains("ja") {
-        println!("{}", help_ja);
+        usage = usage_ja;
+        options = options_ja;
+        help = help_ja;
+        version = version_ja;
+        upgrade = upgrade_ja;
+        image = image_ja;
+        area = area_ja;
+        window = window_ja;
+        full = full_ja;
+        file = file_ja;
+        destinations = destinations_ja;
+        toot = toot_ja;
+        tweet = tweet_ja;
+        imgur = imgur_ja;
+        examples = examples_ja;
     } else if lang.contains("ko") {
-        println!("{}", help_ko);
+        usage = usage_ko;
+        options = options_ko;
+        help = help_ko;
+        version = version_ko;
+        upgrade = upgrade_ko;
+        image = image_ko;
+        area = area_ko;
+        window = window_ko;
+        full = full_ko;
+        file = file_ko;
+        destinations = destinations_ko;
+        toot = toot_ko;
+        tweet = tweet_ko;
+        imgur = imgur_ko;
+        examples = examples_ko;
     } else if lang.contains("de") {
-        println!("{}", help_de);
+        usage = usage_de;
+        options = options_de;
+        help = help_de;
+        version = version_de;
+        upgrade = upgrade_de;
+        image = image_de;
+        area = area_de;
+        window = window_de;
+        full = full_de;
+        file = file_de;
+        destinations = destinations_de;
+        toot = toot_de;
+        tweet = tweet_de;
+        imgur = imgur_de;
+        examples = examples_de;
     } else {
-        println!("{}", help);
+        usage = usage_en;
+        options = options_en;
+        help = help_en;
+        version = version_en;
+        upgrade = upgrade_en;
+        image = image_en;
+        area = area_en;
+        window = window_en;
+        full = full_en;
+        file = file_en;
+        destinations = destinations_en;
+        toot = toot_en;
+        tweet = tweet_en;
+        imgur = imgur_en;
+        examples = examples_en;
     }
+
+    let mut message = String::from(APP);
+    message.push_str(VERSION);
+    message.push_str("\n");
+    message.push_str(usage);
+    message.push_str(usage_usage);
+    message.push_str("\n\n");
+    message.push_str(options);
+    message.push_str("\n  -h, --help\t");
+    message.push_str(help);
+    message.push_str("\n  -V, --version\t");
+    message.push_str(version);
+    message.push_str("\n  -U, --upgrade\t");
+    message.push_str(upgrade);
+    message.push_str("\n\n");
+    message.push_str(image);
+    message.push_str("\n  area\t\t");
+    message.push_str(area);
+    message.push_str("\n  window\t");
+    message.push_str(window);
+    message.push_str("\n  full\t\t");
+    message.push_str(full);
+    message.push_str("\n  file\t\t");
+    message.push_str(file);
+    message.push_str("\n\n");
+    message.push_str(destinations);
+    message.push_str("\n  toot\t\t");
+    message.push_str(toot);
+    message.push_str("\n  tweet\t\t");
+    message.push_str(tweet);
+    message.push_str("\n  imgur\t\t");
+    message.push_str(imgur);
+    message.push_str("\n\n");
+    message.push_str(examples);
+    message.push_str("\n");
+    message.push_str(usage_examples);
+
+    return message;
 }
