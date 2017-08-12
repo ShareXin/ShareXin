@@ -7,7 +7,6 @@ use error;
 pub fn image(txt: String) {
     let mastodon = Destination::new(0);
 
-    // gets file to send from temp dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
@@ -18,13 +17,13 @@ pub fn image(txt: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 5: {}", error::message(5));
+            eprintln!("{}", error::message(6));
             notification::not_sent(mastodon);
             process::exit(1)
         }
     };
     if _toot.code() == Some(2) {
-        eprintln!("Error 26: {}", error::message(26));
+        eprintln!("{}", error::message(21));
         notification::not_sent(mastodon);
         process::exit(1);
     }
@@ -37,13 +36,13 @@ pub fn toot(txt: String) {
     let _toot = match Command::new("toot").args(&["post", &txt]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 5: {}", error::message(5));
+            eprintln!("{}", error::message(6));
             notification::not_sent(mastodon);
             process::exit(1)
         }
     };
     if _toot.code() == Some(2) {
-        eprintln!("Error 26: {}", error::message(26));
+        eprintln!("{}", error::message(21));
         notification::not_sent(mastodon);
         process::exit(1);
     }

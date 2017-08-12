@@ -31,8 +31,8 @@
 
 ## `--help`  
 
-```rust
-sharexin 0.4.8
+```bash
+sharexin 0.4.9
 Usage: sharexin <options> [destination] [image options] [FILE]
 
 Options:
@@ -56,8 +56,6 @@ Examples:
   sharexin tweet full
   sharexin toot area
   sharexin imgur file [FILE]
-
-
 ```  
 
 ## Language support  
@@ -135,6 +133,16 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.4.9] - 2017-08-12  
+- Lots of optimizations  
+- Actual bug fixes  
+- Better error messages  
+- `format!` is a thing  
+- `gnome-screenshot` has native shadow effects for windows  
+- Really dumb [seg](https://github.com/thebitstick/ShareXin/blob/master/src/language.rs#L25) [fault](https://github.com/thebitstick/ShareXin/blob/master/src/error.rs#L38)  
+- Less code, actually  
+- Less comments, cause "comments are bad"  
+
 #### [0.4.8] - 2017-08-11  
 - Stderr used for errors  
 - Returns for String methods rather than variables  

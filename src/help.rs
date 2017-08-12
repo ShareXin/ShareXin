@@ -5,6 +5,7 @@ static APP: &'static str = "sharexin ";
 
 pub fn help() -> String {
 
+    // snippets of help/usage message in 9 languages, will be formated
     let usage_fr = "Utilisation: ";
     let options_fr = "Options:";
     let help_fr = "Afficher le message d'aide et quitter";
@@ -155,6 +156,7 @@ pub fn help() -> String {
   sharexin toot area
   sharexin imgur file [FILE]";
 
+    // templates
     let usage: &str;
     let options: &str;
     let help: &str;
@@ -171,9 +173,9 @@ pub fn help() -> String {
     let imgur: &str;
     let examples: &str;
 
-    // checks $LANG variable, should work universally on unix-like systems
     let _lang = language::locale();
     let lang = &_lang.to_lowercase();
+
     if lang.contains("fr") {
         usage = usage_fr;
         options = options_fr;
@@ -320,41 +322,30 @@ pub fn help() -> String {
         examples = examples_en;
     }
 
-    let mut message = String::from(APP);
-    message.push_str(VERSION);
-    message.push_str("\n");
-    message.push_str(usage);
-    message.push_str(usage_usage);
-    message.push_str("\n\n");
-    message.push_str(options);
-    message.push_str("\n  -h, --help\t");
-    message.push_str(help);
-    message.push_str("\n  -V, --version\t");
-    message.push_str(version);
-    message.push_str("\n  -U, --upgrade\t");
-    message.push_str(upgrade);
-    message.push_str("\n\n");
-    message.push_str(image);
-    message.push_str("\n  area\t\t");
-    message.push_str(area);
-    message.push_str("\n  window\t");
-    message.push_str(window);
-    message.push_str("\n  full\t\t");
-    message.push_str(full);
-    message.push_str("\n  file\t\t");
-    message.push_str(file);
-    message.push_str("\n\n");
-    message.push_str(destinations);
-    message.push_str("\n  toot\t\t");
-    message.push_str(toot);
-    message.push_str("\n  tweet\t\t");
-    message.push_str(tweet);
-    message.push_str("\n  imgur\t\t");
-    message.push_str(imgur);
-    message.push_str("\n\n");
-    message.push_str(examples);
-    message.push_str("\n");
-    message.push_str(usage_examples);
+    return format!(
+        "{}{}\n{}{}\n\n{}\n  -h, --help\t{}\n  -V, --version\t{}\n  -U, --upgrade\t{}\n
+{}\n  area\t\t{}\n  window\t{}\n  full\t\t{}\n  file\t\t{}\n
+{}\n  toot\t\t{}\n  tweet\t\t{}\n  imgur\t\t{}\n
+{}\n{}",
+        APP,
+        VERSION,
+        usage,
+        usage_usage,
+        options,
+        help,
+        version,
+        upgrade,
+        image,
+        area,
+        window,
+        full,
+        file,
+        destinations,
+        toot,
+        tweet,
+        imgur,
+        examples,
+        usage_examples
+    );
 
-    return message;
 }

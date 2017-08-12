@@ -16,7 +16,6 @@ fn args() {
     let twitter = Destination::new(1);
     let mastodon = Destination::new(0);
 
-    // fetches user arguments
     let args: Vec<String> = env::args().collect();
     match args.len() {
         2 => match args[1].as_ref() {
@@ -29,45 +28,45 @@ fn args() {
         3 => match args[1].as_ref() {
             "toot" => match args[2].as_ref() {
                 "area" => {
-                    image::image(String::from("-s"));
+                    image::image(0);
                     gui(mastodon, true);
                 }
                 "window" => {
-                    image::image(String::from("-i"));
+                    image::image(1);
                     gui(mastodon, true);
                 }
                 "full" => {
-                    image::image(String::new());
+                    image::image(2);
                     gui(mastodon, true);
                 }
                 _ => check(),
             },
             "tweet" => match args[2].as_ref() {
                 "area" => {
-                    image::image(String::from("-s"));
+                    image::image(0);
                     gui(twitter, true);
                 }
                 "window" => {
-                    image::image(String::from("-i"));
+                    image::image(1);
                     gui(twitter, true);
                 }
                 "full" => {
-                    image::image(String::new());
+                    image::image(2);
                     gui(twitter, true);
                 }
                 _ => check(),
             },
             "imgur" => match args[2].as_ref() {
                 "area" => {
-                    image::image(String::from("-s"));
+                    image::image(0);
                     imgur::send();
                 }
                 "window" => {
-                    image::image(String::from("-i"));
+                    image::image(1);
                     imgur::send();
                 }
                 "full" => {
-                    image::image(String::new());
+                    image::image(2);
                     imgur::send();
                 }
                 _ => check(),
@@ -103,16 +102,16 @@ fn args() {
 }
 
 fn check() {
+    println!("{}", help::help());
     if !check_exists("t") {
-        eprintln!("Error 4: {}", error::message(4));
+        eprintln!("\n{}", error::message(5));
     }
     if !check_exists("toot") {
-        eprintln!("Error 5: {}", error::message(5));
+        eprintln!("{}", error::message(6));
     }
     if !check_exists("convert") {
-        eprintln!("Error 29: {}", error::message(29));
+        eprintln!("{}", error::message(15));
     }
-    println!("{}", help::help());
 }
 
 fn check_exists(program: &str) -> bool {

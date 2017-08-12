@@ -29,14 +29,14 @@ pub fn upgrade() {
             let current_version: usize = match str::replace(VERSION, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
                 Err(_) => {
-                    eprintln!("Error 8: {}", error::message(8));
+                    eprintln!("{}", error::message(18));
                     process::exit(1)
                 }
             };
             let latest_version: usize = match str::replace(&latest_utf, ".", "").parse::<usize>() {
                 Ok(ok) => ok,
                 Err(_) => {
-                    eprintln!("Error 8: {}", error::message(8));
+                    eprintln!("{}", error::message(18));
                     process::exit(1)
                 }
             };
@@ -51,17 +51,15 @@ pub fn upgrade() {
     match transfer.perform() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 2: {}", error::message(2));
+            eprintln!("{}", error::message(16));
             process::exit(1)
         }
     };
 }
 
 fn check_update(latest_version: usize, current_version: usize, latest_utf: String) -> String {
-    let _lang = language::locale();
-    let lang = &_lang.to_lowercase();
 
-    let mut _return = String::new();
+    let lang = language::locale();
 
     let mut installed = String::new();
     let mut latest = String::new();
@@ -159,116 +157,102 @@ fn check_update(latest_version: usize, current_version: usize, latest_utf: Strin
     }
 
     if latest_version > current_version {
-        _return.push_str(&installed);
-        _return.push_str(": ");
-        _return.push_str(VERSION);
-        _return.push_str("\n");
-        _return.push_str(&latest);
-        _return.push_str(": ");
-        _return.push_str(&latest_utf);
-        _return.push_str("\n");
-        _return.push_str(&update_state);
         open_update();
+        return format!(
+            "{}: {}\n{}: {}\n{}",
+            &installed,
+            VERSION,
+            &latest,
+            &latest_utf,
+            &update_state
+        );
     } else if latest_version < current_version {
-        _return.push_str(&installed);
-        _return.push_str(": ");
-        _return.push_str(VERSION);
-        _return.push_str("\n");
-        _return.push_str(&latest);
-        _return.push_str(": ");
-        _return.push_str(&latest_utf);
-        _return.push_str("\n");
-        _return.push_str(&update_state);
+        return format!(
+            "{}: {}\n{}: {}\n{}",
+            &installed,
+            VERSION,
+            &latest,
+            &latest_utf,
+            &update_state
+        );
     } else if latest_version == current_version {
-        _return.push_str(&installed);
-        _return.push_str(": ");
-        _return.push_str(VERSION);
-        _return.push_str("\n");
-        _return.push_str(&latest);
-        _return.push_str(": ");
-        _return.push_str(&latest_utf);
-        _return.push_str("\n");
-        _return.push_str(&update_state);
+        return format!(
+            "{}: {}\n{}: {}\n{}",
+            &installed,
+            VERSION,
+            &latest,
+            &latest_utf,
+            &update_state
+        );
     }
-    _return
+    return String::new();
 }
 
 fn open_update() {
     match open::that(SHAREXIN) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 9: {}", error::message(9));
+            eprintln!("{}", error::message(19));
             return;
         }
     };
 
-    // checks $LANG variable, should work universally on unix-like systems
-    let _lang = language::locale();
-    let lang = &_lang.to_lowercase();
+    let lang = language::locale();
 
-    let mut upgrade_fr = String::from(
+    let upgrade_fr = String::from(
         "
 Vérifiez les nouvelles mises à jour à l'adresse suivante: ",
     );
-    let mut upgrade_es = String::from(
+    let upgrade_es = String::from(
         "
 Busque nuevas actualizaciones en: ",
     );
-    let mut upgrade_eo = String::from(
+    let upgrade_eo = String::from(
         "
 Kontrolu por novaj ĝisdatigoj ĉe: ",
     );
-    let mut upgrade_cn = String::from(
+    let upgrade_cn = String::from(
         "
 要检查是否有新的更新：\n",
     );
-    let mut upgrade_tw = String::from(
+    let upgrade_tw = String::from(
         "
 要檢查是否有新的更新：\n",
     );
-    let mut upgrade_ja = String::from(
+    let upgrade_ja = String::from(
         "
 新しいアップデートを確認する：\n",
     );
-    let mut upgrade_ko = String::from(
+    let upgrade_ko = String::from(
         "
 새로운 업데이트 확인 :\n",
     );
-    let mut upgrade_de = String::from(
+    let upgrade_de = String::from(
         "
 Überprüfen Sie nach neuen Updates unter: ",
     );
-    let mut upgrade = String::from(
+    let upgrade = String::from(
         "
 Check for new updates at: ",
     );
-    upgrade_fr.push_str(SHAREXIN);
-    upgrade_es.push_str(SHAREXIN);
-    upgrade_eo.push_str(SHAREXIN);
-    upgrade_cn.push_str(SHAREXIN);
-    upgrade_tw.push_str(SHAREXIN);
-    upgrade_ja.push_str(SHAREXIN);
-    upgrade_ko.push_str(SHAREXIN);
-    upgrade_de.push_str(SHAREXIN);
-    upgrade.push_str(SHAREXIN);
 
     if lang.contains("fr") {
-        println!("{}", upgrade_fr);
+        println!("{}{}", upgrade_fr, SHAREXIN);
     } else if lang.contains("es") {
-        println!("{}", upgrade_es);
+        println!("{}{}", upgrade_es, SHAREXIN);
     } else if lang.contains("eo") {
-        println!("{}", upgrade_eo);
+        println!("{}{}", upgrade_eo, SHAREXIN);
     } else if lang.contains("cn") {
-        println!("{}", upgrade_cn);
+        println!("{}{}", upgrade_cn, SHAREXIN);
     } else if lang.contains("tw") {
-        println!("{}", upgrade_tw);
+        println!("{}{}", upgrade_tw, SHAREXIN);
     } else if lang.contains("ja") {
-        println!("{}", upgrade_ja);
+        println!("{}{}", upgrade_ja, SHAREXIN);
     } else if lang.contains("ko") {
-        println!("{}", upgrade_ko);
+        println!("{}{}", upgrade_ko, SHAREXIN);
     } else if lang.contains("de") {
-        println!("{}", upgrade_de);
+        println!("{}{}", upgrade_de, SHAREXIN);
     } else {
-        println!("{}", upgrade);
+        println!("{}{}", upgrade, SHAREXIN);
     }
 }

@@ -18,12 +18,13 @@ impl Language {
     }
 }
 
+// uses $LANG to get setting from user, should work without any user modification
 pub fn locale() -> String {
     match env::var("LANG") {
-        Ok(ok) => ok,
+        Ok(ok) => ok.to_lowercase(),
         Err(e) => {
-            eprintln!("Error 1: {}", error::message(1));
-            String::from("en_US.utf8")
+            eprintln!("{}", error::message(2));
+            String::from("en_US.utf8").to_lowercase()
         }
     }
 }
@@ -31,9 +32,7 @@ pub fn locale() -> String {
 pub fn language<'a>(langue: Language) -> &'a str {
     let service = langue.service;
 
-    // check $LANG
-    let mut lang = locale();
-    lang = lang.to_lowercase();
+    let lang = locale();
 
     // 0 is for image_sent, telling the user their toot/tweet with an image has been sent
     // 0 is also for message_sent, telling the user their toot/tweet has been sent

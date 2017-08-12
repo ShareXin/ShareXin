@@ -1,9 +1,5 @@
-// many _ are used in rust to make compiler ignore "unused_variable" tips
-
-// args may be "-s" for selection screenshots
-//     "-i" for window screenshots, or empty for fullscreenshots
-
-#![allow(unused_must_use)]
+// args may be 0 for selection screenshots
+// 1 for window screenshots, or 2 for fullscreenshots
 
 #[cfg(target_os = "macos")]
 use screenshot::get_screenshot;
@@ -18,28 +14,24 @@ use error;
 
 pub fn file(file: String) {
 
-    // tmp gets temporary dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
 
-    // copy copies file to temp
+    thread::sleep(Duration::new(0, 500000000));
 
-    thread::sleep(Duration::new(1, 0));
     let _copy = match std::fs::copy(file, tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 13: {}", error::message(13));
+            eprintln!("{}", error::message(30));
             process::exit(1)
         }
     };
-
     notification::file_saved();
 }
 
 #[cfg(target_os = "macos")]
-fn screenshot(args: String, temp: &str) {
+fn screenshot(args: usize, temp: &str) {
 
-    // tmp gets temporary dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
 
@@ -55,28 +47,7 @@ fn screenshot(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-fn screenshot(args: String, temp: &str) {
-    // x11/wayland session info gotten here
-    let mut _session = String::new();
-    _session = match env::var("XDG_SESSION_TYPE") {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("Error 6: {}", error::message(6));
-            String::from("x11")
-        }
-    };
-    let session = &_session.to_lowercase();
-
-    // desktop environment info gotten here
-    let mut _desktop = String::new();
-    _desktop = match env::var("DESKTOP_SESSION") {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("Error 7: {}", error::message(7));
-            process::exit(1)
-        }
-    };
-    let desktop = &_desktop.to_lowercase();
+fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
 
     match session.as_ref() {
         "wayland" => match desktop.as_ref() {
@@ -84,7 +55,7 @@ fn screenshot(args: String, temp: &str) {
             "plasma" => kde(args, temp),
             "sway" => sway(args, temp),
             _ => {
-                eprintln!("Error 18: {}", error::message(18));
+                eprintln!("{}", error::message(26));
                 process::exit(1)
             }
         },
@@ -93,44 +64,43 @@ fn screenshot(args: String, temp: &str) {
             "plasma" => kde(args, temp),
             _ => maim(args, temp),
         },
-        _ => {
-            eprintln!("Error 19: {}", error::message(19));
-            process::exit(1)
-        }
+        _ => match desktop.as_ref() {
+            "gnome" => gnome(args, temp),
+            "plasma" => kde(args, temp),
+            _ => maim(args, temp),
+        },
     }
 }
 
 #[cfg(not(target_os = "macos"))]
-fn sway(args: String, temp: &str) {
-    if args == "-s" {
+fn sway(args: usize, temp: &str) {
+    if args == 0 {
 
         // _before_image takes a full screenshot using swaygrab
         match Command::new("swaygrab").arg(temp.clone()).output() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 16: {}", error::message(16));
+                eprintln!("{}", error::message(9));
                 process::exit(1)
             }
         };
 
-        // _feh displays it and sleeps the thread to wait for _image
+        // _feh displays it
         println!("Feh may not display properly due to tiling and Wayland.");
 
-        match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
+        match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 21: {}", error::message(21));
+                eprintln!("{}", error::message(12));
                 process::exit(1)
             }
         };
-
-        thread::sleep(Duration::new(0, 500000000));
 
         // _image lets use _slop to select
         let _slop = match Command::new("slop").output() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 23: {}", error::message(23));
+                eprintln!("{}", error::message(14));
                 process::exit(1)
             }
         };
@@ -141,29 +111,16 @@ fn sway(args: String, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 22: {}", error::message(22));
+                eprintln!("{}", error::message(15));
                 process::exit(1)
             }
         };
 
         // _kill closes _feh, gently
-        Command::new("killall").arg("feh").output();
-
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
-    } else if args == "-i" {
-
-        // _image uses swaygrab to get "focused" window and take screenshot
-        let _image = match Command::new("swaygrab")
-            .arg("-f")
-            .arg(temp.clone())
-            .status()
-        {
+        match Command::new("killall").arg("feh").output() {
             Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("Error 16: {}", error::message(16));
+            Err(e) => {
+                eprintln!("{}", e);
                 process::exit(1)
             }
         };
@@ -172,13 +129,31 @@ fn sway(args: String, temp: &str) {
             println!("Exiting...");
             process::exit(1);
         }
-    } else {
+    } else if args == 1 {
+
+        // _image uses swaygrab to get "focused" window and take screenshot
+        let _image = match Command::new("swaygrab")
+            .args(&["-f", temp.clone()])
+            .status()
+        {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(9));
+                process::exit(1)
+            }
+        };
+
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    } else if args == 2 {
 
         // _image uses swaygrab to take screenshot
         let _image = match Command::new("swaygrab").arg(temp.clone()).status() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 16: {}", error::message(16));
+                eprintln!("{}", error::message(9));
                 process::exit(1)
             }
         };
@@ -191,85 +166,85 @@ fn sway(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-fn gnome(args: String, temp: &str) {
-    if args == "-s" {
+fn gnome(args: usize, temp: &str) {
+    if args == 0 {
 
-        // _before_image takes a full screenshot using gnome-screenshot
+        // _before_image takes a full screenshot using gnome0creenshot
         match Command::new("gnome-screenshot")
-            .arg("-f")
-            .arg(temp.clone())
+            .args(&["-f", temp.clone()])
             .output()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 14: {}", error::message(14));
+                eprintln!("{}", error::message(7));
                 process::exit(1)
             }
         };
 
-        // _feh displays it and sleeps the thread to wait for _image
+        // _feh displays it
         match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 21: {}", error::message(21));
+                eprintln!("{}", error::message(12));
                 process::exit(1)
             }
         };
 
-        thread::sleep(Duration::new(0, 500000000));
-
         // _image lets you select
         let _image = match Command::new("gnome-screenshot")
-            .arg("-a")
-            .args(&["-f", temp.clone()])
+            .args(&["-a", "-f", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 14: {}", error::message(14));
+                eprintln!("{}", error::message(7));
                 process::exit(1)
             }
         };
 
         // _kill closes _feh, gently
-        Command::new("killall").arg("feh").output();
+        match Command::new("killall").arg("feh").output() {
+            Ok(ok) => ok,
+            Err(e) => {
+                eprintln!("{}", e);
+                process::exit(1)
+            }
+        };
 
         println!("gnome-screenshot doesnt give exit codes but maybe one day");
         if _image.code() == Some(1) {
             println!("Exiting...");
             process::exit(1);
         }
-    } else if args == "-i" {
+    } else if args == 1 {
 
         // _image uses gnome-screenshot to get current window and take screenshot
         let _image = match Command::new("gnome-screenshot")
-            .arg("-w")
+            .args(&["-w", "-e", "shadow", "-f", temp.clone()])
+            .status()
+        {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(7));
+                process::exit(1)
+            }
+        };
+
+        println!("gnome-screenshot doesnt give exit codes but maybe one day");
+        if _image.code() == Some(1) {
+            println!("Exiting...");
+            process::exit(1);
+        }
+    } else if args == 2 {
+
+        // _image uses gnome-screenshot to take screenshot
+        let _image = match Command::new("gnome-screenshot")
             .args(&["-f", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 14: {}", error::message(14));
-                process::exit(1)
-            }
-        };
-
-        println!("gnome-screenshot doesnt give exit codes but maybe one day");
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
-    } else {
-
-        // _image uses gnome-screenshot to take screenshot
-        let _image = match Command::new("gnome-screenshot")
-            .arg("-f")
-            .arg(temp.clone())
-            .status()
-        {
-            Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("Error 14: {}", error::message(14));
+                eprintln!("{}", error::message(7));
                 process::exit(1)
             }
         };
@@ -283,18 +258,17 @@ fn gnome(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-fn kde(args: String, temp: &str) {
-    if args == "-s" {
+fn kde(args: usize, temp: &str) {
+    if args == 0 {
 
         // _image pauses screen and lets you select
         let _image = match Command::new("spectacle")
-            .arg("-rbno")
-            .arg(temp.clone())
+            .args(&["-rbno", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 15: {}", error::message(15));
+                eprintln!("{}", error::message(8));
                 process::exit(1)
             }
         };
@@ -304,17 +278,16 @@ fn kde(args: String, temp: &str) {
             println!("Exiting...");
             process::exit(1);
         }
-    } else if args == "-i" {
+    } else if args == 1 {
 
         // _image uses spectacle to get current window and take screenshot
         let _image = match Command::new("spectacle")
-            .arg("-abno")
-            .arg(temp.clone())
+            .args(&["-abno", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 15: {}", error::message(15));
+                eprintln!("{}", error::message(8));
                 process::exit(1)
             }
         };
@@ -324,17 +297,16 @@ fn kde(args: String, temp: &str) {
             println!("Exiting...");
             process::exit(1);
         }
-    } else {
+    } else if args == 2 {
 
         // _image uses spectacle to take screenshot
         let _image = match Command::new("spectacle")
-            .arg("-fbno")
-            .arg(temp.clone())
+            .args(&["-fbno", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 15: {}", error::message(15));
+                eprintln!("{}", error::message(8));
                 process::exit(1)
             }
         };
@@ -348,60 +320,62 @@ fn kde(args: String, temp: &str) {
 }
 
 #[cfg(not(target_os = "macos"))]
-fn maim(args: String, temp: &str) {
-    if args == "-s" {
+fn maim(args: usize, temp: &str) {
+    if args == 0 {
 
         // _before_image takes a full screenshot using maim
         match Command::new("maim")
-            .arg("--hidecursor")
-            .arg(temp.clone())
+            .args(&["--bordersize=1", "--hidecursor", temp.clone()])
             .output()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 17: {}", error::message(17));
+                eprintln!("{}", error::message(10));
                 process::exit(1)
             }
         };
 
-        // _feh displays it and sleeps the thread to wait for _image
+        // _feh displays it
         match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 21: {}", error::message(21));
+                eprintln!("{}", error::message(12));
                 process::exit(1)
             }
         };
 
-        thread::sleep(Duration::new(0, 500000000));
-
         // _image lets you select
         let _image = match Command::new("maim")
-            .args(&["--hidecursor", "-s"])
-            .arg(temp.clone())
+            .args(&["--hidecursor", "-s", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 17: {}", error::message(17));
+                eprintln!("{}", error::message(10));
                 process::exit(1)
             }
         };
 
         // _kill closes _feh, gently
-        Command::new("killall").arg("feh").output();
+        match Command::new("killall").arg("feh").output() {
+            Ok(ok) => ok,
+            Err(e) => {
+                eprintln!("{}", e);
+                process::exit(1)
+            }
+        };
 
         if _image.code() == Some(1) {
             println!("Exiting...");
             process::exit(1);
         }
-    } else if args == "-i" {
+    } else if args == 1 {
 
         // _xdo gets the active window
         let _xdo = match Command::new("xdotool").arg("getactivewindow").output() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 20: {}", error::message(20));
+                eprintln!("{}", error::message(11));
                 process::exit(1)
             }
         };
@@ -410,13 +384,12 @@ fn maim(args: String, temp: &str) {
         let xdo = String::from_utf8_lossy(&_xdo.stdout);
 
         let _image = match Command::new("maim")
-            .args(&["--hidecursor", "-i"])
-            .args(&[&xdo, temp.clone()])
+            .args(&["--hidecursor", "-i", &xdo, temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 17: {}", error::message(17));
+                eprintln!("{}", error::message(10));
                 process::exit(1)
             }
         };
@@ -425,17 +398,16 @@ fn maim(args: String, temp: &str) {
             println!("Exiting...");
             process::exit(1);
         }
-    } else {
+    } else if args == 2 {
 
         // _image uses maim to take screenshot
         let _image = match Command::new("maim")
-            .arg("--hidecursor")
-            .arg(temp.clone())
+            .args(&["--hidecursor", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 17: {}", error::message(17));
+                eprintln!("{}", error::message(10));
                 process::exit(1)
             }
         };
@@ -447,7 +419,7 @@ fn maim(args: String, temp: &str) {
     }
 }
 
-pub fn image(args: String) {
+pub fn image(args: usize) {
     //  tmp gets the temporary directory of the system
     let mut tmp = env::temp_dir();
 
@@ -457,13 +429,31 @@ pub fn image(args: String) {
     // makes a string
     let temp = tmp.to_str().unwrap();
 
-    screenshot(args.clone(), temp.clone());
+    // x11/wayland session info gotten here
+    let session = match env::var("XDG_SESSION_TYPE") {
+        Ok(ok) => ok.to_lowercase(),
+        Err(_) => {
+            eprintln!("{}", error::message(3));
+            String::from("x11").to_lowercase()
+        }
+    };
+
+    // desktop environment info gotten here
+    let desktop = match env::var("DESKTOP_SESSION") {
+        Ok(ok) => ok.to_lowercase(),
+        Err(_) => {
+            eprintln!("{}", error::message(4));
+            String::new()
+        }
+    };
+
+    screenshot(args.clone(), temp.clone(), session.clone(), desktop.clone());
     if !tmp.exists() {
-        eprintln!("Error 13: {}", error::message(13));
+        eprintln!("{}", error::message(30));
         process::exit(1);
     }
 
-    if args == "-i" {
+    if args == 1 && desktop != "gnome" {
         //  adds a shadow
         match Command::new("convert")
             .arg(temp.clone())
@@ -483,14 +473,15 @@ pub fn image(args: String) {
                 "+repage",
             ])
             .arg(temp.clone())
-            .spawn()
+            .status()
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 22: {}", error::message(22));
+                eprintln!("{}", error::message(13));
                 process::exit(1)
             }
         };
+        thread::sleep(Duration::new(0, 500000000));
     }
 
     save();
@@ -505,7 +496,7 @@ fn save() {
     let home = match env::var("HOME") {
         Ok(home) => home,
         Err(_) => {
-            eprintln!("Error 0: {}", error::message(0));
+            eprintln!("{}", error::message(1));
             process::exit(1)
         }
     };
@@ -516,7 +507,7 @@ fn save() {
     let _dir = match std::fs::create_dir(pictures) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 25: {}", error::message(25));
+            eprintln!("{}", error::message(29));
         }
     };
     let mut new_file = String::from(home);
@@ -526,19 +517,20 @@ fn save() {
     let time = String::from(match time::strftime("%Y-%m-%d-%H_%M_%S", &time::now()) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 12: {}", error::message(12));
+            eprintln!("{}", error::message(25));
             process::exit(1)
         }
     });
     new_file.push_str(&time);
     new_file.push_str(".png");
 
+    thread::sleep(Duration::new(0, 500000000));
+
     // _clone copies the temp file to your home pic dir
-    thread::sleep(Duration::new(1, 0));
     let _clone = match std::fs::copy(tmp.clone(), new_file) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 13: {}", error::message(13));
+            eprintln!("{}", error::message(30));
             return;
         }
     };

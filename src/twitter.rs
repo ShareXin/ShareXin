@@ -7,7 +7,6 @@ use error;
 pub fn image(txt: String) {
     let twitter = Destination::new(1);
 
-    // gets file to send from temp dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
     let temp = tmp.to_str().unwrap().clone();
@@ -18,14 +17,14 @@ pub fn image(txt: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 4: {}", error::message(4));
+            eprintln!("{}", error::message(5));
             notification::not_sent(twitter);
             process::exit(1)
         }
     };
-    Command::new("killall").arg("vim");
+    Command::new("killall").arg("vim"); // Only way to get t work, sorry
     if _t.code() == Some(1) {
-        eprintln!("Error 27: {}", error::message(27));
+        eprintln!("{}", error::message(22));
         process::exit(1);
     }
     notification::image_sent(twitter, &txt, temp);
@@ -37,14 +36,13 @@ pub fn tweet(txt: String) {
     let _t = match Command::new("t").args(&["update", &txt]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 4: {}", error::message(4));
+            eprintln!("{}", error::message(5));
             notification::not_sent(twitter);
             process::exit(1)
         }
     };
-    Command::new("killall").arg("vim");
     if _t.code() == Some(1) {
-        eprintln!("Error 27: {}", error::message(27));
+        eprintln!("{}", error::message(22));
         process::exit(1);
     }
     notification::message_sent(twitter, &txt);

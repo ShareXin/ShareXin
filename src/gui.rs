@@ -15,16 +15,15 @@ use Destination;
 use error;
 
 pub fn gui(service: Destination, image_bool: bool) {
-    // if gtk dont init, ends program
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("Error 11: {}", error::message(11));
+            eprintln!("{}", error::message(24));
             process::exit(1)
         }
     };
 
-    // all theses get objects from a glade builder
+    // objects from glade file
     let builder = gtk::Builder::new_from_string(include_str!("sharexin.glade"));
     let window: gtk::Window = builder.get_object("window").unwrap();
     let header: gtk::HeaderBar = builder.get_object("header").unwrap();
@@ -34,7 +33,7 @@ pub fn gui(service: Destination, image_bool: bool) {
     let image: gtk::Button = builder.get_object("image").unwrap();
     let count: gtk::Label = builder.get_object("count").unwrap();
 
-    // readying widgets
+    // setting widgets
     count.set_label("0");
     window.set_title("ShareXin");
     if service.mastodon {
@@ -48,7 +47,6 @@ pub fn gui(service: Destination, image_bool: bool) {
         image.destroy();
     }
 
-    // opens image if image "file" button is clicked
     image.connect_clicked(move |_| {
         let mut tmp = env::temp_dir();
         tmp.push("sharexin.png");
@@ -56,7 +54,7 @@ pub fn gui(service: Destination, image_bool: bool) {
         match open::that(temp) {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("Error 9: {}", error::message(9));
+                eprintln!("{}", error::message(19));
                 process::exit(1)
             }
         };
@@ -81,7 +79,7 @@ pub fn gui(service: Destination, image_bool: bool) {
         let window = wrap_window.clone();
         let text = wrap_text.clone();
 
-        // checks textview and sends message to predefined destination/service
+        // checks textview and sends message to destination/service
         send.borrow().connect_clicked(move |_| {
             // gets buffer text from TextView item
             let buffer = TextView::get_buffer(&text.borrow()).unwrap();
