@@ -137,7 +137,7 @@ Examples:
 - Better error messages  
 - `format!` is a thing  
 - `gnome-screenshot` has native shadow effects for windows  
-- Really dumb [seg](https://github.com/thebitstick/ShareXin/blob/master/src/language.rs#L25) [fault](https://github.com/thebitstick/ShareXin/blob/master/src/error.rs#L38)  
+- Really dumb [seg](https://github.com/thebitstick/ShareXin/blob/db4b202d30eecb160b2e4db4fbd4f03f918ba4da/src/language.rs#L25) [fault](https://github.com/thebitstick/ShareXin/blob/db4b202d30eecb160b2e4db4fbd4f03f918ba4da/src/error.rs#L38)  
 - Less code, actually  
 - Less comments, cause "comments are bad"  
 
