@@ -27,8 +27,6 @@
 * Screenshotting works with X11 and Wayland (on supported desktops)  
 * Saves screenshots to a folder in your Pictures directory  
 
-##### ShareXin binary tested on Arch Linux  
-
 ## `--help`  
 
 ```bash
