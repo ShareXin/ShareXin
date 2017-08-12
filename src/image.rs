@@ -325,7 +325,7 @@ fn maim(args: usize, temp: &str) {
 
         // _before_image takes a full screenshot using maim
         match Command::new("maim")
-            .args(&["--bordersize=1", "--hidecursor", temp.clone()])
+            .args(&["--hidecursor", temp.clone()])
             .output()
         {
             Ok(ok) => ok,
