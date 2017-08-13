@@ -30,7 +30,7 @@
 ## `--help`  
 
 ```bash
-sharexin 0.4.9
+sharexin 0.5.0
 Usage: sharexin <options> [destination] [image options] [FILE]
 
 Options:
@@ -57,6 +57,8 @@ Examples:
 ```  
 
 ## Language support  
+
+### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)  
 
 #### English  
 #### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
@@ -131,6 +133,10 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.5.0] - 2017-08-13  
+- Rewrite of Language message system, now using templates, extremely easy to add more languages  
+- Bug fixes  
+
 #### [0.4.9] - 2017-08-12  
 - Lots of optimizations  
 - Actual bug fixes  
