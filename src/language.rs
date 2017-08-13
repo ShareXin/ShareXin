@@ -54,7 +54,7 @@ fn loader<'a>(lang: String) -> &'a str {
         return include_str!("lang/de.yml");
     }
 
-    return include_str!("lang/en.yml")
+    return include_str!("lang/en.yml");
 }
 
 pub fn notification(langue: Language) -> String {
