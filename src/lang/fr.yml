@@ -1,0 +1,68 @@
+Notification:
+    Sent:
+        Mastodon: Envoyé vers Mastodon
+        Twitter: Envoyé vers Twitter
+        Imgur: Envoyé vers Imgur
+    File: Fichier sauvegardé
+    Empty:
+        Mastodon: Toot vide | N'a pas été envoyé
+        Twitter: Tweet vide | N'a pas été envoyé
+    Not_Sent:
+        Mastodon: Toot n'a pas été envoyé
+        Twitter: Tweet n'a pas été envoyé
+Update:
+    Installed: Version installée
+    Latest: Dernière version
+    Out: Vous n'êtes pas à jour!
+    Too: Vous êtes trop à jour!
+    Up: Vous êtes à jour!
+    Check: Vérifiez les nouvelles mises à jour à l'adresse suivante
+Error:
+    Error: Erreur
+    "0": Unknown error
+    "1": Erreur lors de la réception de la variable $HOME
+    "2": Erreur lors de la réception de la variable $LANG
+    "3": Erreur lors de la réception de la variable $XDG_SESSION_TYPE
+    "4": Erreur lors de la réception de la variable $DESKTOP_SESSION
+    "5": Commande t indisponible
+    "6": Commande toot indisponible
+    "7": Commande gnome-screenshot indisponible
+    "8": Commande spectacle indisponible
+    "9": Commande swaygrab indisponible
+    "10": Commande maim indisponible
+    "11": Commande xdotool indisponible
+    "12": Commande feh indisponible
+    "13": ImageMagick indisponible
+    "14": Commande slop indisponible
+    "15": Commande convert indisponible
+    "16": Github inaccessible
+    "17": Imgur inaccessible
+    "18": Erreur d'analyse de la dernière version
+    "19": Incapable d'ouvrir le fichier ou la page web
+    "20": Erreur lors de l'envoi vers Imgur
+    "21": Impossible de publier sur Mastodon
+    "22": Impossible de publier sur Twitter
+    "23": Impossible d'afficher une notification
+    "24": Erreur d'initialisation GTK
+    "25": L'heure locale n'est pas disponible
+    "26": L'environnement de bureau Wayland n'est pas pris en charge
+    "27": L'environnement de bureau n'est pas pris en charge
+    "28": Fichier non lisible
+    "29": Le dossier existe déjà
+    "30": Le fichier n'est pas sauvegardé
+Help:
+    Usage: Utilisation
+    Options: Options
+    Help: Afficher le message d'aide et quitter
+    Version: Imprimer les informations de la version et quitter
+    Upgrade: Vérifiez les nouvelles mises à jour
+    Image: Options d'image
+    Area: Capturer une zone de l'écran plutôt que l'écran complet
+    Window: Capturer la fenêtre active plutôt que l'écran complet
+    Full: Capturer l'écran complet
+    File: Utiliser un fichier
+    Destinations: Destinations
+    Toot: Upload vers Mastodon
+    Tweet: Upload vers Twitter
+    Imgur: Upload vers Imgur
+    Examples: Exemples

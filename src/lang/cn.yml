@@ -1,0 +1,68 @@
+Notification:
+    Sent:
+        Mastodon: 它已被发送到Mastodon
+        Twitter: 它已被发送到Twitter
+        Imgur: 它已被发送到Imgur
+    File: 文件已保存
+    Empty:
+        Mastodon: Toot是空 | 它不会发送到Mastodon
+        Twitter: Tweet是空 | 它不会发送到Twitter
+    Not_Sent:
+        Mastodon: Toot没有发送
+        Twitter: Tweet没有发送
+Update:
+    Installed: 已安装版本
+    Latest: 最新版本
+    Out: 你已经过时了!
+    Too: 你也是最新的!
+    Up: 你是最新的!
+    Check: 要检查是否有新的更新
+Error:
+    Error: 错误
+    "0": Unknown error
+    "1": 获取$HOME变量时发生错误
+    "2": 获取$LANG变量时发生错误
+    "3": 检索$XDG_SESSION_TYPE变量时发生错误
+    "4": 检索$DESKTOP_SESSION变量时发生错误
+    "5": 「t」应用程序不可用
+    "6": 「toot」应用程序不可用
+    "7": 「gnome-screenshot」应用程序不可用
+    "8": 「spectacle」应用程序不可用
+    "9": 「swaygrab」应用程序不可用
+    "10": 「maim」应用程序不可用
+    "11": 「xdotool」应用程序不可用
+    "12": 「feh」应用程序不可用
+    "13": 「ImageMagick」应用程序不可用
+    "14": 「slop」应用程序不可用
+    "15": 「convert」应用程序不可用
+    "16": 我不能到达Github
+    "17": 我无法到达Imgur
+    "18": 解析最新版本号时出现错误
+    "19": 打开文件或网页时出错
+    "20": 上传到Imgur时发生错误
+    "21": 无法上传到Mastodon
+    "22": 无法上传到Twitter
+    "23": 我无法显示通知
+    "24": GTK初始化错误
+    "25": 当地时间不可用
+    "26": 您的Wayland桌面环境不受支持
+    "27": 您的桌面环境不受支持
+    "28": 我无法读取文件
+    "29": 文件夹已存在
+    "30": 该文件未保存
+Help:
+    Usage: 使用方法
+    Options: 选项
+    Help: 退出标准成功输出输出用法消息
+    Version: 在成功完成输出版本信息到标准输出
+    Upgrade: 要检查新的更新
+    Image: 选项截图
+    Area: 截取屏幕的一个区域，而不是整个屏幕
+    Window: 截取窗口，而不是整个屏幕
+    Full: 为了让整个屏幕
+    File: 使用文件
+    Destinations: 目的地
+    Toot: 上传到Mastodon
+    Tweet: 上传到Twitter
+    Imgur: 上传到Imgur
+    Examples: 案件

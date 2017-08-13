@@ -1,0 +1,68 @@
+Notification:
+    Sent:
+        Mastodon: Auf Mastodon veröffentlicht
+        Twitter: Auf Twitter veröffentlicht
+        Imgur: Auf Imgur veröffentlicht
+    File: Datei gespeichert
+    Empty:
+        Mastodon: Toot leer | Nicht gesendet
+        Twitter: Tweet leer | Nicht gesendet
+    Not_Sent:
+        Mastodon: Toot wurde nicht gesendet
+        Twitter: Tweet wurde nicht gesendet
+Update:
+    Installed: Installierte Version
+    Latest: Letzte Version
+    Out: Sie sind veraltet!
+    Too: Sie sind zu auf dem Laufenden!
+    Up: Sie sind auf dem Laufenden!
+    Check: Überprüfen Sie nach neuen Updates unter
+Error:
+    Error: Fehler
+    "0": Unknown error
+    "1": Fehler beim lesen der $HOME Variable
+    "2": Fehler beim lesen der $LANG Variable
+    "3": Fehler beim lesen der $XDG_SESSION_TYPE Variable
+    "4": Fehler beim lesen der $DESKTOP_SESSION Variable
+    "5": t command nicht verfügbar
+    "6": toot command nicht verfügbar
+    "7": gnome-screenshot command nicht verfügbar
+    "8": spectacle command nicht verfügbar
+    "9": swaygrab command nicht verfügbar
+    "10": maim command nicht verfügbar
+    "11": xdotool command nicht verfügbar
+    "12": feh command nicht verfügbar
+    "13": ImageMagick nicht verfügbar
+    "14": slop command nicht verfügbar
+    "15": convert command nicht verfügbar
+    "16": Github unerreichbar
+    "17": Imgur unerreichbar
+    "18": Fehler beim Parsen der neuesten Versionsnummer
+    "19": Fehler beim Öffnen der Datei oder Webseite
+    "20": Fehler beim Uploaden auf Imgur
+    "21": Fehler beim veröffentlichen auf Mastodon
+    "22": Fehler beim veröffentlichen auf Twitter
+    "23": Kann keine Benachrichtigung anzeigen
+    "24": GTK Initialisierungsfehler
+    "25": Lokale Zeit nicht verfügbar
+    "26": Wayland Desktopumgebung nicht unterstützt
+    "27": Desktopumgebung nicht unterstützt
+    "28": Datei nicht lesbar
+    "29": Ordner existiert bereits
+    "30": Datei nicht gespeichert
+Help:
+    Usage: Anwendung
+    Options: Optionen
+    Help: Zeige diese Nachricht an und beende
+    Version: Gebe Version aus und beende
+    Upgrade: Auf neue Updates prüfen
+    Image: Bildoptionen
+    Area: Nur einen Bereich anstatt des gesamten Bildschirms aufnehmen
+    Window: Nur ein Fenster anstatt des gesamten Bildschirms aufnehmen
+    Full: Gesamten Bildschirms aufnehmen
+    File: Benutze eine Datei
+    Destinations: Reiseziele
+    Toot: Auf Mastodon veröffentlichen
+    Tweet: Auf Twitter veröffentlichen
+    Imgur: Auf Imgur veröffentlichen
+    Examples: Beispiele

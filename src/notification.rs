@@ -10,7 +10,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
     let string = notification(Language::new(service, 0));
     match Notification::new()
         .appname("ShareXin")
-        .summary(string)
+        .summary(&string)
         .body(text)
         .icon(img)
         .timeout(5000)
@@ -29,7 +29,7 @@ pub fn message_sent(service: Destination, text: &str) {
     let string = notification(Language::new(service, 0));
     match Notification::new()
         .appname("ShareXin")
-        .summary(string)
+        .summary(&string)
         .body(text)
         .timeout(5000)
         .show()
@@ -47,7 +47,7 @@ pub fn file_saved() {
     let string = notification(Language::new(Destination::new(3), 2));
     match Notification::new()
         .appname("ShareXin")
-        .summary(string)
+        .summary(&string)
         .timeout(5000)
         .show()
     {
@@ -64,7 +64,7 @@ pub fn empty(service: Destination) {
     let string = notification(Language::new(service, 3));
     match Notification::new()
         .appname("ShareXin")
-        .summary(string)
+        .summary(&string)
         .timeout(5000)
         .show()
     {
@@ -81,7 +81,7 @@ pub fn not_sent(service: Destination) {
     let string = notification(Language::new(service, 4));
     match Notification::new()
         .appname("ShareXin")
-        .summary(string)
+        .summary(&string)
         .timeout(5000)
         .show()
     {

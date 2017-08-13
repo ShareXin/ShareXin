@@ -10,6 +10,7 @@ extern crate gdk;
 extern crate open;
 extern crate time;
 extern crate curl;
+extern crate yaml_rust;
 extern crate imgur as Imgur;
 mod notification;
 mod twitter;
@@ -74,16 +75,11 @@ impl Destination {
 fn main() {
     let user = match ::std::env::var("USER") {
         Ok(ok) => ok,
-        // change error messages and add $USER
-        Err(_) => {
-            eprintln!("{}", language::error(0));
-            String::new()
-        }
+        Err(_) => String::new(),
     };
     if user != "root" {
         cmd::cmd();
     } else {
-        // change error messages and add root error
         eprintln!("{}", language::error(0));
     }
 }

@@ -1,0 +1,68 @@
+Notification:
+    Sent:
+        Mastodon: Mastodon에 보냈습니다
+        Twitter: Twitter에 보냈습니다
+        Imgur: Imgur에 보냈습니다
+    File: 파일이 저장된
+    Empty:
+        Mastodon: Toot 비어 있습니다 | 그것은 Mastodon에 보내지지 않았다
+        Twitter: Tweet 비어 있습니다 | 그것은 Twitter에 보내지지 않았다
+    Not_Sent:
+        Mastodon: Toot이 보내지지 않았다
+        Twitter: Tweet이 보내지지 않았다
+Update:
+    Installed: 설치된 버전
+    Latest: 최신 버전
+    Out: 구식입니다!
+    Too: 너는 너무 최신이야!
+    Up: 당신은 최신입니다!
+    Check: 새로운 업데이트 확인
+Error:
+    Error: 오류
+    "0": Unknown error
+    "1": $HOME 변수를 검색하는 동안 오류가 발생했습니다
+    "2": $LANG 변수를 검색하는 동안 오류가 발생했습니다
+    "3": $XDG_SESSION_TYPE 변수를 검색하는 동안 오류가 발생했습니다
+    "4": $DESKTOP_SESSION 변수를 검색하는 동안 오류가 발생했습니다
+    "5": 「t」응용 프로그램을 사용할 수없는
+    "6": 「toot」응용 프로그램을 사용할 수없는
+    "7": 「gnome-screenshot」응용 프로그램을 사용할 수없는
+    "8": 「spectacle」응용 프로그램을 사용할 수없는
+    "9": 「swaygrab」응용 프로그램을 사용할 수없는
+    "10": 「maim」응용 프로그램을 사용할 수없는
+    "11": 「xdotool」응용 프로그램을 사용할 수없는
+    "12": 「feh」응용 프로그램을 사용할 수없는
+    "13": 「ImageMagick」응용 프로그램을 사용할 수없는
+    "14": 「slop」응용 프로그램을 사용할 수없는
+    "15": 「convert」응용 프로그램을 사용할 수없는
+    "16": Github에 도달 할 수없는
+    "17": Imgur에 도달 할 수없는
+    "18": 최신 버전 번호를 구문 분석하는 동안 오류가 발생했습니다
+    "19": 파일 또는 Web 페이지를 열 때 오류가 발생했습니다
+    "20": Imgur에 업로드하는 중에 오류가 발생했습니다
+    "21": Mastodon에 업로드 할 수 없습니다
+    "22": Twitter에 업로드 할 수 없습니다
+    "23": 통지를 표시 할 수 없습니다
+    "24": GTK 초기화 오류
+    "25": 현지 시간은 사용할 수 없습니다
+    "26": 너의 Wayland 데스크탑 환경은 지원하지 않습니다
+    "27": 너의 데스크탑 환경은 지원하지 않습니다
+    "28": 파일을 읽을 수없는
+    "29": 폴더는 이미 존재합니다
+    "30": 파일이 저장되지 않았습니다
+Help:
+    Usage: 사용 방법
+    Options: 옵션
+    Help: 표준 출력으로 사용법을 출력하고 정상적으로 종료한다
+    Version: 표준 출력으로 버전 정보를 출력하고 정상적으로 종료한다
+    Upgrade: 새로운 업데이트를 확인한다
+    Image: 스크린 샷 옵션
+    Area: 전체 화면 대신에 화면의 일정 영역을 찍습니다
+    Window: 전체 화면 대신에 창을 찍습니다
+    Full: 전체 화면을 얻을
+    File: 파일을 사용하여
+    Destinations: 목적지
+    Toot: Mastodon에 업로드
+    Tweet: Twitter에 업로드
+    Imgur: Imgur에 업로드
+    Examples: 예

@@ -494,7 +494,12 @@ fn save() {
 
     // home gets the user's name
     let home = match env::var("HOME") {
-        Ok(home) => home,
+        Ok(home) => if home.to_string().is_empty() {
+            eprintln!("{}", language::error(1));
+            process::exit(1)
+        } else {
+            home
+        },
         Err(_) => {
             eprintln!("{}", language::error(1));
             process::exit(1)

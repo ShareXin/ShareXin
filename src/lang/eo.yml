@@ -1,0 +1,68 @@
+Notification:
+    Sent:
+        Mastodon: Sendita al Mastodon
+        Twitter: Sendita al Twitter
+        Imgur: Sendita al Imgur
+    File: Dosieron konservis
+    Empty:
+        Mastodon: Malplena Toot | Ne estis sendita
+        Twitter: Malplena Tweet | Ne estis sendita
+    Not_Sent:
+        Mastodon: Toot ne estis sendita
+        Twitter: Tweet ne estis sendita
+Update:
+    Installed: Instalita versio
+    Latest: Plej lasta versio
+    Out: Vi estas eksterdata!
+    Too: Vi estas tro ĝisdata!
+    Up: Vi estas ĝisdatigita!
+    Check: Kontrolu por novaj ĝisdatigoj ĉe
+Error:
+    Error: Eraro
+    "0": Unknown error
+    "1": Eraro ricevanta la $HOME variablon
+    "2": Eraro ricevanta la $LANG variablon
+    "3": Eraro ricevanta la $XDG_SESSION_TYPE variablon
+    "4": Eraro ricevanta la $DESKTOP_SESSION variablon
+    "5": t komando ne disponebla
+    "6": toot komando ne disponebla
+    "7": gnome-screenshot komando ne disponebla
+    "8": spectacle komando ne disponebla
+    "9": swaygrab komando ne disponebla
+    "10": maim komando ne disponebla
+    "11": xdotool komando ne disponebla
+    "12": feh komando ne disponebla
+    "13": ImageMagick ne ekzistas
+    "14": slop komando ne disponebla
+    "15": convert komando ne disponebla
+    "16": Github neŝanĝebla
+    "17": Imgur neŝanĝebla
+    "18": Eraro pri analizado de plej nova versio
+    "19": Ne eblas malfermi dosieron aŭ retpaĝon
+    "20": Eraro alŝuta al Imgur
+    "21": Malsukcesis eldoni al Mastodon
+    "22": Malsukcesis eldoni al Twitter
+    "23": Ne eblas montri sciigon
+    "24": GTK-komenca eraro
+    "25": Ne eblas akiri aktualan tempon
+    "26": Wayland labortabla medio ne estas subtenata
+    "27": Labortabla medio ne estas subtenata
+    "28": Ne eblas legi dosieron
+    "29": La dosierujo jam ekzistas
+    "30": Dosiero ne savis
+Help:
+    Usage: Uzo
+    Options: Opcioj
+    Help: Montru la helpo mesaĝon kaj eliro
+    Version: Printversio informoj kaj eliro
+    Upgrade: Kontrolu por novaj ĝisdatigoj
+    Image: Opcioj de bildo
+    Area: Kapti areon de la ekrano anstataŭ ol la tuta ekrano
+    Window: Kapti la aktivan fenestron anstataŭ ol la tuta ekrano
+    Full: Kapti la plena ekrano
+    File: Uzu dosieron
+    Destinations: Celoj
+    Toot: Alŝutu al Mastodon
+    Tweet: Alŝutu al Twitter
+    Imgur: Alŝutu al Imgur
+    Examples: Ekzemploj

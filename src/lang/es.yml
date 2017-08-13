@@ -1,0 +1,68 @@
+Notification:
+    Sent:
+        Mastodon: Enviado a Mastodon
+        Twitter: Enviado a Twitter
+        Imgur: Enviado a Imgur
+    File: Archivo guardado
+    Empty:
+        Mastodon: Toot vacío | No fue enviado
+        Twitter: Tweet vacío | No fue enviado
+    Not_Sent:
+        Mastodon: Toot no fue enviado
+        Twitter: Tweet no fue enviado
+Update:
+    Installed: Versión instalada
+    Latest: Ultima versión
+    Out: ¡Estás fuera de fecha!
+    Too: ¡Usted está demasiado al día!
+    Up: ¡Estas actualizado!
+    Check: Busque nuevas actualizaciones en
+Error:
+    Error: Error
+    "0": Unknown error
+    "1": Error al obtener la variable $HOME
+    "2": Error al obtener la variable $LANG
+    "3": Error al obtener la variable $XDG_SESSION_TYPE
+    "4": Error al obtener la variable $DESKTOP_SESSION
+    "5": t comando no disponible
+    "6": toot comando no disponible
+    "7": gnome-screenshot comando no disponible
+    "8": spectacle comando no disponible
+    "9": swaygrab comando no disponible
+    "10": maim comando no disponible
+    "11": xdotool comando no disponible
+    "12": feh comando no disponible
+    "13": ImageMagick no disponible
+    "14": slop comando no disponible
+    "15": convert comando no disponible
+    "16": Github inalcanzable
+    "17": Imgur inalcanzable
+    "18": Error al analizar el último número de versión
+    "19": Error al abrir el archivo o la página web
+    "20": Error al subir a Imgur
+    "21": Error al publicar al Mastodon
+    "22": Error al publicar al Twitter
+    "23": No se puede mostrar la notificación
+    "24": Error de inicialización de GTK
+    "25": Hora local no disponible
+    "26": Wayland Entorno de escritorio no compatible
+    "27": Entorno de escritorio no compatible
+    "28": Archivo no legible
+    "29": La carpeta ya existe
+    "30": El archivo no se ha guardado
+Help:
+    Usage: Utilización
+    Options: Opciones
+    Help: Mostrar el mensaje de ayuda y sale
+    Version: Imprimir información de la versión y sale
+    Upgrade: Busque nuevas actualizaciones
+    Image: Opciones de imagen
+    Area: Capturar un área de la pantalla en lugar de la pantalla entera
+    Window: Capturar una ventana en vez de la pantalla entera
+    Full: Capturar la pantalla completa
+    File: Utilice un archive
+    Destinations: Destinos
+    Toot: Sube a Mastodon
+    Tweet: Sube a Twitter
+    Imgur: Sube a Imgur
+    Examples: Ejemplos
