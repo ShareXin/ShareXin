@@ -5,7 +5,7 @@ use std::io::*;
 use std::*;
 use Imgur;
 use open;
-use error;
+use language;
 
 pub fn send() {
 
@@ -14,7 +14,7 @@ pub fn send() {
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(28));
+            eprintln!("{}", language::error(28));
             process::exit(1)
         }
     };
@@ -22,7 +22,7 @@ pub fn send() {
     match file.read_to_end(&mut image) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(28));
+            eprintln!("{}", language::error(28));
             process::exit(1)
         }
     };
@@ -35,12 +35,12 @@ pub fn send() {
         Ok(info) => match info.link() {
             Some(link) => copy_link.push_str(link),
             None => {
-                eprintln!("{}", error::message(20));
+                eprintln!("{}", language::error(20));
                 process::exit(1)
             }
         },
         Err(_) => {
-            eprintln!("{}", error::message(17));
+            eprintln!("{}", language::error(17));
             process::exit(1)
         }
     }
@@ -48,7 +48,7 @@ pub fn send() {
     match open::that(copy_link) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(19));
+            eprintln!("{}", language::error(19));
             process::exit(1)
         }
     };

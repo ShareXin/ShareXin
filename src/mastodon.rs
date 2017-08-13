@@ -2,7 +2,7 @@ use std::*;
 use std::process::*;
 use notification;
 use Destination;
-use error;
+use language;
 
 pub fn image(txt: String) {
     let mastodon = Destination::new(0);
@@ -17,13 +17,13 @@ pub fn image(txt: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(6));
+            eprintln!("{}", language::error(6));
             notification::not_sent(mastodon);
             process::exit(1)
         }
     };
     if _toot.code() == Some(2) {
-        eprintln!("{}", error::message(21));
+        eprintln!("{}", language::error(21));
         notification::not_sent(mastodon);
         process::exit(1);
     }
@@ -36,13 +36,13 @@ pub fn toot(txt: String) {
     let _toot = match Command::new("toot").args(&["post", &txt]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(6));
+            eprintln!("{}", language::error(6));
             notification::not_sent(mastodon);
             process::exit(1)
         }
     };
     if _toot.code() == Some(2) {
-        eprintln!("{}", error::message(21));
+        eprintln!("{}", language::error(21));
         notification::not_sent(mastodon);
         process::exit(1);
     }

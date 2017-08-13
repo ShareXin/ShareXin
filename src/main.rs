@@ -15,13 +15,10 @@ mod notification;
 mod twitter;
 mod mastodon;
 mod image;
-mod help;
 mod gui;
 mod imgur;
 mod cmd;
-mod error;
 mod language;
-mod upgrade;
 
 static VERSION: &'static str = env!("CARGO_PKG_VERSION");
 static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
@@ -75,5 +72,18 @@ impl Destination {
 }
 
 fn main() {
-    cmd::cmd();
+    let user = match ::std::env::var("USER") {
+        Ok(ok) => ok,
+        // change error messages and add $USER
+        Err(_) => {
+            eprintln!("{}", language::error(0));
+            String::new()
+        }
+    };
+    if user != "root" {
+        cmd::cmd();
+    } else {
+        // change error messages and add root error
+        eprintln!("{}", language::error(0));
+    }
 }

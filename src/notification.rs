@@ -2,12 +2,12 @@
 use notify_rust::Notification;
 
 use Destination;
-use error;
-use language::{language, Language};
+use language;
+use language::*;
 
 // when the tweet/toot with an image is sent
 pub fn image_sent(service: Destination, text: &str, img: &str) {
-    let string = language(Language::new(service, 0));
+    let string = notification(Language::new(service, 0));
     match Notification::new()
         .appname("ShareXin")
         .summary(string)
@@ -18,7 +18,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(23));
+            eprintln!("{}", language::error(23));
             return;
         }
     };
@@ -26,7 +26,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
 
 // when the tweet/toot without an image is sent
 pub fn message_sent(service: Destination, text: &str) {
-    let string = language(Language::new(service, 0));
+    let string = notification(Language::new(service, 0));
     match Notification::new()
         .appname("ShareXin")
         .summary(string)
@@ -36,7 +36,7 @@ pub fn message_sent(service: Destination, text: &str) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(23));
+            eprintln!("{}", language::error(23));
             return;
         }
     };
@@ -44,7 +44,7 @@ pub fn message_sent(service: Destination, text: &str) {
 
 // when the file has been saved
 pub fn file_saved() {
-    let string = language(Language::new(Destination::new(3), 2));
+    let string = notification(Language::new(Destination::new(3), 2));
     match Notification::new()
         .appname("ShareXin")
         .summary(string)
@@ -53,7 +53,7 @@ pub fn file_saved() {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(23));
+            eprintln!("{}", language::error(23));
             return;
         }
     };
@@ -61,7 +61,7 @@ pub fn file_saved() {
 
 // if a tweet/toot without an image is empty
 pub fn empty(service: Destination) {
-    let string = language(Language::new(service, 3));
+    let string = notification(Language::new(service, 3));
     match Notification::new()
         .appname("ShareXin")
         .summary(string)
@@ -70,7 +70,7 @@ pub fn empty(service: Destination) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(23));
+            eprintln!("{}", language::error(23));
             return;
         }
     };
@@ -78,7 +78,7 @@ pub fn empty(service: Destination) {
 
 // if a tweet/toot is unable to send
 pub fn not_sent(service: Destination) {
-    let string = language(Language::new(service, 4));
+    let string = notification(Language::new(service, 4));
     match Notification::new()
         .appname("ShareXin")
         .summary(string)
@@ -87,7 +87,7 @@ pub fn not_sent(service: Destination) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(23));
+            eprintln!("{}", language::error(23));
             return;
         }
     };

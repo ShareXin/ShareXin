@@ -6,6 +6,7 @@ description = "ShareX for Unix-like systems"
 homepage = "https://github.com/thebitstick/ShareXin"
 repository = "https://github.com/thebitstick/ShareXin"
 license = "MIT"
+include = ["src/lang/**/*"]
 
 [dependencies]
 gtk = "^0"

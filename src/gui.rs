@@ -12,13 +12,13 @@ use notification;
 use twitter;
 use mastodon;
 use Destination;
-use error;
+use language;
 
 pub fn gui(service: Destination, image_bool: bool) {
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(24));
+            eprintln!("{}", language::error(24));
             process::exit(1)
         }
     };
@@ -54,7 +54,7 @@ pub fn gui(service: Destination, image_bool: bool) {
         match open::that(temp) {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(19));
+                eprintln!("{}", language::error(19));
                 process::exit(1)
             }
         };

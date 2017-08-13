@@ -10,7 +10,7 @@ use std::*;
 use std;
 use notification;
 use time;
-use error;
+use language;
 
 pub fn file(file: String) {
 
@@ -22,7 +22,7 @@ pub fn file(file: String) {
     let _copy = match std::fs::copy(file, tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(30));
+            eprintln!("{}", language::error(30));
             process::exit(1)
         }
     };
@@ -55,7 +55,7 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
             "plasma" => kde(args, temp),
             "sway" => sway(args, temp),
             _ => {
-                eprintln!("{}", error::message(26));
+                eprintln!("{}", language::error(26));
                 process::exit(1)
             }
         },
@@ -80,7 +80,7 @@ fn sway(args: usize, temp: &str) {
         match Command::new("swaygrab").arg(temp.clone()).output() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(9));
+                eprintln!("{}", language::error(9));
                 process::exit(1)
             }
         };
@@ -91,7 +91,7 @@ fn sway(args: usize, temp: &str) {
         match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(12));
+                eprintln!("{}", language::error(12));
                 process::exit(1)
             }
         };
@@ -100,7 +100,7 @@ fn sway(args: usize, temp: &str) {
         let _slop = match Command::new("slop").output() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(14));
+                eprintln!("{}", language::error(14));
                 process::exit(1)
             }
         };
@@ -111,7 +111,7 @@ fn sway(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(15));
+                eprintln!("{}", language::error(15));
                 process::exit(1)
             }
         };
@@ -138,7 +138,7 @@ fn sway(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(9));
+                eprintln!("{}", language::error(9));
                 process::exit(1)
             }
         };
@@ -153,7 +153,7 @@ fn sway(args: usize, temp: &str) {
         let _image = match Command::new("swaygrab").arg(temp.clone()).status() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(9));
+                eprintln!("{}", language::error(9));
                 process::exit(1)
             }
         };
@@ -176,7 +176,7 @@ fn gnome(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(7));
+                eprintln!("{}", language::error(7));
                 process::exit(1)
             }
         };
@@ -185,7 +185,7 @@ fn gnome(args: usize, temp: &str) {
         match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(12));
+                eprintln!("{}", language::error(12));
                 process::exit(1)
             }
         };
@@ -197,7 +197,7 @@ fn gnome(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(7));
+                eprintln!("{}", language::error(7));
                 process::exit(1)
             }
         };
@@ -225,7 +225,7 @@ fn gnome(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(7));
+                eprintln!("{}", language::error(7));
                 process::exit(1)
             }
         };
@@ -244,7 +244,7 @@ fn gnome(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(7));
+                eprintln!("{}", language::error(7));
                 process::exit(1)
             }
         };
@@ -268,7 +268,7 @@ fn kde(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(8));
+                eprintln!("{}", language::error(8));
                 process::exit(1)
             }
         };
@@ -287,7 +287,7 @@ fn kde(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(8));
+                eprintln!("{}", language::error(8));
                 process::exit(1)
             }
         };
@@ -306,7 +306,7 @@ fn kde(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(8));
+                eprintln!("{}", language::error(8));
                 process::exit(1)
             }
         };
@@ -330,7 +330,7 @@ fn maim(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(10));
+                eprintln!("{}", language::error(10));
                 process::exit(1)
             }
         };
@@ -339,7 +339,7 @@ fn maim(args: usize, temp: &str) {
         match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(12));
+                eprintln!("{}", language::error(12));
                 process::exit(1)
             }
         };
@@ -351,7 +351,7 @@ fn maim(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(10));
+                eprintln!("{}", language::error(10));
                 process::exit(1)
             }
         };
@@ -375,7 +375,7 @@ fn maim(args: usize, temp: &str) {
         let _xdo = match Command::new("xdotool").arg("getactivewindow").output() {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(11));
+                eprintln!("{}", language::error(11));
                 process::exit(1)
             }
         };
@@ -389,7 +389,7 @@ fn maim(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(10));
+                eprintln!("{}", language::error(10));
                 process::exit(1)
             }
         };
@@ -407,7 +407,7 @@ fn maim(args: usize, temp: &str) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(10));
+                eprintln!("{}", language::error(10));
                 process::exit(1)
             }
         };
@@ -433,7 +433,7 @@ pub fn image(args: usize) {
     let session = match env::var("XDG_SESSION_TYPE") {
         Ok(ok) => ok.to_lowercase(),
         Err(_) => {
-            eprintln!("{}", error::message(3));
+            eprintln!("{}", language::error(3));
             String::from("x11").to_lowercase()
         }
     };
@@ -442,14 +442,14 @@ pub fn image(args: usize) {
     let desktop = match env::var("DESKTOP_SESSION") {
         Ok(ok) => ok.to_lowercase(),
         Err(_) => {
-            eprintln!("{}", error::message(4));
+            eprintln!("{}", language::error(4));
             String::new()
         }
     };
 
     screenshot(args.clone(), temp.clone(), session.clone(), desktop.clone());
     if !tmp.exists() {
-        eprintln!("{}", error::message(30));
+        eprintln!("{}", language::error(30));
         process::exit(1);
     }
 
@@ -477,7 +477,7 @@ pub fn image(args: usize) {
         {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", error::message(13));
+                eprintln!("{}", language::error(13));
                 process::exit(1)
             }
         };
@@ -496,7 +496,7 @@ fn save() {
     let home = match env::var("HOME") {
         Ok(home) => home,
         Err(_) => {
-            eprintln!("{}", error::message(1));
+            eprintln!("{}", language::error(1));
             process::exit(1)
         }
     };
@@ -507,7 +507,7 @@ fn save() {
     let _dir = match std::fs::create_dir(pictures) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(29));
+            eprintln!("{}", language::error(29));
         }
     };
     let mut new_file = String::from(home);
@@ -517,7 +517,7 @@ fn save() {
     let time = String::from(match time::strftime("%Y-%m-%d-%H_%M_%S", &time::now()) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(25));
+            eprintln!("{}", language::error(25));
             process::exit(1)
         }
     });
@@ -530,7 +530,7 @@ fn save() {
     let _clone = match std::fs::copy(tmp.clone(), new_file) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(30));
+            eprintln!("{}", language::error(30));
             return;
         }
     };
