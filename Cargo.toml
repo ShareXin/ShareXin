@@ -6,7 +6,11 @@ description = "ShareX for Unix-like systems"
 homepage = "https://github.com/thebitstick/ShareXin"
 repository = "https://github.com/thebitstick/ShareXin"
 license = "MIT"
-include = ["src/lang/*", "Cargo.toml"]
+include = ["src/lang/*", "Cargo.toml", "src/*"]
+
+[[bin]]
+name = "sharexin"
+path = "src/main.rs"
 
 [dependencies]
 gtk = "^0"
