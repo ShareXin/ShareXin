@@ -22,6 +22,7 @@ impl Language {
 }
 
 pub fn locale() -> String {
+
     match env::var("LANG") {
         Ok(ok) => ok.to_lowercase(),
         Err(_) => {
@@ -29,6 +30,7 @@ pub fn locale() -> String {
             String::from("en_US.utf8").to_lowercase()
         }
     }
+
 }
 
 pub fn loader<'a>(lang: String) -> &'a str {

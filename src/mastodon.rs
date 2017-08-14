@@ -5,6 +5,7 @@ use Destination;
 use error;
 
 pub fn image(txt: String) {
+
     let mastodon = Destination::new(0);
 
     let mut tmp = env::temp_dir();
@@ -31,6 +32,7 @@ pub fn image(txt: String) {
 }
 
 pub fn toot(txt: String) {
+
     let mastodon = Destination::new(0);
 
     let _toot = match Command::new("toot").args(&["post", &txt]).status() {

@@ -12,8 +12,7 @@
 * **Rust Nightly**  
 * Unix-like system  
 * xdg (probably already installed)  
-* maim (on non-Gnome/KDE x11 desktops)  
-* slop (on non-Gnome/KDE x11 desktops)  
+* scrot (on non-Gnome/KDE x11 desktops)  
 * imagemagick  
 * openssl  
 * [t](https://github.com/sferik/t) (for now)  
@@ -133,6 +132,13 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.5.1] - 2017-08-14  
+- No more wildcards in getting modules  
+- Separated `language.rs`  
+- Now using scrot rather than maim  
+- `.kill()` exists for `Command`, no longer using killall feh  
+- Added Fatal error messages  
+
 #### [0.5.0] - 2017-08-13  
 - Rewrite of Language message system, now using templates, extremely easy to add more languages  
 - Bug fixes  

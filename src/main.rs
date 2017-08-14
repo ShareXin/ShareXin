@@ -75,6 +75,7 @@ impl Destination {
 }
 
 fn main() {
+
     let user = match ::std::env::var("USER") {
         Ok(ok) => ok,
         Err(_) => String::new(),
@@ -84,4 +85,5 @@ fn main() {
     } else {
         error::fatal();
     }
+
 }

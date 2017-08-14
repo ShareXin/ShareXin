@@ -9,6 +9,7 @@ use error;
 use upgrade;
 
 pub fn cmd() {
+
     let twitter = Destination::new(1);
     let mastodon = Destination::new(0);
 
@@ -98,6 +99,7 @@ pub fn cmd() {
 }
 
 fn check() {
+
     println!("{}", language::help());
     if !check_exists("t") {
         eprintln!("\n{}", error::message(5));
@@ -108,9 +110,11 @@ fn check() {
     if !check_exists("convert") {
         eprintln!("{}", error::message(15));
     }
+
 }
 
 fn check_exists(program: &str) -> bool {
+
     if let Ok(path) = env::var("PATH") {
         for p in path.split(":") {
             let p_str = format!("{}/{}", p, program);
@@ -119,5 +123,6 @@ fn check_exists(program: &str) -> bool {
             }
         }
     }
-    false
+    return false;
+
 }

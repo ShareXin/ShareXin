@@ -7,6 +7,7 @@ use error;
 use VERSION;
 
 pub fn upgrade() {
+
     let mut dst = Vec::new();
     let mut latest = Easy::new();
 

@@ -51,6 +51,7 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
     match session.as_ref() {
         "wayland" => match desktop.as_ref() {
             "gnome" => gnome(args, temp),
+            "cinnamon" => gnome(args, temp),
             "plasma" => kde(args, temp),
             "sway" => sway(args, temp),
             _ => {
@@ -60,19 +61,21 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
         },
         "x11" => match desktop.as_ref() {
             "gnome" => gnome(args, temp),
+            "cinnamon" => gnome(args, temp),
             "plasma" => kde(args, temp),
-            _ => maim(args, temp),
+            _ => scrot(args, temp),
         },
         _ => match desktop.as_ref() {
             "gnome" => gnome(args, temp),
             "plasma" => kde(args, temp),
-            _ => maim(args, temp),
+            _ => scrot(args, temp),
         },
     }
 }
 
 #[cfg(not(target_os = "macos"))]
 fn sway(args: usize, temp: &str) {
+
     if args == 0 {
 
         // _before_image takes a full screenshot using swaygrab
@@ -87,7 +90,7 @@ fn sway(args: usize, temp: &str) {
         // _feh displays it
         println!("Feh may not display properly due to tiling and Wayland.");
 
-        match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
+        let mut _feh = match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
@@ -115,19 +118,16 @@ fn sway(args: usize, temp: &str) {
             }
         };
 
-        // _kill closes _feh, gently
-        match Command::new("killall").arg("feh").output() {
+        // closes _feh, gently
+        match _feh.kill() {
             Ok(ok) => ok,
-            Err(e) => {
-                eprintln!("{}", e);
-                error::fatal()
-            }
+            Err(_) => return,
         };
 
         if _image.code() == Some(1) {
-            println!("Exiting...");
             process::exit(1);
         }
+
     } else if args == 1 {
 
         // _image uses swaygrab to get "focused" window and take screenshot
@@ -143,7 +143,6 @@ fn sway(args: usize, temp: &str) {
         };
 
         if _image.code() == Some(1) {
-            println!("Exiting...");
             process::exit(1);
         }
     } else if args == 2 {
@@ -158,7 +157,6 @@ fn sway(args: usize, temp: &str) {
         };
 
         if _image.code() == Some(1) {
-            println!("Exiting...");
             process::exit(1);
         }
     }
@@ -166,6 +164,7 @@ fn sway(args: usize, temp: &str) {
 
 #[cfg(not(target_os = "macos"))]
 fn gnome(args: usize, temp: &str) {
+
     if args == 0 {
 
         // _before_image takes a full screenshot using gnome0creenshot
@@ -181,7 +180,7 @@ fn gnome(args: usize, temp: &str) {
         };
 
         // _feh displays it
-        match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
+        let mut _feh = match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
@@ -201,20 +200,12 @@ fn gnome(args: usize, temp: &str) {
             }
         };
 
-        // _kill closes _feh, gently
-        match Command::new("killall").arg("feh").output() {
+        // closes _feh, gently
+        match _feh.kill() {
             Ok(ok) => ok,
-            Err(e) => {
-                eprintln!("{}", e);
-                error::fatal()
-            }
+            Err(_) => return,
         };
 
-        println!("gnome-screenshot doesnt give exit codes but maybe one day");
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     } else if args == 1 {
 
         // _image uses gnome-screenshot to get current window and take screenshot
@@ -228,12 +219,6 @@ fn gnome(args: usize, temp: &str) {
                 error::fatal()
             }
         };
-
-        println!("gnome-screenshot doesnt give exit codes but maybe one day");
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     } else if args == 2 {
 
         // _image uses gnome-screenshot to take screenshot
@@ -247,17 +232,12 @@ fn gnome(args: usize, temp: &str) {
                 error::fatal()
             }
         };
-
-        println!("gnome-screenshot doesnt give exit codes but maybe one day");
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     }
 }
 
 #[cfg(not(target_os = "macos"))]
 fn kde(args: usize, temp: &str) {
+
     if args == 0 {
 
         // _image pauses screen and lets you select
@@ -272,11 +252,6 @@ fn kde(args: usize, temp: &str) {
             }
         };
 
-        println!("spectacle doesnt give exit codes but maybe one day");
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     } else if args == 1 {
 
         // _image uses spectacle to get current window and take screenshot
@@ -291,11 +266,6 @@ fn kde(args: usize, temp: &str) {
             }
         };
 
-        println!("spectacle doesnt give exit codes but maybe one day");
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     } else if args == 2 {
 
         // _image uses spectacle to take screenshot
@@ -309,24 +279,16 @@ fn kde(args: usize, temp: &str) {
                 error::fatal()
             }
         };
-
-        println!("spectacle doesnt give exit codes but maybe one day");
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     }
 }
 
 #[cfg(not(target_os = "macos"))]
-fn maim(args: usize, temp: &str) {
+fn scrot(args: usize, temp: &str) {
+
     if args == 0 {
 
-        // _before_image takes a full screenshot using maim
-        match Command::new("maim")
-            .args(&["--hidecursor", temp.clone()])
-            .output()
-        {
+        // _before_image takes a full screenshot using scrot
+        match Command::new("scrot").arg(temp.clone()).output() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
@@ -335,7 +297,7 @@ fn maim(args: usize, temp: &str) {
         };
 
         // _feh displays it
-        match Command::new("feh").arg(temp.clone()).arg("-F").spawn() {
+        let mut _feh = match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
@@ -344,8 +306,8 @@ fn maim(args: usize, temp: &str) {
         };
 
         // _image lets you select
-        let _image = match Command::new("maim")
-            .args(&["--hidecursor", "-s", temp.clone()])
+        let _image = match Command::new("scrot")
+            .args(&["--select", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
@@ -355,35 +317,20 @@ fn maim(args: usize, temp: &str) {
             }
         };
 
-        // _kill closes _feh, gently
-        match Command::new("killall").arg("feh").output() {
+        // closes _feh, gently
+        match _feh.kill() {
             Ok(ok) => ok,
-            Err(e) => {
-                eprintln!("{}", e);
-                error::fatal()
-            }
+            Err(_) => return,
         };
 
-        if _image.code() == Some(1) {
-            println!("Exiting...");
+        if _image.code() == Some(2) {
             process::exit(1);
         }
     } else if args == 1 {
 
-        // _xdo gets the active window
-        let _xdo = match Command::new("xdotool").arg("getactivewindow").output() {
-            Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("{}", error::message(11));
-                error::fatal()
-            }
-        };
-
-        // _image uses maim to take the window gotten from xdo
-        let xdo = String::from_utf8_lossy(&_xdo.stdout);
-
-        let _image = match Command::new("maim")
-            .args(&["--hidecursor", "-i", &xdo, temp.clone()])
+        // _image uses scrot to take window screenshot
+        let _image = match Command::new("scrot")
+            .args(&["--border", "--focused", temp.clone()])
             .status()
         {
             Ok(ok) => ok,
@@ -393,32 +340,21 @@ fn maim(args: usize, temp: &str) {
             }
         };
 
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     } else if args == 2 {
 
-        // _image uses maim to take screenshot
-        let _image = match Command::new("maim")
-            .args(&["--hidecursor", temp.clone()])
-            .status()
-        {
+        // _image uses scrot to take screenshot
+        let _image = match Command::new("scrot").arg(temp.clone()).status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
                 error::fatal()
             }
         };
-
-        if _image.code() == Some(1) {
-            println!("Exiting...");
-            process::exit(1);
-        }
     }
 }
 
 pub fn image(args: usize) {
+
     //  tmp gets the temporary directory of the system
     let mut tmp = env::temp_dir();
 
@@ -487,6 +423,7 @@ pub fn image(args: usize) {
 }
 
 fn save() {
+
     // tmp gets temporary dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");

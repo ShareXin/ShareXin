@@ -44,6 +44,7 @@ fn notification(langue: Language) -> String {
 
 // when the tweet/toot with an image is sent
 pub fn image_sent(service: Destination, text: &str, img: &str) {
+
     let string = notification(Language::new(service, 0));
     match Notification::new()
         .appname("ShareXin")
@@ -59,10 +60,12 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
             return;
         }
     };
+
 }
 
 // when the tweet/toot without an image is sent
 pub fn message_sent(service: Destination, text: &str) {
+
     let string = notification(Language::new(service, 0));
     match Notification::new()
         .appname("ShareXin")
@@ -77,10 +80,12 @@ pub fn message_sent(service: Destination, text: &str) {
             return;
         }
     };
+
 }
 
 // when the file has been saved
 pub fn file_saved() {
+
     let string = notification(Language::new(Destination::new(3), 2));
     match Notification::new()
         .appname("ShareXin")
@@ -94,10 +99,12 @@ pub fn file_saved() {
             return;
         }
     };
+
 }
 
 // if a tweet/toot without an image is empty
 pub fn empty(service: Destination) {
+
     let string = notification(Language::new(service, 3));
     match Notification::new()
         .appname("ShareXin")
@@ -111,10 +118,12 @@ pub fn empty(service: Destination) {
             return;
         }
     };
+
 }
 
 // if a tweet/toot is unable to send
 pub fn not_sent(service: Destination) {
+
     let string = notification(Language::new(service, 4));
     match Notification::new()
         .appname("ShareXin")
@@ -128,4 +137,5 @@ pub fn not_sent(service: Destination) {
             return;
         }
     };
+
 }

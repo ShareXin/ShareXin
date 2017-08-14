@@ -5,6 +5,7 @@ use Destination;
 use error;
 
 pub fn image(txt: String) {
+
     let twitter = Destination::new(1);
 
     let mut tmp = env::temp_dir();
@@ -22,7 +23,9 @@ pub fn image(txt: String) {
             error::fatal()
         }
     };
+
     Command::new("killall").arg("vim"); // Only way to get t work, sorry
+
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
         error::fatal();
@@ -31,6 +34,7 @@ pub fn image(txt: String) {
 }
 
 pub fn tweet(txt: String) {
+
     let twitter = Destination::new(1);
 
     let _t = match Command::new("t").args(&["update", &txt]).status() {
@@ -41,9 +45,11 @@ pub fn tweet(txt: String) {
             error::fatal()
         }
     };
+
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
         error::fatal();
     }
+
     notification::message_sent(twitter, &txt);
 }

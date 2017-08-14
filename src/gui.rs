@@ -14,6 +14,7 @@ use Destination;
 use error;
 
 pub fn gui(service: Destination, image_bool: bool) {
+
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => {
@@ -35,6 +36,8 @@ pub fn gui(service: Destination, image_bool: bool) {
     // setting widgets
     count.set_label("0");
     window.set_title("ShareXin");
+    window.set_hide_titlebar_when_maximized(false);
+    window.set_keep_above(true);
     if service.mastodon {
         header.set_subtitle("Mastodon");
     } else if service.twitter {
