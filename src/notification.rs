@@ -2,8 +2,45 @@
 use notify_rust::Notification;
 
 use Destination;
-use language;
-use language::*;
+use language::{loader, locale, Language};
+use error;
+use yaml_rust::YamlLoader;
+
+fn notification(langue: Language) -> String {
+
+    let file = loader(locale());
+    let locators = YamlLoader::load_from_str(file).unwrap();
+    let mut locator = &locators[0]["Notification"];
+
+    if langue.option == 0 {
+        locator = &locator["Sent"];
+        if langue.service.mastodon {
+            locator = &locator["Mastodon"];
+        } else if langue.service.twitter {
+            locator = &locator["Twitter"];
+        } else if langue.service.imgur {
+            locator = &locator["Imgur"];
+        }
+    } else if langue.option == 2 {
+        locator = &locator["File"];
+    } else if langue.option == 3 {
+        locator = &locator["Empty"];
+        if langue.service.mastodon {
+            locator = &locator["Mastodon"];
+        } else if langue.service.twitter {
+            locator = &locator["Twitter"];
+        }
+    } else if langue.option == 4 {
+        locator = &locator["Not_Sent"];
+        if langue.service.mastodon {
+            locator = &locator["Mastodon"];
+        } else if langue.service.twitter {
+            locator = &locator["Twitter"];
+        }
+    }
+    return format!("{}", locator.as_str().unwrap());
+}
+
 
 // when the tweet/toot with an image is sent
 pub fn image_sent(service: Destination, text: &str, img: &str) {
@@ -18,7 +55,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(23));
+            eprintln!("{}", error::message(23));
             return;
         }
     };
@@ -36,7 +73,7 @@ pub fn message_sent(service: Destination, text: &str) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(23));
+            eprintln!("{}", error::message(23));
             return;
         }
     };
@@ -53,7 +90,7 @@ pub fn file_saved() {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(23));
+            eprintln!("{}", error::message(23));
             return;
         }
     };
@@ -70,7 +107,7 @@ pub fn empty(service: Destination) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(23));
+            eprintln!("{}", error::message(23));
             return;
         }
     };
@@ -87,7 +124,7 @@ pub fn not_sent(service: Destination) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(23));
+            eprintln!("{}", error::message(23));
             return;
         }
     };

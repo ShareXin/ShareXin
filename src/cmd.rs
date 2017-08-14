@@ -1,16 +1,14 @@
 use Destination;
-use std::*;
+use std::{env, fs};
 use gui::gui;
 use image;
 use imgur;
 use VERSION;
 use language;
+use error;
+use upgrade;
 
 pub fn cmd() {
-    args();
-}
-
-fn args() {
     let twitter = Destination::new(1);
     let mastodon = Destination::new(0);
 
@@ -18,7 +16,7 @@ fn args() {
     match args.len() {
         2 => match args[1].as_ref() {
             "-V" | "--version" | "version" => println!("sharexin {}", VERSION),
-            "-U" | "--upgrade" | "upgrade" => language::upgrade(),
+            "-U" | "--upgrade" | "upgrade" => upgrade::upgrade(),
             "toot" => gui(mastodon, false),
             "tweet" => gui(twitter, false),
             _ => check(),
@@ -102,13 +100,13 @@ fn args() {
 fn check() {
     println!("{}", language::help());
     if !check_exists("t") {
-        eprintln!("\n{}", language::error(5));
+        eprintln!("\n{}", error::message(5));
     }
     if !check_exists("toot") {
-        eprintln!("{}", language::error(6));
+        eprintln!("{}", error::message(6));
     }
     if !check_exists("convert") {
-        eprintln!("{}", language::error(15));
+        eprintln!("{}", error::message(15));
     }
 }
 

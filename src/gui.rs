@@ -1,9 +1,8 @@
 use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
-use gtk::traits::*;
-use gtk::*;
-use std::*;
+use gtk::{ButtonExt, Continue, Inhibit, TextBuffer, TextView, WidgetExt, WindowExt};
+use std::{env, thread};
 use gtk;
 use gdk;
 use glib;
@@ -12,14 +11,14 @@ use notification;
 use twitter;
 use mastodon;
 use Destination;
-use language;
+use error;
 
 pub fn gui(service: Destination, image_bool: bool) {
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(24));
-            process::exit(1)
+            eprintln!("{}", error::message(24));
+            error::fatal()
         }
     };
 
@@ -54,8 +53,8 @@ pub fn gui(service: Destination, image_bool: bool) {
         match open::that(temp) {
             Ok(ok) => ok,
             Err(_) => {
-                eprintln!("{}", language::error(19));
-                process::exit(1)
+                eprintln!("{}", error::message(19));
+                return;
             }
         };
     });

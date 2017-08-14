@@ -1,11 +1,11 @@
 use notification;
 use Destination;
 use std::fs::File;
-use std::io::*;
-use std::*;
+use std::io::Read;
+use std::env;
 use Imgur;
 use open;
-use language;
+use error;
 
 pub fn send() {
 
@@ -14,16 +14,16 @@ pub fn send() {
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(28));
-            process::exit(1)
+            eprintln!("{}", error::message(28));
+            error::fatal()
         }
     };
     let mut image = Vec::new();
     match file.read_to_end(&mut image) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(28));
-            process::exit(1)
+            eprintln!("{}", error::message(28));
+            error::fatal()
         }
     };
 
@@ -35,21 +35,21 @@ pub fn send() {
         Ok(info) => match info.link() {
             Some(link) => copy_link.push_str(link),
             None => {
-                eprintln!("{}", language::error(20));
-                process::exit(1)
+                eprintln!("{}", error::message(20));
+                error::fatal()
             }
         },
         Err(_) => {
-            eprintln!("{}", language::error(17));
-            process::exit(1)
+            eprintln!("{}", error::message(17));
+            error::fatal()
         }
     }
     notification::image_sent(Destination::new(2), &copy_link, tmp.to_str().unwrap());
     match open::that(copy_link) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(19));
-            process::exit(1)
+            eprintln!("{}", error::message(19));
+            error::fatal()
         }
     };
 }

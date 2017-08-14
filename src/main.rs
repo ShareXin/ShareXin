@@ -19,6 +19,8 @@ mod image;
 mod gui;
 mod imgur;
 mod cmd;
+mod error;
+mod upgrade;
 mod language;
 
 static VERSION: &'static str = env!("CARGO_PKG_VERSION");
@@ -80,6 +82,6 @@ fn main() {
     if user != "root" {
         cmd::cmd();
     } else {
-        eprintln!("{}", language::error(0));
+        eprintln!("{}", error::message(0));
     }
 }

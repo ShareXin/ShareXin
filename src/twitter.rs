@@ -1,8 +1,8 @@
-use std::*;
-use std::process::*;
+use std::env;
+use std::process::Command;
 use notification;
 use Destination;
-use language;
+use error;
 
 pub fn image(txt: String) {
     let twitter = Destination::new(1);
@@ -17,15 +17,15 @@ pub fn image(txt: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(5));
+            eprintln!("{}", error::message(5));
             notification::not_sent(twitter);
-            process::exit(1)
+            error::fatal()
         }
     };
     Command::new("killall").arg("vim"); // Only way to get t work, sorry
     if _t.code() == Some(1) {
-        eprintln!("{}", language::error(22));
-        process::exit(1);
+        eprintln!("{}", error::message(22));
+        error::fatal();
     }
     notification::image_sent(twitter, &txt, temp);
 }
@@ -36,14 +36,14 @@ pub fn tweet(txt: String) {
     let _t = match Command::new("t").args(&["update", &txt]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", language::error(5));
+            eprintln!("{}", error::message(5));
             notification::not_sent(twitter);
-            process::exit(1)
+            error::fatal()
         }
     };
     if _t.code() == Some(1) {
-        eprintln!("{}", language::error(22));
-        process::exit(1);
+        eprintln!("{}", error::message(22));
+        error::fatal();
     }
     notification::message_sent(twitter, &txt);
 }
