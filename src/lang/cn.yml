@@ -18,6 +18,7 @@ Update:
     Up: 你是最新的!
     Check: 要检查是否有新的更新
 Error:
+    Fatal: 致命错误，应用程序关闭
     Error: 错误
     "0": Unknown error
     "1": 获取$HOME变量时发生错误

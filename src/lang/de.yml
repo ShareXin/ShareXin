@@ -18,6 +18,7 @@ Update:
     Up: Sie sind auf dem Laufenden!
     Check: Überprüfen Sie nach neuen Updates unter
 Error:
+    Fatal: Schwerwiegender Fehler, Anwendungsschluss
     Error: Fehler
     "0": Unknown error
     "1": Fehler beim lesen der $HOME Variable

@@ -18,6 +18,7 @@ Update:
     Up: あなたは最新です!
     Check: 新しいアップデートを確認する
 Error:
+    Fatal: 致命的なエラー、アプリケーションが閉ます
     Error: エラー
     "0": Unknown error
     "1": $HOME変数を取得中にエラーが発生しました

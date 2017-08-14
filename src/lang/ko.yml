@@ -18,6 +18,7 @@ Update:
     Up: 당신은 최신입니다!
     Check: 새로운 업데이트 확인
 Error:
+    Fatal: 치명적인 오류 응용 프로그램을 닫을 수 있습니다
     Error: 오류
     "0": Unknown error
     "1": $HOME 변수를 검색하는 동안 오류가 발생했습니다

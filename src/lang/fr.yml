@@ -18,6 +18,7 @@ Update:
     Up: Vous êtes à jour!
     Check: Vérifiez les nouvelles mises à jour à l'adresse suivante
 Error:
+    Fatal: Erreur fatale, fermeture de l'application
     Error: Erreur
     "0": Unknown error
     "1": Erreur lors de la réception de la variable $HOME

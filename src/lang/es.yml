@@ -18,6 +18,7 @@ Update:
     Up: ¡Estas actualizado!
     Check: Busque nuevas actualizaciones en
 Error:
+    Fatal: Error fatal, cierendo la aplicación
     Error: Error
     "0": Unknown error
     "1": Error al obtener la variable $HOME

@@ -82,6 +82,6 @@ fn main() {
     if user != "root" {
         cmd::cmd();
     } else {
-        eprintln!("{}", error::message(0));
+        error::fatal();
     }
 }

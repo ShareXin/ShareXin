@@ -18,6 +18,7 @@ Update:
     Up: You are up-to-date!
     Check: Check for new updates at
 Error:
+    Fatal: Fatal error, closing application
     Error: Error
     "0": Unknown error
     "1": Error getting $HOME variable

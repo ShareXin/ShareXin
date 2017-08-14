@@ -18,6 +18,7 @@ Update:
     Up: Vi estas ĝisdatigita!
     Check: Kontrolu por novaj ĝisdatigoj ĉe
 Error:
+    Fatal: Fatala eraro, ferma apliko
     Error: Eraro
     "0": Unknown error
     "1": Eraro ricevanta la $HOME variablon
