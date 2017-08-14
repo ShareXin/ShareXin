@@ -138,6 +138,7 @@ Examples:
 - Now using scrot rather than maim  
 - `.kill()` exists for `Command`, no longer using killall feh  
 - Added Fatal error messages  
+- Cinnamon desktop support  
 
 #### [0.5.0] - 2017-08-13  
 - Rewrite of Language message system, now using templates, extremely easy to add more languages  
