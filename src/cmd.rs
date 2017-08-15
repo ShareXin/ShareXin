@@ -7,6 +7,8 @@ use VERSION;
 use language;
 use error;
 use upgrade;
+use twitter;
+use mastodon;
 
 pub fn cmd() {
 
@@ -36,6 +38,7 @@ pub fn cmd() {
                     image::image(2);
                     gui(mastodon, true);
                 }
+                "auth" => mastodon::auth(),
                 _ => check(),
             },
             "tweet" => match args[2].as_ref() {
@@ -51,6 +54,7 @@ pub fn cmd() {
                     image::image(2);
                     gui(twitter, true);
                 }
+                "auth" => twitter::auth(),
                 _ => check(),
             },
             "imgur" => match args[2].as_ref() {

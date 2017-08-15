@@ -66,4 +66,10 @@ Help:
     Toot: 上傳到Mastodon
     Tweet: 上傳到Twitter
     Imgur: 上傳到Imgur
+    Twitter:
+        Options: Twitter選項
+        Auth: 用Twitter驗證
+    Mastodon:
+        Options: Twitter選項
+        Auth: 用Mastodon驗證
     Examples: 案件

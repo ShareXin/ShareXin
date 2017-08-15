@@ -66,4 +66,10 @@ Help:
     Toot: Alŝutu al Mastodon
     Tweet: Alŝutu al Twitter
     Imgur: Alŝutu al Imgur
+    Twitter:
+        Options: Opcioj de Twitter
+        Auth: Aŭtentigi kun Twitter
+    Mastodon:
+        Options: Opcioj de Mastodon
+        Auth: Aŭtentigi kun Mastodon
     Examples: Ekzemploj

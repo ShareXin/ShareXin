@@ -66,4 +66,10 @@ Help:
     Toot: Mastodon에 업로드
     Tweet: Twitter에 업로드
     Imgur: Imgur에 업로드
+    Twitter:
+        Options: Twitter옵션
+        Auth: Twitter에서 인증
+    Mastodon:
+        Options: Mastodon옵션
+        Auth: Mastodon에서 인증
     Examples: 예

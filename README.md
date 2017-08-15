@@ -29,7 +29,7 @@
 ## `--help`  
 
 ```bash
-sharexin 0.5.2
+sharexin 0.5.3
 Usage: sharexin <options> [destination] [image options] [FILE]
 
 Options:
@@ -132,6 +132,9 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+- Now packaging `t` (should work)  
+- Added `auth` option for Twitter and Mastodon  
+
 #### [0.5.2] - 2017-08-15  
 - GTk fixes  
 - Notification for error messages  

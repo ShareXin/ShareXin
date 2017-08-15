@@ -50,3 +50,12 @@ pub fn toot(txt: String) {
     }
     notification::message_sent(mastodon, &txt);
 }
+
+pub fn auth() {
+
+    match Command::new("toot").arg("login").status() {
+        Ok(ok) => ok,
+        Err(_) => error::fatal(),
+    };
+
+}

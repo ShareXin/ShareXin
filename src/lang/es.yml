@@ -66,4 +66,10 @@ Help:
     Toot: Sube a Mastodon
     Tweet: Sube a Twitter
     Imgur: Sube a Imgur
+    Twitter:
+        Options: Opciones de Twitter
+        Auth: Autenticar con Twitter
+    Mastodon:
+        Options: Opciones de Mastodon
+        Auth: Autenticar con Mastodon
     Examples: Ejemplos

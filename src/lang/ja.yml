@@ -66,4 +66,10 @@ Help:
     Toot: マストドンにアップロード
     Tweet: ツイッターにアップロード
     Imgur: Imgurにアップロード
+    Twitter:
+        Options: Twitterのオプション
+        Auth: Twitterで認証する
+    Mastodon:
+        Options: Mastodonのオプション
+        Auth: Mastodonで認証する
     Examples: 例

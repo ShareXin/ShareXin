@@ -66,4 +66,10 @@ Help:
     Toot: Upload vers Mastodon
     Tweet: Upload vers Twitter
     Imgur: Upload vers Imgur
+    Twitter:
+        Options: Twitter Options
+        Auth: Authentification avec Twitter
+    Mastodon:
+        Options: Mastodon Options
+        Auth: Authentification avec Mastodon
     Examples: Exemples

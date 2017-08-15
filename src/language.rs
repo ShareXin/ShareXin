@@ -60,7 +60,7 @@ pub fn loader<'a>(lang: String) -> &'a str {
 
 pub fn help() -> String {
 
-    let usage_usage = "sharexin <options> [destination] [image options] [FILE]";
+    let usage_usage = "sharexin <options> [destination] [destination options/image options] [FILE]";
     let usage_examples = "  sharexin toot
   sharexin tweet full
   sharexin toot area
@@ -85,12 +85,18 @@ pub fn help() -> String {
     let toot = &locator["Toot"].as_str().unwrap();
     let tweet = &locator["Tweet"].as_str().unwrap();
     let imgur = &locator["Imgur"].as_str().unwrap();
+    let twitter = &locator["Twitter"]["Options"].as_str().unwrap();
+    let twitter_auth = &locator["Twitter"]["Auth"].as_str().unwrap();
+    let mastodon = &locator["Mastodon"]["Options"].as_str().unwrap();
+    let mastodon_auth = &locator["Mastodon"]["Auth"].as_str().unwrap();
     let examples = &locator["Examples"].as_str().unwrap();
 
     return format!(
         "{}{}\n{}: {}\n\n{}:\n  -h, --help\t{}\n  -V, --version\t{}\n  -U, --upgrade\t{}\n
 {}:\n  area\t\t{}\n  window\t{}\n  full\t\t{}\n  file\t\t{}\n
 {}:\n  toot\t\t{}\n  tweet\t\t{}\n  imgur\t\t{}\n
+{}:\n  auth\t\t{}\n
+{}:\n  auth\t\t{}\n
 {}:\n{}",
         APP,
         VERSION,
@@ -109,6 +115,10 @@ pub fn help() -> String {
         toot,
         tweet,
         imgur,
+        twitter,
+        twitter_auth,
+        mastodon,
+        mastodon_auth,
         examples,
         usage_examples
     );

@@ -66,4 +66,10 @@ Help:
     Toot: Auf Mastodon veröffentlichen
     Tweet: Auf Twitter veröffentlichen
     Imgur: Auf Imgur veröffentlichen
+    Twitter:
+        Options: Twitter-Optionen
+        Auth: Authentifizierung mit Twitter
+    Mastodon:
+        Options: Mastodon-Optionen
+        Auth: Authentifizierung mit Mastodon
     Examples: Beispiele
