@@ -30,7 +30,7 @@ Error:
     "7": gnome-screenshot command unavailable
     "8": spectacle command unavailable
     "9": swaygrab command unavailable
-    "10": maim command unavailable
+    "10": scrot command unavailable
     "11": xdotool command unavailable
     "12": feh command unavailable
     "13": ImageMagick unavailable

@@ -1,6 +1,7 @@
 use std::env;
 use VERSION;
 use Destination;
+use notification;
 use yaml_rust::YamlLoader;
 use error;
 
@@ -9,11 +10,11 @@ static APP: &'static str = "sharexin ";
 #[derive(Debug, Clone, Copy)]
 pub struct Language {
     pub service: Destination,
-    pub option: u32,
+    pub option: usize,
 }
 
 impl Language {
-    pub fn new(service: Destination, option: u32) -> Language {
+    pub fn new(service: Destination, option: usize) -> Language {
         Language {
             service: service,
             option: option,
@@ -27,6 +28,7 @@ pub fn locale() -> String {
         Ok(ok) => ok.to_lowercase(),
         Err(_) => {
             eprintln!("{}", error::message(2));
+            notification::error(2);
             String::from("en_US.utf8").to_lowercase()
         }
     }

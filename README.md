@@ -29,7 +29,7 @@
 ## `--help`  
 
 ```bash
-sharexin 0.5.0
+sharexin 0.5.2
 Usage: sharexin <options> [destination] [image options] [FILE]
 
 Options:
@@ -132,6 +132,12 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.5.2] - 2017-08-15  
+- GTk fixes  
+- Notification for error messages  
+- Bug fixes  
+- Now using AppImage for releases  
+
 #### [0.5.1] - 2017-08-14  
 - No more wildcards in getting modules  
 - Separated `language.rs`  

@@ -57,6 +57,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
+            error(23);
             return;
         }
     };
@@ -77,6 +78,7 @@ pub fn message_sent(service: Destination, text: &str) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
+            error(23);
             return;
         }
     };
@@ -96,6 +98,7 @@ pub fn file_saved() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
+            error(23);
             return;
         }
     };
@@ -115,6 +118,7 @@ pub fn empty(service: Destination) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
+            error(23);
             return;
         }
     };
@@ -128,6 +132,25 @@ pub fn not_sent(service: Destination) {
     match Notification::new()
         .appname("ShareXin")
         .summary(&string)
+        .timeout(5000)
+        .show()
+    {
+        Ok(ok) => ok,
+        Err(_) => {
+            eprintln!("{}", error::message(23));
+            error(23);
+            return;
+        }
+    };
+
+}
+
+pub fn error(code: usize) {
+
+    let message = error::message(code);
+    match Notification::new()
+        .appname("ShareXin")
+        .summary(&message)
         .timeout(5000)
         .show()
     {

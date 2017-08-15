@@ -15,6 +15,7 @@ pub fn send() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(28));
+            notification::error(28);
             error::fatal()
         }
     };
@@ -23,6 +24,7 @@ pub fn send() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(28));
+            notification::error(28);
             error::fatal()
         }
     };
@@ -36,11 +38,13 @@ pub fn send() {
             Some(link) => copy_link.push_str(link),
             None => {
                 eprintln!("{}", error::message(20));
+                notification::error(20);
                 error::fatal()
             }
         },
         Err(_) => {
             eprintln!("{}", error::message(17));
+            notification::error(17);
             error::fatal()
         }
     }
@@ -49,6 +53,7 @@ pub fn send() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(19));
+            notification::error(19);
             error::fatal()
         }
     };

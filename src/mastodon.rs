@@ -13,7 +13,7 @@ pub fn image(txt: String) {
     let temp = tmp.to_str().unwrap().clone();
 
     let _toot = match Command::new("toot")
-        .args(&["post", "-m", temp.clone(), &txt])
+        .args(&["post", "-m", &temp, &txt])
         .status()
     {
         Ok(ok) => ok,

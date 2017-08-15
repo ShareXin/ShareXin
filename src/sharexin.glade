@@ -69,12 +69,11 @@
       <object class="GtkHeaderBar" id="header">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="title">ShareXin</property>
+        <property name="subtitle">Twitter</property>
         <property name="spacing">0</property>
         <property name="show_close_button">True</property>
         <property name="decoration_layout">close</property>
-        <child type="title">
-          <placeholder/>
-        </child>
         <child>
           <object class="GtkBox" id="box">
             <property name="visible">True</property>

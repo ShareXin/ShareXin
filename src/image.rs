@@ -22,6 +22,7 @@ pub fn file(file: String) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(30));
+            notification::error(30);
             error::fatal()
         }
     };
@@ -39,8 +40,8 @@ fn screenshot(args: usize, temp: &str) {
     image::save_buffer(
         &Path::new(tmp),
         s.as_slice(),
-        s.width() as u32,
-        s.height() as u32,
+        s.width() as usize,
+        s.height() as usize,
         image::RGBA(8),
     ).unwrap();
 }
@@ -56,6 +57,7 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
             "sway" => sway(args, temp),
             _ => {
                 eprintln!("{}", error::message(26));
+                notification::error(26);
                 error::fatal()
             }
         },
@@ -83,6 +85,7 @@ fn sway(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(9));
+                notification::error(9);
                 error::fatal()
             }
         };
@@ -94,6 +97,7 @@ fn sway(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
+                notification::error(12);
                 error::fatal()
             }
         };
@@ -103,6 +107,7 @@ fn sway(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(14));
+                notification::error(14);
                 error::fatal()
             }
         };
@@ -114,6 +119,7 @@ fn sway(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(15));
+                notification::error(15);
                 error::fatal()
             }
         };
@@ -138,6 +144,7 @@ fn sway(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(9));
+                notification::error(9);
                 error::fatal()
             }
         };
@@ -152,6 +159,7 @@ fn sway(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(9));
+                notification::error(9);
                 error::fatal()
             }
         };
@@ -175,6 +183,7 @@ fn gnome(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
+                notification::error(7);
                 error::fatal()
             }
         };
@@ -184,6 +193,7 @@ fn gnome(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
+                notification::error(12);
                 error::fatal()
             }
         };
@@ -196,6 +206,7 @@ fn gnome(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
+                notification::error(7);
                 error::fatal()
             }
         };
@@ -216,6 +227,7 @@ fn gnome(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
+                notification::error(7);
                 error::fatal()
             }
         };
@@ -229,6 +241,7 @@ fn gnome(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
+                notification::error(7);
                 error::fatal()
             }
         };
@@ -248,6 +261,7 @@ fn kde(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
+                notification::error(8);
                 error::fatal()
             }
         };
@@ -262,6 +276,7 @@ fn kde(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
+                notification::error(8);
                 error::fatal()
             }
         };
@@ -276,6 +291,7 @@ fn kde(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
+                notification::error(8);
                 error::fatal()
             }
         };
@@ -292,6 +308,7 @@ fn scrot(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
+                notification::error(10);
                 error::fatal()
             }
         };
@@ -301,6 +318,7 @@ fn scrot(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
+                notification::error(12);
                 error::fatal()
             }
         };
@@ -313,6 +331,7 @@ fn scrot(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
+                notification::error(10);
                 error::fatal()
             }
         };
@@ -336,6 +355,7 @@ fn scrot(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
+                notification::error(10);
                 error::fatal()
             }
         };
@@ -347,6 +367,7 @@ fn scrot(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
+                notification::error(10);
                 error::fatal()
             }
         };
@@ -378,6 +399,7 @@ pub fn image(args: usize) {
         Ok(ok) => ok.to_lowercase(),
         Err(_) => {
             eprintln!("{}", error::message(4));
+            notification::error(4);
             String::new()
         }
     };
@@ -385,6 +407,7 @@ pub fn image(args: usize) {
     screenshot(args.clone(), temp.clone(), session.clone(), desktop.clone());
     if !tmp.exists() {
         eprintln!("{}", error::message(30));
+        notification::error(30);
         error::fatal();
     }
 
@@ -413,6 +436,7 @@ pub fn image(args: usize) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(13));
+                notification::error(13);
                 error::fatal()
             }
         };
@@ -432,12 +456,14 @@ fn save() {
     let home = match env::var("HOME") {
         Ok(home) => if home.to_string().is_empty() {
             eprintln!("{}", error::message(1));
+            notification::error(1);
             error::fatal()
         } else {
             home
         },
         Err(_) => {
             eprintln!("{}", error::message(1));
+            notification::error(1);
             error::fatal()
         }
     };
@@ -459,6 +485,7 @@ fn save() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(25));
+            notification::error(25);
             error::fatal()
         }
     });
@@ -472,6 +499,7 @@ fn save() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(30));
+            notification::error(30);
             return;
         }
     };

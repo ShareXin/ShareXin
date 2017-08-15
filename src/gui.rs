@@ -19,6 +19,7 @@ pub fn gui(service: Destination, image_bool: bool) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(24));
+            notification::error(24);
             error::fatal()
         }
     };
@@ -40,8 +41,6 @@ pub fn gui(service: Destination, image_bool: bool) {
     window.set_keep_above(true);
     if service.mastodon {
         header.set_subtitle("Mastodon");
-    } else if service.twitter {
-        header.set_subtitle("Twitter");
     }
 
     // if non-image toot/tweet, doesnt show file button
@@ -52,11 +51,12 @@ pub fn gui(service: Destination, image_bool: bool) {
     image.connect_clicked(move |_| {
         let mut tmp = env::temp_dir();
         tmp.push("sharexin.png");
-        let temp = tmp.to_str().unwrap().clone();
+        let temp = tmp.to_str().unwrap();
         match open::that(temp) {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(19));
+                notification::error(19);
                 return;
             }
         };

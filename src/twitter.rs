@@ -13,7 +13,7 @@ pub fn image(txt: String) {
     let temp = tmp.to_str().unwrap().clone();
 
     let _t = match Command::new("t")
-        .args(&["update", &txt, "-f", temp.clone()])
+        .args(&["update", &txt, "-f", &temp])
         .status()
     {
         Ok(ok) => ok,
@@ -24,10 +24,13 @@ pub fn image(txt: String) {
         }
     };
 
-    Command::new("killall").arg("vim"); // Only way to get t work, sorry
+    if txt.is_empty() {
+        Command::new("killall").arg("vim"); // Only way to get t work, sorry
+    }
 
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
+        notification::not_sent(twitter);
         error::fatal();
     }
     notification::image_sent(twitter, &txt, temp);
@@ -48,6 +51,7 @@ pub fn tweet(txt: String) {
 
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
+        notification::not_sent(twitter);
         error::fatal();
     }
 

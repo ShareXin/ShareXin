@@ -30,7 +30,7 @@ Error:
     "7": gnome-screenshot command nicht verfügbar
     "8": spectacle command nicht verfügbar
     "9": swaygrab command nicht verfügbar
-    "10": maim command nicht verfügbar
+    "10": scrot command nicht verfügbar
     "11": xdotool command nicht verfügbar
     "12": feh command nicht verfügbar
     "13": ImageMagick nicht verfügbar

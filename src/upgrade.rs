@@ -5,6 +5,7 @@ use curl::easy::Easy;
 use open;
 use error;
 use VERSION;
+use notification;
 
 pub fn upgrade() {
 
@@ -32,6 +33,7 @@ pub fn upgrade() {
                 Ok(ok) => ok,
                 Err(_) => {
                     eprintln!("{}", error::message(18));
+                    notification::error(18);
                     error::fatal()
                 }
             };
@@ -44,6 +46,7 @@ pub fn upgrade() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(16));
+            notification::error(16);
             error::fatal()
         }
     };
@@ -104,6 +107,7 @@ fn open_update() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(19));
+            notification::error(19);
             return;
         }
     };

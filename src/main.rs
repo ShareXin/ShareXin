@@ -34,7 +34,7 @@ pub struct Destination {
 }
 
 impl Destination {
-    pub fn new(id: u32) -> Destination {
+    pub fn new(id: usize) -> Destination {
         if id == 0 {
             Destination {
                 twitter: false,
