@@ -9,14 +9,10 @@
 ![Twitter](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-twitter.png)  
 
 ## Requirements  
-* **Rust Nightly**  
 * Unix-like system  
-* xdg (probably already installed)  
 * scrot (on non-Gnome/KDE x11 desktops)  
 * imagemagick  
-* openssl  
 * [t](https://github.com/sferik/t) (for now)  
-* [toot](https://github.com/ihabunek/toot) (for now)  
 
 ## Features  
 * Uploads to Twitter and Mastodon and Imgur  
