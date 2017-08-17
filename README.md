@@ -117,7 +117,7 @@ Examples:
 `pkg install openssl-devel gmake gcc`
 
 ### Compiling (via Github)  
-1. `git clone https://github.com/thebitstick/ShareXin/`  
+1. `git clone https://github.com/ShareXin/ShareXin/`  
 2. `cargo install`  
 3. Login to Twitter and/or Mastodon using `t` and/or `toot`  
 4. Explore `--help`  
