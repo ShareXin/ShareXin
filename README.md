@@ -26,7 +26,7 @@
 ## `--help`  
 
 ```bash
-sharexin 0.5.3
+sharexin 0.5.4
 Usage: sharexin <options> [destination] [image options] [FILE]
 
 Options:
