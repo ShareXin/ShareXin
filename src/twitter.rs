@@ -61,7 +61,10 @@ pub fn auth() {
 
     match Command::new("t").arg("authorize").status() {
         Ok(ok) => ok,
-        Err(_) => error::fatal(),
+        Err(_) => {
+            eprintln!("{}", error::message(5));
+            error::fatal()
+        }
     };
 
 }

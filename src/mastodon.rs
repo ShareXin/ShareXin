@@ -54,7 +54,10 @@ pub fn auth() {
 
     match Command::new("toot").arg("login").status() {
         Ok(ok) => ok,
-        Err(_) => error::fatal(),
+        Err(_) => {
+            eprintln!("{}", error::message(6));
+            error::fatal()
+        }
     };
 
 }
