@@ -128,6 +128,10 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.5.5] - 2017-08-18  
+- Added Polish translation  
+- Character count acts like ShareX, counts down from 140 or 500 (depending on destination)  
+
 #### [0.5.4] - 2017-08-17  
 - Just a Cargo fix, ignore  
 

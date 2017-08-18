@@ -15,6 +15,7 @@ pub fn file(file: String) {
 
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
+    let temp = tmp.to_str().unwrap().clone();
 
     thread::sleep(Duration::new(0, 500000000));
 
@@ -26,7 +27,7 @@ pub fn file(file: String) {
             error::fatal()
         }
     };
-    notification::file_saved();
+    notification::file_saved(temp);
 }
 
 #[cfg(target_os = "macos")]
@@ -35,15 +36,7 @@ fn screenshot(args: usize, temp: &str) {
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
 
-    let screenshot = get_screenshot(0).unwrap();
-
-    image::save_buffer(
-        &Path::new(tmp),
-        s.as_slice(),
-        s.width() as usize,
-        s.height() as usize,
-        image::RGBA(8),
-    ).unwrap();
+    println!("{:?}", tmp);
 }
 
 #[cfg(not(target_os = "macos"))]
@@ -451,6 +444,7 @@ fn save() {
     // tmp gets temporary dir
     let mut tmp = env::temp_dir();
     tmp.push("sharexin.png");
+    let temp = tmp.to_str().unwrap().clone();
 
     // home gets the user's name
     let home = match env::var("HOME") {
@@ -503,5 +497,5 @@ fn save() {
             return;
         }
     };
-    notification::file_saved();
+    notification::file_saved(temp);
 }

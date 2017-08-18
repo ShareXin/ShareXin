@@ -35,12 +35,16 @@ pub fn gui(service: Destination, image_bool: bool) {
     let count: gtk::Label = builder.get_object("count").unwrap();
 
     // setting widgets
-    count.set_label("0");
     window.set_title("ShareXin");
     window.set_hide_titlebar_when_maximized(false);
     window.set_keep_above(true);
     if service.mastodon {
         header.set_subtitle("Mastodon");
+        count.set_label("500");
+    } else if service.twitter && !image_bool {
+        count.set_label("140");
+    } else if service.twitter && image_bool {
+        count.set_label("117");
     }
 
     // if non-image toot/tweet, doesnt show file button
@@ -167,20 +171,22 @@ pub fn gui(service: Destination, image_bool: bool) {
             );
             let message: String = sent.unwrap();
 
+            let message_len = char_count(service.clone(), message.clone(), image_bool.clone());
+
             // uses markdown to set color
             let mut limit = String::from("<span foreground=\"#DA2E37\">");
-            limit.push_str(&message.len().to_string());
+            limit.push_str(&message_len.to_string());
             limit.push_str("</span>");
             let mut hit = String::from("<span foreground=\"#e4e543\">");
-            hit.push_str(&message.len().to_string());
+            hit.push_str(&message_len.to_string());
             hit.push_str("</span>");
             if service.mastodon {
-                if message.len() == 500 {
+                if message_len == 0 {
                     count.borrow().set_markup(&hit);
-                } else if message.len() > 500 {
+                } else if message_len < 0 {
                     count.borrow().set_markup(&limit);
                 } else {
-                    count.borrow().set_label(&message.len().to_string());
+                    count.borrow().set_label(&message_len.to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -189,16 +195,12 @@ pub fn gui(service: Destination, image_bool: bool) {
                     }
                 }
             } else if service.twitter {
-                if message.len() > 140 && !image_bool {
-                    count.borrow().set_markup(&limit);
-                } else if message.len() == 140 && !image_bool {
+                if message_len == 0 {
                     count.borrow().set_markup(&hit);
-                } else if message.len() >= 117 && image_bool {
+                } else if message_len < 0 {
                     count.borrow().set_markup(&limit);
-                } else if message.len() == 117 && image_bool {
-                    count.borrow().set_markup(&hit);
                 } else {
-                    count.borrow().set_label(&message.len().to_string());
+                    count.borrow().set_label(&message_len.to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -228,20 +230,22 @@ pub fn gui(service: Destination, image_bool: bool) {
             );
             let message: String = sent.unwrap();
 
+            let message_len = char_count(service.clone(), message.clone(), image_bool.clone());
+
             // uses markdown to set color
             let mut limit = String::from("<span foreground=\"#DA2E37\">");
-            limit.push_str(&message.len().to_string());
+            limit.push_str(&message_len.to_string());
             limit.push_str("</span>");
             let mut hit = String::from("<span foreground=\"#e4e543\">");
-            hit.push_str(&message.len().to_string());
+            hit.push_str(&message_len.to_string());
             hit.push_str("</span>");
             if service.mastodon {
-                if message.len() == 500 {
+                if message_len == 0 {
                     count.borrow().set_markup(&hit);
-                } else if message.len() > 500 {
+                } else if message_len < 0 {
                     count.borrow().set_markup(&limit);
                 } else {
-                    count.borrow().set_label(&message.len().to_string());
+                    count.borrow().set_label(&message_len.to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -250,16 +254,12 @@ pub fn gui(service: Destination, image_bool: bool) {
                     }
                 }
             } else if service.twitter {
-                if message.len() > 140 && !image_bool {
-                    count.borrow().set_markup(&limit);
-                } else if message.len() == 140 && !image_bool {
+                if message_len == 0 {
                     count.borrow().set_markup(&hit);
-                } else if message.len() > 117 && image_bool {
+                } else if message_len < 0 {
                     count.borrow().set_markup(&limit);
-                } else if message.len() == 117 && image_bool {
-                    count.borrow().set_markup(&hit);
                 } else {
-                    count.borrow().set_label(&message.len().to_string());
+                    count.borrow().set_label(&message_len.to_string());
                     if key.get_state().intersects(gdk::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
@@ -274,4 +274,16 @@ pub fn gui(service: Destination, image_bool: bool) {
 
     window.show_all();
     gtk::main();
+}
+
+fn char_count(service: Destination, message: String, image_bool: bool) -> isize {
+    if service.mastodon {
+        return 500 - message.len() as isize;
+    } else if service.twitter && !image_bool {
+        return 140 - message.len() as isize;
+    } else if service.twitter && image_bool {
+        return 117 - message.len() as isize;
+    } else {
+        return 0;
+    }
 }

@@ -86,12 +86,13 @@ pub fn message_sent(service: Destination, text: &str) {
 }
 
 // when the file has been saved
-pub fn file_saved() {
+pub fn file_saved(img: &str) {
 
     let string = notification(Language::new(Destination::new(3), 2));
     match Notification::new()
         .appname("ShareXin")
         .summary(&string)
+        .icon(img)
         .timeout(5000)
         .show()
     {
