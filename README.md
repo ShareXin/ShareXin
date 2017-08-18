@@ -128,6 +128,9 @@ Examples:
 3. Explore `--help`  
 
 ## Changelog  
+#### [0.5.4] - 2017-08-17  
+- Just a Cargo fix, ignore  
+
 #### [0.5.3] - 2017-08-15  
 - Now packaging `t` (should work)  
 - Added `auth` option for Twitter and Mastodon  
