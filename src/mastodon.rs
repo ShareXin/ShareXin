@@ -14,8 +14,7 @@ pub fn image(txt: String) {
 
     let _toot = match Command::new("toot")
         .args(&["post", "-m", &temp, &txt])
-        .status()
-    {
+        .status() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(6));

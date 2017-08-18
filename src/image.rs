@@ -43,28 +43,34 @@ fn screenshot(args: usize, temp: &str) {
 fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
 
     match session.as_ref() {
-        "wayland" => match desktop.as_ref() {
-            "gnome" => gnome(args, temp),
-            "cinnamon" => gnome(args, temp),
-            "plasma" => kde(args, temp),
-            "sway" => sway(args, temp),
-            _ => {
-                eprintln!("{}", error::message(26));
-                notification::error(26);
-                error::fatal()
+        "wayland" => {
+            match desktop.as_ref() {
+                "gnome" => gnome(args, temp),
+                "cinnamon" => gnome(args, temp),
+                "plasma" => kde(args, temp),
+                "sway" => sway(args, temp),
+                _ => {
+                    eprintln!("{}", error::message(26));
+                    notification::error(26);
+                    error::fatal()
+                }
             }
-        },
-        "x11" => match desktop.as_ref() {
-            "gnome" => gnome(args, temp),
-            "cinnamon" => gnome(args, temp),
-            "plasma" => kde(args, temp),
-            _ => scrot(args, temp),
-        },
-        _ => match desktop.as_ref() {
-            "gnome" => gnome(args, temp),
-            "plasma" => kde(args, temp),
-            _ => scrot(args, temp),
-        },
+        }
+        "x11" => {
+            match desktop.as_ref() {
+                "gnome" => gnome(args, temp),
+                "cinnamon" => gnome(args, temp),
+                "plasma" => kde(args, temp),
+                _ => scrot(args, temp),
+            }
+        }
+        _ => {
+            match desktop.as_ref() {
+                "gnome" => gnome(args, temp),
+                "plasma" => kde(args, temp),
+                _ => scrot(args, temp),
+            }
+        }
     }
 }
 
@@ -107,8 +113,7 @@ fn sway(args: usize, temp: &str) {
         let slop = String::from_utf8_lossy(&_slop.stdout);
         let _image = match Command::new("convert")
             .args(&[temp.clone(), "-crop", &slop, temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(15));
@@ -132,8 +137,7 @@ fn sway(args: usize, temp: &str) {
         // _image uses swaygrab to get "focused" window and take screenshot
         let _image = match Command::new("swaygrab")
             .args(&["-f", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(9));
@@ -171,8 +175,7 @@ fn gnome(args: usize, temp: &str) {
         // _before_image takes a full screenshot using gnome0creenshot
         match Command::new("gnome-screenshot")
             .args(&["-f", temp.clone()])
-            .output()
-        {
+            .output() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -194,8 +197,7 @@ fn gnome(args: usize, temp: &str) {
         // _image lets you select
         let _image = match Command::new("gnome-screenshot")
             .args(&["-a", "-f", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -215,8 +217,7 @@ fn gnome(args: usize, temp: &str) {
         // _image uses gnome-screenshot to get current window and take screenshot
         let _image = match Command::new("gnome-screenshot")
             .args(&["-w", "-e", "shadow", "-f", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -229,8 +230,7 @@ fn gnome(args: usize, temp: &str) {
         // _image uses gnome-screenshot to take screenshot
         let _image = match Command::new("gnome-screenshot")
             .args(&["-f", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -249,8 +249,7 @@ fn kde(args: usize, temp: &str) {
         // _image pauses screen and lets you select
         let _image = match Command::new("spectacle")
             .args(&["-rbno", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
@@ -264,8 +263,7 @@ fn kde(args: usize, temp: &str) {
         // _image uses spectacle to get current window and take screenshot
         let _image = match Command::new("spectacle")
             .args(&["-abno", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
@@ -279,8 +277,7 @@ fn kde(args: usize, temp: &str) {
         // _image uses spectacle to take screenshot
         let _image = match Command::new("spectacle")
             .args(&["-fbno", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
@@ -319,8 +316,7 @@ fn scrot(args: usize, temp: &str) {
         // _image lets you select
         let _image = match Command::new("scrot")
             .args(&["--select", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
@@ -343,8 +339,7 @@ fn scrot(args: usize, temp: &str) {
         // _image uses scrot to take window screenshot
         let _image = match Command::new("scrot")
             .args(&["--border", "--focused", temp.clone()])
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
@@ -408,24 +403,25 @@ pub fn image(args: usize) {
         //  adds a shadow
         match Command::new("convert")
             .arg(temp.clone())
-            .args(&[
-                "(",
-                "+clone",
-                "-background",
-                "black",
-                "-shadow",
-                "80x3+5+5",
-                ")",
-                "+swap",
-                "-background",
-                "none",
-                "-layers",
-                "merge",
-                "+repage",
-            ])
+            .args(
+                &[
+                    "(",
+                    "+clone",
+                    "-background",
+                    "black",
+                    "-shadow",
+                    "80x3+5+5",
+                    ")",
+                    "+swap",
+                    "-background",
+                    "none",
+                    "-layers",
+                    "merge",
+                    "+repage",
+                ],
+            )
             .arg(temp.clone())
-            .status()
-        {
+            .status() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(13));
@@ -448,13 +444,15 @@ fn save() {
 
     // home gets the user's name
     let home = match env::var("HOME") {
-        Ok(home) => if home.to_string().is_empty() {
-            eprintln!("{}", error::message(1));
-            notification::error(1);
-            error::fatal()
-        } else {
-            home
-        },
+        Ok(home) => {
+            if home.to_string().is_empty() {
+                eprintln!("{}", error::message(1));
+                notification::error(1);
+                error::fatal()
+            } else {
+                home
+            }
+        }
         Err(_) => {
             eprintln!("{}", error::message(1));
             notification::error(1);

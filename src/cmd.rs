@@ -17,87 +17,105 @@ pub fn cmd() {
 
     let args: Vec<String> = env::args().collect();
     match args.len() {
-        2 => match args[1].as_ref() {
-            "-V" | "--version" | "version" => println!("sharexin {}", VERSION),
-            "-U" | "--upgrade" | "upgrade" => upgrade::upgrade(),
-            "toot" => gui(mastodon, false),
-            "tweet" => gui(twitter, false),
-            _ => check(),
-        },
-        3 => match args[1].as_ref() {
-            "toot" => match args[2].as_ref() {
-                "area" => {
-                    image::image(0);
-                    gui(mastodon, true);
-                }
-                "window" => {
-                    image::image(1);
-                    gui(mastodon, true);
-                }
-                "full" => {
-                    image::image(2);
-                    gui(mastodon, true);
-                }
-                "auth" => mastodon::auth(),
+        2 => {
+            match args[1].as_ref() {
+                "-V" | "--version" | "version" => println!("sharexin {}", VERSION),
+                "-U" | "--upgrade" | "upgrade" => upgrade::upgrade(),
+                "toot" => gui(mastodon, false),
+                "tweet" => gui(twitter, false),
                 _ => check(),
-            },
-            "tweet" => match args[2].as_ref() {
-                "area" => {
-                    image::image(0);
-                    gui(twitter, true);
+            }
+        }
+        3 => {
+            match args[1].as_ref() {
+                "toot" => {
+                    match args[2].as_ref() {
+                        "area" => {
+                            image::image(0);
+                            gui(mastodon, true);
+                        }
+                        "window" => {
+                            image::image(1);
+                            gui(mastodon, true);
+                        }
+                        "full" => {
+                            image::image(2);
+                            gui(mastodon, true);
+                        }
+                        "auth" => mastodon::auth(),
+                        _ => check(),
+                    }
                 }
-                "window" => {
-                    image::image(1);
-                    gui(twitter, true);
+                "tweet" => {
+                    match args[2].as_ref() {
+                        "area" => {
+                            image::image(0);
+                            gui(twitter, true);
+                        }
+                        "window" => {
+                            image::image(1);
+                            gui(twitter, true);
+                        }
+                        "full" => {
+                            image::image(2);
+                            gui(twitter, true);
+                        }
+                        "auth" => twitter::auth(),
+                        _ => check(),
+                    }
                 }
-                "full" => {
-                    image::image(2);
-                    gui(twitter, true);
-                }
-                "auth" => twitter::auth(),
-                _ => check(),
-            },
-            "imgur" => match args[2].as_ref() {
-                "area" => {
-                    image::image(0);
-                    imgur::send();
-                }
-                "window" => {
-                    image::image(1);
-                    imgur::send();
-                }
-                "full" => {
-                    image::image(2);
-                    imgur::send();
-                }
-                _ => check(),
-            },
-            _ => check(),
-        },
-        4 => match args[1].as_ref() {
-            "toot" => match args[2].as_ref() {
-                "file" => {
-                    image::file(args[3].clone());
-                    gui(mastodon, true);
-                }
-                _ => check(),
-            },
-            "tweet" => match args[2].as_ref() {
-                "file" => {
-                    image::file(args[3].clone());
-                    gui(twitter, true);
+                "imgur" => {
+                    match args[2].as_ref() {
+                        "area" => {
+                            image::image(0);
+                            imgur::send();
+                        }
+                        "window" => {
+                            image::image(1);
+                            imgur::send();
+                        }
+                        "full" => {
+                            image::image(2);
+                            imgur::send();
+                        }
+                        _ => check(),
+                    }
                 }
                 _ => check(),
-            },
-            "imgur" => match args[2].as_ref() {
-                "file" => {
-                    image::file(args[3].clone());
-                    imgur::send();
+            }
+        }
+        4 => {
+            match args[1].as_ref() {
+                "toot" => {
+                    match args[2].as_ref() {
+                        "file" => {
+                            image::file(args[3].clone());
+                            gui(mastodon, true);
+                        }
+                        _ => check(),
+                    }
+                }
+                "tweet" => {
+                    match args[2].as_ref() {
+                        "file" => {
+                            image::file(args[3].clone());
+                            gui(twitter, true);
+                        }
+                        _ => check(),
+                    }
+                }
+                "imgur" => {
+                    match args[2].as_ref() {
+                        "file" => {
+                            image::file(args[3].clone());
+                            imgur::send();
+                        }
+                        _ => check(),
+                    }
                 }
                 _ => check(),
-            },
-            _ => check(),
-        },
+            }
+        }
         _ => check(),
     }
 }

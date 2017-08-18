@@ -52,8 +52,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
         .body(text)
         .icon(img)
         .timeout(5000)
-        .show()
-    {
+        .show() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
@@ -73,8 +72,7 @@ pub fn message_sent(service: Destination, text: &str) {
         .summary(&string)
         .body(text)
         .timeout(5000)
-        .show()
-    {
+        .show() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
@@ -94,8 +92,7 @@ pub fn file_saved(img: &str) {
         .summary(&string)
         .icon(img)
         .timeout(5000)
-        .show()
-    {
+        .show() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
@@ -114,8 +111,7 @@ pub fn empty(service: Destination) {
         .appname("ShareXin")
         .summary(&string)
         .timeout(5000)
-        .show()
-    {
+        .show() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
@@ -134,8 +130,7 @@ pub fn not_sent(service: Destination) {
         .appname("ShareXin")
         .summary(&string)
         .timeout(5000)
-        .show()
-    {
+        .show() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));
@@ -153,8 +148,7 @@ pub fn error(code: usize) {
         .appname("ShareXin")
         .summary(&message)
         .timeout(5000)
-        .show()
-    {
+        .show() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(23));

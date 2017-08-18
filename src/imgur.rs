@@ -34,14 +34,16 @@ pub fn send() {
     let handle = Imgur::Handle::new(String::from("37562f83e04fd66"));
 
     match handle.upload(&image) {
-        Ok(info) => match info.link() {
-            Some(link) => copy_link.push_str(link),
-            None => {
-                eprintln!("{}", error::message(20));
-                notification::error(20);
-                error::fatal()
+        Ok(info) => {
+            match info.link() {
+                Some(link) => copy_link.push_str(link),
+                None => {
+                    eprintln!("{}", error::message(20));
+                    notification::error(20);
+                    error::fatal()
+                }
             }
-        },
+        }
         Err(_) => {
             eprintln!("{}", error::message(17));
             notification::error(17);
