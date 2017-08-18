@@ -52,19 +52,18 @@ Examples:
   sharexin imgur file [FILE]
 ```  
 
-## Language support  
-
-### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)  
-
-#### English  
-#### Français by [@Eleoryth](https://twitter.com/Eleoryth)  
-#### Español  
-#### Esperanto  
-#### 简体中文  
-#### 繁體中文  
-#### 日本語  
-#### 한국어  
-#### Deutsch by [@qwertxzy](https://twitter.com/qwertxzy)  
+### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3) 
+## Language support   
+* English  
+* Français (French) by [@Eleoryth](https://twitter.com/Eleoryth)  
+* Español (Spanish)  
+* Esperanto  
+* 简体中文 (Simplified Chinese)  
+* 繁體中文 (Traditional Chinese)  
+* 日本語 (Japanese)  
+* 한국어 (Korean)  
+* Deutsch (German) by [@qwertxzy](https://twitter.com/qwertxzy)  
+* Polski (Polish) by [@Michcioperz](https://twitter.com/Michcioperz)  
 
 ## Compiling
 
@@ -115,7 +114,7 @@ Examples:
 `apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
 
 ### Dependency installation on FreeBSD or TrueOS  
-`pkg install openssl-devel gmake gcc`
+`pkg install openssl-devel gmake gcc`  
 
 ### Compiling (via Github)  
 1. `git clone https://github.com/ShareXin/ShareXin/`  
