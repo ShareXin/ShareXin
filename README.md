@@ -13,6 +13,7 @@
 * scrot (on non-Gnome/KDE x11 desktops)  
 * imagemagick  
 * [t](https://github.com/sferik/t) (for now)  
+* [toot](https://github.com/ihabunek/toot)  
 
 ## Features  
 * Uploads to Twitter and Mastodon and Imgur  
