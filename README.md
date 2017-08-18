@@ -45,6 +45,12 @@ Destinations:
   tweet		Upload to Twitter (uses "t")
   imgur		Upload to Imgur
 
+Twitter Options:
+  auth		Authenticate with Twitter
+
+Mastodon Options:
+  auth		Authenticate with Mastodon
+
 Examples:
   sharexin toot
   sharexin tweet full
@@ -118,14 +124,10 @@ Examples:
 
 ### Compiling (via Github)  
 1. `git clone https://github.com/ShareXin/ShareXin/`  
-2. `cargo install`  
-3. Login to Twitter and/or Mastodon using `t` and/or `toot`  
-4. Explore `--help`  
+2. `cargo install`   
 
 ### Compiling (via Crates.io)  
 1. `cargo install sharexin`  
-2. Login to Twitter and/or Mastodon using `t` and/or `toot`  
-3. Explore `--help`  
 
 ## Changelog  
 #### [0.5.5] - 2017-08-18  
