@@ -2,7 +2,7 @@ use notification;
 use Destination;
 use std::fs::File;
 use std::io::Read;
-use std::{env, fs};
+use std::env;
 use Imgur;
 use open;
 use error;
@@ -57,15 +57,6 @@ pub fn send() {
             eprintln!("{}", error::message(19));
             notification::error(19);
             error::fatal()
-        }
-    };
-
-    match fs::remove_file(tmp.clone()) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(0));
-            notification::error(0);
-            return;
         }
     };
 }
