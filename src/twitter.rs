@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, fs};
 use std::process::Command;
 use notification;
 use Destination;
@@ -33,6 +33,15 @@ pub fn image(txt: String) {
         error::fatal();
     }
     notification::image_sent(twitter, &txt, temp);
+
+    match fs::remove_file(tmp.clone()) {
+        Ok(ok) => ok,
+        Err(_) => {
+            eprintln!("{}", error::message(0));
+            notification::error(0);
+            return;
+        }
+    };
 }
 
 pub fn tweet(txt: String) {

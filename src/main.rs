@@ -1,8 +1,3 @@
-#[cfg(target_os = "macos")]
-extern crate image;
-#[cfg(target_os = "macos")]
-extern crate screenshot;
-
 extern crate notify_rust;
 extern crate gtk;
 extern crate glib;

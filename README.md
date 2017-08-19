@@ -12,6 +12,7 @@
 * Unix-like system  
 * scrot (on non-Gnome/KDE x11 desktops)  
 * imagemagick  
+* feh  
 * [t](https://github.com/sferik/t) (for now)  
 * [toot](https://github.com/ihabunek/toot)  
 
@@ -23,11 +24,20 @@
 * Screenshotting works with X11 and Wayland (on supported desktops)  
 * Saves screenshots to a folder in your Pictures directory  
 
+### Desktop support  
+- Unity desktop  
+- Gnome desktop  
+- Budgie desktop  
+- Cinnamon desktop  
+- Plasma desktop  
+- Sway desktop  
+- General X11 desktop with scrot  
+
 ## `--help`  
 
 ```bash
-sharexin 0.5.4
-Usage: sharexin <options> [destination] [image options] [FILE]
+sharexin 0.5.6
+Usage: sharexin <options> [destination] [destination options/image options] [FILE]
 
 Options:
   -h, --help	Display this help message and exit
@@ -92,6 +102,14 @@ Examples:
 * libssl1.0-dev  
 * libssl-dev  
 
+### Debian dependencies  
+* libgtk-3-dev  
+* libcairo2-dev  
+* libnotify-dev  
+* libpango1.0-dev  
+* libgdk-pixbuf2.0-dev  
+* libatk1.0-dev  
+
 ### Fedora dependencies  
 * gtk3-devel  
 * cairo-devel  
@@ -119,6 +137,9 @@ Examples:
 ### Dependency installation on Ubuntu  
 `apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
 
+### Dependency installation on Debian  
+`apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev`  
+
 ### Dependency installation on FreeBSD or TrueOS  
 `pkg install openssl-devel gmake gcc`  
 
@@ -130,6 +151,12 @@ Examples:
 1. `cargo install sharexin`  
 
 ## Changelog  
+#### [0.5.6] - 2017-08-19  
+- Removes temporary file after sending it  
+- Budgie Desktop support  
+- Ubuntu Unity Desktop support  
+- Theoretical Mac support  
+
 #### [0.5.5] - 2017-08-18  
 - Added Polish translation  
 - Character count acts like ShareX, counts down from 140 or 500 (depending on destination)  

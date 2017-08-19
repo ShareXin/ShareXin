@@ -1,8 +1,7 @@
 // args may be 0 for selection screenshots
 // 1 for window screenshots, or 2 for fullscreenshots
 
-#[cfg(target_os = "macos")]
-use screenshot::get_screenshot;
+#![allow(dead_code)]
 
 use std::time::Duration;
 use std::process::Command;
@@ -30,23 +29,16 @@ pub fn file(file: String) {
     notification::file_saved(temp);
 }
 
-#[cfg(target_os = "macos")]
-fn screenshot(args: usize, temp: &str) {
-
-    let mut tmp = env::temp_dir();
-    tmp.push("sharexin.png");
-
-    println!("{:?}", tmp);
-}
-
-#[cfg(not(target_os = "macos"))]
 fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
 
+    #[cfg(not(target_os = "macos"))]
     match session.as_ref() {
         "wayland" => {
             match desktop.as_ref() {
                 "gnome" => gnome(args, temp),
                 "cinnamon" => gnome(args, temp),
+                "ubuntu" => gnome(args, temp),
+                "budgie-desktop" => gnome(args, temp),
                 "plasma" => kde(args, temp),
                 "sway" => sway(args, temp),
                 _ => {
@@ -60,6 +52,8 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
             match desktop.as_ref() {
                 "gnome" => gnome(args, temp),
                 "cinnamon" => gnome(args, temp),
+                "ubuntu" => gnome(args, temp),
+                "budgie-desktop" => gnome(args, temp),
                 "plasma" => kde(args, temp),
                 _ => scrot(args, temp),
             }
@@ -67,14 +61,63 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
         _ => {
             match desktop.as_ref() {
                 "gnome" => gnome(args, temp),
+                "cinnamon" => gnome(args, temp),
+                "ubuntu" => gnome(args, temp),
+                "budgie-desktop" => gnome(args, temp),
                 "plasma" => kde(args, temp),
                 _ => scrot(args, temp),
             }
         }
     }
+    #[cfg(target_os = "macos")] mac(args, temp);
 }
 
-#[cfg(not(target_os = "macos"))]
+fn mac(args: usize, temp: &str) {
+
+    if args == 0 {
+
+        // _image uses screencapture to take area
+        let _image = match Command::new("screencapture")
+            .args(&["-s", temp.clone()])
+            .status() {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(8));
+                notification::error(8);
+                error::fatal()
+            }
+        };
+
+    } else if args == 1 {
+
+        // _image uses screencapture to get screenshot of current window
+        let _image = match Command::new("screencapture")
+            .args(&["-w", temp.clone()])
+            .status() {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(8));
+                notification::error(8);
+                error::fatal()
+            }
+        };
+
+    } else if args == 2 {
+
+        // _image uses screencapture to take screenshot
+        let _image = match Command::new("screencapture")
+            .args(&["-S", temp.clone()])
+            .status() {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(8));
+                notification::error(8);
+                error::fatal()
+            }
+        };
+    }
+}
+
 fn sway(args: usize, temp: &str) {
 
     if args == 0 {
@@ -167,7 +210,6 @@ fn sway(args: usize, temp: &str) {
     }
 }
 
-#[cfg(not(target_os = "macos"))]
 fn gnome(args: usize, temp: &str) {
 
     if args == 0 {
@@ -241,7 +283,6 @@ fn gnome(args: usize, temp: &str) {
     }
 }
 
-#[cfg(not(target_os = "macos"))]
 fn kde(args: usize, temp: &str) {
 
     if args == 0 {
@@ -288,7 +329,6 @@ fn kde(args: usize, temp: &str) {
     }
 }
 
-#[cfg(not(target_os = "macos"))]
 fn scrot(args: usize, temp: &str) {
 
     if args == 0 {
@@ -378,7 +418,7 @@ pub fn image(args: usize) {
         Ok(ok) => ok.to_lowercase(),
         Err(_) => {
             eprintln!("{}", error::message(3));
-            String::from("x11").to_lowercase()
+            String::new()
         }
     };
 
@@ -393,13 +433,14 @@ pub fn image(args: usize) {
     };
 
     screenshot(args.clone(), temp.clone(), session.clone(), desktop.clone());
-    if !tmp.exists() {
+
+    if !tmp.is_file() {
         eprintln!("{}", error::message(30));
         notification::error(30);
         error::fatal();
     }
 
-    if args == 1 && desktop != "gnome" {
+    if args == 1 && desktop != "gnome" && !cfg!(target_os = "macos") {
         //  adds a shadow
         match Command::new("convert")
             .arg(temp.clone())

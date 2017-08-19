@@ -129,7 +129,7 @@ fn check() {
     if !check_exists("toot") {
         eprintln!("{}", error::message(6));
     }
-    if !check_exists("convert") {
+    if !check_exists("convert") && !cfg!(target_os = "macos") {
         eprintln!("{}", error::message(15));
     }
 

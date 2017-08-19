@@ -66,7 +66,8 @@ pub fn help() -> String {
     let usage_examples = "  sharexin toot
   sharexin tweet full
   sharexin toot area
-  sharexin imgur file [FILE]";
+  sharexin imgur file [FILE]
+  sharexin tweet auth";
 
     let file = loader(locale());
     let locators = YamlLoader::load_from_str(file).unwrap();
