@@ -543,9 +543,7 @@ fn save() {
     // _dir creates pictures dir if not already there
     let _dir = match fs::create_dir(pictures) {
         Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(29));
-        }
+        Err(_) => {}
     };
     let mut new_file = String::from(home);
     new_file.push_str("/Pictures/ShareXin/sharexin-");
@@ -578,11 +576,11 @@ fn save() {
 
 pub fn temp_dir(option: usize) -> PathBuf {
     let mut tmp = env::temp_dir();
-        if option == 0 {
-            tmp.push("sharexin.png");
-        } else {
-            tmp.push("sharexin-tmp");
-            tmp.set_extension("png");
-        }
-        return tmp;
+    if option == 0 {
+        tmp.push("sharexin.png");
+    } else {
+        tmp.push("sharexin-tmp");
+        tmp.set_extension("png");
+    }
+    return tmp;
 }
