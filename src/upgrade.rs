@@ -54,7 +54,7 @@ pub fn upgrade() {
 
 fn check_update(latest_version: usize, current_version: usize, latest_utf: String) {
 
-    let file = language::loader(language::locale());
+    let file = language::loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Update"];
 
@@ -112,7 +112,7 @@ fn open_update() {
         }
     };
 
-    let file = language::loader(language::locale());
+    let file = language::loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Update"];
     let upgrade = format!("{}", &locator["Check"].as_str().unwrap());

@@ -2,7 +2,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
 use gtk::{ButtonExt, Continue, Inhibit, TextBuffer, TextView, WidgetExt, WindowExt};
-use std::{env, thread};
+use std::thread;
 use gtk;
 use gdk;
 use glib;
@@ -12,6 +12,7 @@ use twitter;
 use mastodon;
 use Destination;
 use error;
+use image;
 
 pub fn gui(service: Destination, image_bool: bool) {
 
@@ -53,8 +54,7 @@ pub fn gui(service: Destination, image_bool: bool) {
     }
 
     image.connect_clicked(move |_| {
-        let mut tmp = env::temp_dir();
-        tmp.push("sharexin.png");
+        let tmp = image::temp_dir(0);
         let temp = tmp.to_str().unwrap();
         match open::that(temp) {
             Ok(ok) => ok,

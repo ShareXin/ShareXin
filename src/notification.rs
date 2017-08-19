@@ -2,14 +2,14 @@
 use notify_rust::Notification;
 
 use Destination;
-use language::{loader, locale, Language};
+use language::{loader, Language};
 use error;
 use std::{fs, thread, time};
 use yaml_rust::YamlLoader;
 
 fn notification(langue: Language) -> String {
 
-    let file = loader(locale());
+    let file = loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let mut locator = &locators[0]["Notification"];
 

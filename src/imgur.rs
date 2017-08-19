@@ -2,15 +2,14 @@ use notification;
 use Destination;
 use std::fs::File;
 use std::io::Read;
-use std::env;
+use image;
 use Imgur;
 use open;
 use error;
 
 pub fn send() {
 
-    let mut tmp = env::temp_dir();
-    tmp.push("sharexin.png");
+    let tmp = image::temp_dir(0);
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {

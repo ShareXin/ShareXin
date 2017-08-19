@@ -5,6 +5,7 @@
 
 use std::time::Duration;
 use std::process::Command;
+use std::path::PathBuf;
 use std::{env, fs, process, thread};
 use notification;
 use time;
@@ -12,8 +13,7 @@ use error;
 
 pub fn file(file: String) {
 
-    let mut tmp = env::temp_dir();
-    tmp.push("sharexin.png");
+    let tmp = temp_dir(0);
     let temp = tmp.to_str().unwrap().clone();
 
     thread::sleep(Duration::new(0, 500000000));
@@ -72,6 +72,7 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
     #[cfg(target_os = "macos")] mac(args, temp);
 }
 
+#[cfg(target_os = "macos")]
 fn mac(args: usize, temp: &str) {
 
     if args == 0 {
@@ -122,8 +123,12 @@ fn sway(args: usize, temp: &str) {
 
     if args == 0 {
 
+        // makes filename for temporary temporary file
+        let _tmp = temp_dir(1);
+        let tmp = _tmp.to_str().unwrap().clone();
+
         // _before_image takes a full screenshot using swaygrab
-        match Command::new("swaygrab").arg(temp.clone()).output() {
+        match Command::new("swaygrab").arg(&tmp).output() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(9));
@@ -135,7 +140,7 @@ fn sway(args: usize, temp: &str) {
         // _feh displays it
         println!("Feh may not display properly due to tiling and Wayland.");
 
-        let mut _feh = match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
+        let mut _feh = match Command::new("feh").args(&[&tmp, "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
@@ -169,6 +174,15 @@ fn sway(args: usize, temp: &str) {
         match _feh.kill() {
             Ok(ok) => ok,
             Err(_) => return,
+        };
+
+        match fs::remove_file(tmp) {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(0));
+                notification::error(0);
+                return;
+            }
         };
 
         if _image.code() == Some(1) {
@@ -214,9 +228,13 @@ fn gnome(args: usize, temp: &str) {
 
     if args == 0 {
 
+        // makes filename for temporary temporary file
+        let _tmp = temp_dir(1);
+        let tmp = _tmp.to_str().unwrap().clone();
+
         // _before_image takes a full screenshot using gnome0creenshot
         match Command::new("gnome-screenshot")
-            .args(&["-f", temp.clone()])
+            .args(&["-f", &tmp])
             .output() {
             Ok(ok) => ok,
             Err(_) => {
@@ -227,7 +245,7 @@ fn gnome(args: usize, temp: &str) {
         };
 
         // _feh displays it
-        let mut _feh = match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
+        let mut _feh = match Command::new("feh").args(&[&tmp, "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
@@ -245,6 +263,15 @@ fn gnome(args: usize, temp: &str) {
                 eprintln!("{}", error::message(7));
                 notification::error(7);
                 error::fatal()
+            }
+        };
+
+        match fs::remove_file(tmp) {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(0));
+                notification::error(0);
+                return;
             }
         };
 
@@ -333,8 +360,12 @@ fn scrot(args: usize, temp: &str) {
 
     if args == 0 {
 
+        // makes filename for temporary temporary file
+        let _tmp = temp_dir(1);
+        let tmp = _tmp.to_str().unwrap().clone();
+
         // _before_image takes a full screenshot using scrot
-        match Command::new("scrot").arg(temp.clone()).output() {
+        match Command::new("scrot").arg(&tmp).output() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
@@ -344,7 +375,7 @@ fn scrot(args: usize, temp: &str) {
         };
 
         // _feh displays it
-        let mut _feh = match Command::new("feh").args(&[temp.clone(), "-F"]).spawn() {
+        let mut _feh = match Command::new("feh").args(&[&tmp, "-F"]).spawn() {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(12));
@@ -371,9 +402,19 @@ fn scrot(args: usize, temp: &str) {
             Err(_) => return,
         };
 
+        match fs::remove_file(tmp) {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(0));
+                notification::error(0);
+                return;
+            }
+        };
+
         if _image.code() == Some(2) {
             process::exit(1);
         }
+
     } else if args == 1 {
 
         // _image uses scrot to take window screenshot
@@ -404,11 +445,8 @@ fn scrot(args: usize, temp: &str) {
 
 pub fn image(args: usize) {
 
-    //  tmp gets the temporary directory of the system
-    let mut tmp = env::temp_dir();
-
-    // adds filename
-    tmp.push("sharexin.png");
+    // tmp gets the temporary directory of the system
+    let tmp = temp_dir(0);
 
     // makes a string
     let temp = tmp.to_str().unwrap();
@@ -479,8 +517,7 @@ pub fn image(args: usize) {
 fn save() {
 
     // tmp gets temporary dir
-    let mut tmp = env::temp_dir();
-    tmp.push("sharexin.png");
+    let tmp = temp_dir(0);
     let temp = tmp.to_str().unwrap().clone();
 
     // home gets the user's name
@@ -537,4 +574,15 @@ fn save() {
         }
     };
     notification::file_saved(temp);
+}
+
+pub fn temp_dir(option: usize) -> PathBuf {
+    let mut tmp = env::temp_dir();
+        if option == 0 {
+            tmp.push("sharexin.png");
+        } else {
+            tmp.push("sharexin-tmp");
+            tmp.set_extension("png");
+        }
+        return tmp;
 }

@@ -1,5 +1,5 @@
 use language;
-use std::{env, process, thread};
+use std::{process, thread};
 use yaml_rust::{Yaml, YamlLoader};
 use std::time::Duration;
 
@@ -13,15 +13,7 @@ fn error_loader<'a>(code: &'a str, locator: &Yaml) -> String {
 
 pub fn fatal() -> ! {
 
-    let lang = match env::var("LANG") {
-        Ok(ok) => ok.to_lowercase(),
-        Err(_) => {
-            eprintln!("Error getting $LANG variable");
-            String::from("en_US.utf8").to_lowercase()
-        }
-    };
-
-    let file = language::loader(lang);
+    let file = language::loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Error"];
 
@@ -32,15 +24,7 @@ pub fn fatal() -> ! {
 
 pub fn message(code: usize) -> String {
 
-    let lang = match env::var("LANG") {
-        Ok(ok) => ok.to_lowercase(),
-        Err(_) => {
-            eprintln!("Error getting $LANG variable");
-            String::from("en_US.utf8").to_lowercase()
-        }
-    };
-
-    let file = language::loader(lang);
+    let file = language::loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Error"];
 
@@ -107,6 +91,6 @@ pub fn message(code: usize) -> String {
     } else if code == 30 {
         return format!("{} 30: {}", error, error_loader("30", locator));
     } else {
-        return format!("Unknown error");
+        return String::from("Unknown error");
     }
 }

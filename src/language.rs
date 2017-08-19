@@ -25,17 +25,19 @@ impl Language {
 pub fn locale() -> String {
 
     match env::var("LANG") {
-        Ok(ok) => ok.to_lowercase(),
+        Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(2));
             notification::error(2);
-            String::from("en_US.utf8").to_lowercase()
+            String::from("en_US.utf8")
         }
     }
 
 }
 
-pub fn loader<'a>(lang: String) -> &'a str {
+pub fn loader<'a>() -> &'a str {
+
+    let lang = locale();
 
     if lang.contains("fr") {
         return include_str!("lang/fr.yml");
@@ -43,9 +45,9 @@ pub fn loader<'a>(lang: String) -> &'a str {
         return include_str!("lang/es.yml");
     } else if lang.contains("eo") {
         return include_str!("lang/eo.yml");
-    } else if lang.contains("cn") {
+    } else if lang.contains("CN") && lang.contains("zh") {
         return include_str!("lang/cn.yml");
-    } else if lang.contains("tw") {
+    } else if lang.contains("TW") && lang.contains("zh") {
         return include_str!("lang/tw.yml");
     } else if lang.contains("ja") {
         return include_str!("lang/ja.yml");
@@ -69,7 +71,7 @@ pub fn help() -> String {
   sharexin imgur file [FILE]
   sharexin tweet auth";
 
-    let file = loader(locale());
+    let file = loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Help"];
 

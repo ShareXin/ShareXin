@@ -1,15 +1,14 @@
-use std::env;
 use std::process::Command;
 use notification;
 use Destination;
 use error;
+use image;
 
 pub fn image(txt: String) {
 
     let mastodon = Destination::new(0);
 
-    let mut tmp = env::temp_dir();
-    tmp.push("sharexin.png");
+    let tmp = image::temp_dir(0);
     let temp = tmp.to_str().unwrap().clone();
 
     let _toot = match Command::new("toot")

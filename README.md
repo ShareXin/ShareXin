@@ -36,7 +36,7 @@
 ## `--help`
 
 ```bash
-sharexin 0.5.6
+sharexin 0.5.7
 Usage: sharexin <options> [destination] [destination options/image options] [FILE]
 
 Options:
@@ -66,6 +66,7 @@ Examples:
   sharexin tweet full
   sharexin toot area
   sharexin imgur file [FILE]
+  sharexin tweet auth
 ```  
 
 ### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)  
@@ -169,6 +170,12 @@ Examples:
 1. `cargo install sharexin`  
 
 ## Changelog
+#### [0.5.7] - 2017-08-19
+- Less repetitive code
+- Area screenshots (except for KDE and Mac) use two separate files,
+the frozen fullscreen and the part of it you select
+- Bug fixes
+
 #### [0.5.6] - 2017-08-19
 - Removes temporary file after sending it
 - Budgie Desktop support

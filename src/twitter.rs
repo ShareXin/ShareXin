@@ -1,15 +1,14 @@
-use std::env;
 use std::process::Command;
 use notification;
 use Destination;
 use error;
+use image;
 
 pub fn image(txt: String) {
 
     let twitter = Destination::new(1);
 
-    let mut tmp = env::temp_dir();
-    tmp.push("sharexin.png");
+    let tmp = image::temp_dir(0);
     let temp = tmp.to_str().unwrap().clone();
 
     let _t = match Command::new("t")
