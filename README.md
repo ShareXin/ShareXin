@@ -174,7 +174,7 @@ Examples:
 - Less repetitive code
 - Area screenshots (except for KDE and Mac) use two separate files,
 the frozen fullscreen and the part of it you select
-- Bug fixes
+- Fixed bug where Error 29 would always print (kind of a bug)
 
 #### [0.5.6] - 2017-08-19
 - Removes temporary file after sending it
