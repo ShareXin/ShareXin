@@ -1,7 +1,7 @@
 use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
-use gtk::{ButtonExt, Continue, Inhibit, TextBuffer, TextView, WidgetExt, WindowExt};
+use gtk::*;
 use std::{fs, thread};
 use gtk;
 use gdk;
