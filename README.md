@@ -147,21 +147,6 @@ Examples:
 - TrueOS
 - openSUSE Leap 42.3
 
-### Dependency installation on Fedora
-`dnf install gtk3-devel cairo-devel libnotify-devel pango-devel gdk-pixbuf2-devel atk-devel openssl-devel`  
-
-### Dependency installation on Ubuntu
-`apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl1.0-dev libssl-dev`  
-
-### Dependency installation on Debian
-`apt install libgtk-3-dev libcairo2-dev libnotify-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev`  
-
-### Dependency installation on FreeBSD or TrueOS
-`pkg install openssl-devel gmake gcc`  
-
-### Dependency installation on openSUSE Leap
-`zypper install gtk3-devel cairo-devel libnotify-devel pango-devel gdk-pixbuf-devel atk-devel openssl-devel make gcc`
-
 ### Compiling (via Github)
 1. `git clone https://github.com/ShareXin/ShareXin/`  
 2. `cargo install`   
