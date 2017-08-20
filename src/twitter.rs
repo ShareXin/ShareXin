@@ -1,4 +1,5 @@
 use std::process::Command;
+use std::env;
 use notification;
 use Destination;
 use error;
@@ -22,9 +23,14 @@ pub fn image(txt: String) {
         }
     };
 
-    /*if txt.is_empty() {
-        Command::new("killall").arg("vim"); // Only way to get t work, sorry
-    }*/
+    let appimage = env::var("APPIMAGE") {
+        Ok(ok) => ok,
+        Err(_) => 1,
+    };
+
+    if txt.is_empty() && appimage != "0" {
+        Command::new("killall").arg("vim");
+    }
 
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
