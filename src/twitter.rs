@@ -28,7 +28,7 @@ pub fn image(txt: String) {
         Err(_) => String::from("1"),
     };
 
-    if txt.is_empty() && appimage != "0".to_owned() {
+    if txt.is_empty() && appimage == "1".to_owned() {
         Command::new("killall").arg("vim");
     }
 
