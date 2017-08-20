@@ -62,7 +62,7 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
         }
     };
 
-    thread::sleep(time::Duration::new(5, 0));
+    thread::sleep(time::Duration::new(10, 0));
 
     match fs::remove_file(img.clone()) {
         Ok(ok) => ok,

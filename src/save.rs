@@ -9,13 +9,10 @@ pub fn file(file: String) {
 
     let tmp = temp_dir(0);
 
-    thread::sleep(Duration::new(0, 500000000));
-
-    let _copy = match fs::copy(file, tmp.clone()) {
+    match fs::copy(file, tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(30));
-            notification::error(30);
             error::fatal()
         }
     };
@@ -23,11 +20,9 @@ pub fn file(file: String) {
 
 pub fn save() {
 
-    // tmp gets temporary dir
     let tmp = temp_dir(0);
     let temp = tmp.to_str().unwrap().clone();
 
-    // home gets the user's name
     let home = match env::var("HOME") {
         Ok(home) => {
             if home.to_string().is_empty() {
@@ -47,8 +42,7 @@ pub fn save() {
     let mut pictures = String::from(home.clone());
     pictures.push_str("/Pictures/ShareXin");
 
-    // _dir creates pictures dir if not already there
-    let _dir = match fs::create_dir(pictures) {
+    match fs::create_dir(pictures) {
         Ok(ok) => ok,
         Err(_) => {}
     };
@@ -69,14 +63,9 @@ pub fn save() {
 
     thread::sleep(Duration::new(0, 500000000));
 
-    // _clone copies the temp file to your home pic dir
-    let _clone = match fs::copy(tmp.clone(), new_file) {
+    match fs::copy(tmp.clone(), new_file) {
         Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(30));
-            notification::error(30);
-            return;
-        }
+        Err(_) => 0,
     };
     notification::file_saved(temp);
 }
