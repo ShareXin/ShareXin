@@ -23,7 +23,7 @@ pub fn image(txt: String) {
         }
     };
 
-    let appimage = env::var("APPIMAGE") {
+    let appimage = match env::var("APPIMAGE") {
         Ok(ok) => ok,
         Err(_) => 1,
     };
