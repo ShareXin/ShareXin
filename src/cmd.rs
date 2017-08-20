@@ -9,6 +9,7 @@ use error;
 use upgrade;
 use twitter;
 use mastodon;
+use save;
 
 pub fn cmd() {
 
@@ -89,7 +90,7 @@ pub fn cmd() {
                 "toot" => {
                     match args[2].as_ref() {
                         "file" => {
-                            image::file(args[3].clone());
+                            save::file(args[3].clone());
                             gui(mastodon, true);
                         }
                         _ => check(),
@@ -98,7 +99,7 @@ pub fn cmd() {
                 "tweet" => {
                     match args[2].as_ref() {
                         "file" => {
-                            image::file(args[3].clone());
+                            save::file(args[3].clone());
                             gui(twitter, true);
                         }
                         _ => check(),
@@ -107,7 +108,7 @@ pub fn cmd() {
                 "imgur" => {
                     match args[2].as_ref() {
                         "file" => {
-                            image::file(args[3].clone());
+                            save::file(args[3].clone());
                             imgur::send();
                         }
                         _ => check(),

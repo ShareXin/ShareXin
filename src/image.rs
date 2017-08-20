@@ -8,26 +8,9 @@ use std::process::Command;
 use std::path::PathBuf;
 use std::{env, fs, process, thread};
 use notification;
-use time;
 use error;
-
-pub fn file(file: String) {
-
-    let tmp = temp_dir(0);
-    let temp = tmp.to_str().unwrap().clone();
-
-    thread::sleep(Duration::new(0, 500000000));
-
-    let _copy = match fs::copy(file, tmp.clone()) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(30));
-            notification::error(30);
-            error::fatal()
-        }
-    };
-    notification::file_saved(temp);
-}
+use save;
+use desktop;
 
 fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
 
@@ -452,23 +435,10 @@ pub fn image(args: usize) {
     let temp = tmp.to_str().unwrap();
 
     // x11/wayland session info gotten here
-    let session = match env::var("XDG_SESSION_TYPE") {
-        Ok(ok) => ok.to_lowercase(),
-        Err(_) => {
-            eprintln!("{}", error::message(3));
-            String::new()
-        }
-    };
+    let session = desktop::session();
 
     // desktop environment info gotten here
-    let desktop = match env::var("DESKTOP_SESSION") {
-        Ok(ok) => ok.to_lowercase(),
-        Err(_) => {
-            eprintln!("{}", error::message(4));
-            notification::error(4);
-            String::new()
-        }
-    };
+    let desktop = desktop::desktop();
 
     screenshot(args.clone(), temp.clone(), session.clone(), desktop.clone());
 
@@ -511,67 +481,7 @@ pub fn image(args: usize) {
         thread::sleep(Duration::new(0, 500000000));
     }
 
-    save();
-}
-
-fn save() {
-
-    // tmp gets temporary dir
-    let tmp = temp_dir(0);
-    let temp = tmp.to_str().unwrap().clone();
-
-    // home gets the user's name
-    let home = match env::var("HOME") {
-        Ok(home) => {
-            if home.to_string().is_empty() {
-                eprintln!("{}", error::message(1));
-                notification::error(1);
-                error::fatal()
-            } else {
-                home
-            }
-        }
-        Err(_) => {
-            eprintln!("{}", error::message(1));
-            notification::error(1);
-            error::fatal()
-        }
-    };
-    let mut pictures = String::from(home.clone());
-    pictures.push_str("/Pictures/ShareXin");
-
-    // _dir creates pictures dir if not already there
-    let _dir = match fs::create_dir(pictures) {
-        Ok(ok) => ok,
-        Err(_) => {}
-    };
-    let mut new_file = String::from(home);
-    new_file.push_str("/Pictures/ShareXin/sharexin-");
-
-    // time gets the time in a nice format
-    let time = String::from(match time::strftime("%Y-%m-%d-%H_%M_%S", &time::now()) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(25));
-            notification::error(25);
-            error::fatal()
-        }
-    });
-    new_file.push_str(&time);
-    new_file.push_str(".png");
-
-    thread::sleep(Duration::new(0, 500000000));
-
-    // _clone copies the temp file to your home pic dir
-    let _clone = match fs::copy(tmp.clone(), new_file) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(30));
-            notification::error(30);
-            return;
-        }
-    };
-    notification::file_saved(temp);
+    save::save();
 }
 
 pub fn temp_dir(option: usize) -> PathBuf {

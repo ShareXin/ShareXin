@@ -2,7 +2,7 @@ use std::rc::Rc;
 use std::cell::RefCell;
 use gdk::enums::key;
 use gtk::{ButtonExt, Continue, Inhibit, TextBuffer, TextView, WidgetExt, WindowExt};
-use std::thread;
+use std::{fs, thread};
 use gtk;
 use gdk;
 use glib;
@@ -68,6 +68,15 @@ pub fn gui(service: Destination, image_bool: bool) {
 
     window.connect_delete_event(|_, _| {
         gtk::main_quit();
+        let tmp = image::temp_dir(0);
+        let temp = tmp.to_str().unwrap().clone();
+        match fs::remove_file(temp) {
+            Ok(ok) => ok,
+            Err(_) => {
+                eprintln!("{}", error::message(0));
+                notification::error(0);
+            }
+        };
         Inhibit(false)
     });
 

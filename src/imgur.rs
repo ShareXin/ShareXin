@@ -1,3 +1,4 @@
+use clipboard::{ClipboardProvider, ClipboardContext};
 use notification;
 use Destination;
 use std::fs::File;
@@ -31,6 +32,7 @@ pub fn send() {
     // creates imgur app using sharexin app
     let mut copy_link = String::new();
     let handle = Imgur::Handle::new(String::from("37562f83e04fd66"));
+    let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
 
     match handle.upload(&image) {
         Ok(info) => {
@@ -50,6 +52,10 @@ pub fn send() {
         }
     }
     notification::image_sent(Destination::new(2), &copy_link, tmp.to_str().unwrap());
+    match ctx.set_contents(copy_link.clone()) {
+        Ok(ok) => ok,
+        Err(_) => eprintln!("{}", error::message(19)),
+    };
     match open::that(copy_link) {
         Ok(ok) => ok,
         Err(_) => {
