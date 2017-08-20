@@ -155,7 +155,7 @@ Examples:
 ## Changelog
 #### [0.5.9] - 2017-08-20
 - ImageMagick integrated
-- `killall vim` finally removed!
+- `killall vim` finally removed (kinda)!
 
 #### [0.5.8] - 2017-08-20
 - Imgur link now copied to clipboard _(should work on Wayland?)_
