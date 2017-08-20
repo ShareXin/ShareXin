@@ -19,19 +19,12 @@ pub fn desktop() -> String {
 
     let desktop = match env::var("DESKTOP_SESSION") {
         Ok(ok) => {
-            println!("{}", ok);
             if ok.contains("/") {
                 match env::var("XDG_SESSION_DESKTOP") {
-                    Ok(o) => {
-                        println!("{}", o);
-                        o
-                    }
+                    Ok(o) => o,
                     Err(_) => {
                         match env::var("XDG_CURRENT_DESKTOP") {
-                            Ok(k) => {
-                                println!("{}", k);
-                                k
-                            }
+                            Ok(k) => k,
                             Err(_) => {
                                 eprintln!("{}", error::message(4));
                                 notification::error(4);
@@ -47,16 +40,10 @@ pub fn desktop() -> String {
         Err(_) => {
             if !cfg!(target_os = "macos") {
                 match env::var("XDG_SESSION_DESKTOP") {
-                    Ok(ok) => {
-                        println!("{}", ok);
-                        ok
-                    }
+                    Ok(ok) => ok,
                     Err(_) => {
                         match env::var("XDG_CURRENT_DESKTOP") {
-                            Ok(o) => {
-                                println!("{}", o);
-                                o
-                            }
+                            Ok(o) => o,
                             Err(_) => {
                                 eprintln!("{}", error::message(4));
                                 notification::error(4);
@@ -73,7 +60,6 @@ pub fn desktop() -> String {
             }
         }
     };
-    println!("{}", desktop);
     return desktop.to_lowercase();
 
 }
