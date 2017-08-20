@@ -1,11 +1,10 @@
 use Destination;
-use std::{env, fs};
-use gui::gui;
+use std::env;
+use dialog::dialog;
 use image;
 use imgur;
 use VERSION;
 use language;
-use error;
 use upgrade;
 use twitter;
 use mastodon;
@@ -22,9 +21,9 @@ pub fn cmd() {
             match args[1].as_ref() {
                 "-V" | "--version" | "version" => println!("sharexin {}", VERSION),
                 "-U" | "--upgrade" | "upgrade" => upgrade::upgrade(),
-                "toot" => gui(mastodon, false),
-                "tweet" => gui(twitter, false),
-                _ => check(),
+                "toot" => dialog(mastodon, false),
+                "tweet" => dialog(twitter, false),
+                _ => println!("{}", language::help()),
             }
         }
         3 => {
@@ -33,36 +32,36 @@ pub fn cmd() {
                     match args[2].as_ref() {
                         "area" => {
                             image::image(0);
-                            gui(mastodon, true);
+                            dialog(mastodon, true);
                         }
                         "window" => {
                             image::image(1);
-                            gui(mastodon, true);
+                            dialog(mastodon, true);
                         }
                         "full" => {
                             image::image(2);
-                            gui(mastodon, true);
+                            dialog(mastodon, true);
                         }
                         "auth" => mastodon::auth(),
-                        _ => check(),
+                        _ => println!("{}", language::help()),
                     }
                 }
                 "tweet" => {
                     match args[2].as_ref() {
                         "area" => {
                             image::image(0);
-                            gui(twitter, true);
+                            dialog(twitter, true);
                         }
                         "window" => {
                             image::image(1);
-                            gui(twitter, true);
+                            dialog(twitter, true);
                         }
                         "full" => {
                             image::image(2);
-                            gui(twitter, true);
+                            dialog(twitter, true);
                         }
                         "auth" => twitter::auth(),
-                        _ => check(),
+                        _ => println!("{}", language::help()),
                     }
                 }
                 "imgur" => {
@@ -79,10 +78,10 @@ pub fn cmd() {
                             image::image(2);
                             imgur::send();
                         }
-                        _ => check(),
+                        _ => println!("{}", language::help()),
                     }
                 }
-                _ => check(),
+                _ => println!("{}", language::help()),
             }
         }
         4 => {
@@ -91,18 +90,18 @@ pub fn cmd() {
                     match args[2].as_ref() {
                         "file" => {
                             save::file(args[3].clone());
-                            gui(mastodon, true);
+                            dialog(mastodon, true);
                         }
-                        _ => check(),
+                        _ => println!("{}", language::help()),
                     }
                 }
                 "tweet" => {
                     match args[2].as_ref() {
                         "file" => {
                             save::file(args[3].clone());
-                            gui(twitter, true);
+                            dialog(twitter, true);
                         }
-                        _ => check(),
+                        _ => println!("{}", language::help()),
                     }
                 }
                 "imgur" => {
@@ -111,41 +110,12 @@ pub fn cmd() {
                             save::file(args[3].clone());
                             imgur::send();
                         }
-                        _ => check(),
+                        _ => println!("{}", language::help()),
                     }
                 }
-                _ => check(),
+                _ => println!("{}", language::help()),
             }
         }
-        _ => check(),
+        _ => println!("{}", language::help()),
     }
-}
-
-fn check() {
-
-    println!("{}", language::help());
-    if !check_exists("t") {
-        eprintln!("\n{}", error::message(5));
-    }
-    if !check_exists("toot") {
-        eprintln!("{}", error::message(6));
-    }
-    if !check_exists("convert") && !cfg!(target_os = "macos") {
-        eprintln!("{}", error::message(15));
-    }
-
-}
-
-fn check_exists(program: &str) -> bool {
-
-    if let Ok(path) = env::var("PATH") {
-        for p in path.split(":") {
-            let p_str = format!("{}/{}", p, program);
-            if fs::metadata(p_str).is_ok() {
-                return true;
-            }
-        }
-    }
-    return false;
-
 }

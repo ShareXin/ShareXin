@@ -11,7 +11,6 @@
 ## Requirements
 * Unix-like system
 * scrot (on non-Gnome/KDE x11 desktops)
-* imagemagick
 * feh
 
 ## Features
@@ -34,7 +33,7 @@
 ## `--help`
 
 ```bash
-sharexin 0.5.8
+sharexin 0.5.9
 Usage: sharexin <options> [destination] [destination options/image options] [FILE]
 
 Options:
@@ -154,6 +153,10 @@ Examples:
 1. `cargo install sharexin`  
 
 ## Changelog
+#### [0.5.9] - 2017-08-20
+- ImageMagick integrated
+- `killall vim` finally removed!
+
 #### [0.5.8] - 2017-08-20
 - Imgur link now copied to clipboard _(should work on Wayland?)_
 - Better desktop recognition

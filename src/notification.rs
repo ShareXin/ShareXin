@@ -4,7 +4,7 @@ use notify_rust::Notification;
 use Destination;
 use language::{loader, Language};
 use error;
-use std::{fs, thread, time};
+use std::fs;
 use yaml_rust::YamlLoader;
 
 fn notification(langue: Language) -> String {
@@ -61,8 +61,6 @@ pub fn image_sent(service: Destination, text: &str, img: &str) {
             return;
         }
     };
-
-    thread::sleep(time::Duration::new(10, 0));
 
     match fs::remove_file(img.clone()) {
         Ok(ok) => ok,

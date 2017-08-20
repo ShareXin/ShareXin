@@ -22,9 +22,9 @@ pub fn image(txt: String) {
         }
     };
 
-    if txt.is_empty() {
+    /*if txt.is_empty() {
         Command::new("killall").arg("vim"); // Only way to get t work, sorry
-    }
+    }*/
 
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));

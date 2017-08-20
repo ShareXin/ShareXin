@@ -14,7 +14,7 @@ use Destination;
 use error;
 use image;
 
-pub fn gui(service: Destination, image_bool: bool) {
+pub fn dialog(service: Destination, image_bool: bool) {
 
     match gtk::init() {
         Ok(ok) => ok,

@@ -12,7 +12,7 @@ mod notification;
 mod twitter;
 mod mastodon;
 mod image;
-mod gui;
+mod dialog;
 mod imgur;
 mod cmd;
 mod error;
