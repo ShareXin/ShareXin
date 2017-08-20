@@ -20,7 +20,6 @@ pub fn gui(service: Destination, image_bool: bool) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(24));
-            notification::error(24);
             error::fatal()
         }
     };

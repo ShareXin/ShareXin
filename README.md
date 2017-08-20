@@ -159,6 +159,7 @@ Examples:
 #### [0.5.8] - 2017-08-20
 - Imgur link now copied to clipboard _(should work on Wayland?)_
 - Better desktop recognition
+- Bug fixes
 
 #### [0.5.7] - 2017-08-19
 - Less repetitive code
