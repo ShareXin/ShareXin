@@ -25,10 +25,10 @@ pub fn image(txt: String) {
 
     let appimage = match env::var("APPIMAGE") {
         Ok(ok) => ok,
-        Err(_) => 1,
+        Err(_) => String::from("1"),
     };
 
-    if txt.is_empty() && appimage != "0" {
+    if txt.is_empty() && appimage != "0".to_owned() {
         Command::new("killall").arg("vim");
     }
 
