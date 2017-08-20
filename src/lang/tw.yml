@@ -24,7 +24,7 @@ Error:
     "1": 獲取$HOME變量時發生錯誤
     "2": 獲取$LANG變量時發生錯誤
     "3": 檢索$XDG_SESSION_TYPE變量時發生錯誤
-    "4": 檢索$DESKTOP_SESSION變量時發生錯誤
+    "4": 您的桌面環境不受支持
     "5": 「t」應用程序不可用
     "6": 「toot」應用程序不可用
     "7": 「gnome-screenshot」應用程序不可用

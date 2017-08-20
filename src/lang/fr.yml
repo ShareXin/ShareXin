@@ -24,7 +24,7 @@ Error:
     "1": Erreur lors de la réception de la variable $HOME
     "2": Erreur lors de la réception de la variable $LANG
     "3": Erreur lors de la réception de la variable $XDG_SESSION_TYPE
-    "4": Erreur lors de la réception de la variable $DESKTOP_SESSION
+    "4": L'environnement de bureau n'est pas pris en charge
     "5": Commande t indisponible
     "6": Commande toot indisponible
     "7": Commande gnome-screenshot indisponible

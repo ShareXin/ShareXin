@@ -8,7 +8,6 @@ use error;
 pub fn file(file: String) {
 
     let tmp = temp_dir(0);
-    let temp = tmp.to_str().unwrap().clone();
 
     thread::sleep(Duration::new(0, 500000000));
 
@@ -20,7 +19,6 @@ pub fn file(file: String) {
             error::fatal()
         }
     };
-    notification::file_saved(temp);
 }
 
 pub fn save() {

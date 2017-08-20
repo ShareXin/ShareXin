@@ -24,7 +24,7 @@ Error:
     "1": Błąd podczas odczytu zmiennej $HOME
     "2": Błąd podczas odczytu zmiennej $LANG
     "3": Błąd podczas odczytu zmiennej $XDG_SESSION_TYPE
-    "4": Błąd podczas odczytu zmiennej $DESKTOP_SESSION
+    "4": Nieobsługiwane środowisko graficzne
     "5": Komenda t niedostępna
     "6": Komenda toot niedostępna
     "7": Komenda gnome-screenshot niedostępna

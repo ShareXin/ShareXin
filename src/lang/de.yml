@@ -24,7 +24,7 @@ Error:
     "1": Fehler beim lesen der $HOME Variable
     "2": Fehler beim lesen der $LANG Variable
     "3": Fehler beim lesen der $XDG_SESSION_TYPE Variable
-    "4": Fehler beim lesen der $DESKTOP_SESSION Variable
+    "4": Desktopumgebung nicht unterstützt
     "5": t command nicht verfügbar
     "6": toot command nicht verfügbar
     "7": gnome-screenshot command nicht verfügbar

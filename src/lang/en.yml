@@ -24,7 +24,7 @@ Error:
     "1": Error getting $HOME variable
     "2": Error getting $LANG variable
     "3": Error getting $XDG_SESSION_TYPE variable
-    "4": Error getting $DESKTOP_SESSION variable
+    "4": Unsupported desktop environment
     "5": t command unavailable
     "6": toot command unavailable
     "7": gnome-screenshot command unavailable

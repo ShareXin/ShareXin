@@ -24,7 +24,7 @@ Error:
     "1": Error al obtener la variable $HOME
     "2": Error al obtener la variable $LANG
     "3": Error al obtener la variable $XDG_SESSION_TYPE
-    "4": Error al obtener la variable $DESKTOP_SESSION
+    "4": Entorno de escritorio no compatible
     "5": t comando no disponible
     "6": toot comando no disponible
     "7": gnome-screenshot comando no disponible

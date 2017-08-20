@@ -14,15 +14,15 @@ use desktop;
 
 fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
 
-    #[cfg(not(target_os = "macos"))]
     match session.as_ref() {
         "wayland" => {
             match desktop.as_ref() {
                 "gnome" => gnome(args, temp),
                 "cinnamon" => gnome(args, temp),
-                "ubuntu" => gnome(args, temp),
                 "budgie-desktop" => gnome(args, temp),
+                "budgie:gnome" => gnome(args, temp),
                 "plasma" => kde(args, temp),
+                "kde" => kde(args, temp),
                 "sway" => sway(args, temp),
                 _ => {
                     eprintln!("{}", error::message(26));
@@ -35,9 +35,13 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
             match desktop.as_ref() {
                 "gnome" => gnome(args, temp),
                 "cinnamon" => gnome(args, temp),
+                "x-cinnamon" => gnome(args, temp),
                 "ubuntu" => gnome(args, temp),
+                "unity:unity7" => gnome(args, temp),
                 "budgie-desktop" => gnome(args, temp),
+                "budgie:gnome" => gnome(args, temp),
                 "plasma" => kde(args, temp),
+                "kde" => kde(args, temp),
                 _ => scrot(args, temp),
             }
         }
@@ -45,17 +49,20 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
             match desktop.as_ref() {
                 "gnome" => gnome(args, temp),
                 "cinnamon" => gnome(args, temp),
+                "x-cinnamon" => gnome(args, temp),
                 "ubuntu" => gnome(args, temp),
+                "unity:unity7" => gnome(args, temp),
                 "budgie-desktop" => gnome(args, temp),
+                "budgie:gnome" => gnome(args, temp),
                 "plasma" => kde(args, temp),
+                "kde" => kde(args, temp),
+                "macos" => mac(args, temp),
                 _ => scrot(args, temp),
             }
         }
     }
-    #[cfg(target_os = "macos")] mac(args, temp);
 }
 
-#[cfg(target_os = "macos")]
 fn mac(args: usize, temp: &str) {
 
     if args == 0 {
@@ -444,7 +451,6 @@ pub fn image(args: usize) {
 
     if !tmp.is_file() {
         eprintln!("{}", error::message(30));
-        notification::error(30);
         error::fatal();
     }
 
