@@ -15,7 +15,7 @@ pub fn upgrade() {
     // file made to check version number
     latest
         .url(
-            "https://raw.githubusercontent.com/ShareXin/ShareXin/master/version",
+            "http://raw.githubusercontent.com/ShareXin/ShareXin/master/version",
         )
         .unwrap();
     let mut transfer = latest.transfer();
