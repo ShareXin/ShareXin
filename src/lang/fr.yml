@@ -13,9 +13,9 @@ Notification:
 Update:
     Installed: Version installée
     Latest: Dernière version
-    Out: Vous n'êtes pas à jour!
-    Too: Vous êtes trop à jour!
-    Up: Vous êtes à jour!
+    Out: Vous utilisez une ancienne version
+    Too: Vous utilisez une version bêta
+    Up: Vous utilisez la dernière version
     Check: Vérifiez les nouvelles mises à jour à l'adresse suivante
 Error:
     Fatal: Erreur fatale, fermeture de l'application

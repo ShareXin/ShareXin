@@ -13,9 +13,9 @@ Notification:
 Update:
     Installed: 已安装版本
     Latest: 最新版本
-    Out: 你已经过时了!
-    Too: 你也是最新的!
-    Up: 你是最新的!
+    Out: 您正在使用旧版本
+    Too: 您正在使用测试版
+    Up: 您正在使用最新版本
     Check: 要检查是否有新的更新
 Error:
     Fatal: 致命错误，应用程序关闭
@@ -39,7 +39,7 @@ Error:
     "16": 我不能到达Github
     "17": 我无法到达Imgur
     "18": 解析最新版本号时出现错误
-    "19": 打开文件或网页时出错
+    "19": 打开文件或网站时出错
     "20": 上传到Imgur时发生错误
     "21": 无法上传到Mastodon
     "22": 无法上传到Twitter

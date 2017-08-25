@@ -13,9 +13,9 @@ Notification:
 Update:
     Installed: Installed Version
     Latest: Latest Version
-    Out: You are out-of-date!
-    Too: You are too up-to-date!
-    Up: You are up-to-date!
+    Out: You are using an older version
+    Too: You are using a beta version
+    Up: You are using the latest version
     Check: Check for new updates at
 Error:
     Fatal: Fatal error, closing application
