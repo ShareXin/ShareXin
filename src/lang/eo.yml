@@ -13,9 +13,9 @@ Notification:
 Update:
     Installed: Instalita versio
     Latest: Plej lasta versio
-    Out: Vi estas eksterdata!
-    Too: Vi estas tro ĝisdata!
-    Up: Vi estas ĝisdatigita!
+    Out: Vi uzas pli malnovan version
+    Too: Vi uzas beta-version
+    Up: Vi uzas la plej lastan version
     Check: Kontrolu por novaj ĝisdatigoj ĉe
 Error:
     Fatal: Fatala eraro, ferma apliko
