@@ -12,10 +12,10 @@ Notification:
         Twitter: Tweet nie wysłany
 Update:
     Installed: Zainstalowana wersja
-    Latest: Najnowsza wesja
-    Out: Ta wersja jest nieaktualna!
-    Too: Ta wersja jest zbyt aktualna!
-    Up: Ta wersja jest aktualna!
+    Latest: Najnowsza wersja
+    Out: Używasz przestarzałej wersji
+    Too: Używasz wersji beta
+    Up: Używasz najnowszej wersji
     Check: Sprawdź aktualizacje na
 Error:
     Fatal: Błąd krytyczny, aplikacja ulegnie zagładzie
