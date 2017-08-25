@@ -13,9 +13,9 @@ Notification:
 Update:
     Installed: Installierte Version
     Latest: Letzte Version
-    Out: Sie sind veraltet!
-    Too: Sie sind zu auf dem Laufenden!
-    Up: Sie sind auf dem Laufenden!
+    Out: Sie verwenden eine ältere Version
+    Too: Sie verwenden eine Beta-Version
+    Up: Sie verwenden die neueste Version
     Check: Überprüfen Sie nach neuen Updates unter
 Error:
     Fatal: Schwerwiegender Fehler, Anwendungsschluss
