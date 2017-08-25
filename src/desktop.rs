@@ -10,8 +10,7 @@ pub fn session() -> String {
             if !cfg!(target_os = "macos") {
                 eprintln!("{}", error::message(3));
                 String::new()
-            }
-            else {
+            } else {
                 String::new()
             }
         }
