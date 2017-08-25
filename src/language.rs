@@ -62,7 +62,7 @@ pub fn loader<'a>() -> &'a str {
     }
 }
 
-pub fn help() -> String {
+pub fn help() {
 
     let usage_usage = "sharexin <options> [destination] [destination options/image options] [FILE]";
     let usage_examples = "  sharexin toot
@@ -96,7 +96,7 @@ pub fn help() -> String {
     let mastodon_auth = &locator["Mastodon"]["Auth"].as_str().unwrap();
     let examples = &locator["Examples"].as_str().unwrap();
 
-    return format!(
+    println!(
         "{}{}\n{}: {}\n\n{}:\n  -h, --help\t{}\n  -V, --version\t{}\n  -U, --upgrade\t{}\n
 {}:\n  area\t\t{}\n  window\t{}\n  full\t\t{}\n  file\t\t{}\n
 {}:\n  toot\t\t{}\n  tweet\t\t{}\n  imgur\t\t{}\n

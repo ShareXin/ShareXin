@@ -23,7 +23,7 @@ pub fn cmd() {
                 "-U" | "--upgrade" | "upgrade" => upgrade::upgrade(),
                 "toot" => dialog(mastodon, false),
                 "tweet" => dialog(twitter, false),
-                _ => println!("{}", language::help()),
+                _ => language::help(),
             }
         }
         3 => {
@@ -43,7 +43,7 @@ pub fn cmd() {
                             dialog(mastodon, true);
                         }
                         "auth" => mastodon::auth(),
-                        _ => println!("{}", language::help()),
+                        _ => language::help(),
                     }
                 }
                 "tweet" => {
@@ -61,7 +61,7 @@ pub fn cmd() {
                             dialog(twitter, true);
                         }
                         "auth" => twitter::auth(),
-                        _ => println!("{}", language::help()),
+                        _ => language::help(),
                     }
                 }
                 "imgur" => {
@@ -78,10 +78,10 @@ pub fn cmd() {
                             image::image(2);
                             imgur::send();
                         }
-                        _ => println!("{}", language::help()),
+                        _ => language::help(),
                     }
                 }
-                _ => println!("{}", language::help()),
+                _ => language::help(),
             }
         }
         4 => {
@@ -92,7 +92,7 @@ pub fn cmd() {
                             save::file(args[3].clone());
                             dialog(mastodon, true);
                         }
-                        _ => println!("{}", language::help()),
+                        _ => language::help(),
                     }
                 }
                 "tweet" => {
@@ -101,7 +101,7 @@ pub fn cmd() {
                             save::file(args[3].clone());
                             dialog(twitter, true);
                         }
-                        _ => println!("{}", language::help()),
+                        _ => language::help(),
                     }
                 }
                 "imgur" => {
@@ -110,12 +110,12 @@ pub fn cmd() {
                             save::file(args[3].clone());
                             imgur::send();
                         }
-                        _ => println!("{}", language::help()),
+                        _ => language::help(),
                     }
                 }
-                _ => println!("{}", language::help()),
+                _ => language::help(),
             }
         }
-        _ => println!("{}", language::help()),
+        _ => language::help(),
     }
 }

@@ -65,31 +65,35 @@ pub fn dialog(service: Destination, image_bool: bool) {
         };
     });
 
-    window.connect_delete_event(|_, _| {
+    window.connect_delete_event(move |_, _| {
         gtk::main_quit();
-        let tmp = image::temp_dir(0);
-        let temp = tmp.to_str().unwrap().clone();
-        match fs::remove_file(temp) {
-            Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("{}", error::message(0));
-                notification::error(0);
-            }
-        };
+        if image_bool {
+            let tmp = image::temp_dir(0);
+            let temp = tmp.to_str().unwrap().clone();
+            match fs::remove_file(temp) {
+                Ok(ok) => ok,
+                Err(_) => {
+                    eprintln!("{}", error::message(0));
+                    notification::error(0);
+                }
+            };
+        }
         Inhibit(false)
     });
 
-    cancel.connect_clicked(|_| {
+    cancel.connect_clicked(move |_| {
         gtk::main_quit();
-        let tmp = image::temp_dir(0);
-        let temp = tmp.to_str().unwrap().clone();
-        match fs::remove_file(temp) {
-            Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("{}", error::message(0));
-                notification::error(0);
-            }
-        };
+        if image_bool {
+            let tmp = image::temp_dir(0);
+            let temp = tmp.to_str().unwrap().clone();
+            match fs::remove_file(temp) {
+                Ok(ok) => ok,
+                Err(_) => {
+                    eprintln!("{}", error::message(0));
+                    notification::error(0);
+                }
+            };
+        }
     });
 
     // rust security bypasses

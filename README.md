@@ -5,8 +5,7 @@
 [![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?)](https://crates.io/crates/sharexin)  
 
 ## Screenshots
-![Mastodon](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-mastodon.png)
-![Twitter](https://raw.githubusercontent.com/thebitstick/ShareXin/master/ui-twitter.png)  
+![ShareXin](https://raw.githubusercontent.com/thebitstick/ShareXin/master/dialog.png)  
 
 ## Requirements
 * Unix-like system
@@ -33,7 +32,7 @@
 ## `--help`
 
 ```bash
-sharexin 0.5.9
+sharexin 0.6.0
 Usage: sharexin <options> [destination] [destination options/image options] [FILE]
 
 Options:
@@ -90,7 +89,7 @@ Examples:
 * gdk-pixbuf2
 * atk
 * openssl
-* GNU make
+* cc
 
 ### Ubuntu 17.04 dependencies  
 * libgtk-3-dev
@@ -136,6 +135,10 @@ Examples:
 * gmake
 * gcc
 
+### macOS Sierra dependencies
+* gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
+* xcode
+
 ### Compling tested on
 - Ubuntu 17.04
 - Debian Stable
@@ -144,6 +147,7 @@ Examples:
 - FreeBSD with Xfce
 - TrueOS
 - openSUSE Leap 42.3
+- macOS Sierra
 
 ### Compiling (via Github)
 1. `git clone https://github.com/ShareXin/ShareXin/`  
@@ -153,6 +157,11 @@ Examples:
 1. `cargo install sharexin`  
 
 ## Changelog
+#### [0.6.0] - 2017-08-25
+- macOS tested, Imgur works, `t` and `toot` should work if you have them
+- Updated "upgrade" and error messages
+- Bug fixes
+
 #### [0.5.9] - 2017-08-20
 - ImageMagick integrated
 - `killall vim` finally removed (kinda)!

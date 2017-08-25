@@ -20,6 +20,7 @@ mod upgrade;
 mod language;
 mod save;
 mod desktop;
+mod screenshot;
 
 static VERSION: &'static str = env!("CARGO_PKG_VERSION");
 static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
@@ -73,15 +74,5 @@ impl Destination {
 }
 
 fn main() {
-
-    let user = match ::std::env::var("USER") {
-        Ok(ok) => ok,
-        Err(_) => String::new(),
-    };
-    if user != "root" {
-        cmd::cmd();
-    } else {
-        error::fatal();
-    }
-
+    cmd::cmd();
 }

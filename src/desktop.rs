@@ -7,9 +7,13 @@ pub fn session() -> String {
     match env::var("XDG_SESSION_TYPE") {
         Ok(ok) => ok.to_lowercase(),
         Err(_) => {
-            eprintln!("{}", error::message(3));
-            notification::error(3);
-            String::new()
+            if !cfg!(target_os = "macos") {
+                eprintln!("{}", error::message(3));
+                String::new()
+            }
+            else {
+                String::new()
+            }
         }
     }
 
