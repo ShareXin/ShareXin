@@ -44,8 +44,8 @@ pub fn upgrade() {
 
     match transfer.perform() {
         Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(16));
+        Err(e) => {
+            eprintln!("{}, {:?}", error::message(16), e);
             notification::error(16);
             error::fatal()
         }
