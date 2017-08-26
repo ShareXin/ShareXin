@@ -18,7 +18,6 @@ pub fn upgrade() {
             "https://raw.githubusercontent.com/ShareXin/ShareXin/master/version",
         )
         .unwrap();
-    latest.verbose(true).unwrap();
     let mut transfer = latest.transfer();
     transfer
         .write_function(|data| {
