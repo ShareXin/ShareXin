@@ -11,6 +11,8 @@
 * Unix-like system
 * scrot (on non-Gnome/KDE x11 desktops)
 * feh
+* [t](https://github.com/sferik/t)
+* [toot](https://github.com/ihabunek/toot)
 
 ## Features
 * Uploads to Twitter and Mastodon and Imgur
