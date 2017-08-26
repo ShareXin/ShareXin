@@ -51,7 +51,7 @@ pub fn toot(txt: String) {
 
 pub fn auth() {
 
-    match Command::new("toot").arg("login").status() {
+    match Command::new("toot").arg("login_browser").status() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(6));
