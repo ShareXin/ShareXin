@@ -91,7 +91,7 @@ Examples:
 * gdk-pixbuf2
 * atk
 * openssl
-* libcurl
+* libcurl4
 * cc
 
 ### Ubuntu 17.04 dependencies  
@@ -124,6 +124,8 @@ Examples:
 * gdk-pixbuf2-devel
 * atk-devel
 * openssl-devel
+* libcurl-devel
+* libcurl
 
 ### openSUSE Leap 42.3 dependencies
 * gtk3-devel
@@ -132,7 +134,22 @@ Examples:
 * pango-devel
 * gdk-pixbuf-devel
 * atk-devel
-* openssl-devel
+* libopenssl-devel
+* libcurl-devel
+* libcurl4
+* make
+* gcc
+
+### openSUSE Tumbleweed dependencies
+* gtk3-devel
+* cairo-devel
+* libnotify-devel
+* pango-devel
+* gdk-pixbuf-devel
+* atk-devel
+* libopenssl-devel
+* libcurl-devel
+* libcurl4
 * make
 * gcc
 
@@ -153,6 +170,7 @@ Examples:
 - FreeBSD with Xfce
 - TrueOS
 - openSUSE Leap 42.3
+- openSUSE Tumbleweed
 - macOS Sierra
 
 ### Compiling (via Github)
