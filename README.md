@@ -34,7 +34,7 @@
 ## `--help`
 
 ```bash
-sharexin 0.6.0
+sharexin 0.6.1
 Usage: sharexin <options> [destination] [destination options/image options] [FILE]
 
 Options:
@@ -181,6 +181,9 @@ Examples:
 1. `cargo install sharexin`  
 
 ## Changelog
+#### [0.6.1] - 2017-08-26
+- XDG Directory for Pictures folder (switched my system to French, directories changed)
+
 #### [0.6.0] - 2017-08-25
 - macOS tested, Imgur works, `t` and `toot` should work if you have them
 - Updated "upgrade" and error messages

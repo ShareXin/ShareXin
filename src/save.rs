@@ -1,6 +1,7 @@
+use glib::{UserDirectory, get_user_special_dir};
 use image::temp_dir;
 use std::time::Duration;
-use std::{env, fs, thread};
+use std::{fs, thread};
 use notification;
 use time;
 use error;
@@ -23,31 +24,18 @@ pub fn save() {
     let tmp = temp_dir(0);
     let temp = tmp.to_str().unwrap().clone();
 
-    let home = match env::var("HOME") {
-        Ok(home) => {
-            if home.to_string().is_empty() {
-                eprintln!("{}", error::message(1));
-                notification::error(1);
-                error::fatal()
-            } else {
-                home
-            }
-        }
-        Err(_) => {
-            eprintln!("{}", error::message(1));
-            notification::error(1);
-            error::fatal()
-        }
-    };
-    let mut pictures = String::from(home.clone());
-    pictures.push_str("/Pictures/ShareXin");
+    let xdg_pictures = get_user_special_dir(UserDirectory::Pictures).unwrap();
+    let home = xdg_pictures.to_str().unwrap();
+
+    let mut pictures = String::from(home);
+    pictures.push_str("/ShareXin");
 
     match fs::create_dir(pictures) {
         Ok(ok) => ok,
         Err(_) => {}
     };
     let mut new_file = String::from(home);
-    new_file.push_str("/Pictures/ShareXin/sharexin-");
+    new_file.push_str("/ShareXin/sharexin-");
 
     // time gets the time in a nice format
     let time = String::from(match time::strftime("%Y-%m-%d-%H_%M_%S", &time::now()) {
