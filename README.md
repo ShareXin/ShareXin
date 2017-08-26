@@ -89,6 +89,7 @@ Examples:
 * gdk-pixbuf2
 * atk
 * openssl
+* libcurl
 * cc
 
 ### Ubuntu 17.04 dependencies  
@@ -100,6 +101,7 @@ Examples:
 * libatk1.0-dev
 * libssl1.0-dev
 * libssl-dev
+* libcurl4-openssl-dev
 * build-essential
 
 ### Debian Stable dependencies
@@ -108,7 +110,9 @@ Examples:
 * libnotify-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
-* libatk1.0-dev  
+* libatk1.0-dev
+* libssl-dev
+* libcurl4-openssl-dev
 
 ### Fedora 26 dependencies
 * gtk3-devel
@@ -160,6 +164,7 @@ Examples:
 #### [0.6.0] - 2017-08-25
 - macOS tested, Imgur works, `t` and `toot` should work if you have them
 - Updated "upgrade" and error messages
+- Figured out libcurl issue on some older systems
 - Bug fixes
 
 #### [0.5.9] - 2017-08-20
