@@ -1,3 +1,54 @@
+#### [0.5.9] - 2017-08-20
+- ImageMagick integrated
+- `killall vim` finally removed (kinda)!
+
+#### [0.5.8] - 2017-08-20
+- Imgur link now copied to clipboard _(should work on Wayland?)_
+- Better desktop recognition
+- Bug fixes
+
+#### [0.5.7] - 2017-08-19
+- Less repetitive code
+- Area screenshots (except for KDE and Mac) use two separate files,
+the frozen fullscreen and the part of it you select
+- Fixed bug where Error 29 would always print (kind of a bug)
+
+#### [0.5.6] - 2017-08-19
+- Removes temporary file after sending it
+- Budgie Desktop support
+- Ubuntu Unity Desktop support
+- Theoretical Mac support
+
+#### [0.5.5] - 2017-08-18
+- Added Polish translation
+- Character count acts like ShareX, counts down from 140 or 500 (depending on destination)
+- "File Saved" notification now includes image saved
+
+#### [0.5.4] - 2017-08-17
+- Just a Cargo fix, ignore
+
+#### [0.5.3] - 2017-08-15
+- Now packaging `t` (should work)
+- Added `auth` option for Twitter and Mastodon
+
+#### [0.5.2] - 2017-08-15
+- GTk fixes
+- Notification for error messages
+- Bug fixes
+- Now using AppImage for releases
+
+#### [0.5.1] - 2017-08-14  
+- No more wildcards in getting modules
+- Separated `language.rs`
+- Now using scrot rather than maim
+- `.kill()` exists for `Command`, no longer using killall feh
+- Added Fatal error messages
+- Cinnamon desktop support
+
+#### [0.5.0] - 2017-08-13
+- Rewrite of Language message system, now using templates, extremely easy to add more languages
+- Bug fixes
+
 #### [0.4.9] - 2017-08-12
 - Lots of optimizations
 - Actual bug fixes
