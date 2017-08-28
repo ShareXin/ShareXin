@@ -13,10 +13,12 @@ sha256sums=('SKIP')
 
 build() {
   cd "$pkgname-$pkgver"
-  cargo build --release
+  LDFLAGS="-static" cargo build --release
 }
 
 package() {
   cd "$pkgname-$pkgver"
-  install -Dm755 target/release/sharexin "$pkgdir/usr/bin/sharexin"
+  strip "target/release/$pkgname"
+  strip -s "target/release/$pkgname"
+  install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/sharexin"
 }
