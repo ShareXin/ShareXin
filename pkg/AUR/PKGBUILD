@@ -21,5 +21,5 @@ package() {
   cd "$pkgname-$pkgver"
   strip "target/release/$pkgname"
   strip -s "target/release/$pkgname"
-  install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/sharexin"
+  install -Dm755 "target/release/$pkgname" "$pkgdir/usr/local/bin/sharexin"
 }
