@@ -81,6 +81,7 @@ pub fn help() {
     let help = &locator["Help"].as_str().unwrap();
     let version = &locator["Version"].as_str().unwrap();
     let upgrade = &locator["Upgrade"].as_str().unwrap();
+    let tray = &locator["Tray"].as_str().unwrap();
     let image = &locator["Image"].as_str().unwrap();
     let area = &locator["Area"].as_str().unwrap();
     let window = &locator["Window"].as_str().unwrap();
@@ -97,7 +98,7 @@ pub fn help() {
     let examples = &locator["Examples"].as_str().unwrap();
 
     println!(
-        "{}{}\n{}: {}\n\n{}:\n  -h, --help\t{}\n  -V, --version\t{}\n  -U, --upgrade\t{}\n
+        "{}{}\n{}: {}\n\n{}:\n  -h, --help\t{}\n  -V, --version\t{}\n  -U, --upgrade\t{}\n  -t, --tray\t{}\n
 {}:\n  area\t\t{}\n  window\t{}\n  full\t\t{}\n  file\t\t{}\n
 {}:\n  toot\t\t{}\n  tweet\t\t{}\n  imgur\t\t{}\n
 {}:\n  auth\t\t{}\n
@@ -111,6 +112,7 @@ pub fn help() {
         help,
         version,
         upgrade,
+        tray,
         image,
         area,
         window,
