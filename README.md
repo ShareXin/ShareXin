@@ -16,11 +16,11 @@
 
 ## Features
 * Uploads to Twitter and Mastodon and Imgur
-* Allows taking screenshots and saving them to files
-* Notifications via dbus
-* GUI works with GTK
-* Screenshotting works with X11 and Wayland (on supported desktops)
-* Saves screenshots to a folder in your Pictures directory
+* Takes screenshots and saves them to your pictures directory
+* Notifications
+* GTK GUI for Tweet/Toot dialog
+* Screenshotting works with X11 and Wayland
+* System tray icon for use without shortcuts
 
 ### Desktop support
 - macOS desktop
@@ -51,9 +51,9 @@ sharexin 0.6.2
 Usage: sharexin <options> [destination] [destination options/image options] [FILE]
 
 Options:
-  -h, --help	Display this help message and exit
-  -V, --version	Print version info and exit
-  -U, --upgrade	Check for new updates
+  -h, --help    Display this help message and exit
+  -V, --version Print version info and exit
+  -U, --upgrade Check for new updates
   -t, --tray    Use system tray icon
 
 Image Options:
@@ -98,16 +98,18 @@ Examples:
 ## Compiling
 
 ### Dependencies for compiling
-* xorg-dev
+* xorg-dev (on BSDs and Linux)
 * gtk3
 * cairo
-* libnotify
+* libnotify (on BSDs and Linux)
+* libdbus (on BSDs and Linux)
 * pango
 * gdk-pixbuf2
 * atk
 * openssl
 * libcurl4
 * cc
+* libappindicator (on BSDs and Linux)
 
 ### Ubuntu 17.04 dependencies  
 * libgtk-3-dev
@@ -172,7 +174,7 @@ Examples:
 * openssl-devel
 * gmake
 * gcc
-* dbus-1 (don't know where to get it, won't compile right now)
+* dbus-1 [(don't know where to get it, won't compile right now)](https://forums.freebsd.org/threads/6191/)
 
 ### macOS Sierra dependencies
 * gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
