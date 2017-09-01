@@ -79,6 +79,7 @@ Examples:
   sharexin toot area
   sharexin imgur file [FILE]
   sharexin tweet auth
+  sharexin --tray
 ```  
 
 ### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)  
