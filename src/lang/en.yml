@@ -57,7 +57,7 @@ Help:
     Help: Display this help message and exit
     Version: Print version info and exit
     Upgrade: Check for new updates
-    Tray: Use system tray
+    Tray: Use system tray icon
     Image: Image Options
     Area: Grab an area of the screen instead of the entire screen
     Window: Grab the current window instead of the entire screen
