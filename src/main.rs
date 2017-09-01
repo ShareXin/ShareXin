@@ -7,6 +7,7 @@ extern crate time;
 extern crate curl;
 extern crate yaml_rust;
 extern crate clipboard;
+extern crate systray;
 extern crate imgur as Imgur;
 mod notification;
 mod twitter;
