@@ -21,6 +21,7 @@ mod upgrade;
 mod language;
 mod save;
 mod desktop;
+mod tray;
 mod screenshot;
 
 static VERSION: &'static str = env!("CARGO_PKG_VERSION");
