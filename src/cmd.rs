@@ -24,7 +24,7 @@ pub fn cmd() {
                 "-U" | "--upgrade" | "upgrade" => upgrade::upgrade(),
                 "toot" => dialog(mastodon, false),
                 "tweet" => dialog(twitter, false),
-                "tray" => tray::tray(),
+                "-t" | "--tray" => tray::tray(),
                 _ => language::help(),
             }
         }
