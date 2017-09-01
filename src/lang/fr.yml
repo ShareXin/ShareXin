@@ -57,6 +57,7 @@ Help:
     Help: Afficher le message d'aide et quitter
     Version: Imprimer les informations de la version et quitter
     Upgrade: Vérifiez les nouvelles mises à jour
+    Tray: Utilisation de la barre des tâches l'icône
     Image: Options d'image
     Area: Capturer une zone de l'écran plutôt que l'écran complet
     Window: Capturer la fenêtre active plutôt que l'écran complet
