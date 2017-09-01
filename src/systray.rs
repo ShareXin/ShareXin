@@ -1,4 +1,4 @@
-extern crate systray;
+use systray;
 
 fn systray() {
     let mut app;
