@@ -69,7 +69,8 @@ pub fn help() {
   sharexin tweet full
   sharexin toot area
   sharexin imgur file [FILE]
-  sharexin tweet auth";
+  sharexin tweet auth
+  sharexin --tray";
 
     let file = loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
