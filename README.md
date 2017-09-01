@@ -23,6 +23,7 @@
 * Saves screenshots to a folder in your Pictures directory
 
 ### Desktop support
+- macOS desktop
 - Unity desktop
 - Gnome desktop
 - Budgie desktop
@@ -30,6 +31,18 @@
 - Plasma desktop
 - Sway desktop
 - General X11 desktop with scrot
+
+### Tested on
+- Ubuntu 17.04
+- Debian Stable
+- Fedora 26
+- Arch Linux
+- FreeBSD with Xfce
+- TrueOS
+- openSUSE Leap 42.3
+- openSUSE Tumbleweed
+- macOS Sierra
+- GhostBSD
 
 ## `--help`
 
@@ -157,6 +170,7 @@ Examples:
 * openssl-devel
 * gmake
 * gcc
+* dbus-1 (don't know where to get it, won't compile right now)
 
 ### macOS Sierra dependencies
 * gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
