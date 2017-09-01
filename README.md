@@ -47,13 +47,14 @@
 ## `--help`
 
 ```bash
-sharexin 0.6.1
+sharexin 0.6.2
 Usage: sharexin <options> [destination] [destination options/image options] [FILE]
 
 Options:
   -h, --help	Display this help message and exit
   -V, --version	Print version info and exit
   -U, --upgrade	Check for new updates
+  -t, --tray    Use tray interface
 
 Image Options:
   area		Grab an area of the screen instead of the entire screen
@@ -195,6 +196,10 @@ Examples:
 1. `cargo install sharexin`  
 
 ## Changelog
+#### [0.6.2] - 2017-09-01
+- Experimental system tray support
+- Makefile and PKGBUILD
+
 #### [0.6.1] - 2017-08-26
 - XDG Directory for Pictures folder (switched my system to French, directories changed)
 
