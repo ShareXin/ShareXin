@@ -57,6 +57,7 @@ Help:
     Help: Mostrar el mensaje de ayuda y sale
     Version: Imprimir información de la versión y sale
     Upgrade: Busque nuevas actualizaciones
+    Tray: Usando un icono de la barra de tareas
     Image: Opciones de imagen
     Area: Capturar un área de la pantalla en lugar de la pantalla entera
     Window: Capturar una ventana en vez de la pantalla entera
