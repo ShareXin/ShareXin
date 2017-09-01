@@ -54,7 +54,7 @@ Options:
   -h, --help	Display this help message and exit
   -V, --version	Print version info and exit
   -U, --upgrade	Check for new updates
-  -t, --tray    Use system tray
+  -t, --tray    Use system tray icon
 
 Image Options:
   area		Grab an area of the screen instead of the entire screen
