@@ -1,6 +1,6 @@
 use systray;
 
-fn systray() {
+fn tray() {
     let mut app;
     match systray::Application::new() {
         Ok(w) => app = w,
