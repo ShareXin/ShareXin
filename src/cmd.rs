@@ -1,13 +1,7 @@
-use std::env;
-use dialog::dialog;
-use image;
-use imgur;
-use VERSION;
 use language;
 use upgrade;
 use twitter;
 use mastodon;
-use save;
 use tray;
 use sharexin::*;
 use yaml_rust::YamlLoader;
@@ -34,7 +28,7 @@ pub fn cmd() {
     let mastodon_auth = &locator["Mastodon"]["Auth"].as_str().unwrap();
 
     let mut sharexin = App::new("sharexin")
-        .version(VERSION)
+        .version(crate_version!())
         .author(crate_authors!())
         .about("ShareX for Unix-like systems")
         .help_message(help.to_owned())
@@ -111,6 +105,7 @@ pub fn cmd() {
                 Some("area") => toot_area(),
                 Some("window") => toot_window(),
                 Some("full") => toot_full(),
+                Some("auth") => mastodon::auth(),
                 _ => toot(),
             }
         }
@@ -119,6 +114,7 @@ pub fn cmd() {
                 Some("area") => tweet_area(),
                 Some("window") => tweet_window(),
                 Some("full") => tweet_full(),
+                Some("auth") => twitter::auth(),
                 _ => tweet(),
             }
         }

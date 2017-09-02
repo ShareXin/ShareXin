@@ -1,5 +1,3 @@
-#![allow(unused_imports)]
-
 extern crate notify_rust;
 extern crate gtk;
 extern crate glib;
@@ -7,7 +5,6 @@ extern crate gdk;
 extern crate open;
 extern crate time;
 extern crate curl;
-#[macro_use]
 extern crate clap;
 extern crate yaml_rust;
 extern crate clipboard;
@@ -27,8 +24,8 @@ pub mod desktop;
 pub mod screenshot;
 use dialog::dialog;
 
-static VERSION: &'static str = env!("CARGO_PKG_VERSION");
-static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
+pub static VERSION: &'static str = env!("CARGO_PKG_VERSION");
+pub static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
 
 #[derive(Debug, Clone, Copy)]
 pub struct Destination {

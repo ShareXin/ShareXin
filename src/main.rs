@@ -1,5 +1,4 @@
 #![allow(dead_code)]
-#![allow(unused_imports)]
 
 extern crate notify_rust;
 extern crate gtk;
@@ -8,6 +7,7 @@ extern crate gdk;
 extern crate open;
 extern crate time;
 extern crate curl;
+
 #[macro_use]
 extern crate clap;
 extern crate yaml_rust;
@@ -29,10 +29,7 @@ mod save;
 mod desktop;
 mod tray;
 mod screenshot;
-use sharexin::Destination;
-
-static VERSION: &'static str = env!("CARGO_PKG_VERSION");
-static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
+use sharexin::{Destination, VERSION, SHAREXIN};
 
 fn main() {
     cmd::cmd();
