@@ -2,12 +2,16 @@ use glib::{Continue, idle_add};
 use std::{process, thread, time};
 use systray;
 use sharexin;
+use error;
 
 pub fn tray() {
     loop {
         let mut app = match systray::Application::new() {
             Ok(w) => w,
-            Err(_) => panic!("Can't create systray!"),
+            Err(_) => {
+                eprintln!("{}", error::message(31));
+                error::fatal();
+            }
         };
         app.set_icon_from_file(&"/usr/share/icons/gnome/48x48/apps/text-editor.png"
             .to_string())

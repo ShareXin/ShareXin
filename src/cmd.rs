@@ -1,4 +1,3 @@
-use Destination;
 use std::env;
 use dialog::dialog;
 use image;

@@ -31,9 +31,9 @@ static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
 
 #[derive(Debug, Clone, Copy)]
 pub struct Destination {
-    twitter: bool,
-    mastodon: bool,
-    imgur: bool,
+    pub twitter: bool,
+    pub mastodon: bool,
+    pub imgur: bool,
 }
 
 impl Destination {
