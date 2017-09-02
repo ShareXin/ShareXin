@@ -16,13 +16,7 @@ use image;
 
 pub fn dialog(service: Destination, image_bool: bool) {
 
-    match gtk::init() {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(24));
-            error::fatal()
-        }
-    };
+
 
     // objects from glade file
     let builder = gtk::Builder::new_from_string(include_str!("sharexin.glade"));

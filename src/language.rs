@@ -99,7 +99,8 @@ pub fn help() {
     let examples = &locator["Examples"].as_str().unwrap();
 
     println!(
-        "{}{}\n{}: {}\n\n{}:\n  -h, --help\t{}\n  -V, --version\t{}\n  -U, --upgrade\t{}\n  -t, --tray\t{}\n
+        "{}{}\n{}: {}\n\n{}:\n  -h, --help\t{}
+  -V, --version\t{}\n  -U, --upgrade\t{}\n  -t, --tray\t{}\n
 {}:\n  area\t\t{}\n  window\t{}\n  full\t\t{}\n  file\t\t{}\n
 {}:\n  toot\t\t{}\n  tweet\t\t{}\n  imgur\t\t{}\n
 {}:\n  auth\t\t{}\n

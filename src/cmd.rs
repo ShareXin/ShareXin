@@ -10,11 +10,9 @@ use twitter;
 use mastodon;
 use save;
 use tray;
+use sharexin::*;
 
 pub fn cmd() {
-
-    let twitter = Destination::new(1);
-    let mastodon = Destination::new(0);
 
     let args: Vec<String> = env::args().collect();
     match args.len() {
@@ -22,8 +20,8 @@ pub fn cmd() {
             match args[1].as_ref() {
                 "-V" | "--version" | "version" => println!("sharexin {}", VERSION),
                 "-U" | "--upgrade" | "upgrade" => upgrade::upgrade(),
-                "toot" => dialog(mastodon, false),
-                "tweet" => dialog(twitter, false),
+                "toot" => toot(),
+                "tweet" => tweet(),
                 "-t" | "--tray" => tray::tray(),
                 _ => language::help(),
             }
@@ -32,54 +30,27 @@ pub fn cmd() {
             match args[1].as_ref() {
                 "toot" => {
                     match args[2].as_ref() {
-                        "area" => {
-                            image::image(0);
-                            dialog(mastodon, true);
-                        }
-                        "window" => {
-                            image::image(1);
-                            dialog(mastodon, true);
-                        }
-                        "full" => {
-                            image::image(2);
-                            dialog(mastodon, true);
-                        }
+                        "area" => toot_area(),
+                        "window" => toot_window(),
+                        "full" => toot_full(),
                         "auth" => mastodon::auth(),
                         _ => language::help(),
                     }
                 }
                 "tweet" => {
                     match args[2].as_ref() {
-                        "area" => {
-                            image::image(0);
-                            dialog(twitter, true);
-                        }
-                        "window" => {
-                            image::image(1);
-                            dialog(twitter, true);
-                        }
-                        "full" => {
-                            image::image(2);
-                            dialog(twitter, true);
-                        }
+                        "area" => tweet_area(),
+                        "window" => tweet_window(),
+                        "full" => tweet_full(),
                         "auth" => twitter::auth(),
                         _ => language::help(),
                     }
                 }
                 "imgur" => {
                     match args[2].as_ref() {
-                        "area" => {
-                            image::image(0);
-                            imgur::send();
-                        }
-                        "window" => {
-                            image::image(1);
-                            imgur::send();
-                        }
-                        "full" => {
-                            image::image(2);
-                            imgur::send();
-                        }
+                        "area" => imgur_area(),
+                        "window" => imgur_window(),
+                        "full" => imgur_full(),
                         _ => language::help(),
                     }
                 }
@@ -90,28 +61,19 @@ pub fn cmd() {
             match args[1].as_ref() {
                 "toot" => {
                     match args[2].as_ref() {
-                        "file" => {
-                            save::file(args[3].clone());
-                            dialog(mastodon, true);
-                        }
+                        "file" => toot_file(args[3].clone()),
                         _ => language::help(),
                     }
                 }
                 "tweet" => {
                     match args[2].as_ref() {
-                        "file" => {
-                            save::file(args[3].clone());
-                            dialog(twitter, true);
-                        }
+                        "file" => tweet_file(args[3].clone()),
                         _ => language::help(),
                     }
                 }
                 "imgur" => {
                     match args[2].as_ref() {
-                        "file" => {
-                            save::file(args[3].clone());
-                            imgur::send();
-                        }
+                        "file" => imgur_file(args[3].clone()),
                         _ => language::help(),
                     }
                 }

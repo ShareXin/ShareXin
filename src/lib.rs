@@ -12,21 +12,19 @@ extern crate yaml_rust;
 extern crate clipboard;
 extern crate systray;
 extern crate imgur as Imgur;
-extern crate sharexin;
-mod notification;
-mod twitter;
-mod mastodon;
-mod image;
-mod dialog;
-mod imgur;
-mod cmd;
-mod error;
-mod upgrade;
-mod language;
-mod save;
-mod desktop;
-mod tray;
-mod screenshot;
+pub mod notification;
+pub mod twitter;
+pub mod mastodon;
+pub mod image;
+pub mod dialog;
+pub mod imgur;
+pub mod error;
+pub mod upgrade;
+pub mod language;
+pub mod save;
+pub mod desktop;
+pub mod screenshot;
+use dialog::dialog;
 
 static VERSION: &'static str = env!("CARGO_PKG_VERSION");
 static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
@@ -79,6 +77,70 @@ impl Destination {
     }
 }
 
-fn main() {
-    cmd::cmd();
+pub fn tweet() {
+    dialog::dialog(Destination::new(1), false);
+}
+
+pub fn toot() {
+    dialog::dialog(Destination::new(0), false);
+}
+
+pub fn tweet_full() {
+    image::image(2);
+    dialog(Destination::new(1), true);
+}
+
+pub fn tweet_window() {
+    image::image(1);
+    dialog(Destination::new(1), true);
+}
+
+pub fn tweet_area() {
+    image::image(0);
+    dialog(Destination::new(1), true);
+}
+
+pub fn toot_full() {
+    image::image(2);
+    dialog(Destination::new(0), true);
+}
+
+pub fn toot_window() {
+    image::image(1);
+    dialog(Destination::new(0), true);
+}
+
+pub fn toot_area() {
+    image::image(0);
+    dialog(Destination::new(0), true);
+}
+
+pub fn imgur_full() {
+    image::image(2);
+    imgur::send();
+}
+
+pub fn imgur_window() {
+    image::image(1);
+    imgur::send();
+}
+
+pub fn imgur_area() {
+    image::image(0);
+    imgur::send();
+}
+
+pub fn tweet_file(filed: String) {
+    save::file(filed);
+    dialog(Destination::new(1), true);
+}
+
+pub fn toot_file(filed: String) {
+    save::file(filed);
+    dialog(Destination::new(0), true);
+}
+
+pub fn imgur_file(filed: String) {
+    save::file(filed);
+    imgur::send();
 }

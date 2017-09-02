@@ -110,8 +110,11 @@ Examples:
 * libcurl4
 * cc
 * libappindicator (on BSDs and Linux)
+* clang
 
-### Ubuntu 17.04 dependencies  
+### Tested every release
+
+#### Ubuntu 17.04 dependencies  
 * libgtk-3-dev
 * libcairo2-dev
 * libnotify-dev
@@ -122,8 +125,11 @@ Examples:
 * libssl-dev
 * libcurl4-openssl-dev
 * build-essential
+* libappindicator3-dev
+* libclang-dev
+* clang
 
-### Debian Stable dependencies
+#### Debian Stable dependencies
 * libgtk-3-dev
 * libcairo2-dev
 * libnotify-dev
@@ -132,8 +138,13 @@ Examples:
 * libatk1.0-dev
 * libssl-dev
 * libcurl4-openssl-dev
+* libappindicator3-dev
+* libclang-dev
+* clang
 
-### Fedora 26 dependencies
+### Compiling untested since 0.6.0
+
+#### Fedora 26 dependencies
 * gtk3-devel
 * cairo-devel
 * libnotify-devel
@@ -144,7 +155,7 @@ Examples:
 * libcurl-devel
 * libcurl
 
-### openSUSE Leap 42.3 dependencies
+#### openSUSE Leap 42.3 dependencies
 * gtk3-devel
 * cairo-devel
 * libnotify-devel
@@ -157,7 +168,7 @@ Examples:
 * make
 * gcc
 
-### openSUSE Tumbleweed dependencies
+#### openSUSE Tumbleweed dependencies
 * gtk3-devel
 * cairo-devel
 * libnotify-devel
@@ -170,13 +181,13 @@ Examples:
 * make
 * gcc
 
-### FreeBSD 11 dependencies
+#### FreeBSD 11 dependencies
 * openssl-devel
 * gmake
 * gcc
 * dbus-1 [(don't know where to get it, won't compile right now)](https://forums.freebsd.org/threads/6191/)
 
-### macOS Sierra dependencies
+#### macOS Sierra dependencies
 * gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
 * xcode
 
@@ -202,6 +213,7 @@ Examples:
 #### [0.6.2] - 2017-09-01
 - Experimental system tray support
 - Makefile and PKGBUILD
+- ShareXin library? I guess?
 
 #### [0.6.1] - 2017-08-26
 - XDG Directory for Pictures folder (switched my system to French, directories changed)
