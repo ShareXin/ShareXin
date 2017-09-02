@@ -13,7 +13,7 @@ pub fn tray() {
                 error::fatal();
             }
         };
-        app.set_icon_from_file(&"/usr/share/icons/gnome/48x48/apps/text-editor.png"
+        app.set_icon_from_file(&"/usr/share/icons/hicolor/48x48/apps/gedit.png"
             .to_string())
             .ok();
         app.add_menu_item(&"Tweet".to_string(), move |_| {
