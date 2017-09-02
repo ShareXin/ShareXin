@@ -1,0 +1,18 @@
+[package]
+name = "systray"
+version = "0.2.0"
+authors = ["Kyle Machulis <kyle@machul.is>"]
+description = "Rust library for making minimal cross-platform systray GUIs"
+license = "BSD-3-Clause"
+homepage = "http://github.com/qdot/systray-rs"
+repository = "https://github.com/qdot/systray-rs.git"
+readme = "README.md"
+keywords = ["gui"]
+
+[dependencies]
+log="0.3"
+
+[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+gtk="0.2.0"
+glib="0.3.0"
+libappindicator= { path="libappindicator-rs" }
