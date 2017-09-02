@@ -1,8 +1,6 @@
 # ShareXin  
 
-[![Crates.io](https://img.shields.io/crates/v/sharexin.svg?)](https://crates.io/crates/sharexin)
 [![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
-[![Crates.io Downloads](https://img.shields.io/crates/d/sharexin.svg?)](https://crates.io/crates/sharexin)  
 
 ## Screenshots
 ![ShareXin](https://raw.githubusercontent.com/thebitstick/ShareXin/master/dialog.png)  
@@ -219,12 +217,9 @@ SUBCOMMANDS:
 - openSUSE Tumbleweed
 - macOS Sierra
 
-### Compiling (via Github)
+### Compiling
 1. `git clone https://github.com/ShareXin/ShareXin/`  
 2. `cargo install`   
-
-### Compiling (via Crates.io)
-1. `cargo install sharexin`  
 
 ## Changelog
 #### [0.6.2] - 2017-09-01
