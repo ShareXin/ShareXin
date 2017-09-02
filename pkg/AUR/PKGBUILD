@@ -14,7 +14,7 @@ sha256sums=('SKIP')
 
 build() {
   cd "$pkgname-$pkgver"
-  LDFLAGS="-static" cargo build --release
+  make
 }
 
 package() {
