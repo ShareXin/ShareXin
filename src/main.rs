@@ -8,6 +8,8 @@ extern crate gdk;
 extern crate open;
 extern crate time;
 extern crate curl;
+#[macro_use]
+extern crate clap;
 extern crate yaml_rust;
 extern crate clipboard;
 extern crate systray;

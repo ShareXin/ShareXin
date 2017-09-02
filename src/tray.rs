@@ -101,5 +101,5 @@ pub fn tray() {
 }
 
 fn wait() {
-    thread::sleep(time::Duration::new(0, 500000000));
+    thread::sleep(time::Duration::new(0, 600000000));
 }

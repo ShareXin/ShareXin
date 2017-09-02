@@ -92,6 +92,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                 }
             };
         }
+        Inhibit(false);
     });
 
     // rust security bypasses

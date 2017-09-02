@@ -25,6 +25,7 @@ imgur = "0.7.0"
 notify-rust = "3.4.2"
 yaml-rust = "0.3.5"
 clipboard = "0.4.0"
+clap = "2.26.0"
 systray = { git = "https://github.com/thebitstick/systray-rs.git" }
 
 [features]
