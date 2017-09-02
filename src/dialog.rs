@@ -16,6 +16,10 @@ use image;
 
 pub fn dialog(service: Destination, image_bool: bool) {
 
+    match gtk::init() {
+        Ok(ok) => ok,
+        Err(_) => eprintln!("{}", error::message(24)),
+    };
 
 
     // objects from glade file
