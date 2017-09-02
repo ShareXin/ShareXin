@@ -28,7 +28,7 @@ clipboard = "0.4.0"
 clap = "2.26.0"
 
 [target.'cfg(not(target_os = "macos"))'.dependencies]
-systray = { path = "systray-rs", version = "0.2.0" }
+systray = { git = "https://github.com/thebitstick/systray-rs.git" } 
 
 [features]
 default = ["gtk/v3_10"]
