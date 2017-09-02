@@ -46,40 +46,25 @@
 
 ## `--help`
 
-```bash
+```shell
 sharexin 0.6.2
-Usage: sharexin <options> [destination] [destination options/image options] [FILE]
+TheBitStick <thebitstick@tfwno.gf>
+ShareX for Unix-like systems
 
-Options:
-  -h, --help    Display this help message and exit
-  -V, --version Print version info and exit
-  -U, --upgrade Check for new updates
-  -t, --tray    Use system tray icon
+USAGE:
+    sharexin [FLAGS] [SUBCOMMAND]
 
-Image Options:
-  area		Grab an area of the screen instead of the entire screen
-  window	Grab the current window instead of the entire screen
-  full		Grab the entire screen
-  file		Use a file
+FLAGS:
+    -h, --help       Display this help message and exit
+    -t, --tray       Use system tray icon
+    -U, --upgrade    Check for new updates
+    -v, --version    Print version info and exit
 
-Destinations:
-  toot		Upload to Mastodon (uses "toot")
-  tweet		Upload to Twitter (uses "t")
-  imgur		Upload to Imgur
+SUBCOMMANDS:
+    imgur    Upload to Imgur
+    toot     Upload to Mastodon
+    tweet    Upload to Twitter
 
-Twitter Options:
-  auth		Authenticate with Twitter
-
-Mastodon Options:
-  auth		Authenticate with Mastodon
-
-Examples:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [FILE]
-  sharexin tweet auth
-  sharexin --tray
 ```  
 
 ### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)  
@@ -213,6 +198,7 @@ Examples:
 #### [0.6.2] - 2017-09-01
 - Experimental system tray support
 - Makefile and PKGBUILD
+- Better command line parsing with clap-rs
 - ShareXin library? I guess?
 
 #### [0.6.1] - 2017-08-26

@@ -51,6 +51,7 @@ Error:
     "28": Unable to read file
     "29": Folder exists
     "30": File not saved
+    "31": Unable to display system tray icon
 Help:
     Usage: Usage
     Options: Options

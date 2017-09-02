@@ -34,6 +34,8 @@ pub fn cmd() {
         .help_message(help.to_owned())
         .version_message(version.to_owned())
         .setting(AppSettings::ArgRequiredElseHelp)
+        .setting(AppSettings::DisableHelpSubcommand)
+        .setting(AppSettings::ColoredHelp)
         .version_short("v")
         .arg(
             Arg::with_name("upgrade")
@@ -52,30 +54,36 @@ pub fn cmd() {
         .subcommand(
             SubCommand::with_name("toot")
                 .about(mastodon.to_owned())
-                .arg(Arg::with_name("auth").help(mastodon_auth))
                 .arg(
                     Arg::with_name("file")
                         .help(file)
-                        .takes_value(true)
-                        .require_equals(true),
+                        .short("f")
+                        .long("file")
+                        .help(file)
+                        .takes_value(true),
                 )
-                .arg(Arg::with_name("area").help(area))
-                .arg(Arg::with_name("window").help(window))
-                .arg(Arg::with_name("full").help(full)),
+                .subcommand(SubCommand::with_name("auth").about(
+                    mastodon_auth.to_owned(),
+                ))
+                .subcommand(SubCommand::with_name("area").about(area.to_owned()))
+                .subcommand(SubCommand::with_name("window").about(window.to_owned()))
+                .subcommand(SubCommand::with_name("full").about(full.to_owned())),
         )
         .subcommand(
             SubCommand::with_name("tweet")
                 .about(twitter.to_owned())
-                .arg(Arg::with_name("auth").help(twitter_auth))
                 .arg(
                     Arg::with_name("file")
                         .help(file)
-                        .takes_value(true)
-                        .require_equals(true),
+                        .short("f")
+                        .long("file")
+                        .help(file)
+                        .takes_value(true),
                 )
-                .arg(Arg::with_name("area").help(area))
-                .arg(Arg::with_name("window").help(window))
-                .arg(Arg::with_name("full").help(full)),
+                .subcommand(SubCommand::with_name("auth").about(twitter_auth.to_owned()))
+                .subcommand(SubCommand::with_name("area").about(area.to_owned()))
+                .subcommand(SubCommand::with_name("window").about(window.to_owned()))
+                .subcommand(SubCommand::with_name("full").about(full.to_owned())),
         )
         .subcommand(
             SubCommand::with_name("imgur")
@@ -83,14 +91,15 @@ pub fn cmd() {
                 .arg(
                     Arg::with_name("file")
                         .help(file)
-                        .takes_value(true)
-                        .require_equals(true),
+                        .short("f")
+                        .long("file")
+                        .help(file)
+                        .takes_value(true),
                 )
-                .arg(Arg::with_name("area").help(area))
-                .arg(Arg::with_name("window").help(window))
-                .arg(Arg::with_name("full").help(full)),
-        )
-        .subcommand(SubCommand::with_name("help").setting(AppSettings::Hidden));
+                .subcommand(SubCommand::with_name("area").about(area.to_owned()))
+                .subcommand(SubCommand::with_name("window").about(window.to_owned()))
+                .subcommand(SubCommand::with_name("full").about(full.to_owned())),
+        );
     let matches = sharexin.clone().get_matches();
 
     if matches.is_present("upgrade") {
@@ -106,7 +115,15 @@ pub fn cmd() {
                 Some("window") => toot_window(),
                 Some("full") => toot_full(),
                 Some("auth") => mastodon::auth(),
-                _ => toot(),
+                _ => {
+                    if toot_matches.is_present("file") {
+                        if let Some(file) = toot_matches.value_of("file") {
+                            toot_file(file.to_owned());
+                        }
+                    } else {
+                        toot();
+                    }
+                }
             }
         }
         ("tweet", Some(tweet_matches)) => {
@@ -115,7 +132,15 @@ pub fn cmd() {
                 Some("window") => tweet_window(),
                 Some("full") => tweet_full(),
                 Some("auth") => twitter::auth(),
-                _ => tweet(),
+                _ => {
+                    if tweet_matches.is_present("file") {
+                        if let Some(file) = tweet_matches.value_of("file") {
+                            tweet_file(file.to_owned());
+                        }
+                    } else {
+                        tweet();
+                    }
+                }
             }
         }
         ("imgur", Some(imgur_matches)) => {
@@ -123,7 +148,15 @@ pub fn cmd() {
                 Some("area") => imgur_area(),
                 Some("window") => imgur_window(),
                 Some("full") => imgur_full(),
-                _ => sharexin.print_help().unwrap(),
+                _ => {
+                    if imgur_matches.is_present("file") {
+                        if let Some(file) = imgur_matches.value_of("file") {
+                            imgur_file(file.to_owned());
+                        }
+                    } else {
+                        sharexin.print_help().unwrap();
+                    }
+                }
             }
         }
         _ => sharexin.print_help().unwrap(),
