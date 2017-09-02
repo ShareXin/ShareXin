@@ -86,23 +86,21 @@ SUBCOMMANDS:
 * xorg-dev (on BSDs and Linux)
 * gtk3
 * cairo
-* libnotify (on BSDs and Linux)
 * libdbus (on BSDs and Linux)
 * pango
 * gdk-pixbuf2
-* atk
-* openssl
-* libcurl4
+* atk (on BSDs and Linux)
+* openssl (on BSDs and Linux)
+* libcurl4 (on BSDs and Linux)
 * cc
 * libappindicator (on BSDs and Linux)
+* libindicator (on BSDs and Linux)
+* libdbusmenu (on BSDs and Linux)
 * clang
-
-### Tested every release
 
 #### Ubuntu 17.04 dependencies  
 * libgtk-3-dev
 * libcairo2-dev
-* libnotify-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
 * libatk1.0-dev
@@ -117,7 +115,6 @@ SUBCOMMANDS:
 #### Debian Stable dependencies
 * libgtk-3-dev
 * libcairo2-dev
-* libnotify-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
 * libatk1.0-dev
@@ -127,23 +124,40 @@ SUBCOMMANDS:
 * libclang-dev
 * clang
 
-### Compiling untested since 0.6.0
+#### Arch Linux dependencies
+* curl
+* gtk3
+* gdk-pixbuf2
+* cairo
+* glib2
+* openssl
+* dbus
+* xcb-util
+* base-devel
+* clang
+* libappindicator-gtk3
 
 #### Fedora 26 dependencies
 * gtk3-devel
 * cairo-devel
-* libnotify-devel
 * pango-devel
 * gdk-pixbuf2-devel
 * atk-devel
 * openssl-devel
 * libcurl-devel
 * libcurl
+* libappindicator-devel
+* libappindicator-gtk3-devel
+* libindicator-devel
+* libindicator-gtk3-devel
+* libdbusmenu-gtk3-devel
+* libdbusmenu-devel
+* clang-devel
+* clang
 
 #### openSUSE Leap 42.3 dependencies
 * gtk3-devel
 * cairo-devel
-* libnotify-devel
 * pango-devel
 * gdk-pixbuf-devel
 * atk-devel
@@ -152,11 +166,18 @@ SUBCOMMANDS:
 * libcurl4
 * make
 * gcc
+* libappindicator-devel
+* libappindicator3-devel
+* libindicator-devel
+* libindicator3-devel
+* libdbusmenu-glib-devel
+* libdbusmenu-gtk3-devel
+* llvm-clang
+* libclang
 
 #### openSUSE Tumbleweed dependencies
 * gtk3-devel
 * cairo-devel
-* libnotify-devel
 * pango-devel
 * gdk-pixbuf-devel
 * atk-devel
@@ -165,16 +186,28 @@ SUBCOMMANDS:
 * libcurl4
 * make
 * gcc
+* libappindicator-devel
+* libappindicator3-devel
+* libindicator-devel
+* libindicator3-devel
+* libdbusmenu-glib-devel
+* libdbusmenu-gtk3-devel
+* clang
+* clang-devel
+* libclang4
+* libclang3_8
 
 #### FreeBSD 11 dependencies
 * openssl-devel
 * gmake
 * gcc
 * dbus-1 [(don't know where to get it, won't compile right now)](https://forums.freebsd.org/threads/6191/)
+* other deps
 
 #### macOS Sierra dependencies
 * gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
 * xcode
+* untested system tray
 
 ### Compling tested on
 - Ubuntu 17.04
