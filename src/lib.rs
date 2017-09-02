@@ -8,7 +8,6 @@ extern crate curl;
 extern crate clap;
 extern crate yaml_rust;
 extern crate clipboard;
-extern crate systray;
 extern crate imgur as Imgur;
 pub mod notification;
 pub mod twitter;
@@ -22,6 +21,10 @@ pub mod language;
 pub mod save;
 pub mod desktop;
 pub mod screenshot;
+
+#[cfg(any(target_os = "linux", target_os = "freebsd"))]
+extern crate systray;
+
 use dialog::dialog;
 
 pub static VERSION: &'static str = env!("CARGO_PKG_VERSION");

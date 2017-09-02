@@ -12,7 +12,6 @@ extern crate curl;
 extern crate clap;
 extern crate yaml_rust;
 extern crate clipboard;
-extern crate systray;
 extern crate imgur as Imgur;
 extern crate sharexin;
 mod notification;
@@ -30,6 +29,9 @@ mod desktop;
 mod tray;
 mod screenshot;
 use sharexin::{Destination, VERSION, SHAREXIN};
+
+#[cfg(any(target_os = "linux", target_os = "freebsd"))]
+extern crate systray;
 
 fn main() {
     cmd::cmd();

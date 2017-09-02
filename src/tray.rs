@@ -1,9 +1,12 @@
 use glib::{Continue, idle_add};
 use std::{process, thread, time};
-use systray;
 use sharexin;
 use error;
 
+#[cfg(any(target_os = "linux", target_os = "freebsd"))]
+use systray;
+
+#[cfg(any(target_os = "linux", target_os = "freebsd"))]
 pub fn tray() {
     loop {
         let mut app = match systray::Application::new() {
@@ -13,8 +16,7 @@ pub fn tray() {
                 error::fatal();
             }
         };
-        app.set_icon_from_file(&"/usr/share/icons/hicolor/48x48/apps/gedit.png"
-            .to_string())
+        app.set_icon_from_file(&"/usr/share/icons/hicolor/48x48/apps/gedit.png".to_string())
             .ok();
         app.add_menu_item(&"Tweet".to_string(), move |_| {
             idle_add(move || {
@@ -100,6 +102,13 @@ pub fn tray() {
     }
 }
 
+#[cfg(target_os = "macos")]
+pub fn tray() {
+    eprintln!("{}", error::message(31));
+    error::fatal();
+}
+
+#[cfg(any(target_os = "linux", target_os = "freebsd"))]
 fn wait() {
     thread::sleep(time::Duration::new(0, 600000000));
 }

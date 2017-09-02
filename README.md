@@ -49,7 +49,7 @@
 ```shell
 sharexin 0.6.2
 TheBitStick <thebitstick@tfwno.gf>
-ShareX for Unix-like systems
+ShareX for Linux, FreeBSD, and macOS
 
 USAGE:
     sharexin [FLAGS] [SUBCOMMAND]
@@ -207,7 +207,6 @@ SUBCOMMANDS:
 #### macOS Sierra dependencies
 * gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
 * xcode
-* untested system tray
 
 ### Compling tested on
 - Ubuntu 17.04
@@ -229,7 +228,8 @@ SUBCOMMANDS:
 
 ## Changelog
 #### [0.6.2] - 2017-09-01
-- Experimental system tray support
+- System tray support (not for Mac)
+- New slogan, guaranteed to work on Linux, FreeBSD, and macOS only
 - Makefile and PKGBUILD
 - Better command line parsing with clap-rs
 - ShareXin library? I guess?

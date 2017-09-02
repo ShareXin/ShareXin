@@ -30,7 +30,7 @@ pub fn cmd() {
     let mut sharexin = App::new("sharexin")
         .version(crate_version!())
         .author(crate_authors!())
-        .about("ShareX for Unix-like systems")
+        .about("ShareX for Linux, FreeBSD, and macOS")
         .help_message(help.to_owned())
         .version_message(version.to_owned())
         .setting(AppSettings::ArgRequiredElseHelp)
