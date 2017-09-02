@@ -1,0 +1,99 @@
+.hy
+.TH "sharexin" "1" "2017\-09\-01" "sharexin 0.6.2" ""
+.SH NAME
+.PP
+sharexin - ShareX for Unix-like systems
+.SH SYNOPSIS
+.PP
+sharexin <options> [destination] [destination options/image options] [FILE]
+.SH DESCRIPTION
+.PP
+sharexin is a simple ShareX-like tool for Unix-like systems.
+It works on Linux, BSDs, and macOS. It allows you to send to Twitter,
+Mastodon, and Imgur. It allows you to create a screenshot or use a file and upload it.
+.SH OPTIONS
+.TP
+.B \-h, \-\-help
+display usage message
+.RS
+.RE
+.TP
+.B \-V, \-\-version
+print version number
+.RS
+.RE
+.TP
+.B \-U, \-\-upgrade
+check if there is a new version
+.RS
+.RE
+.TP
+.B \-t, \-\-tray
+use a system tray icon
+.RS
+.RE
+.SH Image Options
+.TP
+.B area
+screenshot
+.RS
+.RE
+.TP
+.B window
+screenshot
+.RS
+.RE
+.TP
+.B full
+screenshot
+.RS
+.RE
+.TP
+.B file
+use a file
+.RS
+.RE
+.SH Destinations
+.TP
+.B toot
+.RS
+.RE
+.TP
+.B tweet
+.RS
+.RE
+.TP
+.B imgur
+.RS
+.RE
+.SH Twitter options
+.TP
+.B auth
+Authenticate with Twitter
+.RS
+.RE
+.SH Mastodon options
+.TP
+.B auth
+Authenticate with Mastodon
+.RS
+.RE
+.SH EXAMPLES
+.TP
+.B sharexin toot
+.RS
+.RE
+.B sharexin tweet full
+.RS
+.RE
+.B sharexin toot area
+.RS
+.RE
+.B sharexin imgur file [FILE]
+.RS
+.RE
+.B sharexin --tray
+.fi
+.SH AUTHOR
+.PP
+sharexin is maintained by TheBitStick
