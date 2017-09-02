@@ -51,12 +51,14 @@ Error:
     "28": Fichier non lisible
     "29": Le dossier existe déjà
     "30": Le fichier n'est pas sauvegardé
+    "31": Impossible d'afficher l'icône de la barre des tâches
 Help:
     Usage: Utilisation
     Options: Options
     Help: Afficher le message d'aide et quitter
     Version: Imprimer les informations de la version et quitter
     Upgrade: Vérifiez les nouvelles mises à jour
+    Tray: Utilisation d'une icône de la barre des tâches
     Image: Options d'image
     Area: Capturer une zone de l'écran plutôt que l'écran complet
     Window: Capturer la fenêtre active plutôt que l'écran complet

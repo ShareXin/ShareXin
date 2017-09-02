@@ -18,11 +18,9 @@ pub fn dialog(service: Destination, image_bool: bool) {
 
     match gtk::init() {
         Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(24));
-            error::fatal()
-        }
+        Err(_) => eprintln!("{}", error::message(24)),
     };
+
 
     // objects from glade file
     let builder = gtk::Builder::new_from_string(include_str!("sharexin.glade"));
@@ -94,6 +92,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                 }
             };
         }
+        Inhibit(false);
     });
 
     // rust security bypasses

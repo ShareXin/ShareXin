@@ -51,12 +51,14 @@ Error:
     "28": Ne eblas legi dosieron
     "29": La dosierujo jam ekzistas
     "30": Dosiero ne savis
+    "31": Ne eblas montri la taskpunkton
 Help:
     Usage: Uzo
     Options: Opcioj
     Help: Montru la helpo mesaĝon kaj eliro
     Version: Printversio informoj kaj eliro
     Upgrade: Kontrolu por novaj ĝisdatigoj
+    Tray: Uzante taskpunkton
     Image: Opcioj de bildo
     Area: Kapti areon de la ekrano anstataŭ ol la tuta ekrano
     Window: Kapti la aktivan fenestron anstataŭ ol la tuta ekrano

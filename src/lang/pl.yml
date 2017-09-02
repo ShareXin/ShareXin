@@ -51,12 +51,14 @@ Error:
     "28": Nie udało się odczytać pliku
     "29": Folder istnieje
     "30": Plik nie został zapisany
+    "31": <Translation pending> Unable to display system tray icon
 Help:
     Usage: Użycie
     Options: Opcje
     Help: Wyświetl tę informację i wyjdź
     Version: Wyświetl informacje o wersji i wyjdź
     Upgrade: Sprawdź aktualizacje
+    Tray: Umieść i użyj ikony aplikacji w pasku zadań
     Image: Opcje obrazów
     Area: Przechwyć obszar ekranu zamiast całości
     Window: Przechwyć obecne okno zamiast całego ekranu

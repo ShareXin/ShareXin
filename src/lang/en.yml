@@ -51,12 +51,14 @@ Error:
     "28": Unable to read file
     "29": Folder exists
     "30": File not saved
+    "31": Unable to display system tray icon
 Help:
     Usage: Usage
     Options: Options
     Help: Display this help message and exit
     Version: Print version info and exit
     Upgrade: Check for new updates
+    Tray: Use system tray icon
     Image: Image Options
     Area: Grab an area of the screen instead of the entire screen
     Window: Grab the current window instead of the entire screen

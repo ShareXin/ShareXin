@@ -11,16 +11,16 @@
 * Unix-like system
 * scrot (on non-Gnome/KDE x11 desktops)
 * feh
-* [t](https://github.com/sferik/t)
+* [t](https://github.com/thebitstick/t)
 * [toot](https://github.com/ihabunek/toot)
 
 ## Features
 * Uploads to Twitter and Mastodon and Imgur
-* Allows taking screenshots and saving them to files
-* Notifications via dbus
-* GUI works with GTK
-* Screenshotting works with X11 and Wayland (on supported desktops)
-* Saves screenshots to a folder in your Pictures directory
+* Takes screenshots and saves them to your pictures directory
+* Notifications
+* GTK GUI for Tweet/Toot dialog
+* Screenshotting works with X11 and Wayland
+* System tray icon for use without shortcuts
 
 ### Desktop support
 - macOS desktop
@@ -46,38 +46,25 @@
 
 ## `--help`
 
-```bash
-sharexin 0.6.1
-Usage: sharexin <options> [destination] [destination options/image options] [FILE]
+```shell
+sharexin 0.6.2
+TheBitStick <thebitstick@tfwno.gf>
+ShareX for Linux, FreeBSD, and macOS
 
-Options:
-  -h, --help	Display this help message and exit
-  -V, --version	Print version info and exit
-  -U, --upgrade	Check for new updates
+USAGE:
+    sharexin [FLAGS] [SUBCOMMAND]
 
-Image Options:
-  area		Grab an area of the screen instead of the entire screen
-  window	Grab the current window instead of the entire screen
-  full		Grab the entire screen
-  file		Use a file
+FLAGS:
+    -h, --help       Display this help message and exit
+    -t, --tray       Use system tray icon
+    -U, --upgrade    Check for new updates
+    -v, --version    Print version info and exit
 
-Destinations:
-  toot		Upload to Mastodon (uses "toot")
-  tweet		Upload to Twitter (uses "t")
-  imgur		Upload to Imgur
+SUBCOMMANDS:
+    imgur    Upload to Imgur
+    toot     Upload to Mastodon
+    tweet    Upload to Twitter
 
-Twitter Options:
-  auth		Authenticate with Twitter
-
-Mastodon Options:
-  auth		Authenticate with Mastodon
-
-Examples:
-  sharexin toot
-  sharexin tweet full
-  sharexin toot area
-  sharexin imgur file [FILE]
-  sharexin tweet auth
 ```  
 
 ### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)  
@@ -96,21 +83,24 @@ Examples:
 ## Compiling
 
 ### Dependencies for compiling
-* xorg-dev
+* xorg-dev (on BSDs and Linux)
 * gtk3
 * cairo
-* libnotify
+* libdbus (on BSDs and Linux)
 * pango
 * gdk-pixbuf2
-* atk
-* openssl
-* libcurl4
+* atk (on BSDs and Linux)
+* openssl (on BSDs and Linux)
+* libcurl4 (on BSDs and Linux)
 * cc
+* libappindicator (on BSDs and Linux)
+* libindicator (on BSDs and Linux)
+* libdbusmenu (on BSDs and Linux)
+* clang
 
-### Ubuntu 17.04 dependencies  
+#### Ubuntu 17.04 dependencies  
 * libgtk-3-dev
 * libcairo2-dev
-* libnotify-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
 * libatk1.0-dev
@@ -118,32 +108,56 @@ Examples:
 * libssl-dev
 * libcurl4-openssl-dev
 * build-essential
+* libappindicator3-dev
+* libclang-dev
+* clang
 
-### Debian Stable dependencies
+#### Debian Stable dependencies
 * libgtk-3-dev
 * libcairo2-dev
-* libnotify-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
 * libatk1.0-dev
 * libssl-dev
 * libcurl4-openssl-dev
+* libappindicator3-dev
+* libclang-dev
+* clang
 
-### Fedora 26 dependencies
+#### Arch Linux dependencies
+* curl
+* gtk3
+* gdk-pixbuf2
+* cairo
+* glib2
+* openssl
+* dbus
+* xcb-util
+* base-devel
+* clang
+* libappindicator-gtk3
+
+#### Fedora 26 dependencies
 * gtk3-devel
 * cairo-devel
-* libnotify-devel
 * pango-devel
 * gdk-pixbuf2-devel
 * atk-devel
 * openssl-devel
 * libcurl-devel
 * libcurl
+* libappindicator-devel
+* libappindicator-gtk3-devel
+* libindicator-devel
+* libindicator-gtk3-devel
+* libdbusmenu-gtk3-devel
+* libdbusmenu-devel
+* clang-devel
+* clang
 
-### openSUSE Leap 42.3 dependencies
+#### openSUSE Leap 42.3 dependencies
 * gtk3-devel
 * cairo-devel
-* libnotify-devel
 * pango-devel
 * gdk-pixbuf-devel
 * atk-devel
@@ -152,11 +166,18 @@ Examples:
 * libcurl4
 * make
 * gcc
+* libappindicator-devel
+* libappindicator3-devel
+* libindicator-devel
+* libindicator3-devel
+* libdbusmenu-glib-devel
+* libdbusmenu-gtk3-devel
+* llvm-clang
+* libclang
 
-### openSUSE Tumbleweed dependencies
+#### openSUSE Tumbleweed dependencies
 * gtk3-devel
 * cairo-devel
-* libnotify-devel
 * pango-devel
 * gdk-pixbuf-devel
 * atk-devel
@@ -165,14 +186,25 @@ Examples:
 * libcurl4
 * make
 * gcc
+* libappindicator-devel
+* libappindicator3-devel
+* libindicator-devel
+* libindicator3-devel
+* libdbusmenu-glib-devel
+* libdbusmenu-gtk3-devel
+* clang
+* clang-devel
+* libclang4
+* libclang3_8
 
-### FreeBSD 11 dependencies
+#### FreeBSD 11 dependencies
 * openssl-devel
 * gmake
 * gcc
-* dbus-1 (don't know where to get it, won't compile right now)
+* dbus-1 [(don't know where to get it, won't compile right now)](https://forums.freebsd.org/threads/6191/)
+* other deps
 
-### macOS Sierra dependencies
+#### macOS Sierra dependencies
 * gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
 * xcode
 
@@ -195,6 +227,13 @@ Examples:
 1. `cargo install sharexin`  
 
 ## Changelog
+#### [0.6.2] - 2017-09-01
+- System tray support (not for Mac)
+- New slogan, guaranteed to work on Linux, FreeBSD, and macOS only
+- Makefile and PKGBUILD
+- Better command line parsing with clap-rs
+- ShareXin library? I guess?
+
 #### [0.6.1] - 2017-08-26
 - XDG Directory for Pictures folder (switched my system to French, directories changed)
 
