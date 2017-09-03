@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PWD=$(pwd)
-TMP=/tmp/sharexin-$(cat version)
+TMP=/tmp/ShareXin
 
 mkdir -p "$TMP"
 cp pkg/AUR/PKGBUILD "$TMP"
