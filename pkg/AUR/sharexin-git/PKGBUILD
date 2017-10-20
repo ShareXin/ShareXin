@@ -1,0 +1,30 @@
+# Maintainer: TheBitStick <thebitstick@tfwno.gf>
+# Contributor: Rhys Kenwell <redrield+aur@gmail.com>
+
+pkgname=sharexin-git
+_pkgname=sharexin
+pkgver=r260.ec52dd5
+pkgrel=1
+pkgdesc="ShareX for Unix-like systems"
+url="https://github.com/ShareXin/ShareXin"
+makedepends=('rust' 'curl' 'gtk3' 'gdk-pixbuf2' 'cairo' 'glib2' 'openssl' 'dbus' 'xcb-util' 'libappindicator-gtk3')
+depends=('feh' 'imagemagick')
+arch=('x86_64')
+license=('MIT')
+sha256sums=('SKIP')
+source=("sharexin::git+https://github.com/ShareXin/ShareXin#branch=master")
+
+pkgver() {
+    cd "$_pkgname"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+    cd "$_pkgname"
+    cargo build --release
+}
+
+package() {
+    cd "$_pkgname"
+    install -Dm755 "target/release/$_pkgname" "$pkgdir/usr/bin/sharexin"
+}
