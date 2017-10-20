@@ -17,6 +17,8 @@ fn screenshot(args: usize, temp: &str, session: String, desktop: String) {
                 "cinnamon" => screenshot::gnome(args, temp),
                 "budgie-desktop" => screenshot::gnome(args, temp),
                 "budgie:gnome" => screenshot::gnome(args, temp),
+                "ubuntu" => screenshot::gnome(args, temp),
+                "ubuntu:gnome" => screenshot::gnome(args, temp),
                 "plasma" => screenshot::kde(args, temp),
                 "kde" => screenshot::kde(args, temp),
                 "sway" => screenshot::sway(args, temp),

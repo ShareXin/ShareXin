@@ -32,6 +32,7 @@
 
 ### Tested on
 - Ubuntu 17.04
+- Ubuntu 17.10
 - Debian Stable
 - Fedora 26
 - Arch Linux
@@ -45,7 +46,7 @@
 ## `--help`
 
 ```shell
-sharexin 0.6.2
+sharexin 0.6.3
 TheBitStick <thebitstick@tfwno.gf>
 ShareX for Linux, FreeBSD, and macOS
 
@@ -222,6 +223,9 @@ SUBCOMMANDS:
 2. `cargo install`   
 
 ## Changelog
+#### [0.6.3] - 2017-10-19
+- Added support for Ubuntu 17.10 Gnome Desktop (congrats on upgrading to the future)
+
 #### [0.6.2] - 2017-09-01
 - System tray support (not for Mac)
 - New slogan, guaranteed to work on Linux, FreeBSD, and macOS only
