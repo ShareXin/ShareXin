@@ -46,7 +46,7 @@
 ## `--help`
 
 ```shell
-sharexin 0.6.3
+sharexin 0.6.4
 TheBitStick <thebitstick@tfwno.gf>
 ShareX for Linux, FreeBSD, and macOS
 
@@ -224,6 +224,10 @@ SUBCOMMANDS:
 2. `cargo install`   
 
 ## Changelog
+#### [0.6.4] - 2018-03-30
+- Wow this project keeps going
+- Added Portuguese translation
+
 #### [0.6.3] - 2017-10-19
 - Added support for Ubuntu 17.10 Gnome Desktop (congrats on upgrading to the future)
 
