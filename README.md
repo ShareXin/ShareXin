@@ -78,6 +78,7 @@ SUBCOMMANDS:
 * 한국어 (Korean)
 * Deutsch (German) by [@qwertxzy](https://twitter.com/qwertxzy)
 * Polski (Polish) by [@Michcioperz](https://twitter.com/Michcioperz)
+* Português (Portuguese) by [@pillgp](https://twitter.com/pillgp)
 
 ## Compiling
 
