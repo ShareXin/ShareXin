@@ -53,6 +53,8 @@ pub fn loader<'a>() -> &'a str {
         return include_str!("lang/de.yml");
     } else if lang.contains("pl") {
         return include_str!("lang/pl.yml");
+    } else if lang.contains("pt") {
+        return include_str!("lang/pt.yml");
     } else {
         return include_str!("lang/en.yml");
     }
