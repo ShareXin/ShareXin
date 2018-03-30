@@ -28,7 +28,7 @@ extern crate systray;
 use dialog::dialog;
 
 pub static VERSION: &'static str = env!("CARGO_PKG_VERSION");
-pub static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
+pub static SHAREXIN: &'static str = "https://github.com/ShareXin/ShareXin";
 
 #[derive(Debug, Clone, Copy)]
 pub struct Destination {
