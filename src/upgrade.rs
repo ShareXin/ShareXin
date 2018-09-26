@@ -1,22 +1,19 @@
+use curl::easy::Easy;
+use error;
 use language;
+use notification;
+use open;
 use yaml_rust::YamlLoader;
 use SHAREXIN;
-use curl::easy::Easy;
-use open;
-use error;
 use VERSION;
-use notification;
 
 pub fn upgrade() {
-
     let mut dst = Vec::new();
     let mut latest = Easy::new();
 
     // file made to check version number
     latest
-        .url(
-            "https://raw.githubusercontent.com/ShareXin/ShareXin/master/version",
-        )
+        .url("https://raw.githubusercontent.com/ShareXin/ShareXin/master/version")
         .unwrap();
     let mut transfer = latest.transfer();
     transfer
@@ -53,7 +50,6 @@ pub fn upgrade() {
 }
 
 fn check_update(latest_version: usize, current_version: usize, latest_utf: String) {
-
     let file = language::loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Update"];
@@ -74,35 +70,22 @@ fn check_update(latest_version: usize, current_version: usize, latest_utf: Strin
         open_update();
         println!(
             "{}: {}\n{}: {}\n{}",
-            &installed,
-            VERSION,
-            &latest,
-            &latest_utf,
-            &update_state
+            &installed, VERSION, &latest, &latest_utf, &update_state
         );
     } else if latest_version < current_version {
         println!(
             "{}: {}\n{}: {}\n{}",
-            &installed,
-            VERSION,
-            &latest,
-            &latest_utf,
-            &update_state
+            &installed, VERSION, &latest, &latest_utf, &update_state
         );
     } else if latest_version == current_version {
         println!(
             "{}: {}\n{}: {}\n{}",
-            &installed,
-            VERSION,
-            &latest,
-            &latest_utf,
-            &update_state
+            &installed, VERSION, &latest, &latest_utf, &update_state
         );
     }
 }
 
 fn open_update() {
-
     match open::that(SHAREXIN) {
         Ok(ok) => ok,
         Err(_) => {

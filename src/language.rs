@@ -1,7 +1,7 @@
+use error;
+use notification;
 use std::env;
 use Destination;
-use notification;
-use error;
 
 #[derive(Debug, Clone, Copy)]
 pub struct Language {
@@ -19,7 +19,6 @@ impl Language {
 }
 
 pub fn locale() -> String {
-
     match env::var("LANG") {
         Ok(ok) => ok,
         Err(_) => {
@@ -28,11 +27,9 @@ pub fn locale() -> String {
             String::from("en_US.utf8")
         }
     }
-
 }
 
 pub fn loader<'a>() -> &'a str {
-
     let lang = locale();
 
     if lang.contains("fr") {

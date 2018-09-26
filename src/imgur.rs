@@ -1,15 +1,14 @@
-use clipboard::{ClipboardProvider, ClipboardContext};
+use clipboard::{ClipboardContext, ClipboardProvider};
+use error;
+use image;
 use notification;
-use Destination;
+use open;
 use std::fs::File;
 use std::io::Read;
-use image;
+use Destination;
 use Imgur;
-use open;
-use error;
 
 pub fn send() {
-
     let tmp = image::temp_dir(0);
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
@@ -35,16 +34,14 @@ pub fn send() {
     let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
 
     match handle.upload(&image) {
-        Ok(info) => {
-            match info.link() {
-                Some(link) => copy_link.push_str(link),
-                None => {
-                    eprintln!("{}", error::message(20));
-                    notification::error(20);
-                    error::fatal()
-                }
+        Ok(info) => match info.link() {
+            Some(link) => copy_link.push_str(link),
+            None => {
+                eprintln!("{}", error::message(20));
+                notification::error(20);
+                error::fatal()
             }
-        }
+        },
         Err(_) => {
             eprintln!("{}", error::message(17));
             notification::error(17);

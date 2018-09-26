@@ -1,3 +1,26 @@
+#### [0.6.4] - 2018-03-30
+- Wow this project keeps going
+- Added Portuguese translation
+
+#### [0.6.3] - 2017-10-19
+- Added support for Ubuntu 17.10 Gnome Desktop (congrats on upgrading to the future)
+
+#### [0.6.2] - 2017-09-01
+- System tray support (not for Mac)
+- New slogan, guaranteed to work on Linux, FreeBSD, and macOS only
+- Makefile and PKGBUILD
+- Better command line parsing with clap-rs
+- ShareXin library? I guess?
+
+#### [0.6.1] - 2017-08-26
+- XDG Directory for Pictures folder (switched my system to French, directories changed)
+
+#### [0.6.0] - 2017-08-25
+- macOS tested, Imgur works, `t` and `toot` should work if you have them
+- Updated "upgrade" and error messages
+- Figured out libcurl issue on some older systems
+- Bug fixes
+
 #### [0.5.9] - 2017-08-20
 - ImageMagick integrated
 - `killall vim` finally removed (kinda)!

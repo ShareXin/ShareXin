@@ -1,34 +1,24 @@
 [package]
 name = "sharexin"
-version = "0.6.4"
+version = "0.6.5"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
-description = "ShareX for Linux, FreeBSD, and macOS"
+description = "ShareX for Linux and FreeBSD"
 homepage = "https://sharexin.github.io"
 repository = "https://github.com/ShareXin/ShareXin"
-keywords = ["twitter", "sharex", "mastodon", "imgur", "gtk", "gui", "linux", "bsd", "mac"]
+keywords = ["twitter", "sharex", "mastodon", "imgur", "gtk", "gui", "linux", "bsd"]
 license = "MIT"
 include = ["src/lang/*", "Cargo.toml", "src/*"]
 readme = "README.md"
 
-[[bin]]
-name = "sharexin"
-path = "src/main.rs"
-
 [dependencies]
-gtk = "0.2.0"
-glib = "0.3.0"
-gdk = "0.6.0"
-time = "0.1.38"
-open = "1.2.0"
-curl = "0.4.8"
+gtk = { version = "0.5.0", features = ["v3_22_30"] }
+gdk = { version = "0.9.0", features = ["v3_22_30"] }
+glib = "0.6.0"
+time = "0.1.40"
+open = "1.2.2"
+curl = "0.4.17"
 imgur = "0.7.0"
 notify-rust = "3.4.2"
-yaml-rust = "0.3.5"
-clipboard = "0.4.0"
+yaml-rust = "0.4.2"
+clipboard = "0.5.0"
 clap = "2.26.0"
-
-[target.'cfg(not(target_os = "macos"))'.dependencies]
-systray = { git = "https://github.com/thebitstick/systray-rs.git" } 
-
-[features]
-default = ["gtk/v3_10"]

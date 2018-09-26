@@ -1,59 +1,11 @@
-use std::process::Command;
-use std::{fs, process};
-use notification;
 use error;
 use image::temp_dir;
-
-pub fn mac(args: usize, temp: &str) {
-
-    if args == 0 {
-
-        // _image uses screencapture to take area
-        let _image = match Command::new("screencapture")
-            .args(&["-s", temp.clone()])
-            .status() {
-            Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("{}", error::message(8));
-                notification::error(8);
-                error::fatal()
-            }
-        };
-
-    } else if args == 1 {
-
-        // _image uses screencapture to get screenshot of current window
-        let _image = match Command::new("screencapture")
-            .args(&["-w", temp.clone()])
-            .status() {
-            Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("{}", error::message(8));
-                notification::error(8);
-                error::fatal()
-            }
-        };
-
-    } else if args == 2 {
-
-        // _image uses screencapture to take screenshot
-        let _image = match Command::new("screencapture")
-            .args(&["-S", temp.clone()])
-            .status() {
-            Ok(ok) => ok,
-            Err(_) => {
-                eprintln!("{}", error::message(8));
-                notification::error(8);
-                error::fatal()
-            }
-        };
-    }
-}
+use notification;
+use std::process::Command;
+use std::{fs, process};
 
 pub fn sway(args: usize, temp: &str) {
-
     if args == 0 {
-
         // makes filename for temporary temporary file
         let _tmp = temp_dir(1);
         let tmp = _tmp.to_str().unwrap().clone();
@@ -92,7 +44,8 @@ pub fn sway(args: usize, temp: &str) {
         let slop = String::from_utf8_lossy(&_slop.stdout);
         let _image = match Command::new("convert")
             .args(&[temp.clone(), "-crop", &slop, temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(15));
@@ -119,13 +72,12 @@ pub fn sway(args: usize, temp: &str) {
         if _image.code() == Some(1) {
             process::exit(1);
         }
-
     } else if args == 1 {
-
         // _image uses swaygrab to get "focused" window and take screenshot
         let _image = match Command::new("swaygrab")
             .args(&["-f", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(9));
@@ -138,7 +90,6 @@ pub fn sway(args: usize, temp: &str) {
             process::exit(1);
         }
     } else if args == 2 {
-
         // _image uses swaygrab to take screenshot
         let _image = match Command::new("swaygrab").arg(temp.clone()).status() {
             Ok(ok) => ok,
@@ -156,9 +107,7 @@ pub fn sway(args: usize, temp: &str) {
 }
 
 pub fn gnome(args: usize, temp: &str) {
-
     if args == 0 {
-
         // makes filename for temporary temporary file
         let _tmp = temp_dir(1);
         let tmp = _tmp.to_str().unwrap().clone();
@@ -166,7 +115,8 @@ pub fn gnome(args: usize, temp: &str) {
         // _before_image takes a full screenshot using gnome0creenshot
         match Command::new("gnome-screenshot")
             .args(&["-f", &tmp])
-            .output() {
+            .output()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -188,7 +138,8 @@ pub fn gnome(args: usize, temp: &str) {
         // _image lets you select
         let _image = match Command::new("gnome-screenshot")
             .args(&["-a", "-f", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -211,13 +162,12 @@ pub fn gnome(args: usize, temp: &str) {
             Ok(ok) => ok,
             Err(_) => return,
         };
-
     } else if args == 1 {
-
         // _image uses gnome-screenshot to get current window and take screenshot
         let _image = match Command::new("gnome-screenshot")
             .args(&["-w", "-e", "shadow", "-f", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -226,11 +176,11 @@ pub fn gnome(args: usize, temp: &str) {
             }
         };
     } else if args == 2 {
-
         // _image uses gnome-screenshot to take screenshot
         let _image = match Command::new("gnome-screenshot")
             .args(&["-f", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(7));
@@ -242,13 +192,12 @@ pub fn gnome(args: usize, temp: &str) {
 }
 
 pub fn kde(args: usize, temp: &str) {
-
     if args == 0 {
-
         // _image pauses screen and lets you select
         let _image = match Command::new("spectacle")
             .args(&["-rbno", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
@@ -256,13 +205,12 @@ pub fn kde(args: usize, temp: &str) {
                 error::fatal()
             }
         };
-
     } else if args == 1 {
-
         // _image uses spectacle to get current window and take screenshot
         let _image = match Command::new("spectacle")
             .args(&["-abno", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
@@ -270,13 +218,12 @@ pub fn kde(args: usize, temp: &str) {
                 error::fatal()
             }
         };
-
     } else if args == 2 {
-
         // _image uses spectacle to take screenshot
         let _image = match Command::new("spectacle")
             .args(&["-fbno", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(8));
@@ -288,9 +235,7 @@ pub fn kde(args: usize, temp: &str) {
 }
 
 pub fn scrot(args: usize, temp: &str) {
-
     if args == 0 {
-
         // makes filename for temporary temporary file
         let _tmp = temp_dir(1);
         let tmp = _tmp.to_str().unwrap().clone();
@@ -318,7 +263,8 @@ pub fn scrot(args: usize, temp: &str) {
         // _image lets you select
         let _image = match Command::new("scrot")
             .args(&["--select", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
@@ -345,13 +291,12 @@ pub fn scrot(args: usize, temp: &str) {
         if _image.code() == Some(2) {
             process::exit(1);
         }
-
     } else if args == 1 {
-
         // _image uses scrot to take window screenshot
         let _image = match Command::new("scrot")
             .args(&["--border", "--focused", temp.clone()])
-            .status() {
+            .status()
+        {
             Ok(ok) => ok,
             Err(_) => {
                 eprintln!("{}", error::message(10));
@@ -359,9 +304,7 @@ pub fn scrot(args: usize, temp: &str) {
                 error::fatal()
             }
         };
-
     } else if args == 2 {
-
         // _image uses scrot to take screenshot
         let _image = match Command::new("scrot").arg(temp.clone()).status() {
             Ok(ok) => ok,

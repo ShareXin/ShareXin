@@ -6,56 +6,51 @@
 ![ShareXin](https://raw.githubusercontent.com/thebitstick/ShareXin/master/dialog.png)  
 
 ## Requirements
-* Unix-like system
-* scrot (on non-Gnome/KDE x11 desktops)
+* Linux or FreeBSD
+* rustc 1.28.0^
+* scrot (on non-GNOME/Plasma X11 desktops)
 * feh
 * [t](https://github.com/thebitstick/t)
 * [toot](https://github.com/ihabunek/toot)
 
 ## Features
-* Uploads to Twitter and Mastodon and Imgur
-* Takes screenshots and saves them to your pictures directory
+* Takes screenshots
+* Uploads to Twitter, Mastodon, and Imgur
+* Saves screenshots to your Pictures
 * Notifications
-* GTK GUI for Tweet/Toot dialog
-* Screenshotting works with X11 and Wayland
-* System tray icon for use without shortcuts
+* GTK Dialog for entering a message with a tweet or toot
+* Designed with Wayland in mind
 
 ### Desktop support
-- macOS desktop
 - Unity desktop
-- Gnome desktop
+- GNOME desktop
 - Budgie desktop
 - Cinnamon desktop
-- Plasma desktop
+- KDE Plasma desktop
 - Sway desktop
-- General X11 desktop with scrot
+- X11 DE
 
 ### Tested on
-- Ubuntu 17.04
-- Ubuntu 17.10
+- Ubuntu 18.04
 - Debian Stable
-- Fedora 26
+- Fedora 28
 - Arch Linux
 - FreeBSD with Xfce
 - TrueOS
-- openSUSE Leap 42.3
-- openSUSE Tumbleweed
-- macOS Sierra
 - GhostBSD
 
 ## `--help`
 
 ```shell
-sharexin 0.6.4
+sharexin 0.6.5
 TheBitStick <thebitstick@tfwno.gf>
-ShareX for Linux, FreeBSD, and macOS
+ShareX for Linux and FreeBSD
 
 USAGE:
     sharexin [FLAGS] [SUBCOMMAND]
 
 FLAGS:
     -h, --help       Display this help message and exit
-    -t, --tray       Use system tray icon
     -U, --upgrade    Check for new updates
     -v, --version    Print version info and exit
 
@@ -66,7 +61,7 @@ SUBCOMMANDS:
 
 ```  
 
-### Now accepting language template files in this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)  
+### Submit more languages using this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)
 ## Language support
 * English
 * Français (French) by [@Eleoryth](https://twitter.com/Eleoryth)
@@ -83,32 +78,26 @@ SUBCOMMANDS:
 ## Compiling
 
 ### Dependencies for compiling
-* xorg-dev (on BSDs and Linux)
+* xorg-dev
 * gtk3
 * cairo
-* libdbus (on BSDs and Linux)
+* libdbus
 * pango
 * gdk-pixbuf2
-* atk (on BSDs and Linux)
-* openssl (on BSDs and Linux)
-* libcurl4 (on BSDs and Linux)
+* atk
+* openssl
+* libcurl4
 * cc
-* libappindicator (on BSDs and Linux)
-* libindicator (on BSDs and Linux)
-* libdbusmenu (on BSDs and Linux)
 * clang
 
-#### Ubuntu 17.04 dependencies  
+#### Ubuntu 18.04 dependencies
 * libgtk-3-dev
 * libcairo2-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
 * libatk1.0-dev
-* libssl1.0-dev
 * libssl-dev
 * libcurl4-openssl-dev
-* build-essential
-* libappindicator3-dev
 * libclang-dev
 * clang
 
@@ -120,7 +109,6 @@ SUBCOMMANDS:
 * libatk1.0-dev
 * libssl-dev
 * libcurl4-openssl-dev
-* libappindicator3-dev
 * libclang-dev
 * clang
 
@@ -135,9 +123,8 @@ SUBCOMMANDS:
 * xcb-util
 * base-devel
 * clang
-* libappindicator-gtk3
 
-#### Fedora 26 dependencies
+#### Fedora 28 dependencies
 * gtk3-devel
 * cairo-devel
 * pango-devel
@@ -145,57 +132,7 @@ SUBCOMMANDS:
 * atk-devel
 * openssl-devel
 * libcurl-devel
-* libcurl
-* libappindicator-devel
-* libappindicator-gtk3-devel
-* libindicator-devel
-* libindicator-gtk3-devel
-* libdbusmenu-gtk3-devel
-* libdbusmenu-devel
 * clang-devel
-* clang
-
-#### openSUSE Leap 42.3 dependencies
-* gtk3-devel
-* cairo-devel
-* pango-devel
-* gdk-pixbuf-devel
-* atk-devel
-* libopenssl-devel
-* libcurl-devel
-* libcurl4
-* make
-* gcc
-* libappindicator-devel
-* libappindicator3-devel
-* libindicator-devel
-* libindicator3-devel
-* libdbusmenu-glib-devel
-* libdbusmenu-gtk3-devel
-* llvm-clang
-* libclang
-
-#### openSUSE Tumbleweed dependencies
-* gtk3-devel
-* cairo-devel
-* pango-devel
-* gdk-pixbuf-devel
-* atk-devel
-* libopenssl-devel
-* libcurl-devel
-* libcurl4
-* make
-* gcc
-* libappindicator-devel
-* libappindicator3-devel
-* libindicator-devel
-* libindicator3-devel
-* libdbusmenu-glib-devel
-* libdbusmenu-gtk3-devel
-* clang
-* clang-devel
-* libclang4
-* libclang3_8
 
 #### FreeBSD 11 dependencies
 * openssl-devel
@@ -204,45 +141,31 @@ SUBCOMMANDS:
 * dbus-1 [(don't know where to get it, won't compile right now)](https://forums.freebsd.org/threads/6191/)
 * other deps
 
-#### macOS Sierra dependencies
-* gtk+3 (via Homebrew or via source with [jhbuild](https://wiki.gnome.org/Projects/GTK+/OSX/Building))
-* xcode
-
 ### Compling tested on
-- Ubuntu 17.04
+- Ubuntu 18.04
 - Debian Stable
-- Fedora 26
-- Arch Linux with i3
-- FreeBSD with Xfce
+- Fedora 28
+- Arch Linux
+- FreeBSD
 - TrueOS
-- openSUSE Leap 42.3
-- openSUSE Tumbleweed
-- macOS Sierra
+- GhostBSD
 
 ### Compiling
 1. `git clone https://github.com/ShareXin/ShareXin/`  
-2. `cargo install`   
+2. `cargo install`
 
 ## Changelog
-#### [0.6.4] - 2018-03-30
-- Wow this project keeps going
-- Added Portuguese translation
-
-#### [0.6.3] - 2017-10-19
-- Added support for Ubuntu 17.10 Gnome Desktop (congrats on upgrading to the future)
-
-#### [0.6.2] - 2017-09-01
-- System tray support (not for Mac)
-- New slogan, guaranteed to work on Linux, FreeBSD, and macOS only
-- Makefile and PKGBUILD
-- Better command line parsing with clap-rs
-- ShareXin library? I guess?
-
-#### [0.6.1] - 2017-08-26
-- XDG Directory for Pictures folder (switched my system to French, directories changed)
-
-#### [0.6.0] - 2017-08-25
-- macOS tested, Imgur works, `t` and `toot` should work if you have them
-- Updated "upgrade" and error messages
-- Figured out libcurl issue on some older systems
-- Bug fixes
+#### [0.6.5] - 2018-09-26
+- Work will continue on the project!
+- Updated GNOME deps to 3_22_30 from 3_10
+- Removed macOS support (how many people even used it?)
+- Removed tray icon support (unneeded and unusable, GNOME doesn't even support it anymore)
+- Updated various dependencies
+- Removed ShareXin as a library
+- Readded ShareXin to crates.io
+- Added Subfolder under ShareXin in Pictures for sorting by years-month
+- Rewrote method of determining screenshot selection software
+  - Used to rely on hard-coded desktop variables to match with specific software
+  - Now simply checks which software is installed, in a prefered order
+- **t** and **toot** are still required for use with Twitter and Mastodon, but this WILL be addressed in 0.6.6
+  - Native rust Twitter and Mastodon APIs will be added, with hopefully the same functionality.

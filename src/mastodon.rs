@@ -1,11 +1,10 @@
-use std::process::Command;
-use notification;
-use Destination;
 use error;
 use image;
+use notification;
+use std::process::Command;
+use Destination;
 
 pub fn image(txt: String) {
-
     let mastodon = Destination::new(0);
 
     let tmp = image::temp_dir(0);
@@ -13,7 +12,8 @@ pub fn image(txt: String) {
 
     let _toot = match Command::new("toot")
         .args(&["post", "-m", &temp, &txt])
-        .status() {
+        .status()
+    {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(6));
@@ -30,7 +30,6 @@ pub fn image(txt: String) {
 }
 
 pub fn toot(txt: String) {
-
     let mastodon = Destination::new(0);
 
     let _toot = match Command::new("toot").args(&["post", &txt]).status() {
@@ -50,7 +49,6 @@ pub fn toot(txt: String) {
 }
 
 pub fn auth() {
-
     match Command::new("toot").arg("login_browser").status() {
         Ok(ok) => ok,
         Err(_) => {
@@ -58,5 +56,4 @@ pub fn auth() {
             error::fatal()
         }
     };
-
 }

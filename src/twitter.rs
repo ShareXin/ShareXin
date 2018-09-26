@@ -1,11 +1,10 @@
-use std::process::Command;
-use notification;
-use Destination;
 use error;
 use image;
+use notification;
+use std::process::Command;
+use Destination;
 
 pub fn image(txt: String) {
-
     let twitter = Destination::new(1);
 
     let tmp = image::temp_dir(0);
@@ -13,7 +12,8 @@ pub fn image(txt: String) {
 
     let _t = match Command::new("t")
         .args(&["update", &txt, "-f", &temp])
-        .status() {
+        .status()
+    {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(5));
@@ -31,7 +31,6 @@ pub fn image(txt: String) {
 }
 
 pub fn tweet(txt: String) {
-
     let twitter = Destination::new(1);
 
     let _t = match Command::new("t").args(&["update", &txt]).status() {
@@ -53,7 +52,6 @@ pub fn tweet(txt: String) {
 }
 
 pub fn auth() {
-
     match Command::new("t").arg("authorize").status() {
         Ok(ok) => ok,
         Err(_) => {
@@ -61,5 +59,4 @@ pub fn auth() {
             error::fatal()
         }
     };
-
 }

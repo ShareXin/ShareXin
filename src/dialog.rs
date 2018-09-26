@@ -1,26 +1,24 @@
-use std::rc::Rc;
-use std::cell::RefCell;
-use gdk::enums::key;
-use gtk::*;
-use std::{fs, thread};
-use gtk;
-use gdk;
-use glib;
-use open;
-use notification;
-use twitter;
-use mastodon;
-use Destination;
 use error;
+use gdk;
+use gdk::enums::key;
+use glib;
+use gtk;
+use gtk::*;
 use image;
+use mastodon;
+use notification;
+use open;
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::{fs, thread};
+use twitter;
+use Destination;
 
 pub fn dialog(service: Destination, image_bool: bool) {
-
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => eprintln!("{}", error::message(24)),
     };
-
 
     // objects from glade file
     let builder = gtk::Builder::new_from_string(include_str!("sharexin.glade"));
@@ -124,7 +122,6 @@ pub fn dialog(service: Destination, image_bool: bool) {
                 if message.len() <= 500 {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-
                             // image_bool is true for yes image, false for no image
                             if image_bool {
                                 mastodon::image(message.clone());
@@ -148,7 +145,6 @@ pub fn dialog(service: Destination, image_bool: bool) {
                 if message.len() <= 140 && !image_bool {
                     thread::spawn(move || {
                         glib::idle_add(move || {
-
                             // if its not empty, send
                             if !message.is_empty() {
                                 twitter::tweet(message.clone());
@@ -209,7 +205,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                     count.borrow().set_markup(&limit);
                 } else {
                     count.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::CONTROL_MASK) {
+                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
                             _ => (),
@@ -223,7 +219,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                     count.borrow().set_markup(&limit);
                 } else {
                     count.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::CONTROL_MASK) {
+                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
                             _ => (),
@@ -236,7 +232,6 @@ pub fn dialog(service: Destination, image_bool: bool) {
     }
 
     {
-
         // same as connect_key_press but when any key is released
         let send = wrap_send.clone();
         let window = wrap_window.clone();
@@ -268,7 +263,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                     count.borrow().set_markup(&limit);
                 } else {
                     count.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::CONTROL_MASK) {
+                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
                             _ => (),
@@ -282,7 +277,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                     count.borrow().set_markup(&limit);
                 } else {
                     count.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::CONTROL_MASK) {
+                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
                         match key.get_keyval() {
                             key::Return => send.borrow().clicked(),
                             _ => (),

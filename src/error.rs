@@ -1,18 +1,15 @@
 use language;
+use std::time::Duration;
 use std::{process, thread};
 use yaml_rust::{Yaml, YamlLoader};
-use std::time::Duration;
 
 fn error_loader<'a>(code: &'a str, locator: &Yaml) -> String {
-
     let error: &str = &code.to_string();
     let message = &locator[error].as_str().expect("Error not found");
     return format!("{}", message);
-
 }
 
 pub fn fatal() -> ! {
-
     let file = language::loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Error"];
@@ -23,7 +20,6 @@ pub fn fatal() -> ! {
 }
 
 pub fn message(code: usize) -> String {
-
     let file = language::loader();
     let locators = YamlLoader::load_from_str(file).unwrap();
     let locator = &locators[0]["Error"];
