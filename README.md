@@ -1,6 +1,7 @@
 # ShareXin  
 
 [![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
+[![Crates.io](https://img.shields.io/crates/v/sharexin.svg)](https://crates.io/crates/sharexin)
 
 ## Screenshots
 ![ShareXin](https://raw.githubusercontent.com/thebitstick/ShareXin/master/dialog.png)  
@@ -32,12 +33,12 @@
 
 ### Tested on
 - Ubuntu 18.04
-- Debian Stable
-- Fedora 28
-- Arch Linux
-- FreeBSD with Xfce
-- TrueOS
-- GhostBSD
+> - Debian Stable
+> - Fedora 28
+> - Arch Linux
+> - FreeBSD with Xfce
+> - TrueOS
+> - GhostBSD
 
 ## `--help`
 
@@ -140,15 +141,6 @@ SUBCOMMANDS:
 * gcc
 * dbus-1 [(don't know where to get it, won't compile right now)](https://forums.freebsd.org/threads/6191/)
 * other deps
-
-### Compling tested on
-- Ubuntu 18.04
-- Debian Stable
-- Fedora 28
-- Arch Linux
-- FreeBSD
-- TrueOS
-- GhostBSD
 
 ### Compiling
 1. `git clone https://github.com/ShareXin/ShareXin/`  
