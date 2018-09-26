@@ -1,13 +1,12 @@
 # Maintainer: TheBitStick <thebitstick@tfwno.gf>
 # Contributor: Rhys Kenwell <redrield+aur@gmail.com>
 
-pkgname=sharexin-git
-_pkgname=sharexin
+pkgname=sharexin
 pkgver=r260.ec52dd5
 pkgrel=1
-pkgdesc="ShareX for Unix-like systems"
+pkgdesc="ShareX for Linux and FreeBSD"
 url="https://github.com/ShareXin/ShareXin"
-makedepends=('rust' 'curl' 'gtk3' 'gdk-pixbuf2' 'cairo' 'glib2' 'openssl' 'dbus' 'xcb-util' 'libappindicator-gtk3')
+makedepends=('rust' 'curl' 'gtk3' 'gdk-pixbuf2' 'cairo' 'glib2' 'openssl' 'dbus' 'xcb-util')
 depends=('feh' 'imagemagick')
 arch=('x86_64')
 license=('MIT')
@@ -15,16 +14,16 @@ sha256sums=('SKIP')
 source=("sharexin::git+https://github.com/ShareXin/ShareXin#branch=master")
 
 pkgver() {
-    cd "$_pkgname"
+    cd "$pkgname"
     printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {
-    cd "$_pkgname"
+    cd "$pkgname"
     cargo build --release
 }
 
 package() {
-    cd "$_pkgname"
-    install -Dm755 "target/release/$_pkgname" "$pkgdir/usr/bin/sharexin"
+    cd "$pkgname"
+    install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/sharexin"
 }

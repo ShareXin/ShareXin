@@ -147,6 +147,11 @@ SUBCOMMANDS:
 2. `cargo install`
 
 ## Changelog
+#### [0.6.6] - 2018-09-27
+- Two versions in one day why
+- More testing done
+- Twitter and Mastodon are now using native APIs
+
 #### [0.6.5] - 2018-09-26
 - Work will continue on the project!
 - Updated GNOME deps to 3_22_30 from 3_10
