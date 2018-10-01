@@ -1,11 +1,13 @@
 use error;
 use image;
 use notification;
-use std::process::Command;
 use Destination;
 
+use egg_mode;
+use std::io;
+
 pub fn image(txt: String) {
-    let twitter = Destination::new(1);
+    /*let twitter = Destination::new(1);
 
     let tmp = image::temp_dir(0);
     let temp = tmp.to_str().unwrap().clone();
@@ -27,13 +29,13 @@ pub fn image(txt: String) {
         notification::not_sent(twitter);
         error::fatal();
     }
-    notification::image_sent(twitter, &txt, temp);
+    notification::image_sent(twitter, &txt, temp);*/
 }
 
 pub fn tweet(txt: String) {
-    let twitter = Destination::new(1);
+    /*let twitter = Destination::new(1);
 
-    let _t = match Command::new("t").args(&["update", &txt]).status() {
+    // twitter status update {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(5));
@@ -42,21 +44,18 @@ pub fn tweet(txt: String) {
         }
     };
 
-    if _t.code() == Some(1) {
+    // error {
         eprintln!("{}", error::message(22));
         notification::not_sent(twitter);
         error::fatal();
     }
 
-    notification::message_sent(twitter, &txt);
+    notification::message_sent(twitter, &txt);*/
 }
 
 pub fn auth() {
-    match Command::new("t").arg("authorize").status() {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(5));
-            error::fatal()
-        }
-    };
+    let con_token = egg_mode::KeyPair::new(
+        "GiuJw1blnaSCfolC6BaKU4DHf",
+        "jEmcoCSK0rQNmwtxFNDcK58748NzR3iJfEumSdijXuELpPAXCP",
+    );
 }

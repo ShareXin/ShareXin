@@ -1,16 +1,19 @@
-extern crate curl;
-extern crate gdk;
-extern crate glib;
-extern crate gtk;
-extern crate notify_rust;
-extern crate open;
-extern crate time;
-
 #[macro_use]
 extern crate clap;
 extern crate clipboard;
+extern crate curl;
+extern crate egg_mode;
+extern crate elefren;
+extern crate gdk;
+extern crate glib;
+extern crate gtk;
 extern crate imgur as Imgur;
+extern crate notify_rust;
+extern crate open;
+extern crate time;
+extern crate tokio_core;
 extern crate yaml_rust;
+
 mod cmd;
 mod dialog;
 mod error;

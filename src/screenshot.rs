@@ -112,7 +112,7 @@ pub fn gnome(args: usize, temp: &str) {
         let _tmp = temp_dir(1);
         let tmp = _tmp.to_str().unwrap().clone();
 
-        // _before_image takes a full screenshot using gnome0creenshot
+        // _before_image takes a full screenshot using gnome-screenshot
         match Command::new("gnome-screenshot")
             .args(&["-f", &tmp])
             .output()

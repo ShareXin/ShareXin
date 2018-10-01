@@ -2,8 +2,7 @@ use error;
 use glib::{get_user_special_dir, UserDirectory};
 use image::temp_dir;
 use notification;
-use std::time::Duration;
-use std::{fs, thread};
+use std::fs;
 use time;
 
 pub fn file(file: String) {
@@ -45,6 +44,12 @@ pub fn save() {
 
     new_file.push_str("/ShareXin/");
     new_file.push_str(&folder_date);
+
+    match fs::create_dir(new_file.clone()) {
+        Ok(ok) => ok,
+        Err(_) => {}
+    };
+
     new_file.push_str("/sharexin-");
 
     // time gets the time in a nice format
@@ -58,8 +63,6 @@ pub fn save() {
     });
     new_file.push_str(&time);
     new_file.push_str(".png");
-
-    thread::sleep(Duration::new(0, 500000000));
 
     match fs::copy(tmp.clone(), new_file) {
         Ok(ok) => ok,

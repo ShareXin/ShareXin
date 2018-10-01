@@ -29,8 +29,8 @@ fn screenshot_tool_selection(args: usize, temp: &str, session: String) {
                 Err(_) => match Command::new("scrot").arg("--version").spawn() {
                     Ok(_) => screenshot::scrot(args, temp),
                     Err(_) => {
-                        eprintln!("{}", error::message(26));
-                        notification::error(26);
+                        eprintln!("{}", error::message(27));
+                        notification::error(27);
                         error::fatal()
                     }
                 },
@@ -43,8 +43,8 @@ fn screenshot_tool_selection(args: usize, temp: &str, session: String) {
                 Err(_) => match Command::new("scrot").arg("--version").spawn() {
                     Ok(_) => screenshot::scrot(args, temp),
                     Err(_) => {
-                        eprintln!("{}", error::message(26));
-                        notification::error(26);
+                        eprintln!("{}", error::message(27));
+                        notification::error(27);
                         error::fatal()
                     }
                 },
@@ -81,8 +81,7 @@ pub fn temp_dir(option: usize) -> PathBuf {
     if option == 0 {
         tmp.push("sharexin.png");
     } else {
-        tmp.push("sharexin-tmp");
-        tmp.set_extension("png");
+        tmp.push("sharexin-area.png");
     }
     return tmp;
 }

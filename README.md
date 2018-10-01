@@ -1,6 +1,8 @@
+## Submit more languages using this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)
+
 # ShareXin  
 
-[![Github Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
+[![GitHub Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
 [![Crates.io](https://img.shields.io/crates/v/sharexin.svg)](https://crates.io/crates/sharexin)
 
 ## Screenshots
@@ -8,11 +10,14 @@
 
 ## Requirements
 * Linux or FreeBSD
-* rustc 1.28.0^
-* scrot (on non-GNOME/Plasma X11 desktops)
-* feh
-* [t](https://github.com/thebitstick/t)
-* [toot](https://github.com/ihabunek/toot)
+* rustc 1.28.0^ (through rustup)
+* *scrot* (on non-GNOME/Plasma X11 desktops)
+* *feh*
+
+> Hopefully in the future, **[Flameshot](https://github.com/lupoDharkael/flameshot)** will be prefered
+> for screenshots over *gnome-screenshot* or *Spectacle*.
+> It provides Wayland screenshotting with great features and looks nice
+> Once this [issue](https://github.com/lupoDharkael/flameshot/issues/302) has been resolved, it will be added to *image.rs*.
 
 ## Features
 * Takes screenshots
@@ -23,46 +28,22 @@
 * Designed with Wayland in mind
 
 ### Desktop support
-- Unity desktop
 - GNOME desktop
+- KDE Plasma desktop
 - Budgie desktop
 - Cinnamon desktop
-- KDE Plasma desktop
+- Unity desktop
 - Sway desktop
 - X11 DE
 
 ### Tested on
 - Ubuntu 18.04
-> - Debian Stable
-> - Fedora 28
-> - Arch Linux
-> - FreeBSD with Xfce
-> - TrueOS
-> - GhostBSD
+- Fedora 28
+- Arch Linux
+- GhostBSD (FreeBSD distro)
 
 ## `--help`
 
-```shell
-sharexin 0.6.5
-TheBitStick <thebitstick@tfwno.gf>
-ShareX for Linux and FreeBSD
-
-USAGE:
-    sharexin [FLAGS] [SUBCOMMAND]
-
-FLAGS:
-    -h, --help       Display this help message and exit
-    -U, --upgrade    Check for new updates
-    -v, --version    Print version info and exit
-
-SUBCOMMANDS:
-    imgur    Upload to Imgur
-    toot     Upload to Mastodon
-    tweet    Upload to Twitter
-
-```  
-
-### Submit more languages using this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)
 ## Language support
 * English
 * Français (French) by [@Eleoryth](https://twitter.com/Eleoryth)
@@ -102,17 +83,6 @@ SUBCOMMANDS:
 * libclang-dev
 * clang
 
-#### Debian Stable dependencies
-* libgtk-3-dev
-* libcairo2-dev
-* libpango1.0-dev
-* libgdk-pixbuf2.0-dev
-* libatk1.0-dev
-* libssl-dev
-* libcurl4-openssl-dev
-* libclang-dev
-* clang
-
 #### Arch Linux dependencies
 * curl
 * gtk3
@@ -139,18 +109,31 @@ SUBCOMMANDS:
 * openssl-devel
 * gmake
 * gcc
-* dbus-1 [(don't know where to get it, won't compile right now)](https://forums.freebsd.org/threads/6191/)
-* other deps
+* dbus-glib
+* devel/dbus
+* gtk3
+* devel/glib20 (via ports)
+* cairo
+* pango
+* gdk-pixbuf2
+* atk
+* openssl
+* curl
 
 ### Compiling
 1. `git clone https://github.com/ShareXin/ShareXin/`  
 2. `cargo install`
 
 ## Changelog
-#### [0.6.6] - 2018-09-27
-- Two versions in one day why
+#### [0.6.6] - 2018-10-31
 - More testing done
 - Twitter and Mastodon are now using native APIs
+- Removed some strange and unneccesary lines
+- Removed lots of duplicate code
+- Revamped error codes
+- Replaced many if else statements with match statements
+- AppImage script provided
+- General bug fixes
 
 #### [0.6.5] - 2018-09-26
 - Work will continue on the project!
