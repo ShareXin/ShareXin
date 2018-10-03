@@ -6,7 +6,7 @@ use std::fs;
 use time;
 
 pub fn file(file: String) {
-    let tmp = temp_dir(0);
+    let tmp = temp_dir();
 
     match fs::copy(file, tmp.clone()) {
         Ok(ok) => ok,
@@ -18,7 +18,7 @@ pub fn file(file: String) {
 }
 
 pub fn save() {
-    let tmp = temp_dir(0);
+    let tmp = temp_dir();
     let temp = tmp.to_str().unwrap().clone();
 
     let xdg_pictures = get_user_special_dir(UserDirectory::Pictures).unwrap();

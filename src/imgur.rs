@@ -9,7 +9,7 @@ use Destination;
 use Imgur;
 
 pub fn send() {
-    let tmp = image::temp_dir(0);
+    let tmp = image::temp_dir();
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {

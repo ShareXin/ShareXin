@@ -5,9 +5,6 @@
 [![GitHub Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
 [![Crates.io](https://img.shields.io/crates/v/sharexin.svg)](https://crates.io/crates/sharexin)
 
-## Screenshots
-![ShareXin](https://raw.githubusercontent.com/thebitstick/ShareXin/master/dialog.png)  
-
 ## Requirements
 * Linux or FreeBSD
 * rustc 1.28.0^ (through rustup)
@@ -17,7 +14,7 @@
 > Hopefully in the future, **[Flameshot](https://github.com/lupoDharkael/flameshot)** will be prefered
 > for screenshots over *gnome-screenshot* or *Spectacle*.
 > It provides Wayland screenshotting with great features and looks nice
-> Once this [issue](https://github.com/lupoDharkael/flameshot/issues/302) has been resolved, it will be added to *image.rs*.
+> Once this [issue](https://github.com/lupoDharkael/flameshot/issues/302) has been resolved, it will be added to [screenshot-rs](https://github.com/ShareXin/screenshot-rs).
 
 ## Features
 * Takes screenshots
@@ -33,7 +30,6 @@
 - Budgie desktop
 - Cinnamon desktop
 - Unity desktop
-- Sway desktop
 - X11 DE
 
 ### Tested on
@@ -134,6 +130,10 @@
 - Replaced many if else statements with match statements
 - AppImage script provided
 - General bug fixes
+- Split screenshotting functionality off to [screenshot-rs](https://github.com/ShareXin/screenshot-rs)
+- Removed swaywm support (even back when I used it, my implementation was trash, if any this is a service to sway users)
+- Removed RefCell in *dialog.rs*
+- Updated Twitter character limit (not full proof for non-Latin characters)
 
 #### [0.6.5] - 2018-09-26
 - Work will continue on the project!

@@ -7,7 +7,7 @@ use Destination;
 pub fn image(txt: String) {
     let mastodon = Destination::new(0);
 
-    let tmp = image::temp_dir(0);
+    let tmp = image::temp_dir();
     let temp = tmp.to_str().unwrap().clone();
 
     let _toot = match Command::new("toot")

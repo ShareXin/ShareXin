@@ -112,8 +112,7 @@ pub fn cmd() {
                 .long("upgrade")
                 .help(upgrade)
                 .takes_value(false),
-        )
-        .subcommand(
+        ).subcommand(
             SubCommand::with_name("toot")
                 .about(mastodon.to_owned())
                 .arg(
@@ -123,13 +122,11 @@ pub fn cmd() {
                         .long("file")
                         .help(file)
                         .takes_value(true),
-                )
-                .subcommand(SubCommand::with_name("auth").about(mastodon_auth.to_owned()))
+                ).subcommand(SubCommand::with_name("auth").about(mastodon_auth.to_owned()))
                 .subcommand(SubCommand::with_name("area").about(area.to_owned()))
                 .subcommand(SubCommand::with_name("window").about(window.to_owned()))
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
-        )
-        .subcommand(
+        ).subcommand(
             SubCommand::with_name("tweet")
                 .about(twitter.to_owned())
                 .arg(
@@ -139,13 +136,11 @@ pub fn cmd() {
                         .long("file")
                         .help(file)
                         .takes_value(true),
-                )
-                .subcommand(SubCommand::with_name("auth").about(twitter_auth.to_owned()))
+                ).subcommand(SubCommand::with_name("auth").about(twitter_auth.to_owned()))
                 .subcommand(SubCommand::with_name("area").about(area.to_owned()))
                 .subcommand(SubCommand::with_name("window").about(window.to_owned()))
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
-        )
-        .subcommand(
+        ).subcommand(
             SubCommand::with_name("imgur")
                 .about(imgur.to_owned())
                 .arg(
@@ -155,8 +150,7 @@ pub fn cmd() {
                         .long("file")
                         .help(file)
                         .takes_value(true),
-                )
-                .subcommand(SubCommand::with_name("area").about(area.to_owned()))
+                ).subcommand(SubCommand::with_name("area").about(area.to_owned()))
                 .subcommand(SubCommand::with_name("window").about(window.to_owned()))
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
         );

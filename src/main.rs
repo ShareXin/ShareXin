@@ -10,6 +10,7 @@ extern crate gtk;
 extern crate imgur as Imgur;
 extern crate notify_rust;
 extern crate open;
+extern crate screenshot_rs;
 extern crate time;
 extern crate tokio_core;
 extern crate yaml_rust;
@@ -23,7 +24,6 @@ mod language;
 mod mastodon;
 mod notification;
 mod save;
-mod screenshot;
 mod twitter;
 mod upgrade;
 

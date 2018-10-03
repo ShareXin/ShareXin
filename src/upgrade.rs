@@ -36,8 +36,7 @@ pub fn upgrade() {
             };
             check_update(latest_version, current_version, latest_utf);
             Ok(data.len())
-        })
-        .unwrap();
+        }).unwrap();
 
     match transfer.perform() {
         Ok(ok) => ok,
