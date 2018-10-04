@@ -13,15 +13,16 @@ readme = "README.md"
 [dependencies]
 gtk = { version = "0.5.0", features = ["v3_22_30"] }
 gdk = { version = "0.9.0", features = ["v3_22_30"] }
+openssl = {version = "0.10", features = ["vendored"]}
 glib = "0.6.0"
 time = "0.1.40"
 open = "1.2.2"
-curl = "0.4.17"
+curl = "0.4.18"
 imgur = "0.7.0"
 notify-rust = "3.4.2"
 yaml-rust = "0.4.2"
 clipboard = "0.5.0"
-clap = "2.26.0"
+clap = "2.32.0"
 elefren = "0.14"
 egg-mode = "0.12.0"
 tokio-core = "0.1.17"
