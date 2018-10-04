@@ -123,10 +123,8 @@
 ## Changelog
 #### [0.6.6] - 2018-10-31
 - More testing done
-- Twitter and Mastodon are now using native APIs
 - Removed some strange and unneccesary lines
 - Removed lots of duplicate code
-- Revamped error codes
 - Replaced many if else statements with match statements
 - AppImage script provided
 - General bug fixes
@@ -134,6 +132,7 @@
 - Removed swaywm support (even back when I used it, my implementation was trash, if any this is a service to sway users)
 - Removed RefCell in *dialog.rs*
 - Updated Twitter character limit (not full proof for non-Latin characters)
+- Heavy rewrite of functions with clearer variables
 
 #### [0.6.5] - 2018-09-26
 - Work will continue on the project!

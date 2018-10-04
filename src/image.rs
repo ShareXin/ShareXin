@@ -5,20 +5,19 @@ use save;
 use screenshot_rs;
 use std::path::PathBuf;
 use std::{env, fs};
+use screenshot_rs::ScreenshotKind;
 
-pub fn image(args: usize) {
+pub fn image(kind: ScreenshotKind) {
     // tmp gets the temporary directory of the system
     let tmp = temp_dir();
 
     // makes a string
     let temp = tmp.to_str().unwrap().to_string();
 
-    if args == 0 {
-        screenshot_rs::screenshot_area(temp);
-    } else if args == 1 {
-        screenshot_rs::screenshot_window(temp);
-    } else {
-        screenshot_rs::screenshot_full(temp);
+    match kind {
+        ScreenshotKind::Area => screenshot_rs::screenshot_area(temp),
+        ScreenshotKind::Window => screenshot_rs::screenshot_window(temp),
+        ScreenshotKind::Full => screenshot_rs::screenshot_full(temp)
     }
 
     if !tmp.is_file() {
@@ -35,7 +34,6 @@ pub fn delete_temp() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(0));
-            notification::error(0);
         }
     }
 }

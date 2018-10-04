@@ -37,7 +37,6 @@ pub fn save() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(25));
-            notification::error(25);
             error::fatal()
         }
     });
@@ -57,7 +56,6 @@ pub fn save() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(25));
-            notification::error(25);
             error::fatal()
         }
     });
@@ -65,8 +63,7 @@ pub fn save() {
     new_file.push_str(".png");
 
     match fs::copy(tmp.clone(), new_file) {
-        Ok(ok) => ok,
-        Err(_) => 0,
+        Ok(ok) => notification::file_saved(temp),
+        Err(_) => return,
     };
-    notification::file_saved(temp);
 }

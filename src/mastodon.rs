@@ -2,50 +2,52 @@ use error;
 use image;
 use notification;
 use std::process::Command;
-use Destination;
+use ServiceKind;
 
-pub fn image(txt: String) {
-    let mastodon = Destination::new(0);
+pub fn image(status: String) {
+    let service = ServiceKind::Mastodon;
 
     let tmp = image::temp_dir();
     let temp = tmp.to_str().unwrap().clone();
 
     let _toot = match Command::new("toot")
-        .args(&["post", "-m", &temp, &txt])
+        .args(&["post", "-m", &temp, &status])
         .status()
     {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(6));
-            notification::not_sent(mastodon);
+            notification::not_sent(service);
             error::fatal()
         }
     };
     if _toot.code() == Some(2) {
         eprintln!("{}", error::message(21));
-        notification::not_sent(mastodon);
+        notification::not_sent(service);
         error::fatal();
+    } else {
+        notification::image_sent(service, &status, temp);
     }
-    notification::image_sent(mastodon, &txt, temp);
 }
 
-pub fn toot(txt: String) {
-    let mastodon = Destination::new(0);
+pub fn toot(status: String) {
+    let service = ServiceKind::Mastodon;
 
-    let _toot = match Command::new("toot").args(&["post", &txt]).status() {
+    let _toot = match Command::new("toot").args(&["post", &status]).status() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(6));
-            notification::not_sent(mastodon);
+            notification::not_sent(service);
             error::fatal()
         }
     };
     if _toot.code() == Some(2) {
         eprintln!("{}", error::message(21));
-        notification::not_sent(mastodon);
+        notification::not_sent(service);
         error::fatal();
+    } else {
+        notification::message_sent(service, &status);
     }
-    notification::message_sent(mastodon, &txt);
 }
 
 pub fn auth() {

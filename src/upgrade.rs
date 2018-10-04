@@ -1,7 +1,6 @@
 use curl::easy::Easy;
 use error;
 use language;
-use notification;
 use open;
 use yaml_rust::YamlLoader;
 use SHAREXIN;
@@ -30,7 +29,6 @@ pub fn upgrade() {
                 Ok(ok) => ok,
                 Err(_) => {
                     eprintln!("{}", error::message(18));
-                    notification::error(18);
                     error::fatal()
                 }
             };
@@ -42,7 +40,6 @@ pub fn upgrade() {
         Ok(ok) => ok,
         Err(e) => {
             eprintln!("{}, {:?}", error::message(16), e);
-            notification::error(16);
             error::fatal()
         }
     };
@@ -89,7 +86,6 @@ fn open_update() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(19));
-            notification::error(19);
             return;
         }
     };

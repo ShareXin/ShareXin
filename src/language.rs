@@ -1,30 +1,13 @@
-use error;
-use notification;
 use std::env;
-use Destination;
-
-#[derive(Debug, Clone, Copy)]
-pub struct Language {
-    pub service: Destination,
-    pub option: usize,
-}
-
-impl Language {
-    pub fn new(service: Destination, option: usize) -> Language {
-        Language {
-            service: service,
-            option: option,
-        }
-    }
-}
 
 pub fn locale() -> String {
-    match env::var("LANG") {
+    match env::var("LC_CTYPE") {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(2));
-            notification::error(2);
-            String::from("en_US.utf8")
+            match env::var("LANG") {
+                Ok(ok) => ok,
+                Err(_) => String::new()
+            }
         }
     }
 }

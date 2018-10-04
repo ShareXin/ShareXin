@@ -7,77 +7,10 @@ use save;
 use twitter;
 use upgrade;
 use yaml_rust::YamlLoader;
-use Destination;
-
+use ServiceKind;
+use MessageKind;
+use screenshot_rs::ScreenshotKind;
 use clap::{App, AppSettings, Arg, SubCommand};
-
-pub fn tweet() {
-    dialog::dialog(Destination::new(1), false);
-}
-
-pub fn toot() {
-    dialog::dialog(Destination::new(0), false);
-}
-
-pub fn tweet_full() {
-    image::image(2);
-    dialog::dialog(Destination::new(1), true);
-}
-
-pub fn tweet_window() {
-    image::image(1);
-    dialog::dialog(Destination::new(1), true);
-}
-
-pub fn tweet_area() {
-    image::image(0);
-    dialog::dialog(Destination::new(1), true);
-}
-
-pub fn toot_full() {
-    image::image(2);
-    dialog::dialog(Destination::new(0), true);
-}
-
-pub fn toot_window() {
-    image::image(1);
-    dialog::dialog(Destination::new(0), true);
-}
-
-pub fn toot_area() {
-    image::image(0);
-    dialog::dialog(Destination::new(0), true);
-}
-
-pub fn imgur_full() {
-    image::image(2);
-    imgur::send();
-}
-
-pub fn imgur_window() {
-    image::image(1);
-    imgur::send();
-}
-
-pub fn imgur_area() {
-    image::image(0);
-    imgur::send();
-}
-
-pub fn tweet_file(filed: String) {
-    save::file(filed);
-    dialog::dialog(Destination::new(1), true);
-}
-
-pub fn toot_file(filed: String) {
-    save::file(filed);
-    dialog::dialog(Destination::new(0), true);
-}
-
-pub fn imgur_file(filed: String) {
-    save::file(filed);
-    imgur::send();
-}
 
 pub fn cmd() {
     let file = language::loader();
@@ -207,4 +140,72 @@ pub fn cmd() {
         },
         _ => sharexin.print_help().unwrap(),
     }
+}
+
+pub fn tweet() {
+    dialog::dialog(ServiceKind::Twitter, MessageKind::Text);
+}
+
+pub fn toot() {
+    dialog::dialog(ServiceKind::Mastodon, MessageKind::Text);
+}
+
+pub fn tweet_full() {
+    image::image(ScreenshotKind::Full);
+    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
+}
+
+pub fn tweet_window() {
+    image::image(ScreenshotKind::Window);
+    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
+}
+
+pub fn tweet_area() {
+    image::image(ScreenshotKind::Area);
+    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
+}
+
+pub fn toot_full() {
+    image::image(ScreenshotKind::Full);
+    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
+}
+
+pub fn toot_window() {
+    image::image(ScreenshotKind::Window);
+    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
+}
+
+pub fn toot_area() {
+    image::image(ScreenshotKind::Area);
+    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
+}
+
+pub fn imgur_full() {
+    image::image(ScreenshotKind::Full);
+    imgur::send();
+}
+
+pub fn imgur_window() {
+    image::image(ScreenshotKind::Window);
+    imgur::send();
+}
+
+pub fn imgur_area() {
+    image::image(ScreenshotKind::Area);
+    imgur::send();
+}
+
+pub fn tweet_file(filed: String) {
+    save::file(filed);
+    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
+}
+
+pub fn toot_file(filed: String) {
+    save::file(filed);
+    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
+}
+
+pub fn imgur_file(filed: String) {
+    save::file(filed);
+    imgur::send();
 }

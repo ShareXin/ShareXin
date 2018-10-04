@@ -5,7 +5,7 @@ use notification;
 use open;
 use std::fs::File;
 use std::io::Read;
-use Destination;
+use ServiceKind;
 use Imgur;
 
 pub fn send() {
@@ -48,7 +48,7 @@ pub fn send() {
             error::fatal()
         }
     }
-    notification::image_sent(Destination::new(2), &copy_link, tmp.to_str().unwrap());
+    notification::image_sent(ServiceKind::Imgur, &copy_link, tmp.to_str().unwrap());
     match ctx.set_contents(copy_link.clone()) {
         Ok(ok) => ok,
         Err(_) => eprintln!("{}", error::message(19)),

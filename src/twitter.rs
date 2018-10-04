@@ -1,12 +1,11 @@
 use error;
 use image;
 use notification;
-use Destination;
+use ServiceKind;
 
 use egg_mode;
-use std::io;
 
-pub fn image(txt: String) {
+pub fn image(status: String) {
     /*let twitter = Destination::new(1);
 
     let tmp = image::temp_dir(0);
@@ -32,7 +31,7 @@ pub fn image(txt: String) {
     notification::image_sent(twitter, &txt, temp);*/
 }
 
-pub fn tweet(txt: String) {
+pub fn tweet(status: String) {
     /*let twitter = Destination::new(1);
 
     // twitter status update {

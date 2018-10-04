@@ -10,9 +10,10 @@ use notification;
 use std::borrow::Borrow;
 use std::thread;
 use twitter;
-use Destination;
+use ServiceKind;
+use MessageKind;
 
-pub fn dialog(service: Destination, image_bool: bool) {
+pub fn dialog(service: ServiceKind, message: MessageKind) {
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => eprintln!("{}", error::message(24)),
@@ -32,17 +33,23 @@ pub fn dialog(service: Destination, image_bool: bool) {
     window.set_title("ShareXin");
     window.set_hide_titlebar_when_maximized(false);
     window.set_keep_above(true);
-    if service.mastodon {
-        header.set_subtitle("Mastodon");
-        count.set_label("500");
-    } else if service.twitter && !image_bool {
-        count.set_label("280");
-    } else if service.twitter && image_bool {
-        count.set_label("257");
+
+    match service {
+        ServiceKind::Twitter => {
+            match message {
+                MessageKind::Image => count.set_label("257"),
+                MessageKind::Text => count.set_label("280")
+            };
+        },
+        ServiceKind::Mastodon => {
+            header.set_subtitle("Mastodon");
+            count.set_label("500");
+        },
+        ServiceKind::Imgur => panic!("Not possible")
     }
 
-    // if non-image toot/tweet, doesnt show file button
-    if !image_bool {
+    /*// if non-image toot/tweet, doesnt show file button
+    if message == MessageKind::Image {
         image.destroy();
     }
 
@@ -83,9 +90,42 @@ pub fn dialog(service: Destination, image_bool: bool) {
             &TextBuffer::get_end_iter(&buffer),
             false,
         );
-        let message: String = sent.unwrap();
+        let status: String = sent.unwrap();
         // checks if character count is over limit, then creates thread for sending and closes
-        if service.mastodon {
+        match service {
+            ServiceKind::Twitter => {
+                match message {
+                    MessageKind::Image => {
+                        thread::spawn(move || {
+                            glib::idle_add(move || {
+                                twitter::image(status.clone());
+                                gtk::main_quit();
+                                Continue(false)
+                            });
+                        });
+                    window_bypass.borrow().hide();
+                    },
+                    MessageKind::Text => {
+                        thread::spawn(move || {
+                            glib::idle_add(move || {
+                              // if its not empty, send
+                               if !status.is_empty() {
+                                   twitter::tweet(status.clone());
+                                   gtk::main_quit();
+                                   Continue(false)
+                               }
+                            });
+                        });
+                        window_bypass.borrow().hide();
+                    }
+                }
+            },
+            ServiceKind::Mastodon => {
+            },
+            ServiceKind::Imgur => {
+            }
+        }
+        /*if service.mastodon {
             if message.len() <= 500 {
                 thread::spawn(move || {
                     glib::idle_add(move || {
@@ -136,7 +176,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                 });
                 window_bypass.borrow().hide();
             }
-        }
+        }*/
     });
 
     // control+return sends message
@@ -155,18 +195,18 @@ pub fn dialog(service: Destination, image_bool: bool) {
                 &TextBuffer::get_end_iter(&buffer),
                 false,
             );
-            let message: String = sent.unwrap();
+            let status: String = sent.unwrap();
 
-            let message_len = char_count(service.clone(), message.clone(), image_bool.clone());
+            let status_len = char_count(service.clone(), status.clone(), message.clone());
 
             // uses markdown to set color
             let mut limit = String::from("<span foreground=\"#DA2E37\">");
-            limit.push_str(&message_len.to_string());
+            limit.push_str(&status_len.to_string());
             limit.push_str("</span>");
             let mut hit = String::from("<span foreground=\"#e4e543\">");
-            hit.push_str(&message_len.to_string());
+            hit.push_str(&status_len.to_string());
             hit.push_str("</span>");
-            if service.mastodon {
+            /*if service.mastodon {
                 if message_len == 0 {
                     count_bypass.borrow().set_markup(&hit);
                 } else if message_len < 0 {
@@ -194,7 +234,7 @@ pub fn dialog(service: Destination, image_bool: bool) {
                         }
                     }
                 }
-            }
+            }*/
             Inhibit(false)
         });
 
@@ -213,18 +253,18 @@ pub fn dialog(service: Destination, image_bool: bool) {
                 &TextBuffer::get_end_iter(&buffer),
                 false,
             );
-            let message: String = sent.unwrap();
+            let status: String = sent.unwrap();
 
-            let message_len = char_count(service.clone(), message.clone(), image_bool.clone());
+            let status_len = char_count(service.clone(), status.clone(), message.clone());
 
             // uses markdown to set color
             let mut limit = String::from("<span foreground=\"#DA2E37\">");
-            limit.push_str(&message_len.to_string());
+            limit.push_str(&status_len.to_string());
             limit.push_str("</span>");
             let mut hit = String::from("<span foreground=\"#e4e543\">");
-            hit.push_str(&message_len.to_string());
+            hit.push_str(&status_len.to_string());
             hit.push_str("</span>");
-            if service.mastodon {
+            /*if service.mastodon {
                 if message_len == 0 {
                     count_bypass.borrow().set_markup(&hit);
                 } else if message_len < 0 {
@@ -252,22 +292,23 @@ pub fn dialog(service: Destination, image_bool: bool) {
                         }
                     }
                 }
-            }
+            }*/
             Inhibit(false)
-        });
+        });*/
 
     window.show_all();
     gtk::main();
 }
 
-fn char_count(service: Destination, message: String, image_bool: bool) -> isize {
-    if service.mastodon {
-        return 500 - message.len() as isize;
-    } else if service.twitter && !image_bool {
-        return 280 - message.len() as isize;
-    } else if service.twitter && image_bool {
-        return 257 - message.len() as isize;
-    } else {
-        return 0;
+fn char_count(service: ServiceKind, message: MessageKind, status: String) -> isize {
+    match service {
+        ServiceKind::Twitter => {
+            match message {
+                MessageKind::Image => return 257 - status.len() as isize,
+                MessageKind::Text => return 280 - status.len() as isize
+            }
+        },
+        ServiceKind::Mastodon => return 500 - status.len() as isize,
+        ServiceKind::Imgur => return 0 as isize
     }
 }
