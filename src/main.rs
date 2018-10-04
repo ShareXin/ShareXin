@@ -30,14 +30,14 @@ mod upgrade;
 pub static VERSION: &'static str = env!("CARGO_PKG_VERSION");
 pub static SHAREXIN: &'static str = "https://github.com/ShareXin/ShareXin";
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum ServiceKind {
     Twitter,
     Mastodon,
     Imgur,
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq)]
 pub enum MessageKind {
     Image,
     Text,

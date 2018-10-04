@@ -48,8 +48,8 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         ServiceKind::Imgur => panic!("Not possible"),
     }
 
-    /*// if non-image toot/tweet, doesnt show file button
-    if message == MessageKind::Image {
+    // if non-image toot/tweet, doesnt show file button
+    if message != MessageKind::Image {
         image.destroy();
     }
 
@@ -60,7 +60,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
 
     window.connect_delete_event(move |_, _| {
         gtk::main_quit();
-        if image_bool {
+        if message == MessageKind::Image {
             image::delete_temp();
         }
         Inhibit(false)
@@ -68,7 +68,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
 
     cancel.connect_clicked(move |_| {
         gtk::main_quit();
-        if image_bool {
+        if message == MessageKind::Image {
             image::delete_temp();
         }
         Inhibit(false);
@@ -93,93 +93,61 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         let status: String = sent.unwrap();
         // checks if character count is over limit, then creates thread for sending and closes
         match service {
-            ServiceKind::Twitter => {
-                match message {
-                    MessageKind::Image => {
-                        thread::spawn(move || {
-                            glib::idle_add(move || {
-                                twitter::image(status.clone());
-                                gtk::main_quit();
-                                Continue(false)
-                            });
+            ServiceKind::Twitter => match message {
+                MessageKind::Image => {
+                    thread::spawn(move || {
+                        glib::idle_add(move || {
+                            twitter::image(status.clone());
+                            gtk::main_quit();
+                            Continue(false)
                         });
+                    });
                     window_bypass.borrow().hide();
-                    },
-                    MessageKind::Text => {
+                }
+                MessageKind::Text => {
+                    if !status.is_empty() {
                         thread::spawn(move || {
                             glib::idle_add(move || {
-                              // if its not empty, send
-                               if !status.is_empty() {
-                                   twitter::tweet(status.clone());
-                                   gtk::main_quit();
-                                   Continue(false)
-                               }
+                                twitter::tweet(status.clone());
+                                gtk::main_quit();
+
+                                Continue(false)
                             });
                         });
                         window_bypass.borrow().hide();
                     }
                 }
             },
-            ServiceKind::Mastodon => {
+            ServiceKind::Mastodon => match message {
+                MessageKind::Image => {
+                    thread::spawn(move || {
+                        glib::idle_add(move || {
+                            mastodon::image(status.clone());
+                            gtk::main_quit();
+                            Continue(false)
+                        });
+                    });
+                    window_bypass.borrow().hide();
+                }
+                MessageKind::Text => {
+                    if !status.is_empty() {
+                        thread::spawn(move || {
+                            glib::idle_add(move || {
+                                mastodon::toot(status.clone());
+                                gtk::main_quit();
+
+                                Continue(false)
+                            });
+                        });
+                        window_bypass.borrow().hide();
+                    }
+                }
             },
-            ServiceKind::Imgur => {
-            }
+            ServiceKind::Imgur => panic!("Impossible outcome"),
         }
-        /*if service.mastodon {
-            if message.len() <= 500 {
-                thread::spawn(move || {
-                    glib::idle_add(move || {
-                        // image_bool is true for yes image, false for no image
-                        if image_bool {
-                            mastodon::image(message.clone());
-                        }
-                        // if false, then if its not empty, send
-                        else if !message.is_empty() {
-                            mastodon::toot(message.clone());
-                        }
-                        // if empty, cancel and notify
-                        else {
-                            notification::empty(service);
-                        }
-
-                        gtk::main_quit();
-                        Continue(false)
-                    });
-                });
-                window_bypass.borrow().hide();
-            }
-        } else if service.twitter {
-            if message.len() <= 280 && !image_bool {
-                thread::spawn(move || {
-                    glib::idle_add(move || {
-                        // if its not empty, send
-                        if !message.is_empty() {
-                            twitter::tweet(message.clone());
-                        }
-                        // if empty, cancel and notify
-                        else {
-                            notification::empty(service);
-                        }
-
-                        gtk::main_quit();
-                        Continue(false)
-                    });
-                });
-                window_bypass.borrow().hide();
-            } else if message.len() <= 257 && image_bool {
-                thread::spawn(move || {
-                    glib::idle_add(move || {
-                        twitter::image(message.clone());
-                        gtk::main_quit();
-                        Continue(false)
-                    });
-                });
-                window_bypass.borrow().hide();
-            }
-        }*/
     });
 
-    // control+return sends message
+    /*// control+return sends message
     // if twitter, 280 char limit, if mastodon 500 CHAR LIMIT
     let send_bypass = send.clone();
     let window_bypass = window.clone();

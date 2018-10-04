@@ -4,7 +4,6 @@ use error;
 use language::loader;
 use std::fs;
 use yaml_rust::YamlLoader;
-use MessageKind;
 use ServiceKind;
 
 static SOUND: &'static str = "message-new-instant";
