@@ -10,8 +10,8 @@ use notification;
 use std::borrow::Borrow;
 use std::thread;
 use twitter;
-use ServiceKind;
 use MessageKind;
+use ServiceKind;
 
 pub fn dialog(service: ServiceKind, message: MessageKind) {
     match gtk::init() {
@@ -38,14 +38,14 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         ServiceKind::Twitter => {
             match message {
                 MessageKind::Image => count.set_label("257"),
-                MessageKind::Text => count.set_label("280")
+                MessageKind::Text => count.set_label("280"),
             };
-        },
+        }
         ServiceKind::Mastodon => {
             header.set_subtitle("Mastodon");
             count.set_label("500");
-        },
-        ServiceKind::Imgur => panic!("Not possible")
+        }
+        ServiceKind::Imgur => panic!("Not possible"),
     }
 
     /*// if non-image toot/tweet, doesnt show file button
@@ -302,13 +302,11 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
 
 fn char_count(service: ServiceKind, message: MessageKind, status: String) -> isize {
     match service {
-        ServiceKind::Twitter => {
-            match message {
-                MessageKind::Image => return 257 - status.len() as isize,
-                MessageKind::Text => return 280 - status.len() as isize
-            }
+        ServiceKind::Twitter => match message {
+            MessageKind::Image => return 257 - status.len() as isize,
+            MessageKind::Text => return 280 - status.len() as isize,
         },
         ServiceKind::Mastodon => return 500 - status.len() as isize,
-        ServiceKind::Imgur => return 0 as isize
+        ServiceKind::Imgur => return 0 as isize,
     }
 }

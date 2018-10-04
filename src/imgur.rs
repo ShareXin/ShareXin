@@ -5,8 +5,8 @@ use notification;
 use open;
 use std::fs::File;
 use std::io::Read;
-use ServiceKind;
 use Imgur;
+use ServiceKind;
 
 pub fn send() {
     let tmp = image::temp_dir();

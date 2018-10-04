@@ -1,60 +1,63 @@
 use error;
 use image;
 use notification;
+use std::process::Command;
 use ServiceKind;
 
-use egg_mode;
-
 pub fn image(status: String) {
-    /*let twitter = Destination::new(1);
+    let service = ServiceKind::Twitter;
 
-    let tmp = image::temp_dir(0);
+    let tmp = image::temp_dir();
     let temp = tmp.to_str().unwrap().clone();
 
     let _t = match Command::new("t")
-        .args(&["update", &txt, "-f", &temp])
+        .args(&["update", &status, "-f", &temp])
         .status()
     {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(5));
-            notification::not_sent(twitter);
+            notification::not_sent(service);
             error::fatal()
         }
     };
 
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
-        notification::not_sent(twitter);
+        notification::not_sent(service);
         error::fatal();
+    } else {
+        notification::image_sent(service, &status, temp);
     }
-    notification::image_sent(twitter, &txt, temp);*/
 }
 
 pub fn tweet(status: String) {
-    /*let twitter = Destination::new(1);
+    let service = ServiceKind::Twitter;
 
-    // twitter status update {
+    let _t = match Command::new("t").args(&["update", &status]).status() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(5));
-            notification::not_sent(twitter);
+            notification::not_sent(service);
             error::fatal()
         }
     };
 
-    // error {
+    if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
-        notification::not_sent(twitter);
+        notification::not_sent(service);
         error::fatal();
+    } else {
+        notification::message_sent(service, &status);
     }
-
-    notification::message_sent(twitter, &txt);*/
 }
 
 pub fn auth() {
-    let con_token = egg_mode::KeyPair::new(
-        "GiuJw1blnaSCfolC6BaKU4DHf",
-        "jEmcoCSK0rQNmwtxFNDcK58748NzR3iJfEumSdijXuELpPAXCP",
-    );
+    match Command::new("t").arg("authorize").status() {
+        Ok(ok) => ok,
+        Err(_) => {
+            eprintln!("{}", error::message(5));
+            error::fatal()
+        }
+    };
 }

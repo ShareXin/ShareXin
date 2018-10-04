@@ -4,8 +4,8 @@ use error;
 use language::loader;
 use std::fs;
 use yaml_rust::YamlLoader;
-use ServiceKind;
 use MessageKind;
+use ServiceKind;
 
 static SOUND: &'static str = "message-new-instant";
 
@@ -13,7 +13,7 @@ static SOUND: &'static str = "message-new-instant";
 enum NotificationKind {
     Sent,
     File,
-    SendFailure
+    SendFailure,
 }
 
 fn notification(service: ServiceKind, notification: NotificationKind) -> String {
@@ -26,7 +26,7 @@ fn notification(service: ServiceKind, notification: NotificationKind) -> String 
             match service {
                 ServiceKind::Twitter => locator = &locator["Twitter"],
                 ServiceKind::Mastodon => locator = &locator["Mastodon"],
-                ServiceKind::Imgur => locator = &locator["Imgur"]
+                ServiceKind::Imgur => locator = &locator["Imgur"],
             }
         }
         NotificationKind::File => locator = &locator["File"],
@@ -35,7 +35,7 @@ fn notification(service: ServiceKind, notification: NotificationKind) -> String 
             match service {
                 ServiceKind::Twitter => locator = &locator["Twitter"],
                 ServiceKind::Mastodon => locator = &locator["Mastodon"],
-                ServiceKind::Imgur => locator = &locator["Imgur"]
+                ServiceKind::Imgur => locator = &locator["Imgur"],
             }
         }
     }

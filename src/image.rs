@@ -3,9 +3,9 @@ use notification;
 use open;
 use save;
 use screenshot_rs;
+use screenshot_rs::ScreenshotKind;
 use std::path::PathBuf;
 use std::{env, fs};
-use screenshot_rs::ScreenshotKind;
 
 pub fn image(kind: ScreenshotKind) {
     // tmp gets the temporary directory of the system
@@ -17,7 +17,7 @@ pub fn image(kind: ScreenshotKind) {
     match kind {
         ScreenshotKind::Area => screenshot_rs::screenshot_area(temp),
         ScreenshotKind::Window => screenshot_rs::screenshot_window(temp),
-        ScreenshotKind::Full => screenshot_rs::screenshot_full(temp)
+        ScreenshotKind::Full => screenshot_rs::screenshot_full(temp),
     }
 
     if !tmp.is_file() {

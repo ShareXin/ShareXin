@@ -133,6 +133,7 @@
 - Removed RefCell in *dialog.rs*
 - Updated Twitter character limit (not full proof for non-Latin characters)
 - Heavy rewrite of functions with clearer variables
+- Old Twitter API restored for functionality, will be replaced by native API in 0.6.7
 
 #### [0.6.5] - 2018-09-26
 - Work will continue on the project!

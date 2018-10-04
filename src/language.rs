@@ -3,12 +3,10 @@ use std::env;
 pub fn locale() -> String {
     match env::var("LC_CTYPE") {
         Ok(ok) => ok,
-        Err(_) => {
-            match env::var("LANG") {
-                Ok(ok) => ok,
-                Err(_) => String::new()
-            }
-        }
+        Err(_) => match env::var("LANG") {
+            Ok(ok) => ok,
+            Err(_) => String::new(),
+        },
     }
 }
 

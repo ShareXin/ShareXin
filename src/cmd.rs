@@ -1,16 +1,16 @@
+use clap::{App, AppSettings, Arg, SubCommand};
 use dialog;
 use image;
 use imgur;
 use language;
 use mastodon;
 use save;
+use screenshot_rs::ScreenshotKind;
 use twitter;
 use upgrade;
 use yaml_rust::YamlLoader;
-use ServiceKind;
 use MessageKind;
-use screenshot_rs::ScreenshotKind;
-use clap::{App, AppSettings, Arg, SubCommand};
+use ServiceKind;
 
 pub fn cmd() {
     let file = language::loader();

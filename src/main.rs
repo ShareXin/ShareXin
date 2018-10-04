@@ -34,13 +34,13 @@ pub static SHAREXIN: &'static str = "https://github.com/ShareXin/ShareXin";
 pub enum ServiceKind {
     Twitter,
     Mastodon,
-    Imgur
+    Imgur,
 }
 
 #[derive(Debug, Copy, Clone)]
 pub enum MessageKind {
     Image,
-    Text
+    Text,
 }
 
 fn main() {
