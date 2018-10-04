@@ -6,7 +6,6 @@ use gtk;
 use gtk::*;
 use image;
 use mastodon;
-use notification;
 use std::borrow::Borrow;
 use std::thread;
 use twitter;
@@ -147,66 +146,8 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         }
     });
 
-    /*// control+return sends message
+    // control+return sends message
     // if twitter, 280 char limit, if mastodon 500 CHAR LIMIT
-    let send_bypass = send.clone();
-    let window_bypass = window.clone();
-    let text_bypass = text.clone();
-    let count_bypass = count.clone();
-    window_bypass
-        .borrow()
-        .connect_key_press_event(move |_, key| {
-            let buffer = TextView::get_buffer(&text_bypass.borrow()).unwrap();
-            let sent: Option<String> = TextBuffer::get_text(
-                &buffer,
-                &TextBuffer::get_start_iter(&buffer),
-                &TextBuffer::get_end_iter(&buffer),
-                false,
-            );
-            let status: String = sent.unwrap();
-
-            let status_len = char_count(service.clone(), status.clone(), message.clone());
-
-            // uses markdown to set color
-            let mut limit = String::from("<span foreground=\"#DA2E37\">");
-            limit.push_str(&status_len.to_string());
-            limit.push_str("</span>");
-            let mut hit = String::from("<span foreground=\"#e4e543\">");
-            hit.push_str(&status_len.to_string());
-            hit.push_str("</span>");
-            /*if service.mastodon {
-                if message_len == 0 {
-                    count_bypass.borrow().set_markup(&hit);
-                } else if message_len < 0 {
-                    count_bypass.borrow().set_markup(&limit);
-                } else {
-                    count_bypass.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                        match key.get_keyval() {
-                            key::Return => send_bypass.borrow().clicked(),
-                            _ => (),
-                        }
-                    }
-                }
-            } else if service.twitter {
-                if message_len == 0 {
-                    count_bypass.borrow().set_markup(&hit);
-                } else if message_len < 0 {
-                    count_bypass.borrow().set_markup(&limit);
-                } else {
-                    count_bypass.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                        match key.get_keyval() {
-                            key::Return => send_bypass.borrow().clicked(),
-                            _ => (),
-                        }
-                    }
-                }
-            }*/
-            Inhibit(false)
-        });
-
-    // same as connect_key_press but when any key is released
     let send_bypass = send.clone();
     let window_bypass = window.clone();
     let text_bypass = text.clone();
@@ -223,52 +164,57 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
             );
             let status: String = sent.unwrap();
 
-            let status_len = char_count(service.clone(), status.clone(), message.clone());
+            let status_count = char_count(service.clone(), status.clone(), message.clone());
 
             // uses markdown to set color
             let mut limit = String::from("<span foreground=\"#DA2E37\">");
-            limit.push_str(&status_len.to_string());
+            limit.push_str(&status_count.to_string());
             limit.push_str("</span>");
             let mut hit = String::from("<span foreground=\"#e4e543\">");
-            hit.push_str(&status_len.to_string());
+            hit.push_str(&status_count.to_string());
             hit.push_str("</span>");
-            /*if service.mastodon {
-                if message_len == 0 {
-                    count_bypass.borrow().set_markup(&hit);
-                } else if message_len < 0 {
-                    count_bypass.borrow().set_markup(&limit);
-                } else {
-                    count_bypass.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                        match key.get_keyval() {
-                            key::Return => send_bypass.borrow().clicked(),
-                            _ => (),
+
+            match service {
+                ServiceKind::Twitter => {
+                    if status_count == 0 {
+                        count_bypass.borrow().set_markup(&hit);
+                    } else if status_count < 0 {
+                        count_bypass.borrow().set_markup(&limit);
+                    } else {
+                        count_bypass.borrow().set_label(&status_count.to_string());
+                        if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
+                            match key.get_keyval() {
+                                key::Return => send_bypass.borrow().clicked(),
+                                _ => (),
+                            }
                         }
                     }
                 }
-            } else if service.twitter {
-                if message_len == 0 {
-                    count_bypass.borrow().set_markup(&hit);
-                } else if message_len < 0 {
-                    count_bypass.borrow().set_markup(&limit);
-                } else {
-                    count_bypass.borrow().set_label(&message_len.to_string());
-                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                        match key.get_keyval() {
-                            key::Return => send_bypass.borrow().clicked(),
-                            _ => (),
+                ServiceKind::Mastodon => {
+                    if status_count == 0 {
+                        count_bypass.borrow().set_markup(&hit);
+                    } else if status_count < 0 {
+                        count_bypass.borrow().set_markup(&limit);
+                    } else {
+                        count_bypass.borrow().set_label(&status_count.to_string());
+                        if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
+                            match key.get_keyval() {
+                                key::Return => send_bypass.borrow().clicked(),
+                                _ => (),
+                            }
                         }
                     }
                 }
-            }*/
+                ServiceKind::Imgur => panic!("Impossible outcome!"),
+            }
             Inhibit(false)
-        });*/
+        });
 
     window.show_all();
     gtk::main();
 }
 
-fn char_count(service: ServiceKind, message: MessageKind, status: String) -> isize {
+fn char_count(service: ServiceKind, status: String, message: MessageKind) -> isize {
     match service {
         ServiceKind::Twitter => match message {
             MessageKind::Image => return 257 - status.len() as isize,
