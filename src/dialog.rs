@@ -163,7 +163,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         message: MessageKind,
         service: ServiceKind,
     ) {
-        let buffer = TextView::get_buffer(&text_bypass.borrow()).unwrap();
+        let buffer = TextView::get_buffer(&text_bypass).unwrap();
         let sent: Option<String> = TextBuffer::get_text(
             &buffer,
             &TextBuffer::get_start_iter(&buffer),
@@ -172,7 +172,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         );
         let status: String = sent.unwrap();
 
-        let status_count = char_count(service.clone(), status.clone(), message.clone());
+        let status_count = char_count(service, status, message);
 
         // uses markdown to set color
         let mut limit = String::from("<span foreground=\"#DA2E37\">");
@@ -185,14 +185,14 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         match service {
             ServiceKind::Twitter => {
                 if status_count == 0 {
-                    count_bypass.borrow().set_markup(&hit);
+                    count_bypass.set_markup(&hit);
                 } else if status_count < 0 {
-                    count_bypass.borrow().set_markup(&limit);
+                    count_bypass.set_markup(&limit);
                 } else {
-                    count_bypass.borrow().set_label(&status_count.to_string());
+                    count_bypass.set_label(&status_count.to_string());
                     if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
                         match key.get_keyval() {
-                            key::Return => send_bypass.borrow().clicked(),
+                            key::Return => send_bypass.clicked(),
                             _ => (),
                         }
                     }
@@ -200,14 +200,14 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
             }
             ServiceKind::Mastodon => {
                 if status_count == 0 {
-                    count_bypass.borrow().set_markup(&hit);
+                    count_bypass.set_markup(&hit);
                 } else if status_count < 0 {
-                    count_bypass.borrow().set_markup(&limit);
+                    count_bypass.set_markup(&limit);
                 } else {
-                    count_bypass.borrow().set_label(&status_count.to_string());
+                    count_bypass.set_label(&status_count.to_string());
                     if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
                         match key.get_keyval() {
-                            key::Return => send_bypass.borrow().clicked(),
+                            key::Return => send_bypass.clicked(),
                             _ => (),
                         }
                     }

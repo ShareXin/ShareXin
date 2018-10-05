@@ -34,6 +34,7 @@
 
 ### Tested on
 - Ubuntu 18.04
+- Debian 9.5.0
 - Fedora 28
 - Arch Linux
 - GhostBSD (FreeBSD distro)
@@ -70,6 +71,18 @@
 
 #### Ubuntu 18.04 dependencies
 * libgtk-3-dev
+* libcairo2-dev
+* libpango1.0-dev
+* libgdk-pixbuf2.0-dev
+* libatk1.0-dev
+* libssl-dev
+* libcurl4-openssl-dev
+* libclang-dev
+* clang
+
+#### Debian 9.5.0 dependencies
+* libgtk-3-dev
+* libglib2.0-dev **(currently, Debian has outdated version, find glib2 2.54 for Ubuntu and install)**
 * libcairo2-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
