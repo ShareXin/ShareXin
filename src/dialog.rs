@@ -28,13 +28,9 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     let image: gtk::Button = builder.get_object("image").unwrap();
     let count: gtk::Label = builder.get_object("count").unwrap();
 
-    // setting widgets
-    window.set_title("ShareXin");
-    window.set_hide_titlebar_when_maximized(false);
-    window.set_keep_above(true);
-
     match service {
         ServiceKind::Twitter => {
+            header.set_subtitle("Twitter");
             match message {
                 MessageKind::Image => count.set_label("257"),
                 MessageKind::Text => count.set_label("280"),
