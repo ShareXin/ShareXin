@@ -22,7 +22,6 @@ pub fn image(kind: ScreenshotKind) {
 
     if !tmp.is_file() {
         eprintln!("{}", error::message(30));
-        notification::error(30);
         error::fatal();
     }
 

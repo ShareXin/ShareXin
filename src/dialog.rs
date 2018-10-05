@@ -154,61 +154,99 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     let window_bypass = window.clone();
     let text_bypass = text.clone();
     let count_bypass = count.clone();
+
+    fn key_event(
+        key: &gdk::EventKey,
+        send_bypass: gtk::Button,
+        text_bypass: gtk::TextView,
+        count_bypass: gtk::Label,
+        message: MessageKind,
+        service: ServiceKind,
+    ) {
+        let buffer = TextView::get_buffer(&text_bypass.borrow()).unwrap();
+        let sent: Option<String> = TextBuffer::get_text(
+            &buffer,
+            &TextBuffer::get_start_iter(&buffer),
+            &TextBuffer::get_end_iter(&buffer),
+            false,
+        );
+        let status: String = sent.unwrap();
+
+        let status_count = char_count(service.clone(), status.clone(), message.clone());
+
+        // uses markdown to set color
+        let mut limit = String::from("<span foreground=\"#DA2E37\">");
+        limit.push_str(&status_count.to_string());
+        limit.push_str("</span>");
+        let mut hit = String::from("<span foreground=\"#e4e543\">");
+        hit.push_str(&status_count.to_string());
+        hit.push_str("</span>");
+
+        match service {
+            ServiceKind::Twitter => {
+                if status_count == 0 {
+                    count_bypass.borrow().set_markup(&hit);
+                } else if status_count < 0 {
+                    count_bypass.borrow().set_markup(&limit);
+                } else {
+                    count_bypass.borrow().set_label(&status_count.to_string());
+                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
+                        match key.get_keyval() {
+                            key::Return => send_bypass.borrow().clicked(),
+                            _ => (),
+                        }
+                    }
+                }
+            }
+            ServiceKind::Mastodon => {
+                if status_count == 0 {
+                    count_bypass.borrow().set_markup(&hit);
+                } else if status_count < 0 {
+                    count_bypass.borrow().set_markup(&limit);
+                } else {
+                    count_bypass.borrow().set_label(&status_count.to_string());
+                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
+                        match key.get_keyval() {
+                            key::Return => send_bypass.borrow().clicked(),
+                            _ => (),
+                        }
+                    }
+                }
+            }
+            ServiceKind::Imgur => panic!("Impossible outcome!"),
+        }
+    }
+
+    window_bypass
+        .borrow()
+        .connect_key_press_event(move |_, key| {
+            key_event(
+                key,
+                send_bypass.clone(),
+                text_bypass.clone(),
+                count_bypass.clone(),
+                message.clone(),
+                service.clone(),
+            );
+            Inhibit(false)
+        });
+
+    let send_bypass = send.clone();
+    let window_bypass = window.clone();
+    let text_bypass = text.clone();
+    let count_bypass = count.clone();
+
     window_bypass
         .borrow()
         .connect_key_release_event(move |_, key| {
-            let buffer = TextView::get_buffer(&text_bypass.borrow()).unwrap();
-            let sent: Option<String> = TextBuffer::get_text(
-                &buffer,
-                &TextBuffer::get_start_iter(&buffer),
-                &TextBuffer::get_end_iter(&buffer),
-                false,
+            key_event(
+                key,
+                send_bypass.clone(),
+                text_bypass.clone(),
+                count_bypass.clone(),
+                message.clone(),
+                service.clone(),
             );
-            let status: String = sent.unwrap();
-
-            let status_count = char_count(service.clone(), status.clone(), message.clone());
-
-            // uses markdown to set color
-            let mut limit = String::from("<span foreground=\"#DA2E37\">");
-            limit.push_str(&status_count.to_string());
-            limit.push_str("</span>");
-            let mut hit = String::from("<span foreground=\"#e4e543\">");
-            hit.push_str(&status_count.to_string());
-            hit.push_str("</span>");
-
-            match service {
-                ServiceKind::Twitter => {
-                    if status_count == 0 {
-                        count_bypass.borrow().set_markup(&hit);
-                    } else if status_count < 0 {
-                        count_bypass.borrow().set_markup(&limit);
-                    } else {
-                        count_bypass.borrow().set_label(&status_count.to_string());
-                        if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                            match key.get_keyval() {
-                                key::Return => send_bypass.borrow().clicked(),
-                                _ => (),
-                            }
-                        }
-                    }
-                }
-                ServiceKind::Mastodon => {
-                    if status_count == 0 {
-                        count_bypass.borrow().set_markup(&hit);
-                    } else if status_count < 0 {
-                        count_bypass.borrow().set_markup(&limit);
-                    } else {
-                        count_bypass.borrow().set_label(&status_count.to_string());
-                        if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                            match key.get_keyval() {
-                                key::Return => send_bypass.borrow().clicked(),
-                                _ => (),
-                            }
-                        }
-                    }
-                }
-                ServiceKind::Imgur => panic!("Impossible outcome!"),
-            }
             Inhibit(false)
         });
 
@@ -219,11 +257,18 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
 fn char_count(service: ServiceKind, status: String, message: MessageKind) -> i32 {
     let remaining = match service {
         ServiceKind::Twitter => match message {
-            MessageKind::Image => TWITTER_IMAGE_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32,
-            MessageKind::Text => TWITTER_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32,
+            MessageKind::Image => {
+                TWITTER_IMAGE_COUNT
+                    - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32
+            }
+            MessageKind::Text => {
+                TWITTER_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32
+            }
         },
-        ServiceKind::Mastodon => MASTODON_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32,
+        ServiceKind::Mastodon => {
+            MASTODON_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32
+        }
         ServiceKind::Imgur => panic!("Impossible outcome!"),
     };
-    return remaining
+    return remaining;
 }
