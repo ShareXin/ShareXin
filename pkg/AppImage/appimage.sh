@@ -18,5 +18,6 @@ cp pkg/AppImage/sharexin.desktop sharexin.AppDir/
 if [ ! -f appimagetool-x86_64.AppImage ]; then
 	curl https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage --output appimagetool-x86_64.AppImage
 fi
+chmod +x appimagetool-x86_64.AppImage
 ldd target/release/sharexin | grep "=> /" | awk '{print $3}' | xargs -I '{}' cp -v '{}' sharexin.AppDir/usr/lib/x86_64-linux-gnu
 ./appimagetool-x86_64.AppImage -n sharexin.AppDir releases/$version/sharexin-$version-$ARCH.AppImage
