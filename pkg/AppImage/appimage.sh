@@ -9,12 +9,14 @@ echo $ARCH
 git pull
 LDFLAGS="-static" cargo build --release
 mkdir -p sharexin.AppDir/usr/bin/
-mkdir -p sharexin.AppDir/usr/lib/x86_64-linux-gnu
-mkdir -p sharexin.AppDir/lib/x86_64-linux-gnu
+mkdir -p sharexin.AppDir/usr/lib/x86_64-linux-gnu/
+mkdir -p sharexin.AppDir/lib/x86_64-linux-gnu/
+mkdir -p releases/$version/
 cp target/release/sharexin sharexin.AppDir/usr/bin/sharexin
 mkdir releases/$version
 cp pkg/AppImage/AppRun sharexin.AppDir/
 cp pkg/AppImage/sharexin.desktop sharexin.AppDir/
+cp pkg/AppImage/mail-send.svg sharexin.AppDir/
 if [ ! -f appimagetool-x86_64.AppImage ]; then
 	curl https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage --output appimagetool-x86_64.AppImage
 fi

@@ -1,10 +1,9 @@
 [Desktop Entry]
 Name=ShareXin
 Exec=sharexin
-Icon=mail-send
+Icon=mail-send.svg
 Type=Application
-Encoding=UTF-8
-Comment=ShareX for Unix-like systems
+Comment=ShareX for Linux and FreeBSD
 Terminal=true
-Categories=Graphics;Network;Utility;
+Categories=Network;Utility;GTK;
 StartupWMClass=sharexin

@@ -82,7 +82,6 @@
 
 #### Debian 9.5.0 dependencies
 * libgtk-3-dev
-* libglib2.0-dev **(currently, Debian has outdated version, find glib2 2.54 for Ubuntu and install)**
 * libcairo2-dev
 * libpango1.0-dev
 * libgdk-pixbuf2.0-dev
@@ -91,6 +90,19 @@
 * libcurl4-openssl-dev
 * libclang-dev
 * clang
+
+##### Debian issues
+As of Oct 5, 2018, you need these Ubuntu .deb for it to compile on Debian
+- libglib2.0-0_2.55.2-1ubuntu1_amd64.deb
+- libglib2.0-bin_2.55.2-1ubuntu1_amd64.deb
+- libglib2.0-dev-bin_2.55.2-1ubuntu1_amd64.deb
+- libglib2.0-dev_2.55.2-1ubuntu1_amd65.deb
+- fontconfig-config_2.12.6-0ubuntu1_all.deb
+- gir1.2-gtk-3.0_3.22.29-2ubuntu1_amd64.deb
+- libgtk3-0_3.22.29-2ubuntu1_amd64.deb
+- libgtk3-common_3.22.29-2ubuntu1_all.deb
+- libgtk3-dev_3.22.29-2ubuntu1_amd64.deb
+- wayland-protocols_1.10-1_all.deb
 
 #### Arch Linux dependencies
 * curl
