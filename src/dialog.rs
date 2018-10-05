@@ -1,3 +1,4 @@
+use egg_mode_text;
 use error;
 use gdk;
 use gdk::enums::key;
@@ -11,6 +12,11 @@ use std::thread;
 use twitter;
 use MessageKind;
 use ServiceKind;
+
+const URL_COUNT: i32 = 23;
+const TWITTER_COUNT: i32 = 280;
+const MASTODON_COUNT: i32 = 500;
+const TWITTER_IMAGE_COUNT: i32 = TWITTER_COUNT - URL_COUNT;
 
 pub fn dialog(service: ServiceKind, message: MessageKind) {
     match gtk::init() {
@@ -32,13 +38,13 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         ServiceKind::Twitter => {
             header.set_subtitle("Twitter");
             match message {
-                MessageKind::Image => count.set_label("257"),
-                MessageKind::Text => count.set_label("280"),
+                MessageKind::Image => count.set_label(&TWITTER_IMAGE_COUNT.to_string()),
+                MessageKind::Text => count.set_label(&TWITTER_COUNT.to_string()),
             };
         }
         ServiceKind::Mastodon => {
             header.set_subtitle("Mastodon");
-            count.set_label("500");
+            count.set_label(&MASTODON_COUNT.to_string());
         }
         ServiceKind::Imgur => panic!("Not possible"),
     }
@@ -210,13 +216,14 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     gtk::main();
 }
 
-fn char_count(service: ServiceKind, status: String, message: MessageKind) -> isize {
-    match service {
+fn char_count(service: ServiceKind, status: String, message: MessageKind) -> i32 {
+    let remaining = match service {
         ServiceKind::Twitter => match message {
-            MessageKind::Image => return 257 - status.len() as isize,
-            MessageKind::Text => return 280 - status.len() as isize,
+            MessageKind::Image => TWITTER_IMAGE_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32,
+            MessageKind::Text => TWITTER_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32,
         },
-        ServiceKind::Mastodon => return 500 - status.len() as isize,
-        ServiceKind::Imgur => return 0 as isize,
-    }
+        ServiceKind::Mastodon => MASTODON_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32,
+        ServiceKind::Imgur => panic!("Impossible outcome!"),
+    };
+    return remaining
 }

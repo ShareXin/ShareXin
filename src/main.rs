@@ -3,6 +3,7 @@ extern crate clap;
 extern crate clipboard;
 extern crate curl;
 extern crate egg_mode;
+extern crate egg_mode_text;
 extern crate elefren;
 extern crate gdk;
 extern crate glib;
