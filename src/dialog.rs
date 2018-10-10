@@ -175,16 +175,16 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         let status_count = char_count(service, status, message);
 
         // uses markdown to set color
-        let mut limit = String::from("<span foreground=\"#DA2E37\">");
+        let mut limit = String::from("<span foreground=\"#EE0456\">");
         limit.push_str(&status_count.to_string());
         limit.push_str("</span>");
-        let mut hit = String::from("<span foreground=\"#e4e543\">");
+        let mut hit = String::from("<span foreground=\"#ECA60B\">");
         hit.push_str(&status_count.to_string());
         hit.push_str("</span>");
 
         match service {
             ServiceKind::Twitter => {
-                if status_count == 0 {
+                if status_count <= 20 && status_count >= 0 {
                     count_bypass.set_markup(&hit);
                 } else if status_count < 0 {
                     count_bypass.set_markup(&limit);

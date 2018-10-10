@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate clap;
+
 extern crate clipboard;
 extern crate curl;
 extern crate egg_mode;
@@ -9,6 +10,7 @@ extern crate gdk;
 extern crate glib;
 extern crate gtk;
 extern crate imgur as Imgur;
+extern crate mammut;
 extern crate notify_rust;
 extern crate open;
 extern crate screenshot_rs;

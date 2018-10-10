@@ -3,7 +3,7 @@ use std::time::Duration;
 use std::{process, thread};
 use yaml_rust::{Yaml, YamlLoader};
 
-fn error_loader<'a>(code: &'a str, locator: &Yaml) -> String {
+fn error_loader(code: &str, locator: &Yaml) -> String {
     let error: &str = &code.to_string();
     let message = &locator[error].as_str().expect("Error not found");
     return format!("{}", message);
