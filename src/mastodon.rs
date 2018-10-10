@@ -18,13 +18,13 @@ pub fn image(status: String) {
         Err(_) => {
             eprintln!("{}", error::message(6));
             notification::not_sent(service);
-            error::fatal()
+            error::exit()
         }
     };
     if _toot.code() == Some(2) {
         eprintln!("{}", error::message(21));
         notification::not_sent(service);
-        error::fatal();
+        error::exit();
     } else {
         notification::image_sent(service, &status, temp);
     }
@@ -38,13 +38,13 @@ pub fn toot(status: String) {
         Err(_) => {
             eprintln!("{}", error::message(6));
             notification::not_sent(service);
-            error::fatal()
+            error::exit()
         }
     };
     if _toot.code() == Some(2) {
         eprintln!("{}", error::message(21));
         notification::not_sent(service);
-        error::fatal();
+        error::exit();
     } else {
         notification::message_sent(service, &status);
     }
@@ -55,7 +55,7 @@ pub fn auth() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(6));
-            error::fatal()
+            error::exit()
         }
     };
 }

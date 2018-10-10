@@ -12,7 +12,7 @@ pub fn file(file: String) {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(30));
-            error::fatal()
+            error::exit()
         }
     };
 }
@@ -37,7 +37,7 @@ pub fn save() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(25));
-            error::fatal()
+            error::exit()
         }
     });
 
@@ -56,7 +56,7 @@ pub fn save() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(25));
-            error::fatal()
+            error::exit()
         }
     });
     new_file.push_str(&time);

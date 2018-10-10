@@ -1,6 +1,5 @@
 use language;
-use std::time::Duration;
-use std::{process, thread};
+use std::process;
 use yaml_rust::{Yaml, YamlLoader};
 
 fn error_loader(code: &str, locator: &Yaml) -> String {
@@ -9,13 +8,7 @@ fn error_loader(code: &str, locator: &Yaml) -> String {
     return format!("{}", message);
 }
 
-pub fn fatal() -> ! {
-    let file = language::loader();
-    let locators = YamlLoader::load_from_str(file).unwrap();
-    let locator = &locators[0]["Error"];
-
-    println!("{}", error_loader("Fatal", locator));
-    thread::sleep(Duration::new(1, 5));
+pub fn exit() -> ! {
     process::exit(1);
 }
 

@@ -29,7 +29,7 @@ pub fn upgrade() {
                 Ok(ok) => ok,
                 Err(_) => {
                     eprintln!("{}", error::message(18));
-                    error::fatal()
+                    error::exit()
                 }
             };
             check_update(latest_version, current_version, latest_utf);
@@ -40,7 +40,7 @@ pub fn upgrade() {
         Ok(ok) => ok,
         Err(e) => {
             eprintln!("{}, {:?}", error::message(16), e);
-            error::fatal()
+            error::exit()
         }
     };
 }

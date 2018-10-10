@@ -18,14 +18,14 @@ pub fn image(status: String) {
         Err(_) => {
             eprintln!("{}", error::message(5));
             notification::not_sent(service);
-            error::fatal()
+            error::exit()
         }
     };
 
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
         notification::not_sent(service);
-        error::fatal();
+        error::exit();
     } else {
         notification::image_sent(service, &status, temp);
     }
@@ -39,14 +39,14 @@ pub fn tweet(status: String) {
         Err(_) => {
             eprintln!("{}", error::message(5));
             notification::not_sent(service);
-            error::fatal()
+            error::exit()
         }
     };
 
     if _t.code() == Some(1) {
         eprintln!("{}", error::message(22));
         notification::not_sent(service);
-        error::fatal();
+        error::exit();
     } else {
         notification::message_sent(service, &status);
     }
@@ -57,7 +57,7 @@ pub fn auth() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(5));
-            error::fatal()
+            error::exit()
         }
     };
 }

@@ -89,10 +89,6 @@ pub fn cmd() {
         );
     let matches = sharexin.clone().get_matches();
 
-    if matches.is_present("upgrade") {
-        upgrade::upgrade();
-    }
-
     match matches.subcommand() {
         ("toot", Some(toot_matches)) => match toot_matches.subcommand_name() {
             Some("area") => toot_area(),
@@ -138,7 +134,13 @@ pub fn cmd() {
                 }
             }
         },
-        _ => sharexin.print_help().unwrap(),
+        _ => {
+            if matches.is_present("upgrade") {
+                upgrade::upgrade();
+            } else {
+                sharexin.print_help().unwrap()
+            }
+        },
     }
 }
 

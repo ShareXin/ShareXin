@@ -15,7 +15,7 @@ pub fn send() {
         Err(_) => {
             eprintln!("{}", error::message(28));
             notification::error(28);
-            error::fatal()
+            error::exit()
         }
     };
     let mut image = Vec::new();
@@ -24,7 +24,7 @@ pub fn send() {
         Err(_) => {
             eprintln!("{}", error::message(28));
             notification::error(28);
-            error::fatal()
+            error::exit()
         }
     };
 
@@ -39,13 +39,13 @@ pub fn send() {
             None => {
                 eprintln!("{}", error::message(20));
                 notification::error(20);
-                error::fatal()
+                error::exit()
             }
         },
         Err(_) => {
             eprintln!("{}", error::message(17));
             notification::error(17);
-            error::fatal()
+            error::exit()
         }
     }
     notification::image_sent(ServiceKind::Imgur, &copy_link, tmp.to_str().unwrap());
@@ -58,7 +58,7 @@ pub fn send() {
         Err(_) => {
             eprintln!("{}", error::message(19));
             notification::error(19);
-            error::fatal()
+            error::exit()
         }
     };
 }

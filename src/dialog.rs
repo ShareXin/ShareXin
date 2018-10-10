@@ -46,7 +46,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
             header.set_subtitle("Mastodon");
             count.set_label(&MASTODON_COUNT.to_string());
         }
-        ServiceKind::Imgur => panic!("Not possible"),
+        ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
     }
 
     // if non-image toot/tweet, doesnt show file button
@@ -144,7 +144,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
                     }
                 }
             },
-            ServiceKind::Imgur => panic!("Impossible outcome"),
+            ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
         }
     });
 
@@ -213,7 +213,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
                     }
                 }
             }
-            ServiceKind::Imgur => panic!("Impossible outcome!"),
+            ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
         }
     }
 
