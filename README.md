@@ -7,7 +7,7 @@
 
 ## Requirements
 * Linux or FreeBSD
-* rustc 1.28.0^ (through rustup)
+* rustc 1.29.2^ (through rustup)
 * *scrot* (on non-GNOME/Plasma X11 desktops)
 * *feh*
 
@@ -33,7 +33,7 @@
 - X11 DE
 
 ### Tested on
-- Ubuntu 18.04
+- Ubuntu 18.10
 - Debian 9.5.0
 - Fedora 28
 - Arch Linux
@@ -146,6 +146,14 @@ As of Oct 5, 2018, you need these Ubuntu .deb for it to compile on Debian
 2. `cargo install`
 
 ## Changelog
+#### [0.6.7] - 2018-10-??
+- Colors for character count on message popup match colors on Twitter Web
+- Character count on message popup turns yellow when approaching limit with 20 characters left, just like on Twitter Web
+- Bug fix with `--upgrade` also triggering normal cli help
+- Didn't know `unreachable!("")` was a thing, replaced some instances of `panic!()` with it
+- Removed useless `error::fatal()` message
+- Disabling *"Ok"* button when no text is entered or when too much text is over service limit
+
 #### [0.6.6] - 2018-10-31
 - More testing done
 - Removed some strange and unneccesary lines
@@ -155,10 +163,10 @@ As of Oct 5, 2018, you need these Ubuntu .deb for it to compile on Debian
 - General bug fixes
 - Split screenshotting functionality off to [screenshot-rs](https://github.com/ShareXin/screenshot-rs)
 - Removed swaywm support (even back when I used it, my implementation was trash, if any this is a service to sway users)
-- Removed RefCell in *dialog.rs*
+- Removed RefCell in `dialog.rs`
 - Updated Twitter character limit (not full proof for non-Latin characters)
 - Heavy rewrite of functions with clearer variables
-- Old Twitter API restored for functionality, will be replaced by native API in 0.6.7
+- Old Twitter API restored for functionality, will be replaced by native API
 
 #### [0.6.5] - 2018-09-26
 - Work will continue on the project!
@@ -172,5 +180,5 @@ As of Oct 5, 2018, you need these Ubuntu .deb for it to compile on Debian
 - Rewrote method of determining screenshot selection software
   - Used to rely on hard-coded desktop variables to match with specific software
   - Now simply checks which software is installed, in a prefered order
-- **t** and **toot** are still required for use with Twitter and Mastodon, but this WILL be addressed in 0.6.6
+- `t` and `toot` are still required for use with Twitter and Mastodon, but this WILL be addressed in 0.6.6
   - Native rust Twitter and Mastodon APIs will be added, with hopefully the same functionality.

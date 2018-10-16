@@ -3,8 +3,7 @@ use std::process;
 use yaml_rust::{Yaml, YamlLoader};
 
 fn error_loader(code: &str, locator: &Yaml) -> String {
-    let error: &str = &code.to_string();
-    let message = &locator[error].as_str().expect("Error not found");
+    let message = &locator[code].as_str().expect("Error not found");
     return format!("{}", message);
 }
 
@@ -21,7 +20,7 @@ pub fn message(code: usize) -> String {
 
     match code {
         1...31 => return error_formatter(code, error, locator),
-        _ => return String::from("Unknown error"),
+        _ => unreachable!("Internal Logic Error"),
     };
 }
 

@@ -140,7 +140,7 @@ pub fn cmd() {
             } else {
                 sharexin.print_help().unwrap()
             }
-        },
+        }
     }
 }
 

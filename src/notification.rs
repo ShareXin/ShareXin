@@ -6,12 +6,8 @@ use std::fs;
 use yaml_rust::YamlLoader;
 use ServiceKind;
 
-static SOUND: &'static str = "message-new-instant";
-
-#[derive(Debug, Copy, Clone)]
 enum NotificationKind {
     Sent,
-    File,
     SendFailure,
 }
 
@@ -28,7 +24,6 @@ fn notification(service: ServiceKind, notification: NotificationKind) -> String 
                 ServiceKind::Imgur => locator = &locator["Imgur"],
             }
         }
-        NotificationKind::File => locator = &locator["File"],
         NotificationKind::SendFailure => {
             locator = &locator["Not_Sent"];
             match service {
@@ -48,7 +43,6 @@ pub fn image_sent(service: ServiceKind, text: &str, img: &str) {
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
         .icon(img)
-        .sound_name(SOUND)
         .show()
     {
         Ok(ok) => ok,
@@ -73,23 +67,6 @@ pub fn message_sent(service: ServiceKind, text: &str) {
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
-        .sound_name(SOUND)
-        .show()
-    {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(23));
-            return;
-        }
-    };
-}
-
-// when the file has been saved
-pub fn file_saved(img: &str) {
-    match Notification::new()
-        .appname("ShareXin")
-        .summary(&notification(ServiceKind::Twitter, NotificationKind::File))
-        .icon(img)
         .show()
     {
         Ok(ok) => ok,

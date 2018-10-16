@@ -1,8 +1,7 @@
 use error;
 use glib::{get_user_special_dir, UserDirectory};
 use image::temp_dir;
-use notification;
-use std::fs;
+use std::{fs, path};
 use time;
 
 pub fn file(file: String) {
@@ -18,8 +17,7 @@ pub fn file(file: String) {
 }
 
 pub fn save() {
-    let tmp = temp_dir();
-    let temp = tmp.to_str().unwrap().clone();
+    let tmp: path::PathBuf = temp_dir();
 
     let xdg_pictures = get_user_special_dir(UserDirectory::Pictures).unwrap();
     let home = xdg_pictures.to_str().unwrap();
@@ -63,7 +61,7 @@ pub fn save() {
     new_file.push_str(".png");
 
     match fs::copy(tmp.clone(), new_file) {
-        Ok(_) => notification::file_saved(temp),
-        Err(_) => return,
+        Ok(_) => return,
+        Err(_) => eprintln!("{}", error::message(30)),
     };
 }

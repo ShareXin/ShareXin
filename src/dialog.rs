@@ -52,6 +52,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     // if non-image toot/tweet, doesnt show file button
     if message != MessageKind::Image {
         image.destroy();
+        send.set_sensitive(false);
     }
 
     image.connect_clicked(move |_| {
@@ -148,15 +149,42 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         }
     });
 
-    // control+return sends message
     // if twitter, 280 char limit, if mastodon 500 CHAR LIMIT
     let send_bypass = send.clone();
     let window_bypass = window.clone();
     let text_bypass = text.clone();
     let count_bypass = count.clone();
 
+    window_bypass.borrow().connect_key_press_event(move |_, _| {
+        key_event(
+            send_bypass.clone(),
+            text_bypass.clone(),
+            count_bypass.clone(),
+            message.clone(),
+            service.clone(),
+        );
+        Inhibit(false)
+    });
+
+    let send_bypass = send.clone();
+    let window_bypass = window.clone();
+    let text_bypass = text.clone();
+    let count_bypass = count.clone();
+
+    window_bypass
+        .borrow()
+        .connect_key_release_event(move |_, _| {
+            key_event(
+                send_bypass.clone(),
+                text_bypass.clone(),
+                count_bypass.clone(),
+                message.clone(),
+                service.clone(),
+            );
+            Inhibit(false)
+        });
+
     fn key_event(
-        key: &gdk::EventKey,
         send_bypass: gtk::Button,
         text_bypass: gtk::TextView,
         count_bypass: gtk::Label,
@@ -175,78 +203,82 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         let status_count = char_count(service, status, message);
 
         // uses markdown to set color
-        let mut limit = String::from("<span foreground=\"#EE0456\">");
+        let mut limit = format!("<span foreground=\"#EE0456\">");
         limit.push_str(&status_count.to_string());
         limit.push_str("</span>");
-        let mut hit = String::from("<span foreground=\"#ECA60B\">");
+        let mut hit = format!("<span foreground=\"#ECA60B\">");
         hit.push_str(&status_count.to_string());
         hit.push_str("</span>");
 
-        match service {
-            ServiceKind::Twitter => {
-                if status_count <= 20 && status_count >= 0 {
-                    count_bypass.set_markup(&hit);
-                } else if status_count < 0 {
-                    count_bypass.set_markup(&limit);
-                } else {
-                    count_bypass.set_label(&status_count.to_string());
-                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                        match key.get_keyval() {
-                            key::Return => send_bypass.clicked(),
-                            _ => (),
-                        }
+        match message {
+            MessageKind::Image => match service {
+                ServiceKind::Twitter => {
+                    if status_count <= 20 && status_count >= 0 {
+                        count_bypass.set_markup(&hit);
+                    } else if status_count < 0 {
+                        count_bypass.set_markup(&limit);
+                    } else {
+                        count_bypass.set_label(&status_count.to_string());
                     }
                 }
-            }
-            ServiceKind::Mastodon => {
-                if status_count == 0 {
-                    count_bypass.set_markup(&hit);
-                } else if status_count < 0 {
-                    count_bypass.set_markup(&limit);
-                } else {
-                    count_bypass.set_label(&status_count.to_string());
-                    if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
-                        match key.get_keyval() {
-                            key::Return => send_bypass.clicked(),
-                            _ => (),
-                        }
+                ServiceKind::Mastodon => {
+                    if status_count < 0 {
+                        count_bypass.set_markup(&limit);
+                    } else {
+                        count_bypass.set_label(&status_count.to_string());
                     }
                 }
-            }
-            ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
+                ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
+            },
+            MessageKind::Text => match service {
+                ServiceKind::Twitter => {
+                    if status_count >= TWITTER_COUNT || status_count < 0 {
+                        send_bypass.set_sensitive(false);
+                    } else {
+                        send_bypass.set_sensitive(true);
+                    }
+                    if status_count <= 20 && status_count >= 0 {
+                        count_bypass.set_markup(&hit);
+                    } else if status_count < 0 {
+                        count_bypass.set_markup(&limit);
+                    } else {
+                        count_bypass.set_label(&status_count.to_string());
+                    }
+                }
+                ServiceKind::Mastodon => {
+                    if status_count >= MASTODON_COUNT || status_count < 0 {
+                        send_bypass.set_sensitive(false);
+                    } else {
+                        send_bypass.set_sensitive(true);
+                    }
+                    if status_count < 0 {
+                        count_bypass.set_markup(&limit);
+                    } else {
+                        count_bypass.set_label(&status_count.to_string());
+                    }
+                }
+                ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
+            },
         }
     }
+
+    // control+return sends message
+    let send_bypass = send.clone();
+    let window_bypass = window.clone();
 
     window_bypass
         .borrow()
         .connect_key_press_event(move |_, key| {
-            key_event(
-                key,
-                send_bypass.clone(),
-                text_bypass.clone(),
-                count_bypass.clone(),
-                message.clone(),
-                service.clone(),
-            );
-            Inhibit(false)
-        });
-
-    let send_bypass = send.clone();
-    let window_bypass = window.clone();
-    let text_bypass = text.clone();
-    let count_bypass = count.clone();
-
-    window_bypass
-        .borrow()
-        .connect_key_release_event(move |_, key| {
-            key_event(
-                key,
-                send_bypass.clone(),
-                text_bypass.clone(),
-                count_bypass.clone(),
-                message.clone(),
-                service.clone(),
-            );
+            if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) {
+                match key.get_keyval() {
+                    key::Return => {
+                        if send_bypass.get_sensitive() {
+                            send_bypass.clicked();
+                        }
+                    }
+                    _ => (),
+                }
+            }
             Inhibit(false)
         });
 
@@ -268,7 +300,7 @@ fn char_count(service: ServiceKind, status: String, message: MessageKind) -> i32
         ServiceKind::Mastodon => {
             MASTODON_COUNT - egg_mode_text::character_count(&status, URL_COUNT, URL_COUNT) as i32
         }
-        ServiceKind::Imgur => panic!("Impossible outcome!"),
+        ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
     };
     return remaining;
 }
