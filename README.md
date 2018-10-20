@@ -39,6 +39,9 @@
 - Arch Linux
 - GhostBSD (FreeBSD distro)
 
+## Installation
+1. `cargo install sharexin`
+
 ## `--help`
 
 ## Language support
@@ -91,19 +94,6 @@
 * libclang-dev
 * clang
 
-##### Debian issues
-As of Oct 5, 2018, you need these Ubuntu .deb for it to compile on Debian
-- libglib2.0-0_2.55.2-1ubuntu1_amd64.deb
-- libglib2.0-bin_2.55.2-1ubuntu1_amd64.deb
-- libglib2.0-dev-bin_2.55.2-1ubuntu1_amd64.deb
-- libglib2.0-dev_2.55.2-1ubuntu1_amd65.deb
-- fontconfig-config_2.12.6-0ubuntu1_all.deb
-- gir1.2-gtk-3.0_3.22.29-2ubuntu1_amd64.deb
-- libgtk3-0_3.22.29-2ubuntu1_amd64.deb
-- libgtk3-common_3.22.29-2ubuntu1_all.deb
-- libgtk3-dev_3.22.29-2ubuntu1_amd64.deb
-- wayland-protocols_1.10-1_all.deb
-
 #### Arch Linux dependencies
 * curl
 * gtk3
@@ -146,13 +136,22 @@ As of Oct 5, 2018, you need these Ubuntu .deb for it to compile on Debian
 2. `cargo install`
 
 ## Changelog
-#### [0.6.7] - 2018-10-??
+#### [0.6.7] - 2018-10-20
+- NATIVE TWITTER API, reconfigure your account
 - Colors for character count on message popup match colors on Twitter Web
 - Character count on message popup turns yellow when approaching limit with 20 characters left, just like on Twitter Web
 - Bug fix with `--upgrade` also triggering normal cli help
 - Didn't know `unreachable!("")` was a thing, replaced some instances of `panic!()` with it
 - Removed useless `error::fatal()` message
 - Disabling *"Ok"* button when no text is entered or when too much text is over service limit
+- Removed "File saved" notification, not really needed
+- Updated dependencies
+- Debian is actually compatible **(had to regress from 3_22_30 for gtk-rs to 3_18)**
+- Better comments
+- No longer opens browser for checking updates
+- Character count only changes when keys are pressed in the TEXT Box, not the entire window
+- Made `error.rs` actually readable
+- Notifications for a sent image or status tweet/toot or Imgur post only last 2 seconds
 
 #### [0.6.6] - 2018-10-31
 - More testing done

@@ -28,9 +28,6 @@ mod save;
 mod twitter;
 mod upgrade;
 
-pub static VERSION: &'static str = env!("CARGO_PKG_VERSION");
-pub static SHAREXIN: &'static str = "https://github.com/ShareXin/ShareXin";
-
 #[derive(Copy, Clone)]
 pub enum ServiceKind {
     Twitter,

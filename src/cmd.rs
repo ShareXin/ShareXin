@@ -13,8 +13,8 @@ use MessageKind;
 use ServiceKind;
 
 pub fn cmd() {
-    let file = language::loader();
-    let locators = YamlLoader::load_from_str(file).unwrap();
+    // Individual parts the help menu
+    let locators = YamlLoader::load_from_str(&language::loader()).unwrap();
     let locator = &locators[0]["Help"];
     let help = &locator["Help"].as_str().unwrap();
     let version = &locator["Version"].as_str().unwrap();
@@ -29,6 +29,7 @@ pub fn cmd() {
     let twitter_auth = &locator["Twitter"]["Auth"].as_str().unwrap();
     let mastodon_auth = &locator["Mastodon"]["Auth"].as_str().unwrap();
 
+    // Build help menu with clap.rs
     let mut sharexin = App::new("sharexin")
         .version(crate_version!())
         .author(crate_authors!())
@@ -91,43 +92,73 @@ pub fn cmd() {
 
     match matches.subcommand() {
         ("toot", Some(toot_matches)) => match toot_matches.subcommand_name() {
-            Some("area") => toot_area(),
-            Some("window") => toot_window(),
-            Some("full") => toot_full(),
+            Some("area") => {
+                image::image(ScreenshotKind::Area);
+                dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
+            }
+            Some("window") => {
+                image::image(ScreenshotKind::Window);
+                dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
+            }
+            Some("full") => {
+                image::image(ScreenshotKind::Full);
+                dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
+            }
             Some("auth") => mastodon::auth(),
             _ => {
                 if toot_matches.is_present("file") {
                     if let Some(file) = toot_matches.value_of("file") {
-                        toot_file(file.to_owned());
+                        save::file(file.to_string());
+                        dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
                     }
                 } else {
-                    toot();
+                    dialog::dialog(ServiceKind::Mastodon, MessageKind::Text);
                 }
             }
         },
         ("tweet", Some(tweet_matches)) => match tweet_matches.subcommand_name() {
-            Some("area") => tweet_area(),
-            Some("window") => tweet_window(),
-            Some("full") => tweet_full(),
+            Some("area") => {
+                image::image(ScreenshotKind::Area);
+                dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
+            }
+            Some("window") => {
+                image::image(ScreenshotKind::Window);
+                dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
+            }
+            Some("full") => {
+                image::image(ScreenshotKind::Full);
+                dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
+            }
             Some("auth") => twitter::auth(),
             _ => {
                 if tweet_matches.is_present("file") {
                     if let Some(file) = tweet_matches.value_of("file") {
-                        tweet_file(file.to_owned());
+                        save::file(file.to_string());
+                        dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
                     }
                 } else {
-                    tweet();
+                    dialog::dialog(ServiceKind::Twitter, MessageKind::Text);
                 }
             }
         },
         ("imgur", Some(imgur_matches)) => match imgur_matches.subcommand_name() {
-            Some("area") => imgur_area(),
-            Some("window") => imgur_window(),
-            Some("full") => imgur_full(),
+            Some("area") => {
+                image::image(ScreenshotKind::Area);
+                imgur::send();
+            }
+            Some("window") => {
+                image::image(ScreenshotKind::Window);
+                imgur::send();
+            }
+            Some("full") => {
+                image::image(ScreenshotKind::Full);
+                imgur::send();
+            }
             _ => {
                 if imgur_matches.is_present("file") {
                     if let Some(file) = imgur_matches.value_of("file") {
-                        imgur_file(file.to_owned());
+                        save::file(file.to_string());
+                        imgur::send();
                     }
                 } else {
                     sharexin.print_help().unwrap();
@@ -142,72 +173,4 @@ pub fn cmd() {
             }
         }
     }
-}
-
-pub fn tweet() {
-    dialog::dialog(ServiceKind::Twitter, MessageKind::Text);
-}
-
-pub fn toot() {
-    dialog::dialog(ServiceKind::Mastodon, MessageKind::Text);
-}
-
-pub fn tweet_full() {
-    image::image(ScreenshotKind::Full);
-    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
-}
-
-pub fn tweet_window() {
-    image::image(ScreenshotKind::Window);
-    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
-}
-
-pub fn tweet_area() {
-    image::image(ScreenshotKind::Area);
-    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
-}
-
-pub fn toot_full() {
-    image::image(ScreenshotKind::Full);
-    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
-}
-
-pub fn toot_window() {
-    image::image(ScreenshotKind::Window);
-    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
-}
-
-pub fn toot_area() {
-    image::image(ScreenshotKind::Area);
-    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
-}
-
-pub fn imgur_full() {
-    image::image(ScreenshotKind::Full);
-    imgur::send();
-}
-
-pub fn imgur_window() {
-    image::image(ScreenshotKind::Window);
-    imgur::send();
-}
-
-pub fn imgur_area() {
-    image::image(ScreenshotKind::Area);
-    imgur::send();
-}
-
-pub fn tweet_file(filed: String) {
-    save::file(filed);
-    dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
-}
-
-pub fn toot_file(filed: String) {
-    save::file(filed);
-    dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
-}
-
-pub fn imgur_file(filed: String) {
-    save::file(filed);
-    imgur::send();
 }

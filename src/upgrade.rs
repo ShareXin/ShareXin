@@ -1,16 +1,16 @@
 use curl::easy::Easy;
 use error;
 use language;
-use open;
 use yaml_rust::YamlLoader;
-use SHAREXIN;
-use VERSION;
+
+static VERSION: &'static str = crate_version!();
+static SHAREXIN: &'static str = "https://crates.io/crates/sharexin";
 
 pub fn upgrade() {
     let mut dst = Vec::new();
     let mut latest = Easy::new();
 
-    // file made to check version number
+    // Downloads the "version" file from GitHub
     latest
         .url("https://raw.githubusercontent.com/ShareXin/ShareXin/master/version")
         .unwrap();
@@ -18,6 +18,7 @@ pub fn upgrade() {
     transfer
         .write_function(|data| {
             dst.extend_from_slice(data);
+            // Removes periods from version to compare
             let mut latest_utf = String::from_utf8(dst.clone()).unwrap();
             while latest_utf.ends_with("\n") {
                 let len = latest_utf.len();
@@ -46,14 +47,14 @@ pub fn upgrade() {
 }
 
 fn check_update(latest_version: usize, current_version: usize, latest_utf: String) {
-    let file = language::loader();
-    let locators = YamlLoader::load_from_str(file).unwrap();
+    let locators = YamlLoader::load_from_str(&language::loader()).unwrap();
     let locator = &locators[0]["Update"];
 
     let installed = format!("{}", &locator["Installed"].as_str().unwrap());
     let latest = format!("{}", &locator["Latest"].as_str().unwrap());
     let mut update_state = String::new();
 
+    // Checks version numbers and decides if you are up-to-date or not
     if latest_version > current_version {
         update_state.push_str(&locator["Out"].as_str().unwrap());
     } else if latest_version < current_version {
@@ -61,13 +62,13 @@ fn check_update(latest_version: usize, current_version: usize, latest_utf: Strin
     } else if latest_version == current_version {
         update_state.push_str(&locator["Up"].as_str().unwrap());
     }
-
     if latest_version > current_version {
-        open_update();
         println!(
             "{}: {}\n{}: {}\n{}",
             &installed, VERSION, &latest, &latest_utf, &update_state
         );
+        let upgrade = format!("{}", &locator["Check"].as_str().unwrap());
+        println!("{}: {}", upgrade, SHAREXIN);
     } else if latest_version < current_version {
         println!(
             "{}: {}\n{}: {}\n{}",
@@ -79,21 +80,4 @@ fn check_update(latest_version: usize, current_version: usize, latest_utf: Strin
             &installed, VERSION, &latest, &latest_utf, &update_state
         );
     }
-}
-
-fn open_update() {
-    match open::that(SHAREXIN) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(19));
-            return;
-        }
-    };
-
-    let file = language::loader();
-    let locators = YamlLoader::load_from_str(file).unwrap();
-    let locator = &locators[0]["Update"];
-    let upgrade = format!("{}", &locator["Check"].as_str().unwrap());
-
-    println!("{}: {}", upgrade, SHAREXIN);
 }

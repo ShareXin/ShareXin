@@ -13,18 +13,20 @@ use twitter;
 use MessageKind;
 use ServiceKind;
 
+// Constants for Character count
 const URL_COUNT: i32 = 23;
 const TWITTER_COUNT: i32 = 280;
 const MASTODON_COUNT: i32 = 500;
 const TWITTER_IMAGE_COUNT: i32 = TWITTER_COUNT - URL_COUNT;
 
 pub fn dialog(service: ServiceKind, message: MessageKind) {
+    // Initialize GTK
     match gtk::init() {
         Ok(ok) => ok,
         Err(_) => eprintln!("{}", error::message(24)),
     };
 
-    // objects from glade file
+    // Creates variables for objects in Glade GTK file
     let builder = gtk::Builder::new_from_string(include_str!("sharexin.glade"));
     let window: gtk::Window = builder.get_object("window").unwrap();
     let header: gtk::HeaderBar = builder.get_object("header").unwrap();
@@ -34,6 +36,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     let image: gtk::Button = builder.get_object("image").unwrap();
     let count: gtk::Label = builder.get_object("count").unwrap();
 
+    // Set Headerbar Subtitle and Default Character Count Label
     match service {
         ServiceKind::Twitter => {
             header.set_subtitle("Twitter");
@@ -49,17 +52,19 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
     }
 
-    // if non-image toot/tweet, doesnt show file button
-    if message != MessageKind::Image {
+    // If user is not sending an image, then remove view screenshot button, and disallow user to send
+    if let MessageKind::Text = message {
         image.destroy();
         send.set_sensitive(false);
     }
 
+    // Opens screenshot made by user
     image.connect_clicked(move |_| {
         image::open_temp();
         return;
     });
 
+    // When window deleted by user (closed), quit GTK and delete temporary image if possible
     window.connect_delete_event(move |_, _| {
         gtk::main_quit();
         if message == MessageKind::Image {
@@ -68,6 +73,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         Inhibit(false)
     });
 
+    // When cancel button clicked, quit GTK and delete temporary image if possible
     cancel.connect_clicked(move |_| {
         gtk::main_quit();
         if message == MessageKind::Image {
@@ -76,24 +82,27 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         Inhibit(false);
     });
 
-    // rust security bypass
+    // Used to bypass Rust's borrowing and ownership security features
     let send_bypass = send.clone();
     let window_bypass = window.clone();
     let text_bypass = text.clone();
 
-    // checks textview and sends message to destination/service
+    // When send button clicked
     send_bypass.borrow().connect_clicked(move |_| {
-        // gets buffer text from TextView item
+        // Get the Text Buffer from the TextView object (text box)
         let buffer = TextView::get_buffer(&text_bypass.borrow()).unwrap();
 
-        let sent: Option<String> = TextBuffer::get_text(
+        // Get String from Text Buffer (text entered by user)
+        let status: String = TextBuffer::get_text(
             &buffer,
             &TextBuffer::get_start_iter(&buffer),
             &TextBuffer::get_end_iter(&buffer),
             false,
-        );
-        let status: String = sent.unwrap();
-        // checks if character count is over limit, then creates thread for sending and closes
+        ).unwrap();
+        // Checks if Twitter or Mastodon,
+        // then checks if status is being sent with an image or not,
+        // then decides what to do with the status
+        // Creates thread to be able to close the GTK window while sending status/image
         match service {
             ServiceKind::Twitter => match message {
                 MessageKind::Image => {
@@ -149,29 +158,14 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         }
     });
 
-    // if twitter, 280 char limit, if mastodon 500 CHAR LIMIT
+    // Rust security bypassing
     let send_bypass = send.clone();
-    let window_bypass = window.clone();
     let text_bypass = text.clone();
     let count_bypass = count.clone();
 
-    window_bypass.borrow().connect_key_press_event(move |_, _| {
-        key_event(
-            send_bypass.clone(),
-            text_bypass.clone(),
-            count_bypass.clone(),
-            message.clone(),
-            service.clone(),
-        );
-        Inhibit(false)
-    });
-
-    let send_bypass = send.clone();
-    let window_bypass = window.clone();
-    let text_bypass = text.clone();
-    let count_bypass = count.clone();
-
-    window_bypass
+    // Character count functions called when keys are pressed in the Text Box
+    text_bypass
+        .clone()
         .borrow()
         .connect_key_release_event(move |_, _| {
             key_event(
@@ -184,6 +178,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
             Inhibit(false)
         });
 
+    // Updates Character Count to reflect text in Text Box
     fn key_event(
         send_bypass: gtk::Button,
         text_bypass: gtk::TextView,
@@ -262,10 +257,11 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         }
     }
 
-    // control+return sends message
+    // Rust security bypassing
     let send_bypass = send.clone();
     let window_bypass = window.clone();
 
+    // Enables CTRL+Enter shortcut to send a status
     window_bypass
         .borrow()
         .connect_key_press_event(move |_, key| {
@@ -282,10 +278,12 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
             Inhibit(false)
         });
 
+    // Shows the window created
     window.show_all();
     gtk::main();
 }
 
+// Character count using egg_mode_text as a representation of Twitter's character count
 fn char_count(service: ServiceKind, status: String, message: MessageKind) -> i32 {
     let remaining = match service {
         ServiceKind::Twitter => match message {

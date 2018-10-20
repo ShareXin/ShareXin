@@ -10,6 +10,8 @@ use ServiceKind;
 
 pub fn send() {
     let tmp = image::temp_dir();
+
+    // Opens file for use
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
@@ -18,6 +20,8 @@ pub fn send() {
             error::exit()
         }
     };
+
+    // Stores image in a Vector
     let mut image = Vec::new();
     match file.read_to_end(&mut image) {
         Ok(ok) => ok,
@@ -28,11 +32,12 @@ pub fn send() {
         }
     };
 
-    // creates imgur app using sharexin app
+    // Creates Imgur Applications for sending to Imgur API
     let mut copy_link = String::new();
     let handle = Imgur::Handle::new(String::from("37562f83e04fd66"));
     let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
 
+    // Uploads file to Imgur API
     match handle.upload(&image) {
         Ok(info) => match info.link() {
             Some(link) => copy_link.push_str(link),
@@ -48,11 +53,18 @@ pub fn send() {
             error::exit()
         }
     }
+
+    // Send notification
     notification::image_sent(ServiceKind::Imgur, &copy_link, tmp.to_str().unwrap());
+
+    // Copies url to clipboard
     match ctx.set_contents(copy_link.clone()) {
         Ok(ok) => ok,
         Err(_) => eprintln!("{}", error::message(19)),
     };
+
+    // Opens url (sort of a workaround for Wayland clipboard
+    // deleting contents of clipboard after an app closes)
     match open::that(copy_link) {
         Ok(ok) => ok,
         Err(_) => {

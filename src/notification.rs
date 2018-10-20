@@ -1,4 +1,4 @@
-use notify_rust::Notification;
+use notify_rust::{Notification, Timeout};
 
 use error;
 use language::loader;
@@ -12,9 +12,10 @@ enum NotificationKind {
 }
 
 fn notification(service: ServiceKind, notification: NotificationKind) -> String {
-    let locators = YamlLoader::load_from_str(loader()).unwrap();
-    let mut locator = &locators[0]["Notification"];
+    // Gets section of localization file for Notifications
+    let mut locator = &YamlLoader::load_from_str(&loader()).unwrap()[0]["Notification"];
 
+    // Checks kind of notification and the kind of service (Twitter, Mastodon, Imgur) used
     match notification {
         NotificationKind::Sent => {
             locator = &locator["Sent"];
@@ -36,13 +37,14 @@ fn notification(service: ServiceKind, notification: NotificationKind) -> String 
     return format!("{}", locator.as_str().unwrap());
 }
 
-// when the tweet/toot with an image is sent
+// Sends a notification with notify-rust, when a status with an image or an image is sent/uploaded
 pub fn image_sent(service: ServiceKind, text: &str, img: &str) {
     match Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
         .icon(img)
+        .timeout(Timeout::Milliseconds(2000))
         .show()
     {
         Ok(ok) => ok,
@@ -52,6 +54,7 @@ pub fn image_sent(service: ServiceKind, text: &str, img: &str) {
         }
     };
 
+    // Removes temporary file
     match fs::remove_file(img.clone()) {
         Ok(ok) => ok,
         Err(_) => {
@@ -61,12 +64,13 @@ pub fn image_sent(service: ServiceKind, text: &str, img: &str) {
     };
 }
 
-// when the tweet/toot without an image is sent
+// Sends a notification when a status is sent
 pub fn message_sent(service: ServiceKind, text: &str) {
     match Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
+        .timeout(Timeout::Milliseconds(2000))
         .show()
     {
         Ok(ok) => ok,
@@ -77,7 +81,7 @@ pub fn message_sent(service: ServiceKind, text: &str) {
     };
 }
 
-// if a tweet/toot is unable to send
+// Sends a notification when a status update didn't go through
 pub fn not_sent(service: ServiceKind) {
     match Notification::new()
         .appname("ShareXin")
@@ -92,6 +96,7 @@ pub fn not_sent(service: ServiceKind) {
     };
 }
 
+// Sends a notification with the error message as the body
 pub fn error(code: usize) {
     match Notification::new()
         .appname("ShareXin")

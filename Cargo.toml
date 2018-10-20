@@ -1,6 +1,6 @@
 [package]
 name = "sharexin"
-version = "0.6.6"
+version = "0.6.7"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux and FreeBSD"
 homepage = "https://sharexin.github.io"
@@ -11,8 +11,8 @@ include = ["src/lang/*", "Cargo.toml", "src/*"]
 readme = "README.md"
 
 [dependencies]
-gtk = { version = "0.5.0", features = ["v3_22"] }
-gdk = { version = "0.9.0", features = ["v3_22"] }
+gtk = { version = "0.5.0", features = ["v3_18"] }
+gdk = { version = "0.9.0", features = ["v3_18"] }
 openssl = {version = "0.10.13", features = ["vendored"]}
 glib = "0.6.0"
 time = "0.1.40"
