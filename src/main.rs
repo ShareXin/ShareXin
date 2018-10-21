@@ -2,14 +2,11 @@
 extern crate clap;
 
 extern crate clipboard;
-extern crate curl;
-extern crate egg_mode;
 extern crate egg_mode_text;
 extern crate gdk;
 extern crate glib;
 extern crate gtk;
 extern crate imgur as Imgur;
-extern crate mammut;
 extern crate notify_rust;
 extern crate open;
 extern crate screenshot_rs;
@@ -26,7 +23,6 @@ mod mastodon;
 mod notification;
 mod save;
 mod twitter;
-mod upgrade;
 
 #[derive(Copy, Clone)]
 pub enum ServiceKind {

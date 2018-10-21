@@ -137,18 +137,16 @@
 
 ## Changelog
 #### [0.6.7] - 2018-10-20
-- NATIVE TWITTER API, reconfigure your account
 - Colors for character count on message popup match colors on Twitter Web
 - Character count on message popup turns yellow when approaching limit with 20 characters left, just like on Twitter Web
-- Bug fix with `--upgrade` also triggering normal cli help
 - Didn't know `unreachable!("")` was a thing, replaced some instances of `panic!()` with it
 - Removed useless `error::fatal()` message
 - Disabling *"Ok"* button when no text is entered or when too much text is over service limit
 - Removed "File saved" notification, not really needed
 - Updated dependencies
-- Debian is actually compatible **(had to regress from 3_22_30 for gtk-rs to 3_18)**
+- Debian is actually compatible **(had to regress from 3_22_30 of gtk-rs to 3_18)**
 - Better comments
-- No longer opens browser for checking updates
+- `--upgrade` removed due to issues with openssl
 - Character count only changes when keys are pressed in the TEXT Box, not the entire window
 - Made `error.rs` actually readable
 - Notifications for a sent image or status tweet/toot or Imgur post only last 2 seconds
@@ -165,7 +163,7 @@
 - Removed RefCell in `dialog.rs`
 - Updated Twitter character limit (not full proof for non-Latin characters)
 - Heavy rewrite of functions with clearer variables
-- Old Twitter API restored for functionality, will be replaced by native API
+- Old Twitter API restored for functionality, will be replaced by native API in a later update
 
 #### [0.6.5] - 2018-09-26
 - Work will continue on the project!

@@ -7,7 +7,6 @@ use mastodon;
 use save;
 use screenshot_rs::ScreenshotKind;
 use twitter;
-use upgrade;
 use yaml_rust::YamlLoader;
 use MessageKind;
 use ServiceKind;
@@ -18,7 +17,6 @@ pub fn cmd() {
     let locator = &locators[0]["Help"];
     let help = &locator["Help"].as_str().unwrap();
     let version = &locator["Version"].as_str().unwrap();
-    let upgrade = &locator["Upgrade"].as_str().unwrap();
     let area = &locator["Area"].as_str().unwrap();
     let window = &locator["Window"].as_str().unwrap();
     let full = &locator["Full"].as_str().unwrap();
@@ -40,13 +38,7 @@ pub fn cmd() {
         .setting(AppSettings::DisableHelpSubcommand)
         .setting(AppSettings::ColoredHelp)
         .version_short("v")
-        .arg(
-            Arg::with_name("upgrade")
-                .short("U")
-                .long("upgrade")
-                .help(upgrade)
-                .takes_value(false),
-        ).subcommand(
+        .subcommand(
             SubCommand::with_name("toot")
                 .about(mastodon.to_owned())
                 .arg(
@@ -165,12 +157,6 @@ pub fn cmd() {
                 }
             }
         },
-        _ => {
-            if matches.is_present("upgrade") {
-                upgrade::upgrade();
-            } else {
-                sharexin.print_help().unwrap()
-            }
-        }
+        _ => sharexin.print_help().unwrap()
     }
 }
