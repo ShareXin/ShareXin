@@ -8,11 +8,12 @@
     ],
     "command":"sharexin",
     "finish-args":[
-        "--socket=x11",
+        "--socket=fallback-x11",
         "--socket=wayland",
-        "--filesystem=home",
-        "--filesystem=/tmp",
-        "--share=network"
+        "--filesystem=xdg-pictures",
+        "--env=TMPDIR=/var/tmp",
+        "--share=network",
+        "--share=ipc"
     ],
     "modules":[
         {

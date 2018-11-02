@@ -61,7 +61,6 @@ fn main() {
         .about("ShareX for Linux and FreeBSD")
         .help_message(help.to_owned())
         .version_message(version.to_owned())
-        .setting(AppSettings::ArgRequiredElseHelp)
         .setting(AppSettings::DisableHelpSubcommand)
         .setting(AppSettings::ColoredHelp)
         .version_short("v")
@@ -184,6 +183,6 @@ fn main() {
                 }
             }
         },
-        _ => sharexin.print_help().unwrap(),
+        _ => dialog::dialog(ServiceKind::Twitter, MessageKind::Text),
     }
 }
