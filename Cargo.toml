@@ -1,13 +1,13 @@
 [package]
 name = "sharexin"
-version = "0.6.7"
+version = "0.6.8"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux and FreeBSD"
 homepage = "https://sharexin.github.io"
 repository = "https://github.com/ShareXin/ShareXin"
 keywords = ["twitter", "mastodon", "imgur", "gtk", "linux"]
-license = "MIT"
-include = ["src/lang/*", "Cargo.toml", "src/*"]
+license = "GPL"
+include = ["lang/*", "Cargo.toml", "resources/gtk/ui.glade"]
 readme = "README.md"
 
 [dependencies]

@@ -9,7 +9,7 @@ url="https://github.com/ShareXin/ShareXin"
 makedepends=('rust' 'curl' 'gtk3' 'gdk-pixbuf2' 'cairo' 'glib2' 'openssl' 'dbus' 'xcb-util')
 depends=('feh' 'imagemagick')
 arch=('x86_64')
-license=('MIT')
+license=('GPL')
 sha256sums=('SKIP')
 source=("sharexin::git+https://github.com/ShareXin/ShareXin#branch=master")
 

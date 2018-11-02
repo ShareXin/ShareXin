@@ -27,7 +27,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     };
 
     // Creates variables for objects in Glade GTK file
-    let builder = gtk::Builder::new_from_string(include_str!("sharexin.glade"));
+    let builder = gtk::Builder::new_from_string(include_str!("../resources/gtk/ui.glade"));
     let window: gtk::Window = builder.get_object("window").unwrap();
     let header: gtk::HeaderBar = builder.get_object("header").unwrap();
     let text: gtk::TextView = builder.get_object("text").unwrap();
