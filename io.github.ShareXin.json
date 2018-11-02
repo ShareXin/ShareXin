@@ -7,6 +7,16 @@
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
     "command":"sharexin",
+    "build-options":{
+        "append-path":"/usr/lib/sdk/rust-stable/bin",
+        "build-args":[
+            "--share=network"
+        ],
+        "env":{
+            "CARGO_HOME":"/run/build/sharexin/cargo",
+            "DEBUG":"true"
+        }
+    },
     "finish-args":[
         "--socket=fallback-x11",
         "--socket=wayland",
@@ -26,14 +36,20 @@
             ],
             "subdir":"rust",
             "buildsystem":"simple",
+            "build-args":[
+                "--share=network"
+            ],
             "build-commands":[
-                "source /usr/lib/sdk/rust-stable/enable.sh && cargo build --release",
+                "cargo build --release",
                 "install -D target/release/sharexin /app/bin/sharexin"
             ]
         },
         {
             "name":"python3-toot",
             "buildsystem":"simple",
+            "build-args":[
+                "--share=network"
+            ],
             "build-commands":[
                 "pip3 install --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} toot"
             ],
@@ -76,8 +92,11 @@
             ]
         },
         {
-            "name":"rubygems",
+            "name":"t",
             "buildsystem":"simple",
+            "build-args":[
+                "--share=network"
+            ],
             "build-commands":[
                 "bundle install --local"
             ],

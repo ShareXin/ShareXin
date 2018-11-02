@@ -36,9 +36,8 @@ macro_rules! clone {
 
 pub fn dialog(service: ServiceKind, message: MessageKind) {
     // Initialize GTK
-    match gtk::init() {
-        Ok(ok) => ok,
-        Err(_) => eprintln!("{}", error::message(24)),
+    if gtk::init().is_err() {
+        eprintln!("{}", error::message(24));
     };
 
     // Creates variables for objects in Glade GTK file
@@ -92,7 +91,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     // When cancel button clicked, quit GTK and delete temporary image if possible
     cancel.connect_clicked(move |_| {
         gtk::main_quit();
-        if message == MessageKind::Image {
+        if let MessageKind::Image = message {
             image::delete_temp();
         }
         Inhibit(false);

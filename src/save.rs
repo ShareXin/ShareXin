@@ -8,12 +8,9 @@ pub fn file(file: String) {
     let tmp = image::temp_dir();
 
     // Takes the file provided by the user and copies it to a temporary file
-    match fs::copy(file, tmp.clone()) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(30));
-            error::exit()
-        }
+    if fs::copy(file, tmp.clone()).is_err() {
+        eprintln!("{}", error::message(30));
+        error::exit();
     };
 }
 
@@ -29,9 +26,8 @@ pub fn save() {
     // Creates "ShareXin" folder in user's Pictures folders
     let mut pictures = String::from(home);
     pictures.push_str("/ShareXin");
-    match fs::create_dir(pictures) {
-        Ok(ok) => ok,
-        Err(_) => {}
+    if fs::create_dir(pictures).is_err() {
+        eprintln!("{}", error::message(30));
     };
 
     // Creates a folder based on the year and month (similar to ShareX)
@@ -45,9 +41,8 @@ pub fn save() {
     });
     new_file.push_str("/ShareXin/");
     new_file.push_str(&folder_date);
-    match fs::create_dir(new_file.clone()) {
-        Ok(ok) => ok,
-        Err(_) => {}
+    if fs::create_dir(new_file.clone()).is_err() {
+        eprintln!("{}", error::message(30));
     };
 
     // Creates file name based on the year, month, day, hour, minute, and second, with .png
@@ -64,8 +59,7 @@ pub fn save() {
 
     // Copies the temporary file to the new file in the
     // year/month folder in ShareXin in user's Pictures folder
-    match fs::copy(tmp.clone(), new_file) {
-        Ok(_) => return,
-        Err(_) => eprintln!("{}", error::message(30)),
+    if fs::copy(tmp.clone(), new_file).is_err() {
+        eprintln!("{}", error::message(30));
     };
 }

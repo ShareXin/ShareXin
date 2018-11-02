@@ -31,23 +31,17 @@ pub fn image(kind: ScreenshotKind) {
 // After a status is sent, or a status is canceled,
 // or a status is unable to be sent, the temporary file will be deleted
 pub fn delete_temp() {
-    match fs::remove_file(temp_dir()) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(0));
-        }
+    if fs::remove_file(temp_dir()).is_err() {
+        eprintln!("{}", error::message(0));
     }
 }
 
 // Opens the temporary file in the default image viewer
 pub fn open_temp() {
-    match open::that(temp_dir()) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(19));
-            notification::error(19);
-            return;
-        }
+    if open::that(temp_dir()).is_err() {
+        eprintln!("{}", error::message(19));
+        notification::error(19);
+        return;
     };
 }
 

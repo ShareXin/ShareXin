@@ -32,7 +32,7 @@
 - Debian 9.5.0
 - Fedora 29
 - Arch Linux
-- GhostBSD (FreeBSD distro)
+- GhostBSD 18.10 (FreeBSD distro)
 
 ## `--help`
 
@@ -51,7 +51,7 @@
 
 ## Compiling
 
-#### Ubuntu 18.04 dependencies
+#### Ubuntu 18.10 dependencies
 * libgtk-3-dev
 * libcairo2-dev
 * libpango1.0-dev
@@ -118,7 +118,7 @@
 1. `cargo install sharexin`
 
 ## Changelog
-#### [0.6.8] - 2018-10-27
+#### [0.6.8] - 2018-11-02
 - Moved anything in `cmd.rs` to `main.rs` (main only called cmd anyways)
 - Reorganized things to accomodate for Flatpaks
 - Added Flatpak!!!

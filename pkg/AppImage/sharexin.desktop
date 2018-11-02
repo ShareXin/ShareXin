@@ -1,9 +1,21 @@
 [Desktop Entry]
+Version=1.0
 Name=ShareXin
 Exec=sharexin
 Icon=mail-send.svg
 Type=Application
 Comment=ShareX for Linux and FreeBSD
-Terminal=true
-Categories=Network;Utility;GTK;
+Terminal=false
+Categories=GNOME;GTK;Network;
+Keywords=Twitter;Mastodon;Imgur;Screenshot;
+StartupNotify=true
 StartupWMClass=sharexin
+Actions=Tweet;Toot;
+
+[Desktop Action Tweet]
+Exec=sharexin tweet
+Name=Tweet a message
+
+[Desktop Action Toot]
+Exec=sharexin toot
+Name=Toot a message

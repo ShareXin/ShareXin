@@ -39,74 +39,63 @@ fn notification(service: ServiceKind, notification: NotificationKind) -> String 
 
 // Sends a notification with notify-rust, when a status with an image or an image is sent/uploaded
 pub fn image_sent(service: ServiceKind, text: &str, img: &str) {
-    match Notification::new()
+    if Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
         .icon(img)
         .timeout(Timeout::Milliseconds(2000))
         .show()
+        .is_err()
     {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(23));
-            return;
-        }
+        eprintln!("{}", error::message(23));
+        return;
     };
 
     // Removes temporary file
-    match fs::remove_file(img.clone()) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(0));
-            return;
-        }
+    if fs::remove_file(img.clone()).is_err() {
+        eprintln!("{}", error::message(0));
+        return;
     };
 }
 
 // Sends a notification when a status is sent
 pub fn message_sent(service: ServiceKind, text: &str) {
-    match Notification::new()
+    if Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
         .timeout(Timeout::Milliseconds(2000))
         .show()
+        .is_err()
     {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(23));
-            return;
-        }
+        eprintln!("{}", error::message(23));
+        return;
     };
 }
 
 // Sends a notification when a status update didn't go through
 pub fn not_sent(service: ServiceKind) {
-    match Notification::new()
+    if Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::SendFailure))
         .show()
+        .is_err()
     {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(23));
-            return;
-        }
+        eprintln!("{}", error::message(23));
+        return;
     };
 }
 
 // Sends a notification with the error message as the body
 pub fn error(code: usize) {
-    match Notification::new()
+    if Notification::new()
         .appname("ShareXin")
         .summary(&error::message(code))
         .show()
+        .is_err()
     {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(23));
-            return;
-        }
+        eprintln!("{}", error::message(23));
+        return;
     };
 }

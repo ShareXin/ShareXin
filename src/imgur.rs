@@ -23,13 +23,10 @@ pub fn send() {
 
     // Stores image in a Vector
     let mut image = Vec::new();
-    match file.read_to_end(&mut image) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(28));
-            notification::error(28);
-            error::exit()
-        }
+    if file.read_to_end(&mut image).is_err() {
+        eprintln!("{}", error::message(28));
+        notification::error(28);
+        error::exit();
     };
 
     // Creates Imgur Applications for sending to Imgur API
@@ -58,19 +55,15 @@ pub fn send() {
     notification::image_sent(ServiceKind::Imgur, &copy_link, tmp.to_str().unwrap());
 
     // Copies url to clipboard
-    match ctx.set_contents(copy_link.clone()) {
-        Ok(ok) => ok,
-        Err(_) => eprintln!("{}", error::message(19)),
+    if ctx.set_contents(copy_link.clone()).is_err() {
+        eprintln!("{}", error::message(19));
     };
 
     // Opens url (sort of a workaround for Wayland clipboard
     // deleting contents of clipboard after an app closes)
-    match open::that(copy_link) {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(19));
-            notification::error(19);
-            error::exit()
-        }
+    if open::that(copy_link).is_err() {
+        eprintln!("{}", error::message(19));
+        notification::error(19);
+        error::exit();
     };
 }

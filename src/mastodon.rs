@@ -11,7 +11,7 @@ pub fn image(status: String) {
     let temp = tmp.to_str().unwrap().clone();
 
     // Calls the "toot" Python app and sends a status with an image
-    let _toot = match Command::new("toot")
+    let toot = match Command::new("toot")
         .args(&["post", "-m", &temp, &status])
         .status()
     {
@@ -24,7 +24,7 @@ pub fn image(status: String) {
     };
 
     // If toot gives the error code 2, then the status was not sent
-    if _toot.code() == Some(2) {
+    if toot.code() == Some(2) {
         eprintln!("{}", error::message(21));
         notification::not_sent(service);
         error::exit();
@@ -37,7 +37,7 @@ pub fn toot(status: String) {
     let service = ServiceKind::Mastodon;
 
     // Calls the "toot" Python app and send a status
-    let _toot = match Command::new("toot").args(&["post", &status]).status() {
+    let toot = match Command::new("toot").args(&["post", &status]).status() {
         Ok(ok) => ok,
         Err(_) => {
             eprintln!("{}", error::message(6));
@@ -47,7 +47,7 @@ pub fn toot(status: String) {
     };
 
     // If toot gives the error code 2, then the status was not sent
-    if _toot.code() == Some(2) {
+    if toot.code() == Some(2) {
         eprintln!("{}", error::message(21));
         notification::not_sent(service);
         error::exit();
@@ -58,11 +58,8 @@ pub fn toot(status: String) {
 
 pub fn auth() {
     // Calls the "toot" Python app and asks to login using the browser
-    match Command::new("toot").arg("login").status() {
-        Ok(ok) => ok,
-        Err(_) => {
-            eprintln!("{}", error::message(6));
-            error::exit()
-        }
+    if Command::new("toot").arg("login").status().is_err() {
+        eprintln!("{}", error::message(6));
+        error::exit();
     };
 }

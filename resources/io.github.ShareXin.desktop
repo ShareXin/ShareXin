@@ -1,12 +1,21 @@
 [Desktop Entry]
+Version=1.0
 Name=ShareXin
-Comment=ShareX-like application that lets you take a screenshot, and send it to either Twitter, a Mastodon instance, or Imgur.
-Exec=sharexin
+Exec=shareXin
 Icon=gnome-screenshot
 Type=Application
 Comment=ShareX for Linux and FreeBSD
 Terminal=false
-Categories=GNOME;GTK;Graphics;Network;Utility;
-Keywords=Twitter;Mastodon;Pawoo;Imgur;Rust;Screenshot;
+Categories=GNOME;GTK;Network;
+Keywords=Twitter;Mastodon;Imgur;Screenshot;
 StartupNotify=true
 StartupWMClass=sharexin
+Actions=Tweet;Toot;
+
+[Desktop Action Tweet]
+Exec=shareXin tweet
+Name=Tweet a message
+
+[Desktop Action Toot]
+Exec=shareXin toot
+Name=Toot a message
