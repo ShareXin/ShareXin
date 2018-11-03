@@ -12,13 +12,11 @@ extern crate time;
 extern crate yaml_rust;
 
 mod dialog;
-mod error;
 mod image;
 mod imgur;
-mod language;
 mod mastodon;
 mod notification;
-mod save;
+mod text;
 mod twitter;
 
 #[derive(Copy, Clone)]
@@ -40,7 +38,7 @@ use yaml_rust::YamlLoader;
 
 fn main() {
     // Individual parts the help menu
-    let locators = YamlLoader::load_from_str(&language::loader()).unwrap();
+    let locators = YamlLoader::load_from_str(&text::loader()).unwrap();
     let locator = &locators[0]["Help"];
     let help = &locator["Help"].as_str().unwrap();
     let version = &locator["Version"].as_str().unwrap();
@@ -126,7 +124,7 @@ fn main() {
             _ => {
                 if toot_matches.is_present("file") {
                     if let Some(file) = toot_matches.value_of("file") {
-                        save::file(file.to_string());
+                        image::file(file.to_string());
                         dialog::dialog(ServiceKind::Mastodon, MessageKind::Image);
                     }
                 } else {
@@ -151,7 +149,7 @@ fn main() {
             _ => {
                 if tweet_matches.is_present("file") {
                     if let Some(file) = tweet_matches.value_of("file") {
-                        save::file(file.to_string());
+                        image::file(file.to_string());
                         dialog::dialog(ServiceKind::Twitter, MessageKind::Image);
                     }
                 } else {
@@ -175,7 +173,7 @@ fn main() {
             _ => {
                 if imgur_matches.is_present("file") {
                     if let Some(file) = imgur_matches.value_of("file") {
-                        save::file(file.to_string());
+                        image::file(file.to_string());
                         imgur::send();
                     }
                 } else {

@@ -1,7 +1,7 @@
-use error;
 use image;
 use notification;
 use std::process::Command;
+use text;
 use ServiceKind;
 
 pub fn image(status: String) {
@@ -17,17 +17,17 @@ pub fn image(status: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(6));
+            eprintln!("{}", text::message(6));
             notification::not_sent(service);
-            error::exit()
+            text::exit()
         }
     };
 
     // If toot gives the error code 2, then the status was not sent
     if toot.code() == Some(2) {
-        eprintln!("{}", error::message(21));
+        eprintln!("{}", text::message(21));
         notification::not_sent(service);
-        error::exit();
+        text::exit();
     } else {
         notification::image_sent(service, &status, temp);
     }
@@ -40,17 +40,17 @@ pub fn toot(status: String) {
     let toot = match Command::new("toot").args(&["post", &status]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(6));
+            eprintln!("{}", text::message(6));
             notification::not_sent(service);
-            error::exit()
+            text::exit()
         }
     };
 
     // If toot gives the error code 2, then the status was not sent
     if toot.code() == Some(2) {
-        eprintln!("{}", error::message(21));
+        eprintln!("{}", text::message(21));
         notification::not_sent(service);
-        error::exit();
+        text::exit();
     } else {
         notification::message_sent(service, &status);
     }
@@ -59,7 +59,7 @@ pub fn toot(status: String) {
 pub fn auth() {
     // Calls the "toot" Python app and asks to login using the browser
     if Command::new("toot").arg("login").status().is_err() {
-        eprintln!("{}", error::message(6));
-        error::exit();
+        eprintln!("{}", text::message(6));
+        text::exit();
     };
 }

@@ -20,38 +20,38 @@ Update:
 Error:
     Fatal: Fatal error, closing application
     Error: Error
-    "0": Unknown error
-    "1": Error getting $HOME variable
-    "2": Error getting $LANG variable
-    "3": Error getting $XDG_SESSION_TYPE variable
-    "4": Unsupported desktop environment
-    "5": t command unavailable
-    "6": toot command unavailable
-    "7": gnome-screenshot command unavailable
-    "8": spectacle command unavailable
-    "9": swaygrab command unavailable
-    "10": scrot command unavailable
-    "11": xdotool command unavailable
-    "12": feh command unavailable
-    "13": ImageMagick unavailable
-    "14": slop command unavailable
-    "15": convert command unavailable
-    "16": Github unreachable
-    "17": Imgur unreachable
-    "18": Error on parsing latest version number
-    "19": Unable to open file or webpage
-    "20": Error uploading to Imgur
-    "21": Unable to send to Mastodon
-    "22": Unable to send to Twitter
-    "23": Unable to show notification
-    "24": GTK initialize error
-    "25": Unable to get current time
-    "26": Unsupported Wayland desktop environment
-    "27": Unsupported desktop environment
-    "28": Unable to read file
-    "29": Folder exists
-    "30": File not saved
-    "31": Unable to display system tray icon
+    0: Unknown error
+    1: Error getting $HOME variable
+    2: Error getting $LANG variable
+    3: Error getting $XDG_SESSION_TYPE variable
+    4: Unsupported desktop environment
+    5: t command unavailable
+    6: toot command unavailable
+    7: gnome-screenshot command unavailable
+    8: spectacle command unavailable
+    9: swaygrab command unavailable
+    10: scrot command unavailable
+    11: xdotool command unavailable
+    12: feh command unavailable
+    13: ImageMagick unavailable
+    14: slop command unavailable
+    15: convert command unavailable
+    16: Github unreachable
+    17: Imgur unreachable
+    18: Error on parsing latest version number
+    19: Unable to open file or webpage
+    20: Error uploading to Imgur
+    21: Unable to send to Mastodon
+    22: Unable to send to Twitter
+    23: Unable to show notification
+    24: GTK initialize error
+    25: Unable to get current time
+    26: Unsupported Wayland desktop environment
+    27: Unsupported desktop environment
+    28: Unable to read file
+    29: Folder exists
+    30: File not saved
+    31: Unable to display system tray icon
 Help:
     Usage: Usage
     Options: Options

@@ -1,10 +1,10 @@
 use clipboard::{ClipboardContext, ClipboardProvider};
-use error;
 use image;
 use notification;
 use open;
 use std::fs::File;
 use std::io::Read;
+use text;
 use Imgur;
 use ServiceKind;
 
@@ -15,18 +15,18 @@ pub fn send() {
     let mut file = match File::open(tmp.clone()) {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(28));
+            eprintln!("{}", text::message(28));
             notification::error(28);
-            error::exit()
+            text::exit()
         }
     };
 
     // Stores image in a Vector
     let mut image = Vec::new();
     if file.read_to_end(&mut image).is_err() {
-        eprintln!("{}", error::message(28));
+        eprintln!("{}", text::message(28));
         notification::error(28);
-        error::exit();
+        text::exit();
     };
 
     // Creates Imgur Applications for sending to Imgur API
@@ -39,15 +39,15 @@ pub fn send() {
         Ok(info) => match info.link() {
             Some(link) => copy_link.push_str(link),
             None => {
-                eprintln!("{}", error::message(20));
+                eprintln!("{}", text::message(20));
                 notification::error(20);
-                error::exit()
+                text::exit()
             }
         },
         Err(_) => {
-            eprintln!("{}", error::message(17));
+            eprintln!("{}", text::message(17));
             notification::error(17);
-            error::exit()
+            text::exit()
         }
     }
 
@@ -56,14 +56,14 @@ pub fn send() {
 
     // Copies url to clipboard
     if ctx.set_contents(copy_link.clone()).is_err() {
-        eprintln!("{}", error::message(19));
+        eprintln!("{}", text::message(19));
     };
 
     // Opens url (sort of a workaround for Wayland clipboard
     // deleting contents of clipboard after an app closes)
     if open::that(copy_link).is_err() {
-        eprintln!("{}", error::message(19));
+        eprintln!("{}", text::message(19));
         notification::error(19);
-        error::exit();
+        text::exit();
     };
 }

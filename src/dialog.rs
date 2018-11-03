@@ -1,11 +1,11 @@
 use egg_mode_text;
-use error;
 use gdk;
 use glib;
 use gtk;
 use gtk::*;
 use image;
 use mastodon;
+use text;
 use twitter;
 use MessageKind;
 use ServiceKind;
@@ -37,7 +37,7 @@ macro_rules! clone {
 pub fn dialog(service: ServiceKind, message: MessageKind) {
     // Initialize GTK
     if gtk::init().is_err() {
-        eprintln!("{}", error::message(24));
+        eprintln!("{}", text::message(24));
     };
 
     // Creates variables for objects in Glade GTK file

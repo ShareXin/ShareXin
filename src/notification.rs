@@ -1,8 +1,7 @@
 use notify_rust::{Notification, Timeout};
-
-use error;
-use language::loader;
 use std::fs;
+use std::{thread, time};
+use text;
 use yaml_rust::YamlLoader;
 use ServiceKind;
 
@@ -13,7 +12,7 @@ enum NotificationKind {
 
 fn notification(service: ServiceKind, notification: NotificationKind) -> String {
     // Gets section of localization file for Notifications
-    let mut locator = &YamlLoader::load_from_str(&loader()).unwrap()[0]["Notification"];
+    let mut locator = &YamlLoader::load_from_str(&text::loader()).unwrap()[0]["Notification"];
 
     // Checks kind of notification and the kind of service (Twitter, Mastodon, Imgur) used
     match notification {
@@ -39,39 +38,46 @@ fn notification(service: ServiceKind, notification: NotificationKind) -> String 
 
 // Sends a notification with notify-rust, when a status with an image or an image is sent/uploaded
 pub fn image_sent(service: ServiceKind, text: &str, img: &str) {
-    if Notification::new()
+    let notification = match Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
         .icon(img)
-        .timeout(Timeout::Milliseconds(2000))
         .show()
-        .is_err()
     {
-        eprintln!("{}", error::message(23));
-        return;
+        Ok(ok) => ok,
+        Err(_) => {
+            eprintln!("{}", text::message(23));
+            return;
+        }
     };
 
     // Removes temporary file
     if fs::remove_file(img.clone()).is_err() {
-        eprintln!("{}", error::message(0));
         return;
     };
+
+    thread::sleep(time::Duration::from_secs(3));
+    notification.close();
 }
 
 // Sends a notification when a status is sent
 pub fn message_sent(service: ServiceKind, text: &str) {
-    if Notification::new()
+    let notification = match Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::Sent))
         .body(text)
-        .timeout(Timeout::Milliseconds(2000))
         .show()
-        .is_err()
     {
-        eprintln!("{}", error::message(23));
-        return;
+        Ok(ok) => ok,
+        Err(_) => {
+            eprintln!("{}", text::message(23));
+            return;
+        }
     };
+
+    thread::sleep(time::Duration::from_secs(3));
+    notification.close();
 }
 
 // Sends a notification when a status update didn't go through
@@ -79,10 +85,11 @@ pub fn not_sent(service: ServiceKind) {
     if Notification::new()
         .appname("ShareXin")
         .summary(&notification(service, NotificationKind::SendFailure))
+        .timeout(Timeout::Milliseconds(3000))
         .show()
         .is_err()
     {
-        eprintln!("{}", error::message(23));
+        eprintln!("{}", text::message(23));
         return;
     };
 }
@@ -91,11 +98,12 @@ pub fn not_sent(service: ServiceKind) {
 pub fn error(code: usize) {
     if Notification::new()
         .appname("ShareXin")
-        .summary(&error::message(code))
+        .summary(&text::message(code))
+        .timeout(Timeout::Milliseconds(3000))
         .show()
         .is_err()
     {
-        eprintln!("{}", error::message(23));
+        eprintln!("{}", text::message(23));
         return;
     };
 }

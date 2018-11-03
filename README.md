@@ -120,8 +120,17 @@
 ## Changelog
 #### [0.6.8] - 2018-11-02
 - Moved anything in `cmd.rs` to `main.rs` (main only called cmd anyways)
+- Moved anything in `save.rs` to `image.rs`
+- `error.rs` is now `text.rs`, also merged with `language.rs`
 - Reorganized things to accomodate for Flatpaks
 - Added Flatpak!!!
+- Tried to simplify a LOT of code
+- `error.rs` now contains some planned enums for future rewritten error handling
+- Fixed bug where some errors were not found in YAML files for some reason
+- Fixed bug where because the `ShareXin` folder in pictures was already created, it attempted to display an error, which crashed for some reason
+-
+- Slightly modified Headerbar
+- "Sent to Twitter" and "Sent to Mastodon" notifications disappear from your Notifications and don't stick around in the OSD
 
 #### [0.6.7] - 2018-10-21
 - Colors for character count on message popup match colors on Twitter Web

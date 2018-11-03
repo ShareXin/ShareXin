@@ -1,7 +1,7 @@
-use error;
 use image;
 use notification;
 use std::process::Command;
+use text;
 use ServiceKind;
 
 pub fn image(status: String) {
@@ -17,17 +17,17 @@ pub fn image(status: String) {
     {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(5));
+            eprintln!("{}", text::message(5));
             notification::not_sent(service);
-            error::exit()
+            text::exit()
         }
     };
 
     // If t gives the error code 1, then the status was not sent
     if t.code() == Some(1) {
-        eprintln!("{}", error::message(22));
+        eprintln!("{}", text::message(22));
         notification::not_sent(service);
-        error::exit();
+        text::exit();
     } else {
         notification::image_sent(service, &status, temp);
     }
@@ -40,17 +40,17 @@ pub fn tweet(status: String) {
     let t = match Command::new("t").args(&["update", &status]).status() {
         Ok(ok) => ok,
         Err(_) => {
-            eprintln!("{}", error::message(5));
+            eprintln!("{}", text::message(5));
             notification::not_sent(service);
-            error::exit()
+            text::exit()
         }
     };
 
     // If t gives the error code 1, then the status was not sent
     if t.code() == Some(1) {
-        eprintln!("{}", error::message(22));
+        eprintln!("{}", text::message(22));
         notification::not_sent(service);
-        error::exit();
+        text::exit();
     } else {
         notification::message_sent(service, &status);
     }
@@ -59,7 +59,7 @@ pub fn tweet(status: String) {
 pub fn auth() {
     // Calls the "t" Ruby app and asks the user to login
     if Command::new("t").arg("authorize").status().is_err() {
-        eprintln!("{}", error::message(5));
-        error::exit();
+        eprintln!("{}", text::message(5));
+        text::exit();
     };
 }

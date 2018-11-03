@@ -20,38 +20,38 @@ Update:
 Error:
     Fatal: Błąd krytyczny, aplikacja ulegnie zagładzie
     Error: Błąd
-    "0": Nieznany błąd
-    "1": Błąd podczas odczytu zmiennej $HOME
-    "2": Błąd podczas odczytu zmiennej $LANG
-    "3": Błąd podczas odczytu zmiennej $XDG_SESSION_TYPE
-    "4": Nieobsługiwane środowisko graficzne
-    "5": Komenda t niedostępna
-    "6": Komenda toot niedostępna
-    "7": Komenda gnome-screenshot niedostępna
-    "8": Komenda spectacle niedostępna
-    "9": Komenda swaygrab niedostępna
-    "10": Komenda main niedostępna
-    "11": Komenda xdotool niedostępna
-    "12": Komenda feh niedostępna
-    "13": ImageMagick niedostępny
-    "14": Komenda slop niedostępna
-    "15": Komenda convert niedostępna
-    "16": Github nieosiągalny
-    "17": Imgur nieosiągalny
-    "18": Błąd przetwarzania numeru najnowszej wersji
-    "19": Nie udało się otworzyć pliku lub strony
-    "20": Błąd podczas wysyłania do Imgur
-    "21": Nie udało się wysłać na Mastodon
-    "22": Nie udało się wysłać na Twittera
-    "23": Nie udało się wyświetlić powiadomienia
-    "24": Błąd inicjalizacji GTK
-    "25": Nie udało się odczytać daty i godziny
-    "26": Nieobsługiwane środowisko Wayland
-    "27": Nieobsługiwane środowisko graficzne
-    "28": Nie udało się odczytać pliku
-    "29": Folder istnieje
-    "30": Plik nie został zapisany
-    "31": Nie udało się wyświetlić ikony na pasku zadań
+    0: Nieznany błąd
+    1: Błąd podczas odczytu zmiennej $HOME
+    2: Błąd podczas odczytu zmiennej $LANG
+    3: Błąd podczas odczytu zmiennej $XDG_SESSION_TYPE
+    4: Nieobsługiwane środowisko graficzne
+    5: Komenda t niedostępna
+    6: Komenda toot niedostępna
+    7: Komenda gnome-screenshot niedostępna
+    8: Komenda spectacle niedostępna
+    9: Komenda swaygrab niedostępna
+    10: Komenda main niedostępna
+    11: Komenda xdotool niedostępna
+    12: Komenda feh niedostępna
+    13: ImageMagick niedostępny
+    14: Komenda slop niedostępna
+    15: Komenda convert niedostępna
+    16: Github nieosiągalny
+    17: Imgur nieosiągalny
+    18: Błąd przetwarzania numeru najnowszej wersji
+    19: Nie udało się otworzyć pliku lub strony
+    20: Błąd podczas wysyłania do Imgur
+    21: Nie udało się wysłać na Mastodon
+    22: Nie udało się wysłać na Twittera
+    23: Nie udało się wyświetlić powiadomienia
+    24: Błąd inicjalizacji GTK
+    25: Nie udało się odczytać daty i godziny
+    26: Nieobsługiwane środowisko Wayland
+    27: Nieobsługiwane środowisko graficzne
+    28: Nie udało się odczytać pliku
+    29: Folder istnieje
+    30: Plik nie został zapisany
+    31: Nie udało się wyświetlić ikony na pasku zadań
 Help:
     Usage: Użycie
     Options: Opcje

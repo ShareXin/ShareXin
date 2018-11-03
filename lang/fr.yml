@@ -20,38 +20,38 @@ Update:
 Error:
     Fatal: Erreur fatale, fermeture de l'application
     Error: Erreur
-    "0": Unknown error
-    "1": Erreur lors de la réception de la variable $HOME
-    "2": Erreur lors de la réception de la variable $LANG
-    "3": Erreur lors de la réception de la variable $XDG_SESSION_TYPE
-    "4": L'environnement de bureau n'est pas pris en charge
-    "5": Commande t indisponible
-    "6": Commande toot indisponible
-    "7": Commande gnome-screenshot indisponible
-    "8": Commande spectacle indisponible
-    "9": Commande swaygrab indisponible
-    "10": Commande scrot indisponible
-    "11": Commande xdotool indisponible
-    "12": Commande feh indisponible
-    "13": ImageMagick indisponible
-    "14": Commande slop indisponible
-    "15": Commande convert indisponible
-    "16": Github inaccessible
-    "17": Imgur inaccessible
-    "18": Erreur d'analyse de la dernière version
-    "19": Incapable d'ouvrir le fichier ou la page web
-    "20": Erreur lors de l'envoi vers Imgur
-    "21": Impossible de publier sur Mastodon
-    "22": Impossible de publier sur Twitter
-    "23": Impossible d'afficher une notification
-    "24": Erreur d'initialisation GTK
-    "25": L'heure locale n'est pas disponible
-    "26": L'environnement de bureau Wayland n'est pas pris en charge
-    "27": L'environnement de bureau n'est pas pris en charge
-    "28": Fichier non lisible
-    "29": Le dossier existe déjà
-    "30": Le fichier n'est pas sauvegardé
-    "31": Impossible d'afficher l'icône de la barre des tâches
+    0: Unknown error
+    1: Erreur lors de la réception de la variable $HOME
+    2: Erreur lors de la réception de la variable $LANG
+    3: Erreur lors de la réception de la variable $XDG_SESSION_TYPE
+    4: L'environnement de bureau n'est pas pris en charge
+    5: Commande t indisponible
+    6: Commande toot indisponible
+    7: Commande gnome-screenshot indisponible
+    8: Commande spectacle indisponible
+    9: Commande swaygrab indisponible
+    10: Commande scrot indisponible
+    11: Commande xdotool indisponible
+    12: Commande feh indisponible
+    13: ImageMagick indisponible
+    14: Commande slop indisponible
+    15: Commande convert indisponible
+    16: Github inaccessible
+    17: Imgur inaccessible
+    18: Erreur d'analyse de la dernière version
+    19: Incapable d'ouvrir le fichier ou la page web
+    20: Erreur lors de l'envoi vers Imgur
+    21: Impossible de publier sur Mastodon
+    22: Impossible de publier sur Twitter
+    23: Impossible d'afficher une notification
+    24: Erreur d'initialisation GTK
+    25: L'heure locale n'est pas disponible
+    26: L'environnement de bureau Wayland n'est pas pris en charge
+    27: L'environnement de bureau n'est pas pris en charge
+    28: Fichier non lisible
+    29: Le dossier existe déjà
+    30: Le fichier n'est pas sauvegardé
+    31: Impossible d'afficher l'icône de la barre des tâches
 Help:
     Usage: Utilisation
     Options: Options

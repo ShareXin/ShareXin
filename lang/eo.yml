@@ -20,38 +20,38 @@ Update:
 Error:
     Fatal: Fatala eraro, ferma apliko
     Error: Eraro
-    "0": Unknown error
-    "1": Eraro ricevanta la $HOME variablon
-    "2": Eraro ricevanta la $LANG variablon
-    "3": Eraro ricevanta la $XDG_SESSION_TYPE variablon
-    "4": Labortabla medio ne estas subtenata
-    "5": t komando ne disponebla
-    "6": toot komando ne disponebla
-    "7": gnome-screenshot komando ne disponebla
-    "8": spectacle komando ne disponebla
-    "9": swaygrab komando ne disponebla
-    "10": scrot komando ne disponebla
-    "11": xdotool komando ne disponebla
-    "12": feh komando ne disponebla
-    "13": ImageMagick ne ekzistas
-    "14": slop komando ne disponebla
-    "15": convert komando ne disponebla
-    "16": Github neŝanĝebla
-    "17": Imgur neŝanĝebla
-    "18": Eraro pri analizado de plej nova versio
-    "19": Ne eblas malfermi dosieron aŭ retpaĝon
-    "20": Eraro alŝuta al Imgur
-    "21": Malsukcesis eldoni al Mastodon
-    "22": Malsukcesis eldoni al Twitter
-    "23": Ne eblas montri sciigon
-    "24": GTK-komenca eraro
-    "25": Ne eblas akiri aktualan tempon
-    "26": Wayland labortabla medio ne estas subtenata
-    "27": Labortabla medio ne estas subtenata
-    "28": Ne eblas legi dosieron
-    "29": La dosierujo jam ekzistas
-    "30": Dosiero ne savis
-    "31": Ne eblas montri la taskpunkton
+    0: Unknown error
+    1: Eraro ricevanta la $HOME variablon
+    2: Eraro ricevanta la $LANG variablon
+    3: Eraro ricevanta la $XDG_SESSION_TYPE variablon
+    4: Labortabla medio ne estas subtenata
+    5: t komando ne disponebla
+    6: toot komando ne disponebla
+    7: gnome-screenshot komando ne disponebla
+    8: spectacle komando ne disponebla
+    9: swaygrab komando ne disponebla
+    10: scrot komando ne disponebla
+    11: xdotool komando ne disponebla
+    12: feh komando ne disponebla
+    13: ImageMagick ne ekzistas
+    14: slop komando ne disponebla
+    15: convert komando ne disponebla
+    16: Github neŝanĝebla
+    17: Imgur neŝanĝebla
+    18: Eraro pri analizado de plej nova versio
+    19: Ne eblas malfermi dosieron aŭ retpaĝon
+    20: Eraro alŝuta al Imgur
+    21: Malsukcesis eldoni al Mastodon
+    22: Malsukcesis eldoni al Twitter
+    23: Ne eblas montri sciigon
+    24: GTK-komenca eraro
+    25: Ne eblas akiri aktualan tempon
+    26: Wayland labortabla medio ne estas subtenata
+    27: Labortabla medio ne estas subtenata
+    28: Ne eblas legi dosieron
+    29: La dosierujo jam ekzistas
+    30: Dosiero ne savis
+    31: Ne eblas montri la taskpunkton
 Help:
     Usage: Uzo
     Options: Opcioj

@@ -20,38 +20,38 @@ Update:
 Error:
     Fatal: Erro fatal, fechando aplicativo
     Error: Erro
-    "0": Erro desconhecido
-    "1": Erro a obter a variável $HOME
-    "2": Erro a obter a variável $LANG
-    "3": Erro a obter a variável $XDG_SESSION_TYPE
-    "4": Ambiente de Desktop não suportado
-    "5": Comando t indisponível
-    "6": Comando toot indisponível
-    "7": Comando gnome-screenshot indisponível
-    "8": Comando spectacle indisponível
-    "9": Comando swaygrab indisponível
-    "10": Comando scrot indisponível
-    "11": Comando xdotool indisponível
-    "12": Comando feh indisponível
-    "13": ImageMagick indisponível
-    "14": Comando slop indisponível
-    "15": Comando convert indisponível
-    "16": Github inacessível
-    "17": Imgur inacessível
-    "18": Erro a pegar o número da última versão
-    "19": Não é possível abrir o ficheiro ou página
-    "20": Erro ao enviar para o Imgur
-    "21": Indisponível o envio para Mastodon
-    "22": Indisponível o envio para Twitter
-    "23": Incapaz de enviar a notificação
-    "24": Erro de início do GTK
-    "25": Incapaz de obter a hora
-    "26": Ambiente de Desktop Wayland não suportado
-    "27": Ambiente de Desktop não suportado
-    "28": Incapaz de ler ficheiro
-    "29": Pasta existe
-    "30": Ficheiro não salvo
-    "31": Incapaz de mostrar ícone na barra de ícones
+    0: Erro desconhecido
+    1: Erro a obter a variável $HOME
+    2: Erro a obter a variável $LANG
+    3: Erro a obter a variável $XDG_SESSION_TYPE
+    4: Ambiente de Desktop não suportado
+    5: Comando t indisponível
+    6: Comando toot indisponível
+    7: Comando gnome-screenshot indisponível
+    8: Comando spectacle indisponível
+    9: Comando swaygrab indisponível
+    10: Comando scrot indisponível
+    11: Comando xdotool indisponível
+    12: Comando feh indisponível
+    13: ImageMagick indisponível
+    14: Comando slop indisponível
+    15: Comando convert indisponível
+    16: Github inacessível
+    17: Imgur inacessível
+    18: Erro a pegar o número da última versão
+    19: Não é possível abrir o ficheiro ou página
+    20: Erro ao enviar para o Imgur
+    21: Indisponível o envio para Mastodon
+    22: Indisponível o envio para Twitter
+    23: Incapaz de enviar a notificação
+    24: Erro de início do GTK
+    25: Incapaz de obter a hora
+    26: Ambiente de Desktop Wayland não suportado
+    27: Ambiente de Desktop não suportado
+    28: Incapaz de ler ficheiro
+    29: Pasta existe
+    30: Ficheiro não salvo
+    31: Incapaz de mostrar ícone na barra de ícones
 Help:
     Usage: Utilização
     Options: Opções
