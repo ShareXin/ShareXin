@@ -1,4 +1,5 @@
 ## Submit more languages using this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)
+## Flatpak does not work for the 0.6.8 release, will be fixed in a later release
 
 # ShareXin  
 
