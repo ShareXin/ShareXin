@@ -6,7 +6,7 @@ description = "ShareX for Linux and FreeBSD"
 homepage = "https://sharexin.github.io"
 repository = "https://github.com/ShareXin/ShareXin"
 keywords = ["twitter", "mastodon", "imgur", "gtk", "linux"]
-license = "GPL"
+license = "GPL-3.0"
 include = ["lang/*", "Cargo.toml", "resources/gtk/ui.glade", "src/*"]
 readme = "README.md"
 
