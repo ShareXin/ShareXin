@@ -107,3 +107,18 @@ pub fn error(code: usize) {
         return;
     };
 }
+
+// Useful when Terminal is not available (if launched without one)
+#[allow(dead_code)]
+pub fn debug(error: String) {
+    if Notification::new()
+        .appname("ShareXin")
+        .summary(&error.to_string())
+        .timeout(Timeout::Milliseconds(3000))
+        .show()
+        .is_err()
+    {
+        eprintln!("{}", text::message(23));
+        return;
+    };
+}
