@@ -12,6 +12,7 @@ readme = "README.md"
 
 [[bin]]
 name = "sharexin"
+path = "src/*"
 
 [dependencies]
 gtk = { version = "0.5.0", features = ["v3_18"] }
