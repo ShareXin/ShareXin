@@ -10,6 +10,9 @@ license = "GPL"
 include = ["lang/*", "Cargo.toml", "resources/gtk/ui.glade"]
 readme = "README.md"
 
+[[bin]]
+name = "sharexin"
+
 [dependencies]
 gtk = { version = "0.5.0", features = ["v3_18"] }
 gdk = { version = "0.9.0", features = ["v3_18"] }
