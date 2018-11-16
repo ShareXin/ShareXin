@@ -1,13 +1,13 @@
 [package]
 name = "sharexin"
-version = "0.6.8"
+version = "0.6.9"
 authors = ["TheBitStick <thebitstick@tfwno.gf>"]
 description = "ShareX for Linux and FreeBSD"
 homepage = "https://sharexin.github.io"
 repository = "https://github.com/ShareXin/ShareXin"
 keywords = ["twitter", "mastodon", "imgur", "gtk", "linux"]
 license = "GPL-3.0"
-include = ["lang/*", "Cargo.toml", "resources/gtk/ui.glade", "src/*"]
+include = ["lang/*", "Cargo.toml", "data/gtk/dialog.ui", "src/*"]
 readme = "README.md"
 
 [[bin]]
@@ -15,15 +15,15 @@ name = "sharexin"
 path = "src/main.rs"
 
 [dependencies]
-gtk = { version = "0.5.0", features = ["v3_18"] }
-gdk = { version = "0.9.0", features = ["v3_18"] }
+gtk = { version = "0.5.0", features = ["v3_14"] }
+gdk = { version = "0.9.0", features = ["v3_14"] }
 glib = "0.6.0"
+gio = "0.5.1"
 time = "0.1.40"
 open = "1.2.2"
 imgur = "0.7.0"
 notify-rust = "3.5.0"
 yaml-rust = "0.4.2"
-clipboard = "0.5.0"
 clap = "2.32.0"
 egg-mode-text = "1.14.7"
 screenshot-rs = "0.1.1"

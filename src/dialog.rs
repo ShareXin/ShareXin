@@ -1,10 +1,15 @@
 use egg_mode_text;
 use gdk;
+use gio::{ApplicationExt, ApplicationExtManual};
 use glib;
 use gtk;
-use gtk::*;
+use gtk::{
+    ButtonExt, Continue, GtkWindowExt, HeaderBarExt, Inhibit, LabelExt, TextBuffer, TextBufferExt,
+    WidgetExt,
+};
 use image;
 use mastodon;
+use std::env;
 use text;
 use twitter;
 use MessageKind;
@@ -34,14 +39,9 @@ macro_rules! clone {
     );
 }
 
-pub fn dialog(service: ServiceKind, message: MessageKind) {
-    // Initialize GTK
-    if gtk::init().is_err() {
-        eprintln!("{}", text::message(24));
-    };
-
+fn build_ui(application: &gtk::Application, service: ServiceKind, message: MessageKind) {
     // Creates variables for objects in Glade GTK file
-    let builder = gtk::Builder::new_from_string(include_str!("../resources/gtk/ui.glade"));
+    let builder = gtk::Builder::new_from_string(include_str!("../data/gtk/dialog.ui"));
     let window: gtk::Window = builder.get_object("window").unwrap();
     let header: gtk::HeaderBar = builder.get_object("header").unwrap();
     let text: gtk::TextView = builder.get_object("text").unwrap();
@@ -50,6 +50,7 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     let send: gtk::Button = builder.get_object("send").unwrap();
     let image: gtk::Button = builder.get_object("image").unwrap();
     let count: gtk::Label = builder.get_object("count").unwrap();
+    window.set_application(application);
 
     // Set Headerbar Subtitle and Default Character Count Label
     match service {
@@ -80,22 +81,22 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
     });
 
     // When window deleted by user (closed), quit GTK and delete temporary image if possible
-    window.connect_delete_event(move |_, _| {
-        gtk::main_quit();
-        if message == MessageKind::Image {
+    window.connect_delete_event(move |window, _| {
+        window.destroy();
+        if let MessageKind::Image = message {
             image::delete_temp();
         }
         Inhibit(false)
     });
 
     // When cancel button clicked, quit GTK and delete temporary image if possible
-    cancel.connect_clicked(move |_| {
-        gtk::main_quit();
+    cancel.connect_clicked(clone!(window => move |_| {
+        window.destroy();
         if let MessageKind::Image = message {
             image::delete_temp();
         }
         Inhibit(false);
-    });
+    }));
 
     // When send button clicked
     send.connect_clicked(clone!(buffer,window => move |_| {
@@ -237,7 +238,9 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
 
     // Enables CTRL+Enter shortcut to send a status
     text.connect_key_press_event(clone!(send => move |_, key| {
-            if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) && key.get_keyval() == gdk::enums::key::Return && send.get_sensitive() {
+            if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) &&
+                                            key.get_keyval() == gdk::enums::key::Return &&
+                                            send.get_sensitive() {
                             send.clicked();
             }
             Inhibit(false)
@@ -245,7 +248,19 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
 
     // Shows the window created
     window.show_all();
-    gtk::main();
+}
+
+pub fn dialog(service: ServiceKind, message: MessageKind) {
+    let application = gtk::Application::new("io.github.ShareXin", gio::ApplicationFlags::empty())
+        .expect(&text::message(24));
+    glib::set_application_name("ShareXin");
+    glib::set_prgname(Some("ShareXin"));
+    application.connect_startup(clone!(application => move |_| {
+        build_ui(&application, service, message);
+    }));
+    application.connect_activate(|_| {});
+    let args: Vec<String> = env::args().collect();
+    application.run(&args);
 }
 
 // Character count using egg_mode_text as a representation of Twitter's character count

@@ -1,4 +1,3 @@
-use clipboard::{ClipboardContext, ClipboardProvider};
 use image;
 use notification;
 use open;
@@ -32,7 +31,6 @@ pub fn send() {
     // Creates Imgur Applications for sending to Imgur API
     let mut copy_link = String::new();
     let handle = Imgur::Handle::new(String::from("37562f83e04fd66"));
-    let mut ctx: ClipboardContext = ClipboardProvider::new().unwrap();
 
     // Uploads file to Imgur API
     match handle.upload(&image) {
@@ -54,13 +52,7 @@ pub fn send() {
     // Send notification
     notification::image_sent(ServiceKind::Imgur, &copy_link, tmp.to_str().unwrap());
 
-    // Copies url to clipboard
-    if ctx.set_contents(copy_link.clone()).is_err() {
-        eprintln!("{}", text::message(19));
-    };
-
-    // Opens url (sort of a workaround for Wayland clipboard
-    // deleting contents of clipboard after an app closes)
+    // Opens url
     if open::that(copy_link).is_err() {
         eprintln!("{}", text::message(19));
         notification::error(19);

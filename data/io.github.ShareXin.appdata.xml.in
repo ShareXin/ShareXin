@@ -14,11 +14,11 @@
   <url type="homepage">https://sharexin.github.io</url>
   <screenshots>
     <screenshot>
-      <image>https://raw.githubusercontent.com/ShareXin/ShareXin/master/resources/screenshot.png</image>
+      <image>https://sharexin.github.io/img/ShareX_Still.png</image>
     </screenshot>
   </screenshots>
   <releases>
-    <release version="0.6.8" date="2018-11-02"/>
+    <release version="0.6.9" date="2018-11-16"/>
   </releases>
   <update_contact>thebitstick@tfwno.gf</update_contact>
   <developer_name>TheBitStick</developer_name>

@@ -1,7 +1,7 @@
 extern crate clap;
-extern crate clipboard;
 extern crate egg_mode_text;
 extern crate gdk;
+extern crate gio;
 extern crate glib;
 extern crate gtk;
 extern crate imgur as Imgur;
@@ -19,6 +19,10 @@ mod notification;
 mod text;
 mod twitter;
 
+use clap::{crate_authors, crate_version, App, AppSettings, Arg, SubCommand};
+use screenshot_rs::ScreenshotKind;
+use yaml_rust::YamlLoader;
+
 #[derive(Copy, Clone)]
 pub enum ServiceKind {
     Twitter,
@@ -31,10 +35,6 @@ pub enum MessageKind {
     Image,
     Text,
 }
-
-use clap::{crate_authors, crate_version, App, AppSettings, Arg, SubCommand};
-use screenshot_rs::ScreenshotKind;
-use yaml_rust::YamlLoader;
 
 fn main() {
     // Individual parts the help menu
@@ -60,11 +60,15 @@ fn main() {
         .help_message(help.to_owned())
         .version_message(version.to_owned())
         .setting(AppSettings::DisableHelpSubcommand)
-        .setting(AppSettings::ColoredHelp)
         .version_short("v")
         .subcommand(
             SubCommand::with_name("toot")
+                .version(crate_version!())
+                .author(crate_authors!())
                 .about(mastodon.to_owned())
+                .help_message(help.to_owned())
+                .version_message(version.to_owned())
+                .version_short("v")
                 .arg(
                     Arg::with_name("file")
                         .help(file)
@@ -78,7 +82,12 @@ fn main() {
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
         ).subcommand(
             SubCommand::with_name("tweet")
+                .version(crate_version!())
+                .author(crate_authors!())
                 .about(twitter.to_owned())
+                .help_message(help.to_owned())
+                .version_message(version.to_owned())
+                .version_short("v")
                 .arg(
                     Arg::with_name("file")
                         .help(file)
@@ -92,7 +101,12 @@ fn main() {
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
         ).subcommand(
             SubCommand::with_name("imgur")
+                .version(crate_version!())
+                .author(crate_authors!())
                 .about(imgur.to_owned())
+                .help_message(help.to_owned())
+                .version_message(version.to_owned())
+                .version_short("v")
                 .arg(
                     Arg::with_name("file")
                         .help(file)
