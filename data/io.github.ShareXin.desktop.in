@@ -2,7 +2,7 @@
 Version=1.0
 Name=ShareXin
 Exec=shareXin
-Icon=gnome-screenshot
+Icon=sharexin
 Type=Application
 Comment=ShareX for Linux and FreeBSD
 Terminal=false
@@ -13,9 +13,9 @@ StartupWMClass=sharexin
 Actions=Tweet;Toot;
 
 [Desktop Action Tweet]
-Exec=shareXin tweet
+Exec=sharexin tweet
 Name=Tweet a message
 
 [Desktop Action Toot]
-Exec=shareXin toot
+Exec=sharexin toot
 Name=Toot a message

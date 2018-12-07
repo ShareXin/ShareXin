@@ -10,7 +10,7 @@
 
 ## Requirements
 * Linux or FreeBSD
-* rustc 1.30.1
+* rustc 1.31.0 (Rust 2018)
 * *feh* (only need if `spectacle` is not installed or using GNOME)
 
 ## Features
@@ -118,7 +118,7 @@
 ## Changelog
 #### [0.6.9] - 2018-11-16
 - Removed Clipboard functionality (doesn't work under Wayland)
-- Flatpak fixes (Ruby is still a pain, screenshotting doesn't work cause sandboxing doesn't allow access to host's gnome-screenshot, or spectacle)
+- Flatpak fixes
 
 #### [0.6.8] - 2018-11-02
 - Moved anything in `cmd.rs` to `main.rs` (main only called cmd anyways)
