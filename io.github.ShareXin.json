@@ -25,7 +25,7 @@
         "--socket=session-bus",
         "--filesystem=xdg-pictures",
         "--filesystem=home",
-        "--env=TMPDIR=/var/tmp",
+        "--filesystem=/tmp",
         "--share=network",
         "--share=ipc",
         "--filesystem=xdg-run/dconf",
@@ -120,8 +120,7 @@
                 "--share=network"
             ],
             "build-commands":[
-                "cargo build --release",
-                "install -D target/release/sharexin /app/bin/sharexin"
+                "cargo install --path=. --root=/app --force"
             ]
         }
     ]
