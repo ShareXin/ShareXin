@@ -5,7 +5,7 @@
   <project_license>GPL-3.0</project_license>
   <metadata_license>CC0-1.0</metadata_license>
   <content_rating type="oars-1.1" />
-  <summary>ShareX for Linux and FreeBSD</summary>
+  <summary>ShareX for Linux and BSD</summary>
   <description>
     <p>
       ShareX-like application that lets you take a screenshot, and send it to either Twitter, a Mastodon instance, or Imgur.
@@ -23,4 +23,5 @@
   <update_contact>thebitstick@tfwno.gf</update_contact>
   <developer_name>TheBitStick</developer_name>
 </component>
+
 

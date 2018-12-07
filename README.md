@@ -1,5 +1,5 @@
 ## Submit more languages using this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)
-#### Flatpak currently has limited functionality, can only send to Mastodon and no screenshots
+#### Flatpak currently has limited functionality, cannot take screenshots
 
 # ShareXin
 
@@ -9,7 +9,7 @@
 [![Crates.io](https://img.shields.io/crates/v/sharexin.svg)](https://crates.io/crates/sharexin)
 
 ## Requirements
-* Linux or FreeBSD
+* Linux or BSD
 * rustc 1.31.0 (Rust 2018)
 * *feh* (only need if `spectacle` is not installed or using GNOME)
 
@@ -41,7 +41,7 @@
 * 简体中文 (Simplified Chinese)
 * 繁體中文 (Traditional Chinese)
 * 日本語 (Japanese)
-* 한국어 (Korean)
+*  한국어 (Korean)
 * Deutsch (German) by [@qwertxzy](https://twitter.com/qwertxzy)
 * Polski (Polish) by [@Michcioperz](https://twitter.com/Michcioperz)
 * Português (Portuguese) by [@pillgp](https://twitter.com/pillgp)
@@ -107,6 +107,22 @@
 * gdk-pixbuf2
 * atk
 * curl
+
+#### OpenBSD 6.4
+* glib-openssl
+* gmake
+* gcc
+* dbus-glib
+* dbus
+* gtk3
+* glib2
+* python (3)
+* cairo
+* pango
+* gdk-pixbuf2
+* atk
+* curl
+* pkgconfig/pkgconf
 
 ### Compiling
 1. `git clone https://github.com/ShareXin/ShareXin/`

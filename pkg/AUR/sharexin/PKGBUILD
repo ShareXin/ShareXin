@@ -4,7 +4,7 @@
 pkgname=sharexin
 pkgver=r260.ec52dd5
 pkgrel=1
-pkgdesc="ShareX for Linux and FreeBSD"
+pkgdesc="ShareX for Linux and BSD"
 url="https://github.com/ShareXin/ShareXin"
 makedepends=('rust' 'curl' 'gtk3' 'gdk-pixbuf2' 'cairo' 'glib2' 'openssl' 'dbus' 'xcb-util')
 depends=('feh' 'imagemagick')
