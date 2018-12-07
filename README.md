@@ -7,6 +7,23 @@
 [![GitHub Stars](https://img.shields.io/github/stars/thebitstick/ShareXin.svg?)](https://github.com/thebitstick/ShareXin)
 [![Crates.io](https://img.shields.io/crates/v/sharexin.svg)](https://crates.io/crates/sharexin)
 
+## Table of contents
+   * [Requirements](#requirements)
+   * [Features](#features)
+   * [Desktop support](#desktop-support)
+      * [Tested on](#tested-on)
+   * [Language support](#language-support)
+   * [Installation](#installation)
+      * [Ubuntu dependencies](#ubuntu-dependencies)
+      * [Debian dependencies](#debian-dependencies)
+      * [Arch Linux dependencies](#arch-linux-dependencies)
+      * [Fedora dependencies](#fedora-dependencies)
+      * [FreeBSD dependencies](#freebsd-dependencies)
+      * [OpenBSD dependencies](#openbsd-dependencies)
+      * [Compiling from source](#compiling-from-source)
+      * [Installing from Flatpak](#installing-from-flatpak)
+    * [Changelog](#changelog)
+
 ## Requirements
 * Linux or BSD
 * rustc 1.31.0 (Rust 2018)
@@ -20,7 +37,7 @@
 * GTK Dialog for entering a message with a tweet or toot
 * Designed with **Wayland** in mind
 
-### Desktop support
+## Desktop support
 - GNOME desktop
 - KDE Plasma desktop
 - Budgie desktop
@@ -28,7 +45,7 @@
 - Unity desktop
 - Generic X11 DE **(with `scrot`)**
 
-### Tested on
+#### Tested on
 - Ubuntu 18.10
 - Fedora 29
 
@@ -45,9 +62,9 @@
 * Polski (Polish) by [@Michcioperz](https://twitter.com/Michcioperz)
 * Português (Portuguese) by [@pillgp](https://twitter.com/pillgp)
 
-## Compiling
-
-#### Ubuntu 17.04/17.10/18.04/18.10 dependencies
+## Installation
+#### Ubuntu dependencies
+**Tested for 17.04/17.10/18.04/18.10**
 * libgtk-3-dev
 * libcairo2-dev
 * libpango1.0-dev
@@ -58,7 +75,8 @@
 * libclang-dev
 * build-essential
 
-#### Debian 9.5.0 and GNU/kFreeBSD dependencies
+#### Debian dependencies
+**Tested for 9.5.0 and GNU/kFreeBSD**
 * libgtk-3-dev
 * libcairo2-dev
 * libpango1.0-dev
@@ -81,7 +99,8 @@
 * base-devel
 * clang
 
-#### Fedora 28/29/30 dependencies
+#### Fedora dependencies
+**Tested for F28/F29/F30**
 * gtk3-devel
 * cairo-devel
 * pango-devel
@@ -91,7 +110,8 @@
 * libcurl-devel
 * clang-devel
 
-#### FreeBSD 11/TrueOS/GhostBSD 18.10 dependencies
+#### FreeBSD dependencies
+**Tested for 11/TrueOS/GhostBSD 18.10**
 * security/openssl-devel
 * gmake
 * gcc
@@ -107,7 +127,8 @@
 * atk
 * curl
 
-#### OpenBSD 6.4
+#### OpenBSD dependencies
+**Tested for 6.4**
 * glib-openssl
 * gmake
 * gcc
@@ -123,18 +144,20 @@
 * curl
 * pkgconfig/pkgconf
 
-### Compiling
+#### Compiling from source
 1. `git clone https://github.com/ShareXin/ShareXin/`
 2. `cargo install`
-
 **OR**
 1. `cargo install sharexin`
 
-### Flatpak
+#### Installing from Flatpak
 **BETA**
 Tested on Fedora 29 using GNOME Wayland
 
 ## Changelog
+#### [0.7.1] - 2018-12-07
+- Fixed TMPDIR in Flatpak (fixed an issue where it wouldn't open the screenshot you took)
+
 #### [0.7.0] - 2018-12-07
 - Flatpak works on GNOME Wayland/X11 systems
 - Flatpak integrates gnome-screenshot and feh
