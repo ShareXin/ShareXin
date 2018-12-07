@@ -1,5 +1,4 @@
 ## Submit more languages using this [form](https://goo.gl/forms/rNx4yAB9KM2fDXDG3)
-#### Flatpak currently has limited functionality, cannot take screenshots
 
 # ShareXin
 
@@ -130,6 +129,9 @@
 
 **OR**
 1. `cargo install sharexin`
+
+### Flatpak
+**BETA**
 
 ## Changelog
 #### [0.6.9] - 2018-11-16

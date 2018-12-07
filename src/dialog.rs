@@ -246,7 +246,7 @@ fn build_ui(application: &gtk::Application, service: ServiceKind, message: Messa
 }
 
 pub fn dialog(service: ServiceKind, message: MessageKind) {
-    let application = gtk::Application::new("io.github.ShareXin", gio::ApplicationFlags::empty())
+    let application = gtk::Application::new("io.github.ShareXin", gio::ApplicationFlags::NON_UNIQUE)
         .expect(&text::message(24));
     glib::set_application_name("ShareXin");
     glib::set_prgname(Some("ShareXin"));
