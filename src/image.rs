@@ -1,3 +1,4 @@
+use crate::{notification, text};
 use glib::{get_user_special_dir, UserDirectory};
 use open;
 use screenshot_rs;
@@ -5,7 +6,6 @@ use screenshot_rs::ScreenshotKind;
 use std::path::PathBuf;
 use std::{env, fs, path};
 use time;
-use crate::{text, notification};
 
 pub fn image(kind: ScreenshotKind) {
     let tmp = temp_dir();
@@ -13,7 +13,7 @@ pub fn image(kind: ScreenshotKind) {
 
     // Matches the kind of screenshot to functions in my screenshot-rs library
     match kind {
-        ScreenshotKind::Area => screenshot_rs::screenshot_area(temp),
+        ScreenshotKind::Area => screenshot_rs::screenshot_area(temp, true),
         ScreenshotKind::Window => screenshot_rs::screenshot_window(temp),
         ScreenshotKind::Full => screenshot_rs::screenshot_full(temp),
     }

@@ -132,9 +132,15 @@
 
 ### Flatpak
 **BETA**
+Tested on Fedora 29 using GNOME Wayland
 
 ## Changelog
-#### [0.6.9] - 2018-11-16
+#### [0.7.0] - 2018-12-07
+- Flatpak works on GNOME Wayland/X11 systems
+- Flatpak integrates gnome-screenshot and feh
+- Fixed glib/gio issue where multiple instances of ShareXin wouldn't launch, and only one would be allowed
+
+#### [0.6.9] - 2018-12-07
 - Removed Clipboard functionality (doesn't work under Wayland)
 - Flatpak fixes
 

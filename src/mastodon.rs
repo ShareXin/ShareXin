@@ -1,5 +1,5 @@
-use std::process::Command;
 use crate::{image, notification, text, ServiceKind};
+use std::process::Command;
 
 pub fn image(status: String) {
     let service = ServiceKind::Mastodon;

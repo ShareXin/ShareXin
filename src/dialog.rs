@@ -1,3 +1,4 @@
+use crate::{image, mastodon, text, twitter, MessageKind, ServiceKind};
 use egg_mode_text;
 use gdk;
 use gio::{ApplicationExt, ApplicationExtManual};
@@ -8,7 +9,6 @@ use gtk::{
     WidgetExt,
 };
 use std::env;
-use crate::{image, mastodon, text, twitter, MessageKind, ServiceKind};
 
 // Constants for Character count
 const URL_COUNT: i32 = 23;
@@ -246,8 +246,9 @@ fn build_ui(application: &gtk::Application, service: ServiceKind, message: Messa
 }
 
 pub fn dialog(service: ServiceKind, message: MessageKind) {
-    let application = gtk::Application::new("io.github.ShareXin", gio::ApplicationFlags::NON_UNIQUE)
-        .expect(&text::message(24));
+    let application =
+        gtk::Application::new("io.github.ShareXin", gio::ApplicationFlags::NON_UNIQUE)
+            .expect(&text::message(24));
     glib::set_application_name("ShareXin");
     glib::set_prgname(Some("ShareXin"));
     application.connect_startup(clone!(application => move |_| {

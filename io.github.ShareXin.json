@@ -21,7 +21,7 @@
     },
     "finish-args":[
         "--socket=wayland",
-        "--socket=fallback-x11",
+        "--socket=x11",
         "--socket=session-bus",
         "--filesystem=xdg-pictures",
         "--filesystem=home",
@@ -40,9 +40,6 @@
     	{
     	    "name":"gnome-screenshot",
     	    "buildsystem":"meson",
-    	    "build-args":[
-    	        "--share=network"
-    	    ],
     	    "build-options": {
                 "cflags": "-O2 -g"
             },
@@ -52,6 +49,29 @@
                     "url": "https://gitlab.gnome.org/GNOME/gnome-screenshot.git"
                 }
             ]
+    	},
+    	{
+    	    "name": "imlib2",
+    	    "sources":[
+    	        {
+    	            "type": "git",
+    	            "url": "https://git.enlightenment.org/legacy/imlib2.git"
+    	        }
+    	    ]
+    	},
+    	{
+    	    "name":"feh",
+    	    "buildsystem":"simple",
+    	    "sources":[
+    	        {
+    	            "type": "git",
+    	            "url": "https://github.com/derf/feh.git"
+    	        }
+    	    ],
+    	    "build-commands":[
+    	        "make",
+    	        "PREFIX=/app make install"
+    	    ]
     	},
         {
             "name":"toot",

@@ -1,8 +1,8 @@
+use crate::{image, notification, text, ServiceKind};
+use imgur;
 use open;
 use std::fs::File;
 use std::io::Read;
-use imgur;
-use crate::{image, notification, text, ServiceKind};
 
 pub fn send() {
     let tmp = image::temp_dir();
