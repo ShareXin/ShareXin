@@ -1,11 +1,8 @@
-use image;
-use notification;
 use open;
 use std::fs::File;
 use std::io::Read;
-use text;
-use Imgur;
-use ServiceKind;
+use imgur;
+use crate::{image, notification, text, ServiceKind};
 
 pub fn send() {
     let tmp = image::temp_dir();
@@ -30,7 +27,7 @@ pub fn send() {
 
     // Creates Imgur Applications for sending to Imgur API
     let mut copy_link = String::new();
-    let handle = Imgur::Handle::new(String::from("37562f83e04fd66"));
+    let handle = imgur::Handle::new(String::from("37562f83e04fd66"));
 
     // Uploads file to Imgur API
     match handle.upload(&image) {

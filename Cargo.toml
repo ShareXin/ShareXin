@@ -8,6 +8,7 @@ repository = "https://github.com/ShareXin/ShareXin"
 keywords = ["twitter", "mastodon", "imgur", "gtk", "linux"]
 license = "GPL-3.0"
 include = ["lang/*", "Cargo.toml", "data/gtk/dialog.ui", "src/*"]
+edition = "2018"
 readme = "README.md"
 
 [[bin]]

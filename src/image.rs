@@ -1,12 +1,11 @@
 use glib::{get_user_special_dir, UserDirectory};
-use notification;
 use open;
 use screenshot_rs;
 use screenshot_rs::ScreenshotKind;
 use std::path::PathBuf;
 use std::{env, fs, path};
-use text;
 use time;
+use crate::{text, notification};
 
 pub fn image(kind: ScreenshotKind) {
     let tmp = temp_dir();

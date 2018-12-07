@@ -11,8 +11,7 @@
 ## Requirements
 * Linux or FreeBSD
 * rustc 1.30.1
-* *scrot* (only need if `gnome-screenshot` not installed)
-* *feh* (only need if `spectacle` is not installed or using GNOME Wayland)
+* *feh* (only need if `spectacle` is not installed or using GNOME)
 
 ## Features
 * Takes screenshots
@@ -28,14 +27,11 @@
 - Budgie desktop
 - Cinnamon desktop
 - Unity desktop
-- Any X11 DE
+- Generic X11 DE **(with `scrot`)**
 
 ### Tested on
 - Ubuntu 18.10
-- Debian 9.5.0
 - Fedora 29
-- Arch Linux
-- GhostBSD 18.10 (FreeBSD distro)
 
 ## Language support
 * English
@@ -52,7 +48,7 @@
 
 ## Compiling
 
-#### Ubuntu 18.10 dependencies
+#### Ubuntu 17.04/17.10/18.04/18.10 dependencies
 * libgtk-3-dev
 * libcairo2-dev
 * libpango1.0-dev
@@ -63,7 +59,7 @@
 * libclang-dev
 * build-essential
 
-#### Debian 9.5.0 dependencies
+#### Debian 9.5.0 and GNU/kFreeBSD dependencies
 * libgtk-3-dev
 * libcairo2-dev
 * libpango1.0-dev
@@ -86,7 +82,7 @@
 * base-devel
 * clang
 
-#### Fedora 29 dependencies
+#### Fedora 28/29/30 dependencies
 * gtk3-devel
 * cairo-devel
 * pango-devel
@@ -96,19 +92,20 @@
 * libcurl-devel
 * clang-devel
 
-#### FreeBSD 11 dependencies
-* openssl-devel
+#### FreeBSD 11/TrueOS/GhostBSD 18.10 dependencies
+* security/openssl-devel
 * gmake
 * gcc
 * dbus-glib
 * devel/dbus
 * gtk3
-* devel/glib20 (via ports)
+* devel/glib20
+* devel/pkgconf
+* python3
 * cairo
 * pango
 * gdk-pixbuf2
 * atk
-* openssl
 * curl
 
 ### Compiling

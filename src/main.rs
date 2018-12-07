@@ -1,16 +1,3 @@
-extern crate clap;
-extern crate egg_mode_text;
-extern crate gdk;
-extern crate gio;
-extern crate glib;
-extern crate gtk;
-extern crate imgur as Imgur;
-extern crate notify_rust;
-extern crate open;
-extern crate screenshot_rs;
-extern crate time;
-extern crate yaml_rust;
-
 mod dialog;
 mod image;
 mod imgur;
@@ -76,11 +63,13 @@ fn main() {
                         .long("file")
                         .help(file)
                         .takes_value(true),
-                ).subcommand(SubCommand::with_name("auth").about(mastodon_auth.to_owned()))
+                )
+                .subcommand(SubCommand::with_name("auth").about(mastodon_auth.to_owned()))
                 .subcommand(SubCommand::with_name("area").about(area.to_owned()))
                 .subcommand(SubCommand::with_name("window").about(window.to_owned()))
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
-        ).subcommand(
+        )
+        .subcommand(
             SubCommand::with_name("tweet")
                 .version(crate_version!())
                 .author(crate_authors!())
@@ -95,11 +84,13 @@ fn main() {
                         .long("file")
                         .help(file)
                         .takes_value(true),
-                ).subcommand(SubCommand::with_name("auth").about(twitter_auth.to_owned()))
+                )
+                .subcommand(SubCommand::with_name("auth").about(twitter_auth.to_owned()))
                 .subcommand(SubCommand::with_name("area").about(area.to_owned()))
                 .subcommand(SubCommand::with_name("window").about(window.to_owned()))
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
-        ).subcommand(
+        )
+        .subcommand(
             SubCommand::with_name("imgur")
                 .version(crate_version!())
                 .author(crate_authors!())
@@ -114,7 +105,8 @@ fn main() {
                         .long("file")
                         .help(file)
                         .takes_value(true),
-                ).subcommand(SubCommand::with_name("area").about(area.to_owned()))
+                )
+                .subcommand(SubCommand::with_name("area").about(area.to_owned()))
                 .subcommand(SubCommand::with_name("window").about(window.to_owned()))
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
         );

@@ -1,9 +1,8 @@
 use notify_rust::{Notification, Timeout};
 use std::fs;
 use std::{thread, time};
-use text;
 use yaml_rust::YamlLoader;
-use ServiceKind;
+use crate::{ServiceKind, text};
 
 enum NotificationKind {
     Sent,

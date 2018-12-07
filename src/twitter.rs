@@ -1,8 +1,5 @@
-use image;
-use notification;
 use std::process::Command;
-use text;
-use ServiceKind;
+use crate::{image, notification, text, ServiceKind};
 
 pub fn image(status: String) {
     let service = ServiceKind::Twitter;

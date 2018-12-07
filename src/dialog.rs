@@ -7,13 +7,8 @@ use gtk::{
     ButtonExt, Continue, GtkWindowExt, HeaderBarExt, Inhibit, LabelExt, TextBuffer, TextBufferExt,
     WidgetExt,
 };
-use image;
-use mastodon;
 use std::env;
-use text;
-use twitter;
-use MessageKind;
-use ServiceKind;
+use crate::{image, mastodon, text, twitter, MessageKind, ServiceKind};
 
 // Constants for Character count
 const URL_COUNT: i32 = 23;
@@ -164,87 +159,87 @@ fn build_ui(application: &gtk::Application, service: ServiceKind, message: Messa
 
     // Character count when keys are pressed in the Text Box
     text.connect_key_release_event(clone!(send,count => move |_, _| {
-        let status: String = match TextBuffer::get_text(
-            &buffer,
-            &TextBuffer::get_start_iter(&buffer),
-            &TextBuffer::get_end_iter(&buffer),
-            false,
-        ) {
-            Some(string) => string,
-            None => String::new()
-        };
-        let status_count = char_count(service, status, message);
+    let status: String = match TextBuffer::get_text(
+        &buffer,
+        &TextBuffer::get_start_iter(&buffer),
+        &TextBuffer::get_end_iter(&buffer),
+        false,
+    ) {
+        Some(string) => string,
+        None => String::new()
+    };
+    let status_count = char_count(service, status, message);
 
-        // uses markdown to set color
-        let mut limit = format!("<span foreground=\"#EE0456\">");
-        limit.push_str(&status_count.to_string());
-        limit.push_str("</span>");
-        let mut hit = format!("<span foreground=\"#ECA60B\">");
-        hit.push_str(&status_count.to_string());
-        hit.push_str("</span>");
+    // uses markdown to set color
+    let mut limit = format!("<span foreground=\"#EE0456\">");
+    limit.push_str(&status_count.to_string());
+    limit.push_str("</span>");
+    let mut hit = format!("<span foreground=\"#ECA60B\">");
+    hit.push_str(&status_count.to_string());
+    hit.push_str("</span>");
 
-        match message {
-            MessageKind::Image => match service {
-                ServiceKind::Twitter => {
-                    if status_count <= 20 && status_count >= 0 {
-                        count.set_markup(&hit);
-                    } else if status_count < 0 {
-                        count.set_markup(&limit);
-                    } else {
-                        count.set_label(&status_count.to_string());
-                    }
+    match message {
+        MessageKind::Image => match service {
+            ServiceKind::Twitter => {
+                if status_count <= 20 && status_count >= 0 {
+                    count.set_markup(&hit);
+                } else if status_count < 0 {
+                    count.set_markup(&limit);
+                } else {
+                    count.set_label(&status_count.to_string());
                 }
-                ServiceKind::Mastodon => {
-                    if status_count < 0 {
-                        count.set_markup(&limit);
-                    } else {
-                        count.set_label(&status_count.to_string());
-                    }
+            }
+            ServiceKind::Mastodon => {
+                if status_count < 0 {
+                    count.set_markup(&limit);
+                } else {
+                    count.set_label(&status_count.to_string());
                 }
-                ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
-            },
-            MessageKind::Text => match service {
-                ServiceKind::Twitter => {
-                    if status_count >= TWITTER_COUNT || status_count < 0 {
-                        send.set_sensitive(false);
-                    } else {
-                        send.set_sensitive(true);
-                    }
-                    if status_count <= 20 && status_count >= 0 {
-                        count.set_markup(&hit);
-                    } else if status_count < 0 {
-                        count.set_markup(&limit);
-                    } else {
-                        count.set_label(&status_count.to_string());
-                    }
+            }
+            ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
+        },
+        MessageKind::Text => match service {
+            ServiceKind::Twitter => {
+                if status_count >= TWITTER_COUNT || status_count < 0 {
+                    send.set_sensitive(false);
+                } else {
+                    send.set_sensitive(true);
                 }
-                ServiceKind::Mastodon => {
-                    if status_count >= MASTODON_COUNT || status_count < 0 {
-                        send.set_sensitive(false);
-                    } else {
-                        send.set_sensitive(true);
-                    }
-                    if status_count < 0 {
-                        count.set_markup(&limit);
-                    } else {
-                        count.set_label(&status_count.to_string());
-                    }
+                if status_count <= 20 && status_count >= 0 {
+                    count.set_markup(&hit);
+                } else if status_count < 0 {
+                    count.set_markup(&limit);
+                } else {
+                    count.set_label(&status_count.to_string());
                 }
-                ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
-            },
-        }
-            Inhibit(false)
-        }));
+            }
+            ServiceKind::Mastodon => {
+                if status_count >= MASTODON_COUNT || status_count < 0 {
+                    send.set_sensitive(false);
+                } else {
+                    send.set_sensitive(true);
+                }
+                if status_count < 0 {
+                    count.set_markup(&limit);
+                } else {
+                    count.set_label(&status_count.to_string());
+                }
+            }
+            ServiceKind::Imgur => unreachable!("Imgur does not open a GTK dialog"),
+        },
+    }
+        Inhibit(false)
+    }));
 
     // Enables CTRL+Enter shortcut to send a status
     text.connect_key_press_event(clone!(send => move |_, key| {
-            if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) &&
-                                            key.get_keyval() == gdk::enums::key::Return &&
-                                            send.get_sensitive() {
-                            send.clicked();
-            }
-            Inhibit(false)
-        }));
+        if key.get_state().intersects(gdk::ModifierType::CONTROL_MASK) &&
+                                        key.get_keyval() == gdk::enums::key::Return &&
+                                        send.get_sensitive() {
+                        send.clicked();
+        }
+        Inhibit(false)
+    }));
 
     // Shows the window created
     window.show_all();
