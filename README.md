@@ -22,7 +22,7 @@
       * [OpenBSD dependencies](#openbsd-dependencies)
       * [Compiling from source](#compiling-from-source)
       * [Installing from Flatpak](#installing-from-flatpak)
-    * [Changelog](#changelog)
+   * [Changelog](#changelog)
 
 ## Requirements
 * Linux or BSD
