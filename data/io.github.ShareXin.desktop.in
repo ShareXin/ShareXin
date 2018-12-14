@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
 Name=ShareXin
-Exec=shareXin
-Icon=sharexin
+Exec=sharexin
+Icon=io.github.ShareXin
 Type=Application
 Comment=ShareX for Linux and BSD
 Terminal=false
