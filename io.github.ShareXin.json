@@ -33,9 +33,10 @@
         "--talk-name=ca.desrt.dconf",
         "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
-    "rename-icon":"sharexin",
-    "rename-desktop-file":"io.github.ShareXin.desktop",
-    "rename-appdata-file":"io.github.ShareXin.appdata.xml",
+    "cleanup":[
+        "/include",
+        "/lib/pkgconfig"
+    ],
     "modules":[
     	{
     	    "name":"gnome-screenshot",
@@ -108,19 +109,19 @@
         },
         {
             "name":"sharexin",
-            "sources":[
-                {
-                    "type":"git",
-                    "url":"https://github.com/ShareXin/ShareXin"
-                }
-            ],
             "subdir":"rust",
             "buildsystem":"simple",
             "build-args":[
                 "--share=network"
             ],
             "build-commands":[
-                "cargo install --path=. --root=/app --force"
+                "PREFIX=/app make install"
+            ],
+            "sources":[
+                {
+                    "type":"git",
+                    "url":"https://github.com/ShareXin/ShareXin"
+                }
             ]
         }
     ]
