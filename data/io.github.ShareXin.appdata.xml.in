@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
   <id>io.github.ShareXin</id>
+  <launchable type="desktop-id">io.github.ShareXin.desktop</launchable>
   <name>ShareXin</name>
+  <developer_name>thebitstick</developer_name>
+  <update_contact>thebitstick@tfwno.gf</update_contact>
   <project_license>GPL-3.0</project_license>
   <metadata_license>CC0-1.0</metadata_license>
   <content_rating type="oars-1.1" />
   <summary>ShareX for Linux and BSD</summary>
+
   <description>
     <p>
       ShareX-like application that lets you take a screenshot, and send it to either Twitter, a Mastodon instance, or Imgur.
     </p>
   </description>
+
   <url type="homepage">https://sharexin.github.io</url>
+  <url type="bugtracker">https://github.com/ShareXin/ShareXin/issues</url>
+
   <screenshots>
-    <screenshot>
+    <screenshot type="default">
       <image>https://sharexin.github.io/img/ShareX_Still.png</image>
     </screenshot>
   </screenshots>
-  <releases>
-    <release version="0.7.1" date="2018-12-07"/>
-  </releases>
-  <update_contact>thebitstick@tfwno.gf</update_contact>
-  <developer_name>TheBitStick</developer_name>
 </component>
+
 
 
 
