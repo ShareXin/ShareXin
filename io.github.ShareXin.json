@@ -6,7 +6,7 @@
     "sdk-extensions":[
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "command":"sharexin",
+    "command":"sharexin-tmpwrap",
     "tags": ["nightly"],
     "desktop-file-name-prefix": "(Nightly) ",
     "build-options":{
@@ -23,11 +23,10 @@
         "--socket=wayland",
         "--socket=x11",
         "--socket=session-bus",
-        "--filesystem=xdg-pictures",
-        "--filesystem=home",
-        "--filesystem=/tmp",
         "--share=network",
         "--share=ipc",
+        "--filesystem=xdg-pictures",
+        "--filesystem=home",
         "--filesystem=xdg-run/dconf",
         "--filesystem=~/.config/dconf:ro",
         "--talk-name=ca.desrt.dconf",
@@ -115,7 +114,7 @@
                 "--share=network"
             ],
             "build-commands":[
-                "PREFIX=/app make install"
+                "PREFIX=/app make install-tmpwrap"
             ],
             "sources":[
                 {

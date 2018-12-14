@@ -7,8 +7,13 @@ test:
 run:
 	RUST_BACKTRACE=1 cargo run -- --no-fork
 
+install-tmpwrap: install tmp
+
 install: install-resources
 	cargo install --path . --force --root $(DESTDIR)$(PREFIX)
+
+tmp:
+	install data/tmpwrap /app/bin/sharexin-tmpwrap
 
 install-resources:
 	mkdir -p $(DESTDIR)$(PREFIX)/share/applications/

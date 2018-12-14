@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export TMPDIR=$XDG_CACHE_HOME/tmp
+echo "[Flatpak TMP workaround]"
+echo "[TMPDIR is set to:]"
+echo $TMPDIR
+sharexin $@
