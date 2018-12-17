@@ -57,7 +57,7 @@
 - Fedora 29
 
 # How to Use
-##### Twitter
+#### Twitter
 **This is a temporary measure for connecting to Twitter and will be changed in the future**  
 ShareXin uses the **Ruby** Twitter tool `t` for sending Tweets.  
 For non-Flatpak users, you will need to manually install the tool.  
@@ -67,7 +67,7 @@ To authenticate to Twitter:
 `$ sharexin tweet auth`  
 And on Flatpak:  
 `$ flatpak run io.github.ShareXin tweet auth`
-##### Mastodon
+#### Mastodon
 **This is a temporary measure for connecting to Mastodon and will be changed in the future**  
 ShareXin uses the **Python** Mastodon tool `toot` for sending Toots.  
 For non-Flatpak users, you will need to manually install the tool.  
@@ -77,15 +77,15 @@ To login to your Mastodon instance:
 `$ sharexin toot auth`  
 And on Flatpak:  
 `$ flatpak run io.github.ShareXin toot auth`
-##### Imgur
+#### Imgur
 ShareXin uses its own API and App to upload to Imgur, so no external tool is necessary, and you do not need to setup your own API with Imgur to use it. **(if you do wish to change it, change [this line](https://github.com/ShareXin/ShareXin/blob/0c9bd4692a72e56eb8525cebed0e507321e7d341/src/imgur.rs#L30))**
-##### Screenshotting
+#### Screenshotting
 **Flatpak is currently limited to only GNOME**  
 For users of the GNOME Desktop (X11/Wayland), you should already have `GNOME Screenshot` installed by default, so you do not need to worry.  
 Unity, Budgie, and Cinnamon Desktop users are recommended to use `GNOME Screenshot` for the best experience, however none of these desktops have Wayland support, so any other tool mentioned can be used, such as `Spectacle` or `scrot`  
 For users of the Plasma (X11/Wayland) Desktop, you should have `Spectacle` installed in order to have the best experience with ShareXin.  
 For users of any X11 desktop, you must use `scrot` for screenshotting with ShareXin.
-##### Keybinding
+#### Keybinding
 For GNOME Users, setup a custom keyboard shortcut in Settings, and if you want a custom keybinding (say to replace **Print Screen**), navigate to this Dconf setting to change a binding. `/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/`  
 For Plasma Users, you do you.  
 For any other desktop, you do you.
@@ -104,34 +104,34 @@ For any other desktop, you do you.
 * Português (Portuguese) by [@pillgp](https://twitter.com/pillgp)
 
 # Installation
-#### Ubuntu/Debian dependencies
+### Ubuntu/Debian dependencies
 **Ubuntu: Tested for 17.04/17.10/18.04/18.10**  
 **Debian: Tested for 9.5.0 and GNU/kFreeBSD**  
 `$ sudo apt install libgtk-3-dev libcairo2-dev libpango1.0-dev libgdk-pixbuf2.0-dev libatk1.0-dev libssl-dev libcurl4-openssl-dev libclang-dev build-essential`
 
-#### Arch Linux dependencies
+### Arch Linux dependencies
 `$ sudo pacman -S curl gtk3 gdk-pixbuf2 cairo glib2 openssl dbus xcb-util base-devel clang`
 
-#### Fedora dependencies
+### Fedora dependencies
 **Tested for F28/F29/F30**  
 `$ sudo dnf install gtk3-devel cairo-devel pango-devel gdk-pixbuf2-devel atk-devel openssl-devel libcurl-devel clang-devel`
 
-#### FreeBSD dependencies
+### FreeBSD dependencies
 **Tested for 11/TrueOS/GhostBSD 18.10**  
 `$ sudo pkg install security/openssl-devel gmake gcc dbus-glib devel/dbus gtk3 devel/glib20 devel/pkgconf python3 cairo pango gdk-pixbuf2 atk curl`
 
-#### OpenBSD dependencies
+### OpenBSD dependencies
 **Tested for 6.4**  
 `$ sudo pkg_add glib-openssl gmake gcc dbus-glib dbus gtk3 glib2 python cairo pango gdk-pixbuf2 atk curl pkgconfig/pkgconf`
 
-#### GoboLinux Dependencies
+### GoboLinux Dependencies
 **NONE**, works out of the box.
 
-#### Installing from Flatpak
+## Installing from Flatpak
 **Only Tested on Fedora 29 using GNOME Wayland**  
 Use `io.github.ShareXin.json`
 
-#### Compiling from source
+## Compiling from source
 1. `$ git clone https://github.com/ShareXin/ShareXin/`
 2. `$ cargo install --path .`  
 
