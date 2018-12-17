@@ -127,6 +127,10 @@ For any other desktop, you do you.
 #### GoboLinux Dependencies
 **NONE**, works out of the box.
 
+#### Installing from Flatpak
+**Only Tested on Fedora 29 using GNOME Wayland**  
+Use `io.github.ShareXin.json`
+
 #### Compiling from source
 1. `$ git clone https://github.com/ShareXin/ShareXin/`
 2. `$ cargo install --path .`  
@@ -134,11 +138,18 @@ For any other desktop, you do you.
 **OR**  
 1. `$ cargo install sharexin`
 
-#### Installing from Flatpak
-**BETA**
-Tested on Fedora 29 using GNOME Wayland
-
 # Changelog
+#### [0.7.2] - 2018-12-16
+- Makefile added
+- Proper App Icons!!
+- Better Table of Contents in `README.md`
+- Added tutorial to `README.md`
+- Tested GoboLinux compatibility (weird but cool distro)
+- Desktop file works with Flatpak (not tested for native installations)
+- AppStream Metadata conforms to Freedesktop and Flathub standards
+- No longer using `/tmp` under Flatpak (using wrapper script)
+- Bug fix where multiple "zombie" processes would stay alive (pun not intended) after sending a tweet/toot
+
 #### [0.7.1] - 2018-12-07
 - Fixed TMPDIR in Flatpak (fixed an issue where it wouldn't open the screenshot you took)
 
