@@ -61,6 +61,8 @@ pub fn loader() -> String {
         return include_str!("../lang/pl.yml").to_string();
     } else if lang.contains("pt") {
         return include_str!("../lang/pt.yml").to_string();
+    } else if lang.contains("sv") {
+        return include_str!("../lang/sv.yml").to_string();
     } else {
         return include_str!("../lang/en.yml").to_string();
     }
