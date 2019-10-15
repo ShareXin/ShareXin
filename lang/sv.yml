@@ -1,0 +1,77 @@
+Notification:
+    Sent:
+        Mastodon: Skickat till Mastodon
+        Twitter: Skickat till Twitter
+        Imgur: Skickat till Imgur
+    File: Fil sparad
+    Empty:
+        Mastodon: Tom Toot | Inte skickad
+        Twitter: Tom Tweet | Inte skickad
+    Not_Sent:
+        Mastodon: Toot skickades inte
+        Twitter: Tweet skickades inte
+Update:
+    Installed: Installerad Version
+    Latest: Senaste Version
+    Out: Du använder en äldre version
+    Too: Du använder en beta-version
+    Up: Du använder den senaste versionen
+    Check: Leta efter uppdateringar på
+Error:
+    Fatal: Allvarligt fel, programmet stängs
+    Error: Fel
+    0: Okänt fel
+    1: Fel vid hämtning av $HOME variabeln
+    2: Fel vid hämtning av $LANG vaiabeln
+    3: Fel vid hämtning av $XDG_SESSION_TYPE variabeln
+    4: datornmiljön stöds ej
+    5: t kommandot är otillgängligt
+    6: toot kommandot är otillgängligt
+    7: gnome-screenshot kommandot är otillgängligt
+    8: spectacle kommandot är otillgängligt
+    9: swaygrab kommandot är otillgängligt
+    10: scrot kommandot är otillgängligt
+    11: xdotool kommandot är otillgängligt
+    12: feh ckommandot är otillgängligt
+    13: ImageMagick är otillgängligt
+    14: slop kommandot är otillgängligt
+    15: convert kommandot är otillgängligt
+    16: Github kan inte nås
+    17: Imgur kan inte nås
+    18: Fel vid tolkning av senaste versionsnumret
+    19: Kan inte öppna filen eller webbsidan
+    20: Fel vid uppladdning till Imgur
+    21: Kan inte skicka till Mastodon
+    22: Kan inte skicka till Twitter
+    23: Kan inte visa notifikation
+    24: GTK initialiseringsfel
+    25: Kan inte hämta tidsinformation
+    26: Wayland-skrivbordsmiljön stöds inte
+    27: Skrivbordsmiljön stöds inte
+    28: Kan inte läsa filen
+    29: Mappen finns redan
+    30: Filen sparades inte
+    31: Kan inte visa systemfältsikon
+Help:
+    Usage: Användning
+    Options: Alternativ
+    Help: Visa detta hjälpmeddelande och avsluta
+    Version: Skriv ut versionsinformation och avsluta
+    Upgrade: Leta efter uppdateringar
+    Tray: Använd systemfältsikon
+    Image: Bildalternativ
+    Area: Fånga en del av skärmen istället för hela skärmen
+    Window: Fånga det aktiva fönstret istället för hela skärmen
+    Full: Fånga hela skärmen
+    File: Använd en fil
+    Destinations: Destinationer
+    Toot: Ladda upp till Mastodon
+    Tweet: Ladda upp till Twitter
+    Imgur: Ladda upp till Imgur
+    Twitter:
+        Options: Twitter-alternativ
+        Auth: Autentisera med Twitter
+    Mastodon:
+        Options: Mastodon-alternativ
+        Auth: Autentisera med Mastodon
+    Examples: Exempel
