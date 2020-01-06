@@ -81,7 +81,7 @@ pub fn message(code: usize) -> String {
 
     let error = &locator["Error"].as_str().unwrap();
     match code {
-        1...31 => return format!("{} {}: {}", error, code, &locator[code].as_str().unwrap()),
+        1..=31 => return format!("{} {}: {}", error, code, &locator[code].as_str().unwrap()),
         _ => unreachable!("Internal Logic Error"),
     };
 }
