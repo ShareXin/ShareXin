@@ -1,0 +1,77 @@
+Notification:
+    Sent:
+        Mastodon: Mastodon'a gönder
+        Twitter: Twitter'a gönder
+        Imgur: Imgur'a gönder
+    File: Dosya kaydedildi
+    Empty:
+        Mastodon: Toot boş | Gönderilmedi
+        Twitter: Tweet boş | Gönderilmedi
+    Not_Sent:
+        Mastodon: Toot gönderilmedi
+        Twitter: Tweet gönderilmedi
+Update:
+    Installed: Kurulu sürüm
+    Latest: Son sürüm
+    Out: Eski bir versiyon kullanıyorsun
+    Too: Beta versiyonunu kullanıyorsun
+    Up: You are using the latest version
+    Check: Check for new updates at
+Error:
+    Fatal: Önemli hata, uygulama kapatılıyor
+    Error: Hata
+    0: Bilinmeyen hata
+    1: $HOME değişkenini okurken hata alınıyor
+    2: $LANG değişkenini okurken hata alınıyor
+    3: $XDG_SESSION_TYPE değişkenini okurken hata alınıyor
+    4: Desteklenmeyen masaüstü ortamı
+    5: t komutu kullanım dışı
+    6: toot komutu kullanım dışı
+    7: gnome-screenshot komutu kullanım dışı
+    8: spectacle komutu kullanım dışı
+    9: swaygrab komutu kullanım dışı
+    10: scrot komutu kullanım dışı
+    11: xdotool komutu kullanım dışı
+    12: feh komutu kullanım dışı
+    13: ImageMagick kullanım dışı
+    14: slop komutu kullanım dışı
+    15: convert komutu kullanım dışı
+    16: Github'a ulaşılamıyor
+    17: Imgur'a ulaşılamıyor
+    18: Son sürümün versiyon numarası alınırken hata
+    19: Dosya veya web sitesi açılamıyor
+    20: Imgur adresine yüklenirken hata
+    21: Mastodon'a gönderilemedi
+    22: Twitter'a gönderilemedi
+    23: Bildirim gösterilemiyor
+    24: GTK başlatma hatası
+    25: Geçerli saat alınamıyor
+    26: Desteklenmeyen Wayland masaüstü ortamı
+    27: Desteklenmeyen masaüstü ortamı
+    28: Dosya okunamıyor
+    29: Klasör var
+    30: Dosya kaydedilmedi
+    31: Sistem tepsisi simgesi görüntülenemiyor
+Help:
+    Usage: Kullanım
+    Options: Ayarlar
+    Help: Bu yardım mesajını göster ve çık
+    Version: Sürüm bilgisini yazdır ve çık
+    Upgrade: Güncellemeleri kontrol et
+    Tray: Sistem tepsisi simgesini kullan
+    Image: Resim ayarları
+    Area: Ekranın tamamı yerine ekranın bir bölümünü alın
+    Window: Ekranın tamamı yerine mevcut ekranı alın
+    Full: Ekranın tamamını alın
+    File: Bir dosya kullan
+    Destinations: Hedef
+    Toot: Mastodon'a yükle
+    Tweet: Twitter'a yükle
+    Imgur: Imgur'a yükle
+    Twitter:
+        Options: Twitter Ayarları
+        Auth: Twitter ile giriş yap
+    Mastodon:
+        Options: Mastodon Ayarları
+        Auth: Mastodon ile giriş yap
+    Examples: Örnekler
