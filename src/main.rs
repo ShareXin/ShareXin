@@ -110,9 +110,8 @@ fn main() {
                 .subcommand(SubCommand::with_name("window").about(window.to_owned()))
                 .subcommand(SubCommand::with_name("full").about(full.to_owned())),
         );
-    let matches = sharexin.clone().get_matches();
 
-    match matches.subcommand() {
+    match sharexin.clone().get_matches().subcommand() {
         ("toot", Some(toot_matches)) => match toot_matches.subcommand_name() {
             Some("area") => {
                 image::image(ScreenshotKind::Area);

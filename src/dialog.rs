@@ -244,7 +244,12 @@ pub fn dialog(service: ServiceKind, message: MessageKind) {
         window.show_all();
     });
     application.connect_activate(|_| {});
-    let args: Vec<String> = env::args().collect();
+    let mut args: Vec<String> = env::args().collect();
+    for i in 0..args.len() - 1 {
+        if args[i] == "-f".to_string() {
+            args.remove(i);
+        }
+    }
     application.run(&args);
 }
 
